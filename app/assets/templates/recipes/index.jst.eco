@@ -1,0 +1,4 @@
+<h1>RecipeME</h1>
+<% for recipe in @recipes.models: %>
+    <div><%= recipe.get("title") %></div>
+<% end %>
