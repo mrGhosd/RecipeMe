@@ -1,3 +1,3 @@
 class RecipeMe.Collections.Recipes extends Backbone.Collection
-  url: '/recipes'
+  url: '/api/recipes'
   model: RecipeMe.Models.Recipe
