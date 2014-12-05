@@ -1,6 +1,9 @@
 class RecipeMe.Views.ApplicationView extends Backbone.View
   template: JST['application/main']
 
+  events:
+    'click a': 'navigate'
+
   initialize: ->
     this.render()
 
@@ -10,3 +13,7 @@ class RecipeMe.Views.ApplicationView extends Backbone.View
   render: ->
     $(@el).html(@template())
     this
+
+  navigate: (event)->
+    event.preventDefault();
+    Backbone.history.navigate(event.target.pathname, {trigger: true})

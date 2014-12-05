@@ -1,4 +1,7 @@
 <h1>RecipeME</h1>
+<div>
+  <button type="button" class="btn btn-info show_form">Добавить рецепт...</button>
+</div>
 <% for recipe in @recipes.models: %>
     <div><%= recipe.get("title") %></div>
 <% end %>

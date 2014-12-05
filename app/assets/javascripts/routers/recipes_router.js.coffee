@@ -2,7 +2,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
   routes:
     '':'application'
     'recipes': 'index'
-    'rescipes/:id': 'show'
+    'rescipes/new': 'new'
 
   initialize: ->
     @collection = new RecipeMe.Collections.Recipes()
@@ -20,10 +20,3 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     this.setup()
     view = new RecipeMe.Views.RecipesIndex(collection: @collection)
     $("section#main").html(view.render().el)
-#
-#  recipeIndex: ->
-#    this.setup()
-##    new RecipeMe.Views.RecipesIndex({el: 'section#main'})
-#
-#  show:(id) ->
-#    alert "Recipe #{id}"
