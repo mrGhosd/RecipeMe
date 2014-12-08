@@ -1,0 +1,9 @@
+-#<form id="recipe_form" action="/api/recipes">
+-#    <input type="text" class="recipe_title" placeholder="Заголовок" name="title"/>
+-#    <input type="file" class="recipe_image" name="image"/>
+-#    <input type="submit" class="btn btn-success recipe_submit"/>
+-#</form>
+= form_tag '/api/recipes', id: "recipe_form" do
+  = text_field_tag :title
+  = file_field_tag :image
+  = submit_tag 'Отправить', class: 'btn btn-success'

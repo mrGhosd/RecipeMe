@@ -1,7 +1,12 @@
-<h1>RecipeME</h1>
-<div>
+<div class="recipes_manage">
   <button type="button" class="btn btn-info show_form">Добавить рецепт...</button>
+  <div class="recipes_form_hold"></div>
 </div>
+<ul>
 <% for recipe in @recipes.models: %>
-    <div><%= recipe.get("title") %></div>
+      <li class="col-md-4">
+        <div><%= recipe.get("title") %></div>
+        <img src="<%= recipe.get("images")['small'] %>"/>
+      </li>
 <% end %>
+</ul>

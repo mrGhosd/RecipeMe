@@ -9,6 +9,11 @@ gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem 'carrierwave'
+gem 'rmagick', :require => 'RMagick'
+gem 'haml'
+gem 'haml_assets'
+gem 'mini_magick'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -31,6 +36,8 @@ gem 'spring',        group: :development
 
 gem 'eco'
 gem 'backbone-on-rails'
+gem 'jquery-fileupload-rails'
+gem 'pry-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
