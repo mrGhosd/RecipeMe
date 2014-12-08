@@ -1,18 +1,12 @@
 class RecipeMe.Views.RecipesForm extends Backbone.View
   template: JST['recipes/form']
 
-  params:
-    title: $(".recipe_title").val()
-    image: $(".recipe_image").val()
+  events:
+    'submit #recipe_form': 'createRecipe'
 
   initialize: ->
     this.render()
     $("#recipe_form").fileupload()
-    $(document).delegate("#recipe_form", "submit", @createRecipe)
-
-  render: ->
-    $(@el).html(@template())
-    this
 
   createRecipe:(event) ->
     event.preventDefault()
@@ -21,12 +15,27 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     title = $("#recipe_form #title").val()
     formData.append('title', title)
     formData.append('image', image)
-    $.ajax
+
+    $.ajax "/api/recipes",
       type: "POST"
-      url: "/api/recipes"
       data:  formData
       cache: false
       contentType: false
       processData: false
-      success: ->
-        alert("horray!")
+      dataType: 'json'
+      success: (data, textStatus, jqXHR) =>
+        console.log "SUCCESS AJAX"
+        console.log @collection.fetch({reset: true})
+      complete: =>
+
+  updateRecipesList: (data) =>
+    console.log @collection
+    console.log data
+
+
+
+  render: ->
+    $(@el).html(@template())
+    this
+
+

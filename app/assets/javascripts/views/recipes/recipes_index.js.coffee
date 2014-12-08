@@ -9,8 +9,13 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
     @collection.on('add', @render, this)
 
   render: ->
-    $(@el).html(@template(recipes: @collection))
+    $(@el).html(@template())
+    @collection.each(@addRecipe)
     this
+
+  addRecipe: (recipe) ->
+    view = new RecipeMe.Views.Recipe(model: recipe)
+    $("ul.recipes_list").append(view.render().el)
 
   show_form: ->
     view = new RecipeMe.Views.RecipesForm(collection: @collection)

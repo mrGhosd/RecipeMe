@@ -1,0 +1,4 @@
+<div class="recipe-list-item">
+    <div class="image"><img src="<%= @recipe.get("images")['small'] %>"/></div>
+    <div class="title"><%= @recipe.get("title") %></div>
+</div>

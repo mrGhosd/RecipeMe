@@ -6,9 +6,13 @@ class RecipesController <ApplicationController
   end
 
   def create
-    binding.pry
-    Recipe.create(recipes_params)
-    head :ok
+    recipe = Recipe.new(recipes_params)
+    if recipe.save
+      render json: { success: true}, status: :ok
+    else
+      render json: { success: false}, status: :forbidden
+    end
+
   end
 
   private

@@ -19,4 +19,5 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
   index: ->
     this.setup()
     view = new RecipeMe.Views.RecipesIndex(collection: @collection)
-    $("section#main").html(view.render().el)
+    $("section#main").html(view.el)
+    view.render()
