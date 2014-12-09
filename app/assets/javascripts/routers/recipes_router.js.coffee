@@ -8,7 +8,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   initialize: ->
     @collection = new RecipeMe.Collections.Recipes()
-    @collection.fetch({reset: true})
+    @collection.fetch()
 
 
   application: ->
@@ -30,10 +30,14 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     $("section#main").html(view.el)
     view.render()
 
-  showRecipe: ->
+  showRecipe: (id) ->
     this.setup()
     alert "This will be a show template"
 
-  editRecipe: ->
+  editRecipe: (id) ->
     this.setup()
-    alert "this will be a edit template"
+    recipe = @collection.at(12)
+    console.log recipe
+    view = new RecipeMe.Views.RecipesForm()
+    $("section#main").html(view.el)
+    view.render()
