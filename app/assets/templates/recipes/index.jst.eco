@@ -1,6 +1,5 @@
 <div class="recipes_manage">
-  <button type="button" class="btn btn-info show_form">Добавить рецепт...</button>
-  <div class="recipes_form_hold"></div>
+  <a href="/recipes/new" class="btn btn-info">Создать...</a>
 </div>
 <ul class="recipes_list">
 </ul>

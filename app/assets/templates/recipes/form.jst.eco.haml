@@ -1,9 +1,13 @@
--#<form id="recipe_form" action="/api/recipes">
--#    <input type="text" class="recipe_title" placeholder="Заголовок" name="title"/>
--#    <input type="file" class="recipe_image" name="image"/>
--#    <input type="submit" class="btn btn-success recipe_submit"/>
--#</form>
-= form_tag '/api/recipes', id: "recipe_form" do
-  = text_field_tag :title
-  = file_field_tag :image
-  = submit_tag 'Отправить', class: 'btn btn-success'
+= form_tag '/api/recipes', id: "recipe_form", class: 'form-horizontal' do
+  .form-group
+    = label_tag :title,'Название:', class: 'control-label col-sm-1'
+    .col-md-2
+      = text_field_tag :title, nil, class: 'form-control'
+  .form-group
+    = label_tag :image, 'Изображение:', class: 'control-label col-sm-1'
+    .col-md-2
+      = file_field_tag :image
+  .form-group
+  .form-actions
+    = submit_tag 'Отправить', class: 'btn btn-success'
+    = link_to 'Назад', '#', class: 'btn btn-default back-button', remote: true

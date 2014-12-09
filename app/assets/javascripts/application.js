@@ -16,7 +16,6 @@
 //= require backbone
 //= require recipe_me
 //= require jquery-fileupload/basic
-//= require_tree ./lib
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections

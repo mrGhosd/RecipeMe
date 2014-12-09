@@ -1,6 +1,6 @@
 <div class="container">
     <div class="logo">
-      <h1>RecipeME</h1>
+      <a href="/#recipes"><h1>RecipeME</h1></a>
     </div>
     <div class="connection"></div>
     <div class="enter"></div>

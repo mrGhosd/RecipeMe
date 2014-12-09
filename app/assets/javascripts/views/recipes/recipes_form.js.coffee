@@ -3,9 +3,12 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   events:
     'submit #recipe_form': 'createRecipe'
+    'click .back-button': 'returnToList'
 
   initialize: ->
     this.render()
+    console.log @collection
+    console.log @type
     $("#recipe_form").fileupload()
 
   createRecipe:(event) ->
@@ -24,14 +27,11 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       processData: false
       dataType: 'json'
       success: (data, textStatus, jqXHR) =>
-        console.log "SUCCESS AJAX"
-        console.log @collection.fetch({reset: true})
-      complete: =>
+        @collection.fetch({reset: true})
+        @returnToList(jqXHR)
 
-  updateRecipesList: (data) =>
-    console.log @collection
-    console.log data
-
+  returnToList: (event)->
+    Backbone.history.navigate('/recipes', {trigger: true})
 
 
   render: ->
