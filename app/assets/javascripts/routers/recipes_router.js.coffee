@@ -2,6 +2,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
   routes:
     '':'application'
     'recipes': 'index'
+    'recipes/page/:page': 'index'
     'recipes/new': 'newRecipe'
     'recipes/:id': 'showRecipe'
     'recipes/:id/edit': 'editRecipe'
@@ -10,7 +11,6 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     @collection = new RecipeMe.Collections.Recipes()
     @collection.fetch()
 
-
   application: ->
     this.setup()
 
@@ -18,9 +18,11 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     if(!this.ApplicationView)
       new RecipeMe.Views.ApplicationView({el: 'body'})
 
-  index: ->
+  index: (page) ->
+    p = (if page then parseInt(page, 10) else 1)
     this.setup()
-    view = new RecipeMe.Views.RecipesIndex(collection: @collection)
+    @collection.fetch()
+    view = new RecipeMe.Views.RecipesIndex({collection: @collection, page: p})
     $("section#main").html(view.el)
     view.render()
 
@@ -36,8 +38,9 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   editRecipe: (id) ->
     this.setup()
-    recipe = @collection.at(12)
-    console.log recipe
-    view = new RecipeMe.Views.RecipesForm()
-    $("section#main").html(view.el)
-    view.render()
+    recipe = new RecipeMe.Models.Recipe(id: id)
+    recipe.fetch
+      success: (model)->
+        view = new RecipeMe.Views.RecipesForm(model: model)
+        $("section#main").html(view.el)
+        view.render()

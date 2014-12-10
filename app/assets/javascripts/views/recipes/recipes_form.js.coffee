@@ -35,7 +35,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
 
   render: ->
-    $(@el).html(@template())
+    $(@el).html(@template(recipe: @model))
     this
 
   fileUploadAccept: ->

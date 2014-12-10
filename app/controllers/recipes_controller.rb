@@ -12,7 +12,11 @@ class RecipesController <ApplicationController
     else
       render json: { success: false}, status: :forbidden
     end
+  end
 
+  def show
+    recipe = Recipe.find(params[:id])
+    render json: recipe.to_json(methods: [:images])
   end
 
   private

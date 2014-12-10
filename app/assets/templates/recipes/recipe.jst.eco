@@ -1,6 +1,8 @@
-<div class="recipe-list-item">
-    <div class="image"><img src="<%= @recipe.get("images")['small'] %>"/></div>
-    <div class="title">
-      <h5><%= @recipe.get("title") %></h5>
+<a href="/#recipes/<%= @recipe.get('id') %>/edit">
+    <div class="recipe-list-item">
+        <div class="image"><img src="<%= @recipe.get("images")['small'] %>"/></div>
+        <div class="title">
+          <h5><%= @recipe.get("title") %></h5>
+        </div>
     </div>
-</div>
+</a>

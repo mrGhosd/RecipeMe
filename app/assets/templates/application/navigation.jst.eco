@@ -1,6 +1,6 @@
 <div class="navigation_menu">
   <div class="navigation_item">
-    <a href="/recipes">Рецепты</a>
+    <a href="/#recipes">Рецепты</a>
     <a href="about">О нас</a>
   </div>
   <div class="navigation_item"></div>
