@@ -21,14 +21,15 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
   index: (page) ->
     p = (if page then parseInt(page, 10) else 1)
     this.setup()
-    @collection.fetch()
+    console.log @collection
+    @collection.fetch({reset: true})
     view = new RecipeMe.Views.RecipesIndex({collection: @collection, page: p})
     $("section#main").html(view.el)
     view.render()
 
   newRecipe: ->
     this.setup()
-    view = new RecipeMe.Views.RecipesForm(collection: @collection)
+    view = new RecipeMe.Views.RecipesForm({collection: @collection, type: "POST"})
     $("section#main").html(view.el)
     view.render()
 
@@ -41,6 +42,6 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     recipe = new RecipeMe.Models.Recipe(id: id)
     recipe.fetch
       success: (model)->
-        view = new RecipeMe.Views.RecipesForm(model: model)
+        view = new RecipeMe.Views.RecipesForm({model: model, type: 'PUT'})
         $("section#main").html(view.el)
         view.render()

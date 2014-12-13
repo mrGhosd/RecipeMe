@@ -39,6 +39,20 @@ gem 'backbone-on-rails'
 gem 'jquery-fileupload-rails'
 gem 'pry-rails'
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
+end
+
+group :test do
+  gem 'faker', '~> 1.1.2'
+  gem 'launchy'
+  gem 'capybara'
+  gem 'database_cleaner', '~> 1.0.1'
+  gem 'selenium-webdriver'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

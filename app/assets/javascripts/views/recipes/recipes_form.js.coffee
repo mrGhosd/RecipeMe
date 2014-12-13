@@ -7,36 +7,50 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     'submit #recipe_form': 'createRecipe'
     'click .back-button': 'returnToList'
 
-  initialize: ->
+  initialize: (options = {}) ->
+    @model = options['model'] if options['model']
+    @type = options['type']
     this.render()
     @reader = new FileReader()
     @fileUploadAccept()
 
   createRecipe:(event) ->
+    url
+    if @type == "POST"
+      url = "/api/recipes"
+    else
+      url = "/api/recipes/#{@model.get('id')}"
+
     event.preventDefault()
     formData = new FormData()
-    image = $("#recipe_form .recipe-image")[0].files[0]
     title = $("#recipe_form .recipe-title").val()
     formData.append('title', title)
-    formData.append('image', image)
+    if $("#recipe_form .recipe-image")[0].files[0]
+      image = $("#recipe_form .recipe-image")[0].files[0]
+      formData.append('image', image)
 
-    $.ajax "/api/recipes",
-      type: "POST"
+    $.ajax url,
+      type: @type
       data:  formData
       cache: false
       contentType: false
       processData: false
       dataType: 'json'
       success: (data, textStatus, jqXHR) =>
+        @model.fetch() if @model
         @returnToList(jqXHR)
 
   returnToList: (event)->
-    Backbone.history.navigate('/recipes', {trigger: true})
+    Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
 
 
   render: ->
-    $(@el).html(@template(recipe: @model))
-    this
+    if @model
+      $(@el).html(@template(recipe: @model))
+      this
+    if @collection
+      $(@el).html(@template())
+      this
 
   fileUploadAccept: ->
     $("#recipe_form .recipe-image").val()

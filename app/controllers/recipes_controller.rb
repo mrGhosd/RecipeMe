@@ -14,6 +14,15 @@ class RecipesController <ApplicationController
     end
   end
 
+  def update
+   recipe =  Recipe.find(params[:id])
+    if recipe.update(recipes_params)
+      render json: { success: true}, status: :ok
+    else
+      render json: { success: false}, status: :forbidden
+    end
+  end
+
   def show
     recipe = Recipe.find(params[:id])
     render json: recipe.to_json(methods: [:images])
