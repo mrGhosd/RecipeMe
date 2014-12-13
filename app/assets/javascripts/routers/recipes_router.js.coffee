@@ -35,7 +35,12 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   showRecipe: (id) ->
     this.setup()
-    alert "This will be a show template"
+    recipe = new RecipeMe.Models.Recipe(id: id)
+    recipe.fetch
+      success: (model)->
+        view = new RecipeMe.Views.RecipeShow(model: model)
+        $("section#main").html(view.el)
+        view.render()
 
   editRecipe: (id) ->
     this.setup()

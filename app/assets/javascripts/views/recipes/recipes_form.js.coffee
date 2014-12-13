@@ -54,6 +54,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     if @collection
       $(@el).html(@template())
       this
+    $(".markItUp").markItUp(myHtmlSettings)
 
   fileUploadAccept: ->
     $("#recipe_form .recipe-image").val()

@@ -6,6 +6,7 @@ class RecipesController <ApplicationController
   end
 
   def create
+    binding.pry
     recipe = Recipe.new(recipes_params)
     if recipe.save
       render json: { success: true}, status: :ok
@@ -30,6 +31,6 @@ class RecipesController <ApplicationController
 
   private
   def recipes_params
-    params.permit(:title, :image)
+    params.permit(:title, :description, :image)
   end
 end
