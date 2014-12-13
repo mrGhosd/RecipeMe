@@ -15,7 +15,8 @@
 //= require underscore
 //= require backbone
 //= require recipe_me
-//= require jquery-fileupload/basic
+//= require markitup
+//= require markitup/sets/html/set
 //= require_tree ./lib
 //= require_tree ../templates
 //= require_tree ./models

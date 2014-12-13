@@ -6,6 +6,13 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="description" class="control-label col-sm-1">Описание:</label>
+    <div class="col-md-6">
+      <textarea class="form-control recipe-description markItUp"
+      id="recipe-description" name="description"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
     <label for="image" class="control-label col-sm-1">Изображение:</label>
     <div class="col-md-2">
       <input type="file" name="image" class="recipe-image" value="<%= @recipe.get('image').small.url if @recipe %>"/>
