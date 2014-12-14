@@ -27,7 +27,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     description = $("#recipe_form .recipe-description").val()
     formData.append('title', title)
     formData.append('description', description)
-
     if $("#recipe_form .recipe-image")[0].files[0]
       image = $("#recipe_form .recipe-image")[0].files[0]
       formData.append('image', image)
