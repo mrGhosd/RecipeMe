@@ -1,6 +1,6 @@
-<header>
+<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 </header>
-<div class="container">
+<div class="main-content container">
     <nav></nav>
     <section id='main'>
     </section>
