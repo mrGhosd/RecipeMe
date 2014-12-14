@@ -6,7 +6,6 @@ class RecipesController <ApplicationController
   end
 
   def create
-    binding.pry
     recipe = Recipe.new(recipes_params)
     if recipe.save
       render json: { success: true}, status: :ok
@@ -27,6 +26,15 @@ class RecipesController <ApplicationController
   def show
     recipe = Recipe.find(params[:id])
     render json: recipe.to_json(methods: [:images])
+  end
+
+  def destroy
+    recipe = Recipe.find(params[:id])
+    if recipe.destroy
+      render json: { success: true}, status: :ok
+    else
+      render json: { success: false}, status: :forbidden
+    end
   end
 
   private

@@ -1,5 +1,6 @@
 class RecipeMe.Models.Recipe extends Backbone.Model
   urlRoot: '/api/recipes'
+  fileAttribute: 'image'
 
   setFile: (file) ->
     setFromFile = (file) ->

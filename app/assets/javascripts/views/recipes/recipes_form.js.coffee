@@ -9,38 +9,21 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   initialize: (options = {}) ->
     @model = options['model'] if options['model']
-    @type = options['type']
     this.render()
     @reader = new FileReader()
     @fileUploadAccept()
 
   createRecipe:(event) ->
-    url
-    if @type == "POST"
-      url = "/api/recipes"
-    else
-      url = "/api/recipes/#{@model.get('id')}"
-
     event.preventDefault()
-    formData = new FormData()
-    title = $("#recipe_form .recipe-title").val()
-    description = $("#recipe_form .recipe-description").val()
-    formData.append('title', title)
-    formData.append('description', description)
-    if $("#recipe_form .recipe-image")[0].files[0]
-      image = $("#recipe_form .recipe-image")[0].files[0]
-      formData.append('image', image)
+    attributes = window.appHelper.formSerialization($("#recipe_form"))
+    if @model
+      @model.set(attributes)
+    else
+      @model = new RecipeMe.Models.Recipe()
+      @model.set(attributes)
 
-    $.ajax url,
-      type: @type
-      data:  formData
-      cache: false
-      contentType: false
-      processData: false
-      dataType: 'json'
-      success: (data, textStatus, jqXHR) =>
-        @model.fetch() if @model
-        @returnToList(jqXHR)
+    @model.save()
+    @returnToList()
 
   returnToList: (event)->
     Backbone.history.navigate('/recipes', {trigger: true, repalce: true})

@@ -1,8 +1,12 @@
-<a href="/#recipes/<%= @recipe.get('id') %>">
-    <div class="recipe-list-item">
-        <div class="image"><img src="<%= @recipe.get("images")['small'] %>"/></div>
-        <div class="title">
-          <h5><%= @recipe.get("title") %></h5>
-        </div>
+<div class="recipe-list-item">
+    <div class="image"><img height="200" width="200" src="<%= @recipe.get("images")['small'] %>"/></div>
+    <div class="title">
+      <h5><%= @recipe.get("title").substr(0, 12)  %></h5>
+      <div class="hidden recipe-item-actions">
+        <a href="/#recipes/<%= @recipe.get('id') %>" class="btn btn-info glyphicon glyphicon-book"></a>
+        <a href="/#recipes/<%= @recipe.get('id') %>/edit" class="btn btn-success glyphicon glyphicon-edit"></a>
+        <a href="#" data-remote = "true" class="btn btn-danger glyphicon glyphicon-remove destroy-recipe" data-recipe-id="<%= @recipe.get('id') %>"></a>
+      </div>
     </div>
-</a>
+</div>
+

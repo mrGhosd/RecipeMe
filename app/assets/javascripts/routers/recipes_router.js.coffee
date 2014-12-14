@@ -29,7 +29,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   newRecipe: ->
     this.setup()
-    view = new RecipeMe.Views.RecipesForm({collection: @collection, type: "POST"})
+    view = new RecipeMe.Views.RecipesForm({collection: @collection})
     $("section#main").html(view.el)
     view.render()
 
@@ -47,6 +47,6 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     recipe = new RecipeMe.Models.Recipe(id: id)
     recipe.fetch
       success: (model)->
-        view = new RecipeMe.Views.RecipesForm({model: model, type: 'PUT'})
+        view = new RecipeMe.Views.RecipesForm({model: model})
         $("section#main").html(view.el)
         view.render()
