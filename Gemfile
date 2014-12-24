@@ -39,6 +39,7 @@ gem 'eco'
 gem 'backbone-on-rails'
 gem 'jquery-fileupload-rails'
 gem 'pry-rails'
+gem "i18n-js", ">= 3.0.0.rc8"
 
 group :development, :test do
   gem 'rspec-rails'
