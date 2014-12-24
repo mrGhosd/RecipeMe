@@ -3,3 +3,8 @@ ru:
    title: "МоиРецепты"
    recipes: "Рецепты"
    about: "О нас"
+   login: 'Вход'
+   registration: 'Регистрация'
+   form:
+    save: 'Сохранить'
+    back: 'Назад'

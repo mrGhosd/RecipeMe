@@ -3,3 +3,8 @@ en:
     title: "RecipeMe"
     recipes: "Recipes"
     about: 'About us'
+    login: 'Login'
+    registration: 'Registration'
+    form:
+      save: 'Save'
+      back: 'Back'

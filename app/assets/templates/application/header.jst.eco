@@ -8,8 +8,8 @@
         <li> <a href="about"><%= I18n.t('application.about') %></a></li>
       </ul>
       <div class="navbar-form navbar-right">
-          <input type="button" class="btn btn-primary login-window" value="Войти" data-toggle="modal" data-target="#myModal"/>
-          <input type="button" class="btn btn-success registration-window" value="Зарегистрироваться" data-toggle="modal" data-target="#myModal"/>
+          <input type="button" class="btn btn-primary login-window" value="<%= I18n.t('application.login') %>" data-toggle="modal" data-target="#myModal"/>
+          <input type="button" class="btn btn-success registration-window" value="<%= I18n.t('application.registration') %>" data-toggle="modal" data-target="#myModal"/>
       </div>
     </div>
 </div>

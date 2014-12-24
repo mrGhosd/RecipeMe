@@ -9,7 +9,7 @@
       </div>
   </fieldset>
   <div class="form-actions">
-    <a href="#" data-remote="true" class="btn btn-default back-button"> Назад </a>
+    <a href="#" data-remote="true" class="btn btn-default back-button"><%= I18n.t('application.form.back') %></a>
   </div>
 
 </div>
