@@ -3,13 +3,14 @@ class RecipeMe.Views.HeaderView extends Backbone.View
   template: JST['application/header']
 
   events:
-    "click .login-window": 'modalDialog'
+    "click .login-window": 'loginDialog'
 
   initialize: ->
     this.render()
 
-  modalDialog: ->
+  loginDialog: ->
     modalView = new RecipeMe.Views.ModalWindow({el: ".modal"})
+    login = new RecipeMe.Views.LoginView({el: ".actions-views"})
 
 
   render: ->
