@@ -15,6 +15,8 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
       view = new RecipeMe.Views.LoginView({el: ".actions-views"})
     else if chosenView == "registration"
       view = new RecipeMe.Views.RegistrationView({el: ".actions-views"})
+    else if chosenView == "recovery"
+      view = new RecipeMe.Views.PasswordRecoveryView({el: ".actions-views"})
 
   render: ->
     $(@el).html(@template())
