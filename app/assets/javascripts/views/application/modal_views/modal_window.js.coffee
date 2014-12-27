@@ -21,26 +21,31 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
 
   sendFormData: ->
     form = $("#authModal .actions-views").find("form")
-    url = $(form).attr("action")
-    console.log $(form).serialize()
-#    $.ajax url,
-#      type: "POST"
-#      data: $(form).serialize()
-#      dataType: "json"
-#      success: (data, textStatus, jqXHR)->
-#        window.location.reload()
-#      error: (jqXHR, textStatus, errorThrown) ->
-#        object = JSON.parse(jqXHR.responseText)
-#        if url == "/users/sign_in"
-#          $("#myModal form input").addClass("error")
-#          $("#myModal form #user_password").parent().append("<div class='error-text'>#{object.error}</div>")
-#
-#        $.each(object.errors, (key, value)->
-#          $("#myModal #user_"+key).addClass("error")
-#          $.each(value, (element) ->
-#            $("#myModal #user_"+key).parent().append("<div class='error-text'>#{value[element]}</div>")
-#          )
-#        )
+    $("#authModal input").removeClass("error")
+    $("#authModal .error-text").remove()
+    if form.attr("action") == "/users/sign_in"
+      user = new RecipeMe.Models.Session()
+    else
+      user = new RecipeMe.Models.User()
+    attributes = window.appHelper.formSerialization(form)
+    console.log attributes
+    user.save(attributes,
+      success: ->
+        RecipeMe.currentUser = user
+        window.location.reload()
+      error: (response, request)->
+        object = JSON.parse(request.responseText)
+        if form.attr("action") == "/users/sign_in"
+          $("#authModal form input").addClass("error")
+          $("#authModal form #user_password").parent().append("<div class='error-text'>#{object.error}</div>")
+
+        $.each(object.errors, (key, value)->
+          $("#authModal #user_"+key).addClass("error")
+          $.each(value, (element) ->
+            $("#authModal #user_"+key).parent().append("<div class='error-text'>#{value[element]}</div>")
+          )
+        )
+    )
 
 
   render: ->

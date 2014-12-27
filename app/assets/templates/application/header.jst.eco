@@ -7,9 +7,15 @@
         <li><a href="/#recipes"> <%= I18n.t('application.recipes') %></a></li>
         <li> <a href="about"><%= I18n.t('application.about') %></a></li>
       </ul>
+      <%= if !RecipeMe.currentUser: %>
       <div class="navbar-form navbar-right">
           <input type="button" class="btn btn-primary login-window" value="<%= I18n.t('application.login') %>" data-toggle="modal" data-target="#myModal"/>
           <input type="button" class="btn btn-success registration-window" value="<%= I18n.t('application.registration') %>" data-toggle="modal" data-target="#myModal"/>
       </div>
     </div>
+      <% else:  %>
+          <div class="navbar-form navbar-right sign-out">
+            <input type="button" class="btn btn-danger sign-out-button" value="Выйти"/>
+          </div>
+    <% end %>
 </div>
