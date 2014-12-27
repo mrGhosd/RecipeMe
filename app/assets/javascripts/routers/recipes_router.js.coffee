@@ -6,6 +6,8 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     'recipes/new': 'newRecipe'
     'recipes/:id': 'showRecipe'
     'recipes/:id/edit': 'editRecipe'
+    'users/:id': 'userProfile'
+    'users/:id/recipes': 'userRecipes'
 
   initialize: ->
     @collection = new RecipeMe.Collections.Recipes()
@@ -50,3 +52,27 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
         view = new RecipeMe.Views.RecipesForm({model: model})
         $("section#main").html(view.el)
         view.render()
+
+  userProfile: (id) ->
+    this.setup()
+    if RecipeMe.currentUser
+      profile = new RecipeMe.Views.UserProfile(user: RecipeMe.currentUser)
+      $("section#main").html(profile.el)
+      profile.render()
+    else
+      Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
+
+  userRecipes: ->
+    this.setup()
+    if RecipeMe.currentUser
+      favorites = new RecipeMe.Collections.Recipes(RecipeMe.currentUser.get('recipes'))
+      console.log favorites
+      view = new RecipeMe.Views.RecipesIndex(collection: favorites)
+      $("section#main").html(view.el)
+      view.render()
+    else
+#      Backbone.history.navigate('/recipes', {trigger: true, repalce: true}
+#    if RecipeMe.currentUser
+
+#    else
+#      Backbone.history.navigate('/recipes', {trigger: true, repalce: true}

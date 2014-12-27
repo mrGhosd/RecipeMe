@@ -1,5 +1,7 @@
+<%= if RecipeMe.currentUser: %>
 <div class="recipes_manage">
   <a href="/#recipes/new" class="btn btn-info glyphicon glyphicon-plus"></a>
 </div>
+<% end %>
 <ul class="recipes_list">
 </ul>
