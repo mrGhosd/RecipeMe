@@ -23,10 +23,12 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
     form = $("#authModal .actions-views").find("form")
     $("#authModal input").removeClass("error")
     $("#authModal .error-text").remove()
+    user = new RecipeMe.Models.User()
     if form.attr("action") == "/users/sign_in"
-      user = new RecipeMe.Models.Session()
+      url = "/users/sign_in"
     else
-      user = new RecipeMe.Models.User()
+      url = "/users/sign_up"
+    user.url = url
     attributes = window.appHelper.formSerialization(form)
     console.log attributes
     user.save(attributes,

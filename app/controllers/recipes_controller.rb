@@ -1,5 +1,7 @@
 class RecipesController <ApplicationController
-  protect_from_forgery except: :create
+  # protect_from_forgery except: :create
+  respond_to :json
+
   def index
     recipes = Recipe.all
     render json: recipes.to_json(methods: [:images])
@@ -39,6 +41,6 @@ class RecipesController <ApplicationController
 
   private
   def recipes_params
-    params.permit(:title, :description, :image)
+    params.permit(:title, :description,:user_id, :image)
   end
 end
