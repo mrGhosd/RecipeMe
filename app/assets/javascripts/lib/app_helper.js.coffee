@@ -19,22 +19,10 @@ window.appHelper =
 
       return attributes
 
-    currentUser: ->
-      if RecipeMe.currentUser
-        user =  RecipeMe.currentUser
-      else
-        user = null
 
-      return user
-
-    render_partial: ( path, options = {} ) ->
-      # add the leading underscore (like rails-partials)
-      path = path.split('/')
-      path[ path.length - 1 ] = '_' + path[ path.length - 1 ]
-      path = path.join('/')
-      # render and return the partial if existing
-      try
-        JST["#{ path }"]( options )
-      catch error
-        # if App.Environment != 'production' then "<p class='error'>Sorry, there is no partial named '#{ path }'.</p>" else ''
-        "<p class='error'>Sorry, there is no partial named '#{ path }'.</p>"
+    arrayCheck: (array, object) ->
+      found = false
+      for element in array
+        if element.id == object.get("id")
+          found = true
+          return found

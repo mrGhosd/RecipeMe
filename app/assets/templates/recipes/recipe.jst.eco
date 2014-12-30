@@ -4,7 +4,7 @@
       <h5><%= @recipe.get("title").substr(0, 12)  %></h5>
       <div class="hidden recipe-item-actions">
         <a href="/#recipes/<%= @recipe.get('id') %>" class="btn btn-info glyphicon glyphicon-book"></a>
-        <% if RecipeMe.currentUser: %>
+        <% if RecipeMe.currentUser && window.appHelper.arrayCheck(RecipeMe.currentUser.get('recipes'), @recipe): %>
             <a href="/#recipes/<%= @recipe.get('id') %>/edit" class="btn btn-success glyphicon glyphicon-edit"></a>
             <a href="#" data-remote = "true" class="btn btn-danger glyphicon glyphicon-remove destroy-recipe" data-recipe-id="<%= @recipe.get('id') %>"></a>
         <% end %>
