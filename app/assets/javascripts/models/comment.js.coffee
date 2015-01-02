@@ -12,4 +12,4 @@ class RecipeMe.Models.Comment extends Backbone.Model
     if @option.url == null
       return "api/recipes/#{@recipe}/comments"
     else
-      return "api/recipes/#{@recipe}/comments/#{@option.url}"
+      return "api/recipes/#{@recipe}/comments/#{@option.id}"

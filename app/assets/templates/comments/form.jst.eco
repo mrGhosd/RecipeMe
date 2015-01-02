@@ -1,4 +1,3 @@
-<%= console.log @options.comment %>
 <div class="row comment-form">
   <form id="comment_form" class="form-horizontal">
     <input type="hidden" name="user_id" class="hidden-id-field" value="<%= RecipeMe.currentUser.id %>"/>

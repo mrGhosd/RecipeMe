@@ -3,6 +3,13 @@ class RecipeMe.Models.Recipe extends Backbone.Model
   fileAttribute: 'image'
   paramRoot: 'recipe'
 
+  defaults:
+    title: ""
+    description: ""
+    user_id: ""
+    comments:
+      text: ""
+
   initialize: ->
     if this.get('comments') != null
       this.comments = new RecipeMe.Collections.Comments(recipe: this.id)

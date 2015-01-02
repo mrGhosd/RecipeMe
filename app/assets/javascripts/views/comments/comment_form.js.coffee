@@ -5,23 +5,26 @@ class RecipeMe.Views.CommentForm extends Backbone.View
     'click .cancel-button': 'showComment'
 
   initialize: ->
-    console.log @model.comment
     this.render()
 
   commentAction: (event)->
     event.preventDefault()
     attributes = window.appHelper.formSerialization($("#comment_form"))
-    comment = new RecipeMe.Models.Comment(recipe: @model.recipe.get("id"))
     if @model.comment
-      @model.comment.save(attributes,
+      comment = new RecipeMe.Models.Comment({recipe: @model.recipe.get("id"), id: @model.comment.get('id')})
+      comment.save(attributes,
         success: (response, request)->
-          $(".row.comment-form").parent().prev("div").show()
+          console.log response
+          console.log request
+          view = new RecipeMe.Views.Comment({model: response})
+          $(".row.comment-form").parent().prev("div").html(view.render().el).show()
           $(".row.comment-form").parent().remove()
         error: (response, request)->
           console.log response
           console.log request
       ,{patch: true})
     else
+      comment = new RecipeMe.Models.Comment(recipe: @model.recipe.get("id"))
       comment.save(attributes,
         success: (response, request)->
           view = new RecipeMe.Views.Comment(model: response)
@@ -35,6 +38,5 @@ class RecipeMe.Views.CommentForm extends Backbone.View
     $(".row.comment-form").parent().remove()
 
   render: ->
-    console.log @model
     $(@el).html(@template(options: @model))
     this
