@@ -21,11 +21,9 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     else
       @model = new RecipeMe.Models.Recipe()
       @model.set(attributes)
-
+    console.log @model
     @model.save(attributes,
       success: (response, request)->
-        console.log response
-        console.log request
         Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
       error: (response, request) ->
         console.log response

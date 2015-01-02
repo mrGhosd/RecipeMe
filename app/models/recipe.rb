@@ -1,5 +1,6 @@
 class Recipe < ActiveRecord::Base
   belongs_to :user
+  has_many :comments
   mount_uploader :image, RecipeUploader
 
   def images

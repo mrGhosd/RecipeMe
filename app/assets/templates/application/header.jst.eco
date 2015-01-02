@@ -5,12 +5,12 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li><a href="/#recipes"> <%= I18n.t('application.recipes') %></a></li>
-        <%= if RecipeMe.currentUser: %>
+        <% if RecipeMe.currentUser: %>
             <li><a href="/#users/<%= RecipeMe.currentUser.get('id') %>" >Профиль</a></li>
             <li><a href="/#users/<%= RecipeMe.currentUser.get('id') %>/recipes">Мои рецепты</a></li>
         <% end %>
       </ul>
-      <%= if !RecipeMe.currentUser: %>
+      <% if !RecipeMe.currentUser: %>
       <div class="navbar-form navbar-right">
           <input type="button" class="btn btn-primary login-window" value="<%= I18n.t('application.login') %>" data-toggle="modal" data-target="#myModal"/>
           <input type="button" class="btn btn-success registration-window" value="<%= I18n.t('application.registration') %>" data-toggle="modal" data-target="#myModal"/>

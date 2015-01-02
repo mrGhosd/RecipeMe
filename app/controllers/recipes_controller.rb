@@ -4,7 +4,7 @@ class RecipesController <ApplicationController
 
   def index
     recipes = Recipe.all
-    render json: recipes.to_json(methods: [:images])
+    render json: recipes.to_json(methods: [:comments, :images])
   end
 
   def create
@@ -27,7 +27,7 @@ class RecipesController <ApplicationController
 
   def show
     recipe = Recipe.find(params[:id])
-    render json: recipe.to_json(methods: [:images])
+    render json: recipe.to_json(methods: [:comments, :images])
   end
 
   def destroy
@@ -41,6 +41,6 @@ class RecipesController <ApplicationController
 
   private
   def recipes_params
-    params.permit(:title, :description,:user_id, :image)
+    params.require(:recipe).permit(:title, :description,:user_id, :image)
   end
 end

@@ -38,6 +38,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
   showRecipe: (id) ->
     this.setup()
     recipe = new RecipeMe.Models.Recipe(id: id)
+
     recipe.fetch
       success: (model)->
         view = new RecipeMe.Views.RecipeShow(model: model)
@@ -71,8 +72,3 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
       $("section#main").html(view.el)
       view.render()
     else
-#      Backbone.history.navigate('/recipes', {trigger: true, repalce: true}
-#    if RecipeMe.currentUser
-
-#    else
-#      Backbone.history.navigate('/recipes', {trigger: true, repalce: true}

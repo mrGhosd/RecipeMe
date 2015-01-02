@@ -1,0 +1,6 @@
+<p class="comment-text"><%= @comment.get('text') if @comment %></p>
+<span class="comment-create-at"><%= @comment.get('created_at') if @comment %></span>
+<% if RecipeMe.currentUser && window.appHelper.arrayCheck(RecipeMe.currentUser.get('comments'), @comment): %>
+    <a href="#" class="btn btn-success edit-comment" data-comment="<%= @comment.get('id') if @comment %>" data-recipe="<%= @comment.get('recipe_id') if @comment %>" data-remote="true">Редактировать</a>
+    <a href="#" class="btn btn-danger remove-comment" data-comment="<%= @comment.get('id') if @comment %>" data-recipe="<%= @comment.get('recipe_id') if @comment %>" data-remote="true">Удалить</a>
+<% end %>

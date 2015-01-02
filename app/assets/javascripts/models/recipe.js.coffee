@@ -3,6 +3,11 @@ class RecipeMe.Models.Recipe extends Backbone.Model
   fileAttribute: 'image'
   paramRoot: 'recipe'
 
+  initialize: ->
+    if this.get('comments') != null
+      this.comments = new RecipeMe.Collections.Comments(recipe: this.id)
+      this.comments.fetch parse: true
+
   setFile: (file) ->
     setFromFile = (file) ->
     reader = new FileReader()
