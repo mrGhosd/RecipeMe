@@ -5,11 +5,11 @@
     <div class="form-group">
       <label for="text" class="control-label col-sm-1">Text:</label>
       <div class="col-md-2">
-        <textarea type="text" name="text" class="form-control recipe-title markItUp" ><%= @options.comment.get('text') if @options.comment %></textarea>
+        <textarea type="text" name="text" class="form-control recipe-title markItUp" ><%- @options.comment.get('text') if @options.comment %></textarea>
       </div>
     </div>
     <div class="form-group"></div>
-    <div class="form-actions">
+    <div class="col-md-offset-1">
       <input type="submit" class="btn btn-success" value="<%= I18n.t('application.form.save') %>"/>
       <a href="#" class='btn btn-default cancel-button' data-remote="true">Cancel</a>
     </div>

@@ -1,6 +1,15 @@
-<p class="comment-text"><%= @comment.get('text') if @comment %></p>
-<span class="comment-create-at"><%= @comment.get('created_at') if @comment %></span>
+<span class="comment-text"><%- @comment.get('text') if @comment %></span>
+<span class="comment-create-at"><%= window.appHelper.dateFormater(@comment.get('created_at')) if @comment %></span>
+
 <% if RecipeMe.currentUser && window.appHelper.arrayCheck(RecipeMe.currentUser.get('comments'), @comment): %>
-    <a href="#" class="btn btn-success edit-comment" data-comment="<%= @comment.get('id') if @comment %>" data-recipe="<%= @comment.get('recipe_id') if @comment %>" data-remote="true">Редактировать</a>
-    <a href="#" class="btn btn-danger remove-comment" data-comment="<%= @comment.get('id') if @comment %>" data-recipe="<%= @comment.get('recipe_id') if @comment %>" data-remote="true">Удалить</a>
+    <div class="actions-for-comment">
+        <a href="#" class="btn btn-success edit-comment glyphicon glyphicon-pencil"
+           data-comment="<%= @comment.get('id') if @comment %>"
+           data-recipe="<%= @comment.get('recipe_id') if @comment %>"
+           data-remote="true"></a>
+        <a href="#" class="btn btn-danger remove-comment glyphicon glyphicon-remove"
+           data-comment="<%= @comment.get('id') if @comment %>"
+           data-recipe="<%= @comment.get('recipe_id') if @comment %>"
+           data-remote="true"></a>
+    </div>
 <% end %>

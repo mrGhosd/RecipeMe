@@ -24,11 +24,15 @@ class RecipeMe.Views.CommentForm extends Backbone.View
           console.log request
       ,{patch: true})
     else
-      comment = new RecipeMe.Models.Comment(recipe: @model.recipe.get("id"))
+      console.log @model
+      comment = new RecipeMe.Models.Comment({recipe: @model.recipe.get("id")})
       comment.save(attributes,
         success: (response, request)->
+          RecipeMe.currentUser.get('comments').push(response)
           view = new RecipeMe.Views.Comment(model: response)
-          $(".recipe-comments").append(view.render().el)
+          $(".recipe-comments").prepend(view.render().el)
+          $(".row.comment-form").parent().prev("div").show()
+          $(".row.comment-form").parent().remove()
         error: (response, request) ->
           console.log "error"
       )
@@ -39,4 +43,5 @@ class RecipeMe.Views.CommentForm extends Backbone.View
 
   render: ->
     $(@el).html(@template(options: @model))
+    $(".markItUp").markItUp(myHtmlSettings)
     this

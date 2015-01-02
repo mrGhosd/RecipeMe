@@ -26,3 +26,13 @@ window.appHelper =
         if element.id == object.get("id")
           found = true
           return found
+
+    dateFormater: (date) ->
+      d = new Date(date)
+      dformat = [d.getHours(),
+                 d.getMinutes(),
+                 d.getSeconds()].join(':') + ' ' +
+                [d.getMonth()+1,
+                 d.getDate(),
+                 d.getFullYear()].join('.')
+      return dformat

@@ -1,0 +1,21 @@
+.recipe-comments{
+  >div{
+    padding:15px;
+    border: 1px solid #666666;
+    margin-top:10px;
+    border-radius: 8px;
+    position: relative;
+    .comment-text {
+
+    }
+    .comment-create-at{
+      float: right;
+      position: absolute;
+      right: 10px;
+      bottom: 5px;
+      font-size: 13px;
+      font-style: italic;
+      color: #999999;
+    }
+  }
+}

@@ -9,7 +9,10 @@ class RecipeMe.Models.Comment extends Backbone.Model
       @recipe = 0
 
   url: ->
-    if @option.url == null
-      return "api/recipes/#{@recipe}/comments"
-    else
+    console.log @option.id
+    console.log "recipe is "+@recipe
+    if @option.id
+
       return "api/recipes/#{@recipe}/comments/#{@option.id}"
+    else
+      return "api/recipes/#{@recipe}/comments"

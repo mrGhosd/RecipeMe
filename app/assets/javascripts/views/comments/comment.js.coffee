@@ -2,6 +2,7 @@ class RecipeMe.Views.Comment extends Backbone.View
 
   template: JST['comments/comment']
   tagName: 'div'
+  className: 'comment'
   tagClass: 'recipe-comment'
   events:
     'click .edit-comment': 'editComment'
@@ -19,7 +20,7 @@ class RecipeMe.Views.Comment extends Backbone.View
     button = $(event.currentTarget)
     comment = button.data("comment")
     recipe = button.data("recipe")
-    comment_block = button.closest("div")
+    comment_block = button.closest(".comment")
     comment_text = $(comment).find(".comment-text").text()
     recipeModel = new RecipeMe.Models.Recipe(id: recipe)
     recipeModel.fetch

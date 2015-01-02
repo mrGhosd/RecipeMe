@@ -10,7 +10,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     this.render()
 
   showCommentForm: ->
-    console.log @model
     options = {recipe: @model}
     view = new RecipeMe.Views.CommentForm(model: options)
     $(".comment-form").html(view.el)
@@ -32,4 +31,4 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
   showComments: (comment)->
     view = new RecipeMe.Views.Comment({model: comment})
-    $(".recipe-comments").append view.render().el
+    $(".recipe-comments").prepend view.render().el

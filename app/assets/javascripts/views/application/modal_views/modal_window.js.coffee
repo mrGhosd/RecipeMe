@@ -27,7 +27,7 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
     if form.attr("action") == "/users/sign_in"
       url = "/users/sign_in"
     else
-      url = "/users/sign_up"
+      url = "/users"
     user.url = url
     attributes = window.appHelper.formSerialization(form)
     console.log attributes

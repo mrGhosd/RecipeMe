@@ -3,7 +3,7 @@ class CommentsController <ApplicationController
 
   def index
     recipe = Recipe.find(params[:recipe_id])
-    render json: recipe.comments.to_json
+    render json: recipe.comments.order(created_at: :desc).to_json
   end
 
   def create

@@ -8,11 +8,11 @@
         <div class="col-md-3"><img src="<%= @recipe.get("images")['small'] %>" class="recipe-image"/></div>
       </div>
   </fieldset>
-  <div class="recipe-comments"></div>
   <div class="recipe-actions">
-    <a href="#" data-remote="true" class="btn btn-primary add-comment-button">Add comment</a>
+    <a href="#" data-remote="true" class="btn btn-primary add-comment-button glyphicon glyphicon-plus"></a>
   </div>
   <div class="comment-form"></div>
+  <div class="recipe-comments"></div>
   <div class="form-actions">
     <a href="#" data-remote="true" class="btn btn-default back-button"><%= I18n.t('application.form.back') %></a>
   </div>
