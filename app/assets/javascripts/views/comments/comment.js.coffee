@@ -40,7 +40,18 @@ class RecipeMe.Views.Comment extends Backbone.View
 
   deleteComment: (event)->
     button = $(event.currentTarget)
-    comment = button.closest("div")
+    comment = button.data("comment")
+    recipe = button.data("recipe")
+    commentModel = new RecipeMe.Models.Comment({recipe: recipe, id: comment})
+    commentModel.fetch({async: false})
+    commentModel.destroy
+      success: (response, request)->
+        console.log response
+        console.log request
+      error: (response, request)->
+        console.log response
+        console.log request
+    comment = button.closest(".comment")
     comment.fadeOut('slow')
 
   render: ->

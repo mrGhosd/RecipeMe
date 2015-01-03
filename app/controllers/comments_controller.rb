@@ -29,6 +29,15 @@ class CommentsController <ApplicationController
     end
   end
 
+  def destroy
+    comment = Comment.find(params[:id])
+    if comment.destroy
+      render json: { success: true}, status: :ok
+    else
+      render json: { success: false}, status: :forbidden
+    end
+  end
+
   private
 
   def comments_params
