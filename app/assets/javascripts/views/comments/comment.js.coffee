@@ -9,6 +9,7 @@ class RecipeMe.Views.Comment extends Backbone.View
     'click .remove-comment': 'deleteComment'
 
   initialize: ->
+    console.log @model
     this.render()
 
   editComment: (event)->

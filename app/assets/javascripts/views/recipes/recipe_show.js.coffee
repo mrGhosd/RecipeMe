@@ -7,6 +7,9 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     'click .add-comment-button': 'showCommentForm'
 
   initialize: ->
+    @comments = @model.get('comments')
+    @comments.on('add', @render, this)
+    @comments.on('reset', @render, this)
     this.render()
 
   showCommentForm: ->
@@ -20,14 +23,15 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
   render: ->
     $(@el).html(@template(recipe: @model))
-    if @model.get('comments').length > 0
-      comments = @model.get('comments')
-      for comment in comments
-        bb_comment = new RecipeMe.Models.Comment({recipe: @model})
-        bb_comment.set(comment)
-        @showComments(bb_comment)
-
+    console.log @comments.length
+    @comments.each(@addComment) if @comments.length > 1
     this
+
+
+  addComment: (comment)->
+    view = new RecipeMe.Views.Comment({model: comment})
+    $(".recipe-comments").prepend view.render().el
+
 
   showComments: (comment)->
     view = new RecipeMe.Views.Comment({model: comment})
