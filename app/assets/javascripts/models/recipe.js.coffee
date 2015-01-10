@@ -10,10 +10,10 @@ class RecipeMe.Models.Recipe extends Backbone.Model
     comments:
       text: ""
 
-  initialize: ->
-    if this.get('comments') != null
-      this.comments = new RecipeMe.Collections.Comments(recipe: this.id)
-      this.comments.fetch parse: true
+  parse: (response) ->
+    response.comments = new RecipeMe.Collections.Comments({recipe: response.id})
+    response.comments.fetch()
+    return response
 
   setFile: (file) ->
     setFromFile = (file) ->

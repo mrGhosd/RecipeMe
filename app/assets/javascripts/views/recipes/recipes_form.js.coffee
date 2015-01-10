@@ -26,8 +26,11 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       success: (response, request)->
         Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
       error: (response, request) ->
-        console.log response
-        console.log request
+        errors = request.responseJSON
+        $.each(errors, (key, value)->
+          $("#recipe_form input[name=\"#{key}\"]").addClass("error")
+          $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
+        )
     )
 
   returnToList: (event)->

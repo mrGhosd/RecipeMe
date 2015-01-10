@@ -8,15 +8,17 @@ class RecipesController <ApplicationController
   end
 
   def create
+    binding.pry
     recipe = Recipe.new(recipes_params)
     if recipe.save
       render json: { success: true}, status: :ok
     else
-      render json: { success: false}, status: :forbidden
+      render json: recipe.errors.to_json, status: :forbidden
     end
   end
 
   def update
+    binding.pry
    recipe =  Recipe.find(params[:id])
     if recipe.update(recipes_params)
       render json: { success: true}, status: :ok
