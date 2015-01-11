@@ -1,18 +1,11 @@
 class RecipeMe.Models.Recipe extends Backbone.Model
   urlRoot: '/api/recipes'
   fileAttribute: 'image'
-  paramRoot: 'recipe'
-
-  defaults:
-    title: ""
-    description: ""
-    user_id: ""
-    comments:
-      text: ""
 
   parse: (response) ->
-    response.comments = new RecipeMe.Collections.Comments({recipe: response.id})
-    response.comments.fetch()
+    if response.comments
+      response.comments = new RecipeMe.Collections.Comments({recipe: response.id})
+      response.comments.fetch()
     return response
 
   setFile: (file) ->

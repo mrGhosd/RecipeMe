@@ -20,6 +20,7 @@
 //= require bootstrap-sprockets
 //= require i18n
 //= require i18n/translations
+//= require ./lib/backbone_sync
 //= require_tree ./lib
 //= require_tree ../templates
 //= require_tree ./models

@@ -15,15 +15,18 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   createRecipe:(event) ->
     event.preventDefault()
+    $("#recipe_form input, #recipe_form textarea").removeClass("error")
+    $(".error-text").remove()
     attributes = window.appHelper.formSerialization($("#recipe_form"))
     if @model
-      @model.set(attributes)
+
     else
       @model = new RecipeMe.Models.Recipe()
-      @model.set(attributes)
-    console.log @model
+
     @model.save(attributes,
       success: (response, request)->
+        RecipeMe.currentUser.get('recipes').push(response)
+        RecipeMe.currentUser.fetch()
         Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
       error: (response, request) ->
         errors = request.responseJSON
