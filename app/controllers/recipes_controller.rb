@@ -17,7 +17,6 @@ class RecipesController <ApplicationController
   end
 
   def update
-    binding.pry
    recipe =  Recipe.find(params[:id])
     if recipe.update(recipes_params)
       render json: { success: true}, status: :ok
