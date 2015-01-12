@@ -35,6 +35,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
           $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
         )
     )
+    @updateRecipesCollection()
 
   returnToList: (event)->
     Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
@@ -66,3 +67,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       image = $("#recipe_form .recipe-image")[0].files[0]
       @reader.readAsDataURL(image)
 
+
+
+  updateRecipesCollection: ->
+    RecipeMe.recipesCollection.fetch()
