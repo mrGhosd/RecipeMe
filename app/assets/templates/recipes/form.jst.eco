@@ -16,7 +16,7 @@
   <div class="form-group">
     <label for="image" class="control-label col-sm-1"><%= I18n.t('recipes.image') %></label>
     <div class="col-md-2">
-      <input type="file" name="image" class="recipe-image" value="<%= @recipe.get('image').small.url if @recipe %>"/>
+      <input type="file" name="image" id="recipe_image" class="recipe-image" value="<%= @recipe.get('image').small.url if @recipe %>"/>
     </div>
   </div>
   <div class="form-group">
@@ -31,7 +31,7 @@
   </div>
   <div class="form-group"></div>
   <div class="form-actions">
-    <input type="submit" class="btn btn-success" value="<%= I18n.t('application.form.save') %>"/>
+    <input type="submit" class="btn btn-success submit-form" value="<%= I18n.t('application.form.save') %>"/>
     <a href="#" class='btn btn-default back-button' data-remote="true"><%= I18n.t('application.form.back') %></a>
   </div>
 </form>

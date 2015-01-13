@@ -45,4 +45,17 @@ feature "Recipe for signed in user", js: true do
     expect(page).to have_css(".add-comment-button")
     expect(page).to have_css(".back-button")
   end
+
+  context "with valid attributes" do
+    scenario "create a new recipe" do
+      find(".add-recipe").click
+      expect(page).to have_css("#recipe_form")
+      find(".recipe-title").set("NEWTITLE")
+      find(".recipe-description").set("NEWDESCRIPTION")
+      attach_file "recipe_image", "#{Rails.root}/app/assets/images/empty-recipe.png"
+      find(".submit-form").click
+      sleep 1
+      expect(page).to have_content("NEWTITLE")
+    end
+  end
 end

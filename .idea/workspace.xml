@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f2c486c-bd6f-4de8-b861-d00132afd1a8" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/templates/recipes/form.jst.eco" afterPath="$PROJECT_DIR$/app/assets/templates/recipes/form.jst.eco" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/templates/recipes/index.jst.eco" afterPath="$PROJECT_DIR$/app/assets/templates/recipes/index.jst.eco" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/features/recipes_spec.rb" afterPath="$PROJECT_DIR$/spec/features/recipes_spec.rb" />
     </list>
     <ignored path="RecipeMe.iws" />
@@ -40,8 +42,28 @@
           <file leaf-file-name="recipes_spec.rb" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/spec/features/recipes_spec.rb">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.8152174" vertical-offset="0" max-vertical-offset="828">
-                  <caret line="45" column="44" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="44" />
+                <state vertical-scroll-proportion="0.8731884" vertical-offset="132" max-vertical-offset="990">
+                  <caret line="57" column="45" selection-start-line="57" selection-start-column="45" selection-end-line="57" selection-end-column="45" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="form.jst.eco" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/assets/templates/recipes/form.jst.eco">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-20.625" vertical-offset="0" max-vertical-offset="630">
+                  <caret line="33" column="48" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="59" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.jst.eco" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/assets/templates/recipes/index.jst.eco">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="180">
+                  <caret line="2" column="81" selection-start-line="2" selection-start-column="81" selection-end-line="2" selection-end-column="81" />
                   <folding />
                 </state>
               </provider>
@@ -173,7 +195,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/db/migrate/20141230231239_create_comments.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/views/recipes/recipes_index.js.coffee" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/lib/backbone_relation.js" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
@@ -188,7 +209,6 @@
         <option value="$PROJECT_DIR$/app/assets/templates/comments/comment.jst.eco" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/comments.css.scss" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/main.css.scss" />
-        <option value="$PROJECT_DIR$/app/assets/templates/recipes/index.jst.eco" />
         <option value="$PROJECT_DIR$/spec/factories/comment.rb" />
         <option value="$PROJECT_DIR$/spec/factories/users.rb" />
         <option value="$PROJECT_DIR$/spec/controllers/comments_controller_spec.rb" />
@@ -223,6 +243,8 @@
         <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
         <option value="$PROJECT_DIR$/app/assets/templates/shared/login.jst.eco" />
         <option value="$PROJECT_DIR$/spec/support/feature_helper.rb" />
+        <option value="$PROJECT_DIR$/app/assets/templates/recipes/index.jst.eco" />
+        <option value="$PROJECT_DIR$/app/assets/templates/recipes/form.jst.eco" />
         <option value="$PROJECT_DIR$/spec/features/recipes_spec.rb" />
       </list>
     </option>
@@ -1053,20 +1075,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/assets/templates/application/header.jst.eco">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="435">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/templates/recipes/index.jst.eco">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="804">
-          <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/factories/users.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
@@ -1432,10 +1440,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/templates/recipes/index.jst.eco">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="180">
+          <caret line="2" column="81" selection-start-line="2" selection-start-column="81" selection-end-line="2" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/templates/recipes/form.jst.eco">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.625" vertical-offset="0" max-vertical-offset="630">
+          <caret line="33" column="48" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/spec/features/recipes_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8152174" vertical-offset="0" max-vertical-offset="828">
-          <caret line="45" column="44" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.8731884" vertical-offset="132" max-vertical-offset="990">
+          <caret line="57" column="45" selection-start-line="57" selection-start-column="45" selection-end-line="57" selection-end-column="45" />
           <folding />
         </state>
       </provider>
