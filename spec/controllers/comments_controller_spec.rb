@@ -44,6 +44,21 @@ describe CommentsController do
         expect(response.body).to eq(Comment.last.to_json)
       end
     end
+
+    context "with invalid attributes" do
+      it "create a new comment for recipe" do
+        expect{post :create,
+        recipe_id: recipe.id,
+        comment: attributes_for(:comment, text: "")}.to change(Comment, :count).by(0)
+      end
+
+      it "return comment errors" do
+        post :create,
+        recipe_id: recipe.id,
+        comment: attributes_for(:comment, text: "")
+        expect(JSON.parse(response.body)).to have_key("text")
+      end
+    end
   end
 
   describe "PATCH #update" do
@@ -63,6 +78,25 @@ describe CommentsController do
         id: comment.id,
         comment: attributes_for(:comment)
         expect(response.body).to eq(comment.to_json)
+      end
+    end
+
+    context "with invalid attributes" do
+      it "update attributes of comment" do
+        put :update,
+        recipe_id: recipe.id,
+        id: comment.id,
+        comment: attributes_for(:comment, text: "")
+        comment.reload
+        expect(comment.text).to eq(comment.text)
+      end
+
+      it "return an updated comment" do
+        put :update,
+        recipe_id: recipe.id,
+        id: comment.id,
+        comment: attributes_for(:comment, text: "")
+        expect(JSON.parse(response.body)).to have_key("text")
       end
     end
   end

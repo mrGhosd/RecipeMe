@@ -11,7 +11,7 @@ class CommentsController <ApplicationController
     if comment.save
       render json: comment.to_json, status: :ok
     else
-      render json: { success: false}, status: :forbidden
+      render json: comment.errors.to_json, status: :forbidden
     end
   end
 
@@ -25,7 +25,7 @@ class CommentsController <ApplicationController
     if comment.update(comments_params)
       render json: comment.to_json, status: :ok
     else
-      render json: { success: false}, status: :forbidden
+      render json: comment.errors.to_json, status: :forbidden
     end
   end
 
