@@ -12,8 +12,8 @@ end
 
 feature "Recipe for signed in user", js: true do
   let!(:user) { create :user }
-  let!(:user_recipe){ create :recipe }
-  let!(:diff_recipe){ create :recipe, title: "User Recipe", user_id: user.id }
+  let!(:diff_recipe){ create :recipe }
+  let!(:user_recipe){ create :recipe, title: "User Recipe", user_id: user.id }
 
   before do
     sign_in user
@@ -40,8 +40,8 @@ feature "Recipe for signed in user", js: true do
   scenario "show recipe full actions" do
     page.all(".recipe-list-item .image")[0].hover
     find(".glyphicon-book").click
-    expect(page).to have_content(user_recipe.title)
-    expect(page).to have_content(user_recipe.description)
+    expect(page).to have_content(diff_recipe.title)
+    expect(page).to have_content(diff_recipe.description)
     expect(page).to have_css(".add-comment-button")
     expect(page).to have_css(".back-button")
   end
@@ -56,6 +56,17 @@ feature "Recipe for signed in user", js: true do
       find(".submit-form").click
       sleep 1
       expect(page).to have_content("NEWTITLE")
+    end
+
+    scenario "update an old recipe" do
+      page.all(".recipe-list-item .image")[1].hover
+      find(:css, ".glyphicon-edit").click
+      expect(page).to have_css("#recipe_form")
+      find(".recipe-title").set("NEWOLDTITLE")
+      find(".submit-form").click
+      sleep 1
+      expect(page).to_not have_content(user_recipe.title)
+      expect(page).to have_content("NEWOLDTITLE")
     end
   end
 end
