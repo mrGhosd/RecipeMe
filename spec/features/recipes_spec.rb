@@ -27,7 +27,7 @@ feature "Recipe for signed in user", js: true do
     expect(page).to have_css(".sign-out-button")
   end
 
-  scenario "show recipe full info" do
+  scenario "show recipe actions" do
     find(".recipe-list-item .image", match: :first).hover
     expect(page).to have_css(".glyphicon-book")
 
@@ -35,5 +35,14 @@ feature "Recipe for signed in user", js: true do
     expect(page).to have_css(".glyphicon-book")
     expect(page).to have_css(".glyphicon-edit")
     expect(page).to have_css(".glyphicon-remove")
+  end
+
+  scenario "show recipe full actions" do
+    page.all(".recipe-list-item .image")[0].hover
+    find(".glyphicon-book").click
+    expect(page).to have_content(user_recipe.title)
+    expect(page).to have_content(user_recipe.description)
+    expect(page).to have_css(".add-comment-button")
+    expect(page).to have_css(".back-button")
   end
 end
