@@ -95,4 +95,11 @@ feature "Recipe for signed in user", js: true do
       expect(page).to have_content("can't be blank")
     end
   end
+
+  scenario "remove recipe" do
+    page.all(".recipe-list-item .image")[1].hover
+    find(:css, ".glyphicon-remove").click
+    sleep 1
+    expect(page).to_not have_content(user_recipe.title)
+  end
 end

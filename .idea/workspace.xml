@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f2c486c-bd6f-4de8-b861-d00132afd1a8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/recipes_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/recipes_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/features/recipes_spec.rb" afterPath="$PROJECT_DIR$/spec/features/recipes_spec.rb" />
     </list>
     <ignored path="RecipeMe.iws" />
@@ -38,11 +37,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.45782074">
       <split-first>
         <leaf>
-          <file leaf-file-name="recipes_spec.rb" pinned="false" current-in-tab="false">
+          <file leaf-file-name="recipes_spec.rb" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/spec/features/recipes_spec.rb">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-29.692308" vertical-offset="638" max-vertical-offset="1545">
-                  <caret line="94" column="52" selection-start-line="94" selection-start-column="52" selection-end-line="94" selection-end-column="52" />
+                <state vertical-scroll-proportion="0.9625935" vertical-offset="758" max-vertical-offset="1650">
+                  <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
                   <folding />
                 </state>
               </provider>
@@ -68,10 +67,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="recipes_controller.rb" pinned="false" current-in-tab="true">
+          <file leaf-file-name="recipes_controller.rb" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/controllers/recipes_controller.rb">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.41666666" vertical-offset="0" max-vertical-offset="828">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
                   <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
                   <folding />
                 </state>
@@ -241,8 +240,8 @@
         <option value="$PROJECT_DIR$/spec/support/feature_helper.rb" />
         <option value="$PROJECT_DIR$/app/assets/templates/recipes/index.jst.eco" />
         <option value="$PROJECT_DIR$/app/assets/templates/recipes/form.jst.eco" />
-        <option value="$PROJECT_DIR$/spec/features/recipes_spec.rb" />
         <option value="$PROJECT_DIR$/app/controllers/recipes_controller.rb" />
+        <option value="$PROJECT_DIR$/spec/features/recipes_spec.rb" />
       </list>
     </option>
   </component>
@@ -1468,10 +1467,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/features/recipes_spec.rb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/recipes_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-29.692308" vertical-offset="638" max-vertical-offset="1545">
-          <caret line="94" column="52" selection-start-line="94" selection-start-column="52" selection-end-line="94" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
+          <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -1484,10 +1483,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/recipes_controller.rb">
+    <entry file="file://$PROJECT_DIR$/spec/features/recipes_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41666666" vertical-offset="0" max-vertical-offset="828">
-          <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.9625935" vertical-offset="758" max-vertical-offset="1650">
+          <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
           <folding />
         </state>
       </provider>
