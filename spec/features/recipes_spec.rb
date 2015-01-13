@@ -13,5 +13,17 @@ end
 feature "Recipe for signed in user", js: true do
   let!(:user) { create :user }
   let!(:user_recipe){ create :recipe }
-  let!(:diff_recipe){ create :recipe, user_id: user.id }
+  let!(:diff_recipe){ create :recipe,title: "User Recipe", user_id: user.id }
+
+  before do
+    sign_in user
+    sleep 1
+    click_link "Recipes"
+  end
+
+  scenario "See the list of recipes" do
+    expect(page).to have_content(user_recipe.title)
+    expect(page).to have_content(diff_recipe.title)
+    expect(page).to have_css(".sign-out-button")
+  end
 end

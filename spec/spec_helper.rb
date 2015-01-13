@@ -3,6 +3,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rails'
+require 'support/feature_helper'
 
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
