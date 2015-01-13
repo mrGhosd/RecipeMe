@@ -21,7 +21,7 @@ class RecipesController <ApplicationController
     if recipe.update(recipes_params)
       render json: { success: true}, status: :ok
     else
-      render json: { success: false}, status: :forbidden
+      render json: recipe.errors.to_json, status: :forbidden
     end
   end
 

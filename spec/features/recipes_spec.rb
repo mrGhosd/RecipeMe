@@ -69,4 +69,30 @@ feature "Recipe for signed in user", js: true do
       expect(page).to have_content("NEWOLDTITLE")
     end
   end
+
+  context "with invalid attributes" do
+    scenario "create a new recipe" do
+      find(".add-recipe").click
+      expect(page).to have_css("#recipe_form")
+      find(".recipe-description").set("NEWDESCRIPTION")
+      attach_file "recipe_image", "#{Rails.root}/app/assets/images/empty-recipe.png"
+      find(".submit-form").click
+      sleep 1
+      expect(page).to have_css(".error")
+      expect(page).to have_css(".error-text")
+      expect(page).to have_content("can't be blank")
+    end
+
+    scenario "update an old recipe" do
+      page.all(".recipe-list-item .image")[1].hover
+      find(:css, ".glyphicon-edit").click
+      expect(page).to have_css("#recipe_form")
+      find(".recipe-title").set("")
+      find(".submit-form").click
+      sleep 1
+      expect(page).to have_css(".error")
+      expect(page).to have_css(".error-text")
+      expect(page).to have_content("can't be blank")
+    end
+  end
 end
