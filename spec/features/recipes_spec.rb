@@ -13,7 +13,7 @@ end
 feature "Recipe for signed in user", js: true do
   let!(:user) { create :user }
   let!(:user_recipe){ create :recipe }
-  let!(:diff_recipe){ create :recipe,title: "User Recipe", user_id: user.id }
+  let!(:diff_recipe){ create :recipe, title: "User Recipe", user_id: user.id }
 
   before do
     sign_in user
@@ -25,5 +25,15 @@ feature "Recipe for signed in user", js: true do
     expect(page).to have_content(user_recipe.title)
     expect(page).to have_content(diff_recipe.title)
     expect(page).to have_css(".sign-out-button")
+  end
+
+  scenario "show recipe full info" do
+    find(".recipe-list-item .image", match: :first).hover
+    expect(page).to have_css(".glyphicon-book")
+
+    page.all(".recipe-list-item .image")[1].hover
+    expect(page).to have_css(".glyphicon-book")
+    expect(page).to have_css(".glyphicon-edit")
+    expect(page).to have_css(".glyphicon-remove")
   end
 end
