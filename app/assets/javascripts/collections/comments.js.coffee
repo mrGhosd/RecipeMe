@@ -13,8 +13,3 @@ class RecipeMe.Collections.Comments extends Backbone.Collection
     else
       return "api/recipes/#{@recipe}/comments/#{option.url}"
 
-  defaults:
-    text: null
-    user_id: null
-    recipe_id: null
-

@@ -23,14 +23,15 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
   render: ->
     $(@el).html(@template(recipe: @model))
-    console.log @comments.length
-    @comments.each(@addComment) if @comments.length > 1
+
+    @comments.each(@addComment)
     this
 
 
   addComment: (comment)->
-    view = new RecipeMe.Views.Comment({model: comment})
-    $(".recipe-comments").prepend view.render().el
+    if !_.isEqual(comment.attributes, {recipe: comment.get("recipe")})
+      view = new RecipeMe.Views.Comment({model: comment})
+      $(".recipe-comments").prepend view.render().el
 
 
   showComments: (comment)->

@@ -13,3 +13,7 @@ class RecipeMe.Models.Comment extends Backbone.Model
       return "api/recipes/#{@recipe}/comments/#{@option.id}"
     else
       return "api/recipes/#{@recipe}/comments"
+
+  parse: (attributes) ->
+    console.log attributes
+    return attributes
