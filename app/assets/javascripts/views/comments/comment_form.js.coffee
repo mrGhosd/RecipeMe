@@ -6,6 +6,7 @@ class RecipeMe.Views.CommentForm extends Backbone.View
 
   initialize: ->
     this.render()
+    $(".markItUp").markItUp(myHtmlSettings)
 
   commentAction: (event)->
     event.preventDefault()
@@ -23,7 +24,7 @@ class RecipeMe.Views.CommentForm extends Backbone.View
           errors = request.responseJSON
           $.each(errors, (key, value)->
             $("#comment_form textarea[name=\"#{key}\"]").addClass("error")
-            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#comment_form textarea[name=\"#{key}\"]").closest(".html"))
+            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#comment_form textarea[name=\"#{key}\"]"))
           )
       ,{patch: true})
     else

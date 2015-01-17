@@ -47,6 +47,15 @@ feature "Recipe comments for signed in user", js: true do
       click_button "Save"
       expect(page).to have_content("VALUE")
     end
+
+    scenario "update an comment" do
+      expect(page).to have_css(".glyphicon-pencil")
+      find(".glyphicon-pencil").click
+      expect(page).to have_css("#comment_form")
+      find(".recipe-title").set("VALUE")
+      click_button "Save"
+      expect(page).to have_content("VALUE")
+    end
   end
 
   context "with invalid attributes" do
