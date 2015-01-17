@@ -68,5 +68,16 @@ feature "Recipe comments for signed in user", js: true do
       expect(page).to have_css(".error-text")
       expect(page).to have_content("can't be blank")
     end
+
+    scenario "update an comment" do
+      expect(page).to have_css(".glyphicon-pencil")
+      find(".glyphicon-pencil").click
+      expect(page).to have_css("#comment_form")
+      find(".recipe-title").set("")
+      click_button "Save"
+      expect(page).to have_css(".error")
+      expect(page).to have_css(".error-text")
+      expect(page).to have_content("can't be blank")
+    end
   end
 end
