@@ -20,11 +20,13 @@ class RecipeMe.Views.CommentForm extends Backbone.View
           $(".row.comment-form").parent().prev("div").html(view.render().el).show()
           $(".row.comment-form").parent().remove()
         error: (response, request)->
-          console.log response
-          console.log request
+          errors = request.responseJSON
+          $.each(errors, (key, value)->
+            $("#comment_form textarea[name=\"#{key}\"]").addClass("error")
+            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#comment_form textarea[name=\"#{key}\"]").closest(".html"))
+          )
       ,{patch: true})
     else
-      console.log @model
       comment = new RecipeMe.Models.Comment({recipe: @model.recipe.get("id")})
       comment.save(attributes,
         success: (response, request)->
@@ -34,7 +36,11 @@ class RecipeMe.Views.CommentForm extends Backbone.View
           $(".row.comment-form").parent().prev("div").show()
           $(".row.comment-form").parent().remove()
         error: (response, request) ->
-          console.log "error"
+          errors = request.responseJSON
+          $.each(errors, (key, value)->
+            $("#comment_form textarea[name=\"#{key}\"]").addClass("error")
+            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#comment_form textarea[name=\"#{key}\"]").closest(".html"))
+          )
       )
 
   showComment: ->
