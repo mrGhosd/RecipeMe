@@ -134,8 +134,8 @@
           <file leaf-file-name="comments_spec.rb" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/spec/features/comments_spec.rb">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.7826087" vertical-offset="477" max-vertical-offset="1320">
-                  <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
+                <state vertical-scroll-proportion="0.85507244" vertical-offset="597" max-vertical-offset="1425">
+                  <caret line="87" column="49" selection-start-line="87" selection-start-column="49" selection-end-line="87" selection-end-column="49" />
                   <folding />
                 </state>
               </provider>
@@ -1536,8 +1536,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/features/comments_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7826087" vertical-offset="477" max-vertical-offset="1320">
-          <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.85507244" vertical-offset="597" max-vertical-offset="1425">
+          <caret line="87" column="49" selection-start-line="87" selection-start-column="49" selection-end-line="87" selection-end-column="49" />
           <folding />
         </state>
       </provider>

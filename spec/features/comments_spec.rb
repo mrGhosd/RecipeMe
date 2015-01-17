@@ -80,4 +80,11 @@ feature "Recipe comments for signed in user", js: true do
       expect(page).to have_content("can't be blank")
     end
   end
+
+  scenario "delete an comment" do
+    expect(page).to have_css(".glyphicon-remove")
+    find(".glyphicon-remove").click
+    sleep 1
+    expect(page).to_not have_content(comment.text)
+  end
 end
