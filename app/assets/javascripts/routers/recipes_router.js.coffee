@@ -59,7 +59,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
   userProfile: (id) ->
     this.setup()
     if RecipeMe.currentUser
-      profile = new RecipeMe.Views.UserProfile(user: RecipeMe.currentUser)
+      profile = new RecipeMe.Views.UserProfile({user: RecipeMe.currentUser})
       $("section#main").html(profile.el)
       profile.render()
     else

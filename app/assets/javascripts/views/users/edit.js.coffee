@@ -4,12 +4,14 @@ class RecipeMe.Views.EditProfile extends Backbone.View
     'submit #user_form': 'updateUserInfo'
     'change .user-avatar': 'acceptUserAvatar'
 
-  initialize: ->
+  initialize: (params)->
+    @params = params
+    console.log @params
     @reader = new FileReader()
     this.render()
 
   render: ->
-    $(@el).html(@template(user: @user))
+    $(@el).html(@template(user: @params.user))
     this
 
   acceptUserAvatar: ->

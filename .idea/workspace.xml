@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f2c486c-bd6f-4de8-b861-d00132afd1a8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/views/application/modal_views/common_modal.js.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/views/users/edit.js.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/templates/users/form.jst.eco" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/user.css.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/models/comment.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/models/comment.js.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/views/users/edit.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/views/users/edit.js.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/views/users/profile.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/views/users/profile.js.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/templates/users/profile.jst.eco" afterPath="$PROJECT_DIR$/app/assets/templates/users/profile.jst.eco" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/routers/recipes_router.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/routers/recipes_router.js.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="RecipeMe.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,21 +40,31 @@
     <splitter split-orientation="horizontal" split-proportion="0.45782074">
       <split-first>
         <leaf>
-          <file leaf-file-name="edit.js.coffee" pinned="false" current-in-tab="false">
+          <file leaf-file-name="edit.js.coffee" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/users/edit.js.coffee">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="525">
-                  <caret line="0" column="32" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="32" />
+                <state vertical-scroll-proportion="0.05597015" vertical-offset="0" max-vertical-offset="804">
+                  <caret line="3" column="36" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="36" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="profile.js.coffee" pinned="false" current-in-tab="true">
+          <file leaf-file-name="profile.js.coffee" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/users/profile.js.coffee">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.33582088" vertical-offset="0" max-vertical-offset="804">
-                  <caret line="18" column="67" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
+                <state vertical-scroll-proportion="-11.25" vertical-offset="0" max-vertical-offset="450">
+                  <caret line="18" column="61" selection-start-line="18" selection-start-column="61" selection-end-line="18" selection-end-column="61" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="recipes_router.js.coffee" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/assets/javascripts/routers/recipes_router.js.coffee">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-23.5" vertical-offset="351" max-vertical-offset="1320">
+                  <caret line="61" column="76" selection-start-line="61" selection-start-column="76" selection-end-line="61" selection-end-column="76" />
                   <folding />
                 </state>
               </provider>
@@ -105,6 +110,16 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="comment.js.coffee" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/comments/comment.js.coffee">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-14.4" vertical-offset="0" max-vertical-offset="960">
+                  <caret line="48" column="19" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="19" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
         </leaf>
       </split-first>
       <split-second>
@@ -112,8 +127,8 @@
           <file leaf-file-name="comment.js.coffee" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/assets/javascripts/models/comment.js.coffee">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.33582088" vertical-offset="0" max-vertical-offset="804">
-                  <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.29850745" vertical-offset="0" max-vertical-offset="804">
+                  <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
                   <folding />
                 </state>
               </provider>
@@ -132,8 +147,8 @@
           <file leaf-file-name="comment_form.js.coffee" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/comments/comment_form.js.coffee">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-15.625" vertical-offset="15" max-vertical-offset="900">
-                  <caret line="26" column="115" selection-start-line="26" selection-start-column="115" selection-end-line="26" selection-end-column="115" />
+                <state vertical-scroll-proportion="-5.1" vertical-offset="0" max-vertical-offset="900">
+                  <caret line="17" column="21" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="21" />
                   <folding>
                     <marker date="1421472289000" expanded="true" signature="206:263" placeholder="..." />
                   </folding>
@@ -229,19 +244,19 @@
         <option value="$PROJECT_DIR$/app/controllers/comments_controller.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/collections/comments.js.coffee" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/views/recipes/recipe_show.js.coffee" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/models/comment.js.coffee" />
         <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/views/comments/comment_form.js.coffee" />
         <option value="$PROJECT_DIR$/spec/features/comments_spec.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20150117151221_add_fields_to_user_table.rb" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/routers/recipes_router.js.coffee" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/views/users/edit.js.coffee" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/user.css.scss" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/views/application/modal_views/common_modal.js.coffee" />
         <option value="$PROJECT_DIR$/app/assets/templates/users/profile.jst.eco" />
         <option value="$PROJECT_DIR$/app/assets/templates/application/common_modal.jst.eco" />
         <option value="$PROJECT_DIR$/app/assets/templates/users/form.jst.eco" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/models/comment.js.coffee" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/routers/recipes_router.js.coffee" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/views/users/profile.js.coffee" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/views/users/edit.js.coffee" />
       </list>
     </option>
   </component>
@@ -1466,16 +1481,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/comments/comment_form.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.625" vertical-offset="15" max-vertical-offset="900">
-          <caret line="26" column="115" selection-start-line="26" selection-start-column="115" selection-end-line="26" selection-end-column="115" />
-          <folding>
-            <marker date="1421472289000" expanded="true" signature="206:263" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/templates/application/header.jst.eco">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
@@ -1496,14 +1501,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1425">
           <caret line="87" column="49" selection-start-line="87" selection-start-column="49" selection-end-line="87" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/comments/comment.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="960">
-          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1564,22 +1561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/users/edit.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="525">
-          <caret line="0" column="32" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/routers/recipes_router.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8880597" vertical-offset="501" max-vertical-offset="1320">
-          <caret line="81" column="49" selection-start-line="81" selection-start-column="49" selection-end-line="81" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/templates/application/footer.jst.eco">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
@@ -1620,14 +1601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/models/comment.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33582088" vertical-offset="0" max-vertical-offset="804">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/application/modal_views/modal_window.js.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0074627" vertical-offset="0" max-vertical-offset="900">
@@ -1660,6 +1633,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/comments/comment_form.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.1" vertical-offset="0" max-vertical-offset="900">
+          <caret line="17" column="21" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="21" />
+          <folding>
+            <marker date="1421472289000" expanded="true" signature="206:263" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/models/comment.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29850745" vertical-offset="0" max-vertical-offset="804">
+          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/comments/comment.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.4" vertical-offset="0" max-vertical-offset="960">
+          <caret line="48" column="19" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/users/profile.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.25" vertical-offset="0" max-vertical-offset="450">
+          <caret line="18" column="61" selection-start-line="18" selection-start-column="61" selection-end-line="18" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/routers/recipes_router.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.5" vertical-offset="351" max-vertical-offset="1320">
+          <caret line="61" column="76" selection-start-line="61" selection-start-column="76" selection-end-line="61" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/templates/users/profile.jst.eco">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="120">
@@ -1668,10 +1683,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/users/profile.js.coffee">
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/views/users/edit.js.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33582088" vertical-offset="0" max-vertical-offset="804">
-          <caret line="18" column="67" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.05597015" vertical-offset="0" max-vertical-offset="804">
+          <caret line="3" column="36" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="36" />
           <folding />
         </state>
       </provider>
