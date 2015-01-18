@@ -29,7 +29,7 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
     else
       url = "/users"
     user.url = url
-    attributes = window.appHelper.formSerialization(form)
+    attributes = {"user": window.appHelper.formSerialization(form)}
     console.log attributes
     user.save(attributes,
       success: ->

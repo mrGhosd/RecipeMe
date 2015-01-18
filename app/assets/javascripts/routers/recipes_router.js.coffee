@@ -25,7 +25,6 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
   index: (page) ->
     p = (if page then parseInt(page, 10) else 1)
     this.setup()
-    console.log @collection
     @collection.fetch({reset: true})
     view = new RecipeMe.Views.RecipesIndex({collection: @collection, page: p})
     $("section#main").html(view.el)

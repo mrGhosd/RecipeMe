@@ -18,7 +18,24 @@
     </div>
       <% else:  %>
           <div class="navbar-form navbar-right sign-out">
-            <a class="btn btn-danger glyphicon glyphicon-off sign-out-button"></a>
+            <ul class="nav nav-pills pull-right">
+              <li>
+                <div class="user-avatar">
+                  <img src="<%= RecipeMe.currentUser.get('avatar').small.url %>" height="50" width="50" class="img-circle "/>
+                </div>
+              </li>
+              <li class="nickname">
+                <% if RecipeMe.currentUser.get('nickname'): %>
+                    <a href="/#users/<%= RecipeMe.currentUser.get('id') %>"><%= RecipeMe.currentUser.get('nickname') %></a>
+                <% else: %>
+                    <a href="/#users/<%= RecipeMe.currentUser.get('id') %>"><%= RecipeMe.currentUser.get('email') %></a>
+                <% end %>
+              </li>
+              <li>
+                <a class="btn btn-danger glyphicon glyphicon-off sign-out-button"></a>
+              </li>
+            </ul>
+
           </div>
     <% end %>
 </div>
