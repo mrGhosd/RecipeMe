@@ -19,6 +19,9 @@ class RecipeMe.Views.EditProfile extends Backbone.View
     attributes = window.appHelper.formSerialization($("#user_form"))
     @params.user.save(attributes,
       success: (response, request)->
+        $("#myModal").modal('hide')
+        view = new RecipeMe.Views.UserProfile({user: response})
+        $("section#main").slideUp().html(view.render().el).slideDown()
         console.log response
         console.log request
       error: (response, request) ->

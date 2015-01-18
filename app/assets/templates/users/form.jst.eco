@@ -22,7 +22,7 @@
       <div class="form-group">
         <label for="date_of_birth" class="control-label col-md-3">Дата рождения:</label>
         <div class="col-md-8">
-          <input type="date" name="date_of_birth" class="form-control" value="<%= @user.get('date_of_birth') if @user %>"/>
+          <input type="date" name="date_of_birth" class="form-control" value="<%= window.appHelper.dateOfBirthReverseFormat @user.get('date_of_birth') if @user %>"/>
         </div>
       </div>
       <div class="form-group">

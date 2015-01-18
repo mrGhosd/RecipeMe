@@ -36,3 +36,21 @@ window.appHelper =
                  d.getDate(),
                  d.getFullYear()].join('.')
       return dformat
+
+    dateOfBirthFormat: (date) ->
+      d = new Date(date)
+      dformat = [this.monthValue(d.getDate()),
+                 this.monthValue(d.getMonth()+1),
+                 d.getFullYear()].join('.')
+      return dformat
+
+    dateOfBirthReverseFormat: (date) ->
+      d = new Date(date)
+      dformat = [d.getFullYear(),
+                 this.monthValue(d.getMonth() + 1),
+                 this.monthValue(d.getDate())
+                 ].join('-')
+      return dformat
+
+    monthValue: (month) ->
+      "0"+month.toString() if month.toString().length == 1

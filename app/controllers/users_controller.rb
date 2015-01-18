@@ -5,7 +5,6 @@ class UsersController <ApplicationController
   end
 
   def update
-    binding.pry
     user = User.find(params[:id])
     if user.update(user_params)
       render json: user.to_json, status: :ok

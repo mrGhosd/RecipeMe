@@ -1,2 +1,44 @@
-<h1>Страница профиля пользователя</h1>
+
 <a href="#" class="btn btn-primary edit-profile" data-remote="true">Редактировать</a>
+<div class="user_profile form-horizontal col-md-12">
+  <fieldset>
+    <legend> <h4>Страница пользователя</h4> </legend>
+  </fieldset>
+  <div class="row">
+    <div class="col-md-9">
+      <div class="form-group">
+        <label for="surname" class="control-label col-md-3">Фамилия:</label>
+        <div class="col-md-6">
+          <input type="text" value="<%= @user.get("surname")%>" class="inline-input form-control" disabled="disabled"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name" class="control-label col-md-3">Имя:</label>
+        <div class="col-md-6">
+          <input type="text" value="<%= @user.get("name")%>" class="inline-input form-control" disabled="disabled"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="nickname" class="control-label col-md-3">Ник:</label>
+        <div class="col-md-6">
+          <input type="text" value="<%= @user.get("nickname")%>" class="inline-input form-control" disabled="disabled"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city" class="control-label col-md-3">Город:</label>
+        <div class="col-md-6">
+          <input type="text" value="<%= @user.get("city")%>" class="inline-input form-control" disabled="disabled"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="date_of_birth" class="control-label col-md-3">Дата рождения:</label>
+        <div class="col-md-6">
+          <input type="text" value="<%= window.appHelper.dateOfBirthFormat @user.get("date_of_birth")%>" class="inline-input form-control" disabled="disabled"/>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <img src="<%= @user.get("avatar").normal.url if @user%>" class="recipe-image img-thumbnail"/>
+    </div>
+  </div>
+</div>
