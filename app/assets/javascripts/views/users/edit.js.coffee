@@ -6,13 +6,25 @@ class RecipeMe.Views.EditProfile extends Backbone.View
 
   initialize: (params)->
     @params = params
-    console.log @params
+    console.log @params.user
     @reader = new FileReader()
     this.render()
 
   render: ->
     $(@el).html(@template(user: @params.user))
     this
+
+  updateUserInfo: (event) ->
+    event.preventDefault()
+    attributes = window.appHelper.formSerialization($("#user_form"))
+    @params.user.save(attributes,
+      success: (response, request)->
+        console.log response
+        console.log request
+      error: (response, request) ->
+        console.log response
+        console.log request
+      {patch: true})
 
   acceptUserAvatar: ->
     $("#user_form .user-avatar").val()
