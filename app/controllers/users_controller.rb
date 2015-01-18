@@ -5,6 +5,7 @@ class UsersController <ApplicationController
   end
 
   def update
+    binding.pry
     user = User.find(params[:id])
     if user.update(user_params)
       render json: user.to_json, status: :ok
@@ -16,7 +17,7 @@ class UsersController <ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password,
-    :nickname, :surname, :name, :city, :avatar)
+    params.permit(:email, :password,
+    :nickname, :surname, :name, :city, :avatar, :date_of_birth)
   end
 end
