@@ -8,6 +8,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     'recipes/:id/edit': 'editRecipe'
     'users/:id': 'userProfile'
     'users/:id/recipes': 'userRecipes'
+    'users/:id/edit': 'editProfile'
 
   initialize: ->
     @collection = new RecipeMe.Collections.Recipes()
@@ -72,3 +73,11 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
       $("section#main").html(view.el)
       view.render()
     else
+
+  editProfile: (id) ->
+    this.setup()
+    if RecipeMe.currentUser
+      view = new RecipeMe.Views.EditProfile
+      $("section#main").slideUp()
+      $("section#main").html(view.el).slideDown()
+      view.render()

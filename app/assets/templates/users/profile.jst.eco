@@ -1,1 +1,2 @@
 <h1>Страница профиля пользователя</h1>
+<a href="#" class="btn btn-primary edit-profile" data-remote="true">Редактировать</a>
