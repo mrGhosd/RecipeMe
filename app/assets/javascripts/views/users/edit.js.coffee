@@ -22,11 +22,6 @@ class RecipeMe.Views.EditProfile extends Backbone.View
         $("#myModal").modal('hide')
         view = new RecipeMe.Views.UserProfile({user: response})
         $("section#main").slideUp().html(view.render().el).slideDown()
-        console.log response
-        console.log request
-      error: (response, request) ->
-        console.log response
-        console.log request
       {patch: true})
 
   acceptUserAvatar: ->

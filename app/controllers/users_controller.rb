@@ -1,4 +1,5 @@
 class UsersController <ApplicationController
+  before_filter: authenticate_user!
   def show
     user = User.find(params[:id])
     render json: user.to_json(methods: [:recipes, :comments]).html_safe
@@ -16,7 +17,6 @@ class UsersController <ApplicationController
   private
 
   def user_params
-    params.permit(:email, :password,
-    :nickname, :surname, :name, :city, :avatar, :date_of_birth)
+    params.permit!
   end
 end

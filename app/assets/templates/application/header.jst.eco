@@ -18,7 +18,7 @@
     </div>
       <% else:  %>
           <div class="navbar-form navbar-right sign-out">
-            <input type="button" class="btn btn-danger sign-out-button" value="Выйти"/>
+            <a class="btn btn-danger glyphicon glyphicon-off sign-out-button"></a>
           </div>
     <% end %>
 </div>
