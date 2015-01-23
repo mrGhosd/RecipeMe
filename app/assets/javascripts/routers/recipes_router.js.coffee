@@ -58,19 +58,18 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
   userProfile: (id) ->
     this.setup()
     if RecipeMe.currentUser
-      profile = new RecipeMe.Views.UserProfile({user: RecipeMe.currentUser})
+      user_recipes = new RecipeMe.Collections.Recipes(@collection.currentUserRecipes())
+      profile = new RecipeMe.Views.UserProfile({user: RecipeMe.currentUser, recipes: user_recipes})
       $("section#main").html(profile.el)
       profile.render()
     else
       Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
 
-  userRecipes: ->
+  userRecipes: (id) ->
     this.setup()
     if RecipeMe.currentUser
-      user_recipes = new RecipeMe.Collections.Recipes(RecipeMe.currentUser.get('recipes'))
-      user_recipes.fetch()
-      console.log user_recipes.currentUserRecipes()
-      view = new RecipeMe.Views.RecipesIndex(collection: user_recipes)
+      user_recipes = new RecipeMe.Collections.Recipes(@collection.currentUserRecipes())
+      view = new RecipeMe.Views.RecipesIndex({collection: user_recipes})
       $("section#main").html(view.el)
       view.render()
     else

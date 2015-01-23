@@ -1,0 +1,3 @@
+<a href="/#recipes/<%= @recipe.get("id") %>" class="img-thumbnail">
+    <img src="<%= @recipe.get("image").small.url %>" height="80" width="80" />
+</a>

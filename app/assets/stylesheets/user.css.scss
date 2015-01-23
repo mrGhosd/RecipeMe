@@ -6,3 +6,21 @@
     }
   }
 }
+.user-recipes-title{
+
+    text-align: center;
+}
+.user_profile{
+  legend{
+    * {
+      display: inline;
+    }
+    a.edit-profile{
+      float:right;
+    }
+  }
+}
+.profile-recipe{
+  padding: 10px;
+  float: left;
+}

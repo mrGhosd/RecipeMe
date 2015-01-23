@@ -1,8 +1,11 @@
 
-<a href="#" class="btn btn-primary edit-profile" data-remote="true">Редактировать</a>
+
 <div class="user_profile form-horizontal col-md-12">
   <fieldset>
-    <legend> <h4>Страница пользователя</h4> </legend>
+    <legend>
+      <h4>Страница пользователя</h4>
+      <a href="#" class="btn btn-primary glyphicon glyphicon-edit btn-xs edit-profile" data-remote="true"></a>
+    </legend>
   </fieldset>
   <div class="row">
     <div class="col-md-9">
@@ -40,5 +43,17 @@
     <div class="col-md-3">
       <img src="<%= @user.get("avatar").normal.url if @user%>" class="recipe-image img-thumbnail"/>
     </div>
+  </div>
+  <div class="row">
+    <fieldset>
+      <legend>
+        <h4>Рецепты пользователя</h4>
+        <a href="#" data-remote="true" class="btn btn-warning glyphicon glyphicon-arrow-down btn-xs toggle-user-recipes"></a>
+      </legend>
+        <div class="user-recipes-body"></div>
+        <div class="user-recipes-title">
+
+        </div>
+    </fieldset>
   </div>
 </div>

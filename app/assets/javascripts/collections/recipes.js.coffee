@@ -8,7 +8,7 @@ class RecipeMe.Collections.Recipes extends Backbone.Collection
       (key, value)->
         if value.get("user_id") == RecipeMe.currentUser.get("id")
           recipes.push(value)
-   )
+    )
     return recipes
 
   defaults:
