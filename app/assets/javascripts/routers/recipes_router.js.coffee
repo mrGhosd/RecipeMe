@@ -67,8 +67,10 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
   userRecipes: ->
     this.setup()
     if RecipeMe.currentUser
-      favorites = new RecipeMe.Collections.Recipes(RecipeMe.currentUser.get('recipes'))
-      view = new RecipeMe.Views.RecipesIndex(collection: favorites)
+      user_recipes = new RecipeMe.Collections.Recipes(RecipeMe.currentUser.get('recipes'))
+      user_recipes.fetch()
+      console.log user_recipes.currentUserRecipes()
+      view = new RecipeMe.Views.RecipesIndex(collection: user_recipes)
       $("section#main").html(view.el)
       view.render()
     else

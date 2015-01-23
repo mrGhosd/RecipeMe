@@ -1,7 +1,7 @@
 <span class="comment-text"><%- @comment.get('text') if @comment %></span>
 <span class="comment-create-at"><%= window.appHelper.dateFormater(@comment.get('created_at')) if @comment %></span>
 
-<% if RecipeMe.currentUser && window.appHelper.arrayCheck(RecipeMe.currentUser.get('comments'), @comment): %>
+<% if RecipeMe.currentUser && RecipeMe.currentUser.get('id') == @comment.get('user_id'): %>
     <div class="actions-for-comment">
         <a href="#" class="btn btn-success edit-comment glyphicon glyphicon-pencil"
            data-comment="<%= @comment.get('id') if @comment %>"
