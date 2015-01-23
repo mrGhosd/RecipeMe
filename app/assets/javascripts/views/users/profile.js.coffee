@@ -24,7 +24,8 @@ class RecipeMe.Views.UserProfile extends Backbone.View
 
   showRecipe: (recipe) ->
     view = new RecipeMe.Views.ProfileRecipe({model: recipe})
-    $(".user-recipes-body").append(view.render().el)
+    $(".user-recipes-body").append(view.el)
+    view.render()
 
   showModalEdit: ->
     modal = new RecipeMe.Views.CommonModal()

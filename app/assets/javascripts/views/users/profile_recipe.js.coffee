@@ -10,6 +10,5 @@ class RecipeMe.Views.ProfileRecipe extends Backbone.View
     this.render()
 
   render: ->
-    console.log @params.model
     $(@el).html(@template(recipe: @params.model))
     this
