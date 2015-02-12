@@ -31,7 +31,6 @@ class RecipeMe.Views.CommentForm extends Backbone.View
       comment = new RecipeMe.Models.Comment({recipe: @model.recipe.get("id")})
       comment.save(attributes,
         success: (response, request)->
-          RecipeMe.currentUser.get('comments').push(response)
           view = new RecipeMe.Views.Comment(model: response)
           $(".recipe-comments").prepend(view.render().el)
           $(".row.comment-form").parent().prev("div").show()

@@ -1,6 +1,6 @@
 class RecipesController <ApplicationController
   # protect_from_forgery except: :create
-  respond_to :json
+  # respond_to :json
 
   def index
     recipes = Recipe.all
@@ -27,7 +27,9 @@ class RecipesController <ApplicationController
 
   def show
     recipe = Recipe.find(params[:id])
-    render json: recipe.to_json(methods: [:comments, :images])
+    respond_to do |format|
+      format.json { render json: recipe.to_json(methods: [:comments, :images]) }
+    end
   end
 
   def destroy
