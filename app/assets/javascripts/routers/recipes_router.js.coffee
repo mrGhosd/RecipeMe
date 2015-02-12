@@ -11,22 +11,21 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     'users/:id/edit': 'editProfile'
 
   initialize: ->
+    this.setup()
     @collection = new RecipeMe.Collections.Recipes()
     @collection.fetch()
     RecipeMe.recipesCollection = @collection
 
   application: ->
-    this.setup()
+
 
   setup: ->
     if(!this.ApplicationView)
       new RecipeMe.Views.ApplicationView({el: 'body'})
 
-  index: (page) ->
-    p = (if page then parseInt(page, 10) else 1)
-    this.setup()
+  index:->
     @collection.fetch({reset: true})
-    view = new RecipeMe.Views.RecipesIndex({collection: @collection, page: p})
+    view = new RecipeMe.Views.RecipesIndex({collection: @collection})
     $("section#main").html(view.el)
     view.render()
 
@@ -47,7 +46,6 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
         view.render()
 
   editRecipe: (id) ->
-    this.setup()
     recipe = new RecipeMe.Models.Recipe(id: id)
     recipe.fetch
       success: (model)->
@@ -56,7 +54,6 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
         view.render()
 
   userProfile: (id) ->
-    this.setup()
     if RecipeMe.currentUser
       user_recipes = new RecipeMe.Collections.Recipes(@collection.currentUserRecipes())
       profile = new RecipeMe.Views.UserProfile({user: RecipeMe.currentUser, recipes: user_recipes})
@@ -66,7 +63,6 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
       Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
 
   userRecipes: (id) ->
-    this.setup()
     if RecipeMe.currentUser
       user_recipes = new RecipeMe.Collections.Recipes(@collection.currentUserRecipes())
       view = new RecipeMe.Views.RecipesIndex({collection: user_recipes})
@@ -75,7 +71,6 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     else
 
   editProfile: (id) ->
-    this.setup()
     if RecipeMe.currentUser
       view = new RecipeMe.Views.EditProfile
       $("section#main").slideUp()
