@@ -5,7 +5,8 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
   events:
     'click .destroy-recipe': 'destroyRecipe'
 
-  initialize: ->
+  initialize: (param)->
+    @collection = param.collection
     @collection.on('reset', @render, this)
     @collection.on('add', @render, this)
 

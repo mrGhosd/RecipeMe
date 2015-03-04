@@ -27,28 +27,13 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     new RecipeMe.RecipesController().index()
 
   newRecipe: ->
-    this.setup()
-    view = new RecipeMe.Views.RecipesForm({collection: @collection})
-    $("section#main").html(view.el)
-    view.render()
+    new RecipeMe.RecipesController().new()
 
   showRecipe: (id) ->
-    this.setup()
-    recipe = new RecipeMe.Models.Recipe(id: id)
-
-    recipe.fetch
-      success: (model)->
-        view = new RecipeMe.Views.RecipeShow(model: model)
-        $("section#main").html(view.el)
-        view.render()
+    new RecipeMe.RecipesController().show(id)
 
   editRecipe: (id) ->
-    recipe = new RecipeMe.Models.Recipe(id: id)
-    recipe.fetch
-      success: (model)->
-        view = new RecipeMe.Views.RecipesForm({model: model})
-        $("section#main").html(view.el)
-        view.render()
+    new RecipeMe.RecipesController().edit(id)
 
   userProfile: (id) ->
     if RecipeMe.currentUser

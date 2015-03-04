@@ -25,7 +25,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
     @model.save(attributes,
       success: (response, request)->
-        RecipeMe.currentUser.get('recipes').push(response)
         RecipeMe.currentUser.fetch()
         Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
       error: (response, request) ->
@@ -45,10 +44,10 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     if @model
       $(@el).html(@template(recipe: @model))
       this
-    if @collection
+    else
       $(@el).html(@template())
       this
-    $(".markItUp").markItUp(myHtmlSettings)
+    $(".markItUp").markItUp(window.myHtmlSettings)
 
   fileUploadAccept: ->
     $("#recipe_form .recipe-image").val()
