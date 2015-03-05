@@ -17,7 +17,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     RecipeMe.recipesCollection = @collection
 
   application: ->
-
+    this.index()
 
   setup: ->
     if(!this.ApplicationView)
