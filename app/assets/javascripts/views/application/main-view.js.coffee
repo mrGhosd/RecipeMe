@@ -7,7 +7,7 @@ class RecipeMe.Views.ApplicationView extends Backbone.View
   initialize: ->
     this.render()
 
-    new RecipeMe.Views.HeaderView({el: 'header'})
+    new RecipeMe.Views.HeaderView({el: 'div.app-header'})
     new RecipeMe.Views.FooterView({el: '#footer'})
 
   render: ->

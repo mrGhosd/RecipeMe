@@ -1,0 +1,24 @@
+.app-header{
+  background-color: #39b3d7;
+  position: relative;
+  height: 70px;
+  padding:10px;
+  .menu-item{
+    float: left;
+  }
+  .logo{
+    margin-left:20px;
+  }
+  &>div{
+    display: inline-block;
+  }
+  .current-user-info{
+    float: right;
+    position: absolute;
+    right: 50px;
+
+    &>div{
+      display: inline-block;
+    }
+  }
+}

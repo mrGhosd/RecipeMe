@@ -1,8 +1,9 @@
 <div class="modal" id="myModal"></div>
-<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-</header>
-<div class="main-content container">
+<div id="wrapper">
+  <div class="app-header"></div>
+  <div class="main-content container">
     <section id='main'>
     </section>
+  </div>
+  <div id="footer"></div>
 </div>
-<div id="footer"></div>
