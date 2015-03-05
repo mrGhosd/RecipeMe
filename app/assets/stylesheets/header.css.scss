@@ -1,8 +1,11 @@
 .app-header{
   background-color: #39b3d7;
-  position: relative;
+  position: fixed;
   height: 70px;
+  width: 100%;
   padding:10px;
+  top: 0px;
+  z-index: 10000;
   .menu-item{
     float: left;
   }
@@ -20,5 +23,10 @@
     &>div{
       display: inline-block;
     }
+  }
+  &.menu-active{
+    position: fixed;
+    width: 100%;
+    z-index:100;
   }
 }

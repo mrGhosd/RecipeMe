@@ -1,9 +1,11 @@
 <div class="modal" id="myModal"></div>
 <div id="wrapper">
   <div class="app-header"></div>
+  <div id="navigationMenu"></div>
   <div class="main-content container">
     <section id='main'>
     </section>
   </div>
   <div id="footer"></div>
+  <div class="mask hide"></div>
 </div>

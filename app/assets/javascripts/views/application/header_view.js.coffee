@@ -5,10 +5,13 @@ class RecipeMe.Views.HeaderView extends Backbone.View
   events:
     "click .login-window": 'loginDialog'
     "click .registration-window": 'registrationDialog'
-    "click .sign-out .sign-out-button": 'signOut'
+    "click .sign-out-button": 'signOut'
+    "click .menu-item": 'showNavigationMenu'
 
   initialize: ->
     this.render()
+    @width = $(".app-header").width()
+    @navigation_width = 300
 
   loginDialog: ->
     modalView = new RecipeMe.Views.ModalWindow({el: ".modal"})
@@ -25,6 +28,20 @@ class RecipeMe.Views.HeaderView extends Backbone.View
         window.location.reload()
       error: (jqXHR, textStatus, errorThrown) ->
         console.log jqXHR.responseText
+
+  showNavigationMenu: ->
+    this.toggleLeftMenu()
+
+
+  toggleLeftMenu: ->
+    if $("#navigationMenu").width() == 0
+      $(".app-header").animate({width: "#{@width - @navigation_width}px", left: "#{@navigation_width}px"}, 250)
+      $("#navigationMenu").show().animate({width: "#{@navigation_width}"}, 250)
+      $(".mask").removeClass("hide")
+    else
+      $(".app-header").animate({width: "100%", left: "0px"}, 250)
+      $("#navigationMenu").show().animate({width: "0px"}, 250)
+      $(".mask").addClass("hide")
 
 
 
