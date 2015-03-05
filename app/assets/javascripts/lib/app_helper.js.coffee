@@ -54,3 +54,5 @@ window.appHelper =
 
     monthValue: (month) ->
       "0"+month.toString() if month.toString().length == 1
+
+

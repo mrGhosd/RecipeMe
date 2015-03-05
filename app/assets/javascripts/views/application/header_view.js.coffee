@@ -10,7 +10,7 @@ class RecipeMe.Views.HeaderView extends Backbone.View
 
   initialize: ->
     this.render()
-    @width = $(".app-header").width()
+    @width = window.screen.width
     @navigation_width = 300
 
   loginDialog: ->
@@ -33,16 +33,23 @@ class RecipeMe.Views.HeaderView extends Backbone.View
     this.toggleLeftMenu()
 
 
-  toggleLeftMenu: ->
-    if $("#navigationMenu").width() == 0
+  toggleLeftMenu: (handler = true)->
+    if $("#navigationMenu").width() == 0 && handler
+      if $("#navigationMenu ul").length == 0
+        view = new RecipeMe.Views.NavigationView({el: '#navigationMenu', view: this}  )
+      else
+        $("#navigationMenu ul").show()
       $(".app-header").animate({width: "#{@width - @navigation_width}px", left: "#{@navigation_width}px"}, 250)
       $("#navigationMenu").show().animate({width: "#{@navigation_width}"}, 250)
       $(".mask").removeClass("hide")
     else
       $(".app-header").animate({width: "100%", left: "0px"}, 250)
-      $("#navigationMenu").show().animate({width: "0px"}, 250)
+      $("#navigationMenu").queue(->
+        $(this).animate({width: "0px"}, 250)
+        $(this).find("ul").hide()
+        $(this).dequeue()
+      )
       $(".mask").addClass("hide")
-
 
 
   render: ->
