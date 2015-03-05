@@ -36,13 +36,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     new RecipeMe.RecipesController().edit(id)
 
   userProfile: (id) ->
-    if RecipeMe.currentUser
-      user_recipes = new RecipeMe.Collections.Recipes(@collection.currentUserRecipes())
-      profile = new RecipeMe.Views.UserProfile({user: RecipeMe.currentUser, recipes: user_recipes})
-      $("section#main").html(profile.el)
-      profile.render()
-    else
-      Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
+    new RecipeMe.UsersController().show(id)
 
   userRecipes: (id) ->
     if RecipeMe.currentUser

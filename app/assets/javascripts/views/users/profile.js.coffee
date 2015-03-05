@@ -9,7 +9,7 @@ class RecipeMe.Views.UserProfile extends Backbone.View
     this.render()
 
   render: ->
-    $(@el).html(@template(user: @params.user))
+    $(@el).html(@template({user: @params.user}))
     this
 
   toggleUserRecipes: (event)->

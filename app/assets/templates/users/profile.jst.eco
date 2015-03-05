@@ -1,5 +1,3 @@
-
-
 <div class="user_profile form-horizontal col-md-12">
   <fieldset>
     <legend>
@@ -12,7 +10,7 @@
       <div class="form-group">
         <label for="surname" class="control-label col-md-3">Фамилия:</label>
         <div class="col-md-6">
-          <input type="text" value="<%= @user.get("surname")%>" class="inline-input form-control" disabled="disabled"/>
+          <input type="text" value="<%= @user.get('surname') if @user %>" class="inline-input form-control" disabled="disabled"/>
         </div>
       </div>
       <div class="form-group">
@@ -41,7 +39,8 @@
       </div>
     </div>
     <div class="col-md-3">
-      <img src="<%= @user.get("avatar").normal.url if @user%>" class="recipe-image img-thumbnail"/>
+      <%= console.log @user %>
+      <img src="<%= @user.get('avatar').url if @user.get('avatar') %>" class="recipe-image img-thumbnail"/>
     </div>
   </div>
   <div class="row">

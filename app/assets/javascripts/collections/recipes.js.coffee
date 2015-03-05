@@ -2,11 +2,11 @@ class RecipeMe.Collections.Recipes extends Backbone.Collection
   url: '/api/recipes'
   model: RecipeMe.Models.Recipe
 
-  currentUserRecipes: ->
+  userRecipes: (user_id)->
     recipes = []
     $.each(this.models,
       (key, value)->
-        if value.get("user_id") == RecipeMe.currentUser.get("id")
+        if value.get("user_id") == user_id
           recipes.push(value)
     )
     return recipes
