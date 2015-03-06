@@ -28,7 +28,7 @@ class RecipesController <ApplicationController
   def show
     recipe = Recipe.find(params[:id])
     respond_to do |format|
-      format.json { render json: recipe.to_json(methods: [:comments, :images]) }
+      format.json { render json: recipe.to_json(methods: [:comments, :images, :steps]) }
     end
   end
 

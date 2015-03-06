@@ -11,9 +11,14 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     'dragleave #recipePlaceholder': 'leaveDrag'
     'drop #recipePlaceholder': 'dropImage'
     'click .add-step': 'addRecipeStep'
+    'click .remove-step': 'removeStep'
 
   initialize: (options = {}) ->
-    @model = options['model'] if options['model']
+    if options['model']
+      @model = options['model']
+      @steps = @model.get('steps')
+      console.log @model
+
     this.render()
     @reader = new FileReader()
     this.initFileReader()
@@ -76,9 +81,12 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     $("#recipePlaceholder").removeClass("empty entered")
     return false
 
+  removeStep: (event)->
+    console.log $(event.target).closest(".step-block").remove()
+
   render: ->
     if @model
-      $(@el).html(@template(recipe: @model))
+      $(@el).html(@template(recipe: @model, steps: @steps))
       this
     else
       $(@el).html(@template())

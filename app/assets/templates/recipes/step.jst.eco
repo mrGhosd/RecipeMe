@@ -2,7 +2,11 @@
     <textarea name="description" class="form-control recipe-title"></textarea>
 </div>
 <div class="step-image">
-    <div class="step-placeholder empty">
-</div>
+    <div class="step-placeholder empty"></div>
     <input type="file" name="image" class="step-image hide" />
+</div>
+<div class="step-actions">
+  <a href="#" data-remote="true" class="btn btn-danger remove-step">
+    <img src="/images/delete85.png" height="25" width="25" />
+  </a>
 </div>
