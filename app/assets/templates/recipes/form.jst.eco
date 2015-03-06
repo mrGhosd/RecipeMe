@@ -1,37 +1,37 @@
 <form id="recipe_form" class="form-horizontal">
-  <input type="hidden" name="user_id" class="hidden-id-field" value="<%= RecipeMe.currentUser.id %>"/>
-  <div class="form-group">
-    <label for="title" class="control-label col-sm-1"><%= I18n.t('recipes.title') %></label>
-    <div class="col-md-2">
-      <input type="text" name="title" class="form-control recipe-title" value="<%=  @recipe.get('title') if @recipe %>"/>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="description" class="control-label col-sm-1"><%= I18n.t('recipes.description') %></label>
-    <div class="col-md-6">
-      <textarea class="form-control recipe-description markItUp"
-      id="recipe-description" name="description"><%= @recipe.get('description') if @recipe %></textarea>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="image" class="control-label col-sm-1"><%= I18n.t('recipes.image') %></label>
-    <div class="col-md-2">
-      <input type="file" name="image" id="recipe_image" class="recipe-image" value="<%= @recipe.get('image').small.url if @recipe %>"/>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label"></label>
-    <div class="col-md-2">
-      <div class="image-placeholder">
-        <% if @recipe: %>
-            <img src="<%= @recipe.get('image').small.url if @recipe %>" height="200" width="200" />.
-        <% end %>
+  <div class="row">
+    <div class="col-md-10">
+      <input type="hidden" name="user_id" class="hidden-id-field" value="<%= RecipeMe.currentUser.id %>"/>
+      <div class="form-group">
+        <label for="title" class="control-label col-sm-1"><%= I18n.t('recipes.title') %></label>
+        <div class="col-md-2">
+          <input type="text" name="title" class="form-control recipe-title" value="<%=  @recipe.get('title') if @recipe %>"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description" class="control-label col-sm-1"><%= I18n.t('recipes.description') %></label>
+        <div class="col-md-6">
+          <textarea class="form-control recipe-description markItUp"
+          id="recipe-description" name="description"><%= @recipe.get('description') if @recipe %></textarea>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-group"></div>
-  <div class="form-actions">
-    <input type="submit" class="btn btn-success submit-form" value="<%= I18n.t('application.form.save') %>"/>
-    <a href="#" class='btn btn-default back-button' data-remote="true"><%= I18n.t('application.form.back') %></a>
+    <div class="col-md-2">
+      <div class="form-group">
+        <div class="col-md-2">
+          <div class="image-placeholder empty" id="recipePlaceholder" draggable="true">
+            <% if @recipe: %>
+                <img src="<%= @recipe.get('image').small.url if @recipe %>" height="200" width="200" />.
+            <% end %>
+          </div>
+          <input type="file" name="image" id="recipe_image" class="recipe-image" value="<%= @recipe.get('image').small.url if @recipe %>"/>
+        </div>
+      </div>
+    </div>
+      <div class="form-group"></div>
+      <div class="form-actions">
+        <input type="submit" class="btn btn-success submit-form" value="<%= I18n.t('application.form.save') %>"/>
+        <a href="#" class='btn btn-default back-button' data-remote="true"><%= I18n.t('application.form.back') %></a>
+      </div>
   </div>
 </form>

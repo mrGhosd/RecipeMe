@@ -56,3 +56,22 @@ window.appHelper =
       "0"+month.toString() if month.toString().length == 1
 
 
+
+    dragAndDrop: (input) ->
+      dropZone = $('.image-placeholder')
+      maxFileSize = 1000000
+      console.log dropZone
+
+      if  typeof(window.FileReader == 'undefined')
+        dropZone.text('Не поддерживается браузером!');
+        dropZone.addClass('error');
+
+      dropZone[0].ondragover = ->
+        dropZone.addClass("hover")
+        return false
+
+      dropZone[0].ondragleave = ->
+        dropZone.removeClass("hover")
+        return false
+
+

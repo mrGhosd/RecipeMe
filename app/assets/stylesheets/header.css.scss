@@ -15,6 +15,15 @@
   &>div{
     display: inline-block;
   }
+  .auth-buttons{
+    float: right;
+    position: absolute;
+    right: 50px;
+
+    &>div{
+      display: inline-block;
+    }
+  }
   .current-user-info{
     float: right;
     position: absolute;

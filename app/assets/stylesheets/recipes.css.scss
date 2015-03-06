@@ -39,3 +39,24 @@
     font-size: 24px;
   }
 }
+.image-placeholder {
+  height: 200px;
+  width: 200px;
+  border-radius: 8px;
+  img{
+    border-radius: 8px;
+  }
+  &.empty{
+    border: 2px dotted #000000;
+    background-image: url("/images/plus24.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }
+  &.entered{
+    opacity: 0.3;
+  }
+  &.hover{
+    background-color: red;
+  }
+}

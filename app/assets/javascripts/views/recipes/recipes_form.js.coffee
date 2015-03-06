@@ -6,12 +6,27 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     'change .recipe-image': 'fileUploadAccept'
     'submit #recipe_form': 'createRecipe'
     'click .back-button': 'returnToList'
+    'click #recipePlaceholder': 'triggerFileUpload'
+    'dragenter #recipePlaceholder': 'enterDrag'
+    'dragleave #recipePlaceholder': 'leaveDrag'
+    'drop #recipePlaceholder': 'dropImage'
 
   initialize: (options = {}) ->
     @model = options['model'] if options['model']
     this.render()
     @reader = new FileReader()
-    @fileUploadAccept()
+    this.initFileReader()
+
+  initFileReader: ->
+    @reader = new FileReader()
+    @reader.onload = (event) ->
+      dataUri = event.target.result
+      img = new Image(200, 200)
+      img.class = "image-view"
+      img.src = dataUri
+      $(".image-placeholder").html(img)
+    @reader.onerror = (event) ->
+      console.log "ОШИБКА!"
 
   createRecipe:(event) ->
     event.preventDefault()
@@ -39,6 +54,26 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
   returnToList: (event)->
     Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
 
+  triggerFileUpload: ->
+    $("#recipe_image").click()
+
+  enterDrag: (event) ->
+    event.preventDefault()
+    $("#recipePlaceholder").addClass("entered")
+
+  leaveDrag: (event) ->
+    event.preventDefault()
+    $("#recipePlaceholder").removeClass("entered")
+
+  dropImage: (event)->
+    event.preventDefault()
+    event.stopPropagation()
+    original = event.originalEvent
+    original.dataTransfer.dropEffect = 'copy';
+    uploadedFile = original.dataTransfer.files[0]
+    @reader.readAsDataURL(uploadedFile)
+    $("#recipePlaceholder").removeClass("empty entered")
+    return false
 
   render: ->
     if @model
@@ -55,16 +90,9 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       return false
     else
       $(".image-placeholder .image-view").remove()
-      @reader.onload = (event) ->
-        dataUri = event.target.result
-        img = new Image(200, 200)
-        img.class = "image-view"
-        img.src = dataUri
-        $(".image-placeholder").html(img)
-      @reader.onerror = (event) ->
-        console.log "ОШИБКА!"
       image = $("#recipe_form .recipe-image")[0].files[0]
       @reader.readAsDataURL(image)
+      $(".image-placeholder").removeClass("empty")
 
 
 
