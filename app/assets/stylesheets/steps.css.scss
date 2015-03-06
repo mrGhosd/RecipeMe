@@ -1,8 +1,10 @@
 .step-block{
   float: left;
+  width: 100%;
+  margin-top: 10px;
   textarea{
     resize: none;
-    height: 100px;
+    height: 70px;
     width: 300px;
 
   }
@@ -13,7 +15,7 @@
   .step-image {
     margin-left: 25px;
     .step-placeholder {
-      height: 100px;
+      height: 70px;
       width: 100px;
       &.empty {
         border: 2px dotted #000000;
@@ -27,5 +29,16 @@
         opacity: 0.3;
       }
     }
+  }
+  .step-actions{
+    margin-left:10px;
+  }
+}
+.steps-title{
+  &>div{
+    display: inline-block;
+  }
+  &>p{
+    display: inline-block;
   }
 }

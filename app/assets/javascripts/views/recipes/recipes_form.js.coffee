@@ -10,6 +10,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     'dragenter #recipePlaceholder': 'enterDrag'
     'dragleave #recipePlaceholder': 'leaveDrag'
     'drop #recipePlaceholder': 'dropImage'
+    'click .add-step': 'addRecipeStep'
 
   initialize: (options = {}) ->
     @model = options['model'] if options['model']
@@ -83,6 +84,11 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       $(@el).html(@template())
       this
     $(".markItUp").markItUp(window.myHtmlSettings)
+
+  addRecipeStep: (event)->
+    event.preventDefault()
+    view = new RecipeMe.Views.RecipeStep()
+    $(".steps-group").append(view.render().el)
 
   fileUploadAccept: ->
     $("#recipe_form .recipe-image").val()

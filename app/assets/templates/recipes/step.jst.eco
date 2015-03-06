@@ -1,0 +1,8 @@
+<div class="step-description">
+    <textarea name="description" class="form-control recipe-title"></textarea>
+</div>
+<div class="step-image">
+    <div class="step-placeholder empty">
+</div>
+    <input type="file" name="image" class="step-image hide" />
+</div>
