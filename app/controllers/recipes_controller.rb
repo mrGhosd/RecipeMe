@@ -9,6 +9,7 @@ class RecipesController <ApplicationController
   end
 
   def create
+    binding.pry
     @recipe = Recipe.new(recipes_params)
     if @recipe.save
       render json: { success: true}, status: :ok
