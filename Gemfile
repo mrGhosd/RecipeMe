@@ -14,6 +14,7 @@ gem 'rmagick', :require => 'RMagick'
 gem 'haml'
 gem 'haml_assets'
 gem 'mini_magick'
+gem 'remotipart'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views

@@ -1,4 +1,5 @@
-<form id="recipe_form" class="form-horizontal">
+<form accept-charset="UTF-8" data-type="json" id="recipe_form" class="form-horizontal" data-remote="true" enctype="multipart/form-data">
+  <input type="hidden" name="<%= $('meta[name="csrf-param"]').attr('content') %>" value="<%= $('meta[name="csrf-token"]').attr('content') %>" />
   <div class="row">
     <div class="col-md-10">
       <input type="hidden" name="user_id" class="hidden-id-field" value="<%= RecipeMe.currentUser.id %>"/>
@@ -24,12 +25,12 @@
         </div>
         <div class="step-block">
           <div class="step-description">
-            <textarea name="description" class="form-control recipe-title"></textarea>
+            <textarea name="description" steps="true" class="form-control recipe-title"></textarea>
           </div>
           <div class="step-image">
             <div class="step-placeholder empty">
             </div>
-            <input type="file" name="image" class="step-image hide" />
+            <input type="file" name="image" steps="true" class="step-image hide" />
           </div>
           <div class="step-actions">
             <a href="#" data-remote="true" class="btn btn-danger remove-step"><img src="/images/delete85.png" height="25" width="25" /></a>

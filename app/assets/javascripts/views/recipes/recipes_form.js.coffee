@@ -39,11 +39,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     $("#recipe_form input, #recipe_form textarea").removeClass("error")
     $(".error-text").remove()
     attributes = window.appHelper.formSerialization($("#recipe_form"))
-    if @model
-
-    else
-      @model = new RecipeMe.Models.Recipe()
-
+    @model = new RecipeMe.Models.Recipe() if !@model
     @model.save(attributes,
       success: (response, request)->
         RecipeMe.currentUser.fetch()
@@ -81,6 +77,11 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     $("#recipePlaceholder").removeClass("empty entered")
     return false
 
+  addRecipeStep: (event)->
+    event.preventDefault()
+    view = new RecipeMe.Views.RecipeStep()
+    $(".steps-group").append(view.render().el)
+
   removeStep: (event)->
     console.log $(event.target).closest(".step-block").remove()
 
@@ -93,11 +94,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       this
     $(".markItUp").markItUp(window.myHtmlSettings)
 
-  addRecipeStep: (event)->
-    event.preventDefault()
-    view = new RecipeMe.Views.RecipeStep()
-    $(".steps-group").append(view.render().el)
-
   fileUploadAccept: ->
     $("#recipe_form .recipe-image").val()
     if $("#recipe_form .recipe-image").val() == "" || typeof $("#recipe_form .recipe-image").val() == "undefined"
@@ -107,8 +103,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       image = $("#recipe_form .recipe-image")[0].files[0]
       @reader.readAsDataURL(image)
       $(".image-placeholder").removeClass("empty")
-
-
 
   updateRecipesCollection: ->
     RecipeMe.recipesCollection.fetch()

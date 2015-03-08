@@ -8,6 +8,7 @@ class RecipesController <ApplicationController
   end
 
   def create
+    binding.pry
     recipe = Recipe.new(recipes_params)
     if recipe.save
       render json: { success: true}, status: :ok
@@ -43,6 +44,7 @@ class RecipesController <ApplicationController
 
   private
   def recipes_params
-    params.permit(:title, :description, :user_id, :image)
+    params[:steps].transform_keys!{|key| key[1,1]}
+    params.permit(:title, :user_id, :description, :image, :steps)
   end
 end
