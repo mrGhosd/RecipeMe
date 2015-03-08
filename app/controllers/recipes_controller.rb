@@ -1,6 +1,7 @@
 class RecipesController <ApplicationController
   # protect_from_forgery except: :create
   # respond_to :json
+  after_action :create_steps, only: :create
 
   def index
     recipes = Recipe.all
@@ -8,12 +9,11 @@ class RecipesController <ApplicationController
   end
 
   def create
-    binding.pry
-    recipe = Recipe.new(recipes_params)
-    if recipe.save
+    @recipe = Recipe.new(recipes_params)
+    if @recipe.save
       render json: { success: true}, status: :ok
     else
-      render json: recipe.errors.to_json, status: :forbidden
+      render json: @recipe.errors.to_json, status: :forbidden
     end
   end
 
@@ -46,5 +46,11 @@ class RecipesController <ApplicationController
   def recipes_params
     params[:steps].transform_keys!{|key| key[1,1]}
     params.permit(:title, :user_id, :description, :image, :steps)
+  end
+
+  def create_steps
+      params[:steps].each do |k, v|
+        @recipe.steps.create(v)
+      end
   end
 end

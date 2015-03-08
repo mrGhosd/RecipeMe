@@ -30,7 +30,7 @@
           <div class="step-image">
             <div class="step-placeholder empty">
             </div>
-            <input type="file" name="image" steps="true" class="step-image hide" />
+            <input type="file" name="image" steps="true" class="step-image" />
           </div>
           <div class="step-actions">
             <a href="#" data-remote="true" class="btn btn-danger remove-step"><img src="/images/delete85.png" height="25" width="25" /></a>

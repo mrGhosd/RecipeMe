@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   has_many :recipes
   has_many :comments
+
 end

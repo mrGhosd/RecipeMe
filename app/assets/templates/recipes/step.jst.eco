@@ -1,9 +1,9 @@
 <div class="step-description">
-    <textarea name="recipe[steps][description]" steps="true" class="form-control recipe-title"></textarea>
+    <textarea name="description" steps="true" class="form-control recipe-title"></textarea>
 </div>
 <div class="step-image">
     <div class="step-placeholder empty"></div>
-    <input type="file" name="recipe[steps][image]" steps="true" class="step-image hide" />
+    <input type="file" name="image" steps="true" class="step-image" />
 </div>
 <div class="step-actions">
   <a href="#" data-remote="true" class="btn btn-danger remove-step">
