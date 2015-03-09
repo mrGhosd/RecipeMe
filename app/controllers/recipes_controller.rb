@@ -2,10 +2,11 @@ class RecipesController <ApplicationController
   # protect_from_forgery except: :create
   # respond_to :json
   after_action :create_steps, only: :create
+  after_action :create_image, only: :create
 
   def index
     recipes = Recipe.all
-    render json: recipes.to_json(methods: [:comments, :images])
+    render json: recipes.as_json(only: [:title, :id, :user_id], methods: [:image])
   end
 
   def create
@@ -45,13 +46,16 @@ class RecipesController <ApplicationController
 
   private
   def recipes_params
-    params[:steps].transform_keys!{|key| key[1,1]}
-    params.permit(:title, :user_id, :description, :image, :steps)
+    params.permit(:title, :user_id, :description, :steps)
   end
 
   def create_steps
       params[:steps].each do |k, v|
         @recipe.steps.create(v)
       end
+  end
+
+  def create_image
+    Image.find(params[:image_id]).update(imageable_id: @recipe.id) if params[:image_id].present?
   end
 end

@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20150309193709) do
 
   create_table "images", force: true do |t|
     t.string   "name"
-    t.integer  "imageable_type"
+    t.string   "imageable_type"
     t.integer  "imageable_id"
     t.datetime "created_at"
     t.datetime "updated_at"

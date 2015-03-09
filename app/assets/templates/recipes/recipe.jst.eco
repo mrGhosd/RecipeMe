@@ -1,5 +1,6 @@
 <div class="recipe-list-item">
-    <div class="image"><img height="200" width="200" src="<%= @recipe.get("image").small.url %>"/></div>
+  <%= console.log @recipe %>
+    <div class="image"><img height="200" width="200" src="<%= @recipe.get("image").name.url %>"/></div>
     <div class="title">
       <h5><%= @recipe.get("title").substr(0, 12)  %></h5>
       <div class="hidden recipe-item-actions">

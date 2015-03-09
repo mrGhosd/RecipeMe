@@ -8,7 +8,7 @@ window.appHelper =
       attributes = {}
       elements = $('input, select, textarea', form)
       if $('[steps=true]')
-        attributes["[steps]"] = this.serializeSteps(form)
+        attributes["steps"] = this.serializeSteps(form)
 
       for element in elements
         if $(element).attr("type") == "submit" || $(element).attr("steps")
@@ -28,8 +28,8 @@ window.appHelper =
         step = {}
         description = $(element).find("textarea").val()
         image = $(element).find("input[type=file]")[0].files[0]
-        step["[description]"] = description
-        step["[image]"] =  image
+        step["description"] = description
+        step["image"] =  image
         steps[index] = step
 
       console.log steps

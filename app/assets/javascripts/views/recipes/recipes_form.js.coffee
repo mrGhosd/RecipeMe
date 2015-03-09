@@ -70,11 +70,10 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
   dropImage: (event)->
     event.preventDefault()
     event.stopPropagation()
-    original = event.originalEvent
-    original.dataTransfer.dropEffect = 'copy';
-    uploadedFile = original.dataTransfer.files[0]
-    @reader.readAsDataURL(uploadedFile)
+    file = this.getFileFromEvent(event)
+    @reader.readAsDataURL(file)
     $("#recipePlaceholder").removeClass("empty entered")
+    this.createRecipeImage(event, "Recipe")
     return false
 
   addRecipeStep: (event)->
@@ -106,3 +105,24 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   updateRecipesCollection: ->
     RecipeMe.recipesCollection.fetch()
+
+
+  getFileFromEvent: (event) ->
+    original = event.originalEvent
+    original.dataTransfer.dropEffect = 'copy';
+    uploadedFile = original.dataTransfer.files[0]
+    return uploadedFile
+
+  createRecipeImage: (event, type) ->
+    formData = new FormData()
+    file = this.getFileFromEvent(event)
+    formData.append('name', file)
+    formData.append('imageable_type', type)
+    request = new XMLHttpRequest();
+    request.open("POST", "/api/images");
+    request.send(formData);
+    request.onreadystatechange= ->
+      if (request.readyState==4 && request.status==200)
+        console.log JSON.parse(request.response)
+        response = JSON.parse(request.response)
+        $(".hidden-image-value-recipe").val(response.id)

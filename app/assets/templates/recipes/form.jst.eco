@@ -47,6 +47,7 @@
                 <img src="<%= @recipe.get('image').small.url if @recipe %>" height="200" width="200" />.
             <% end %>
           </div>
+          <input type="hidden" name="image_id" class="hidden-image-value-recipe" />
           <input type="file" name="image" id="recipe_image" class="recipe-image" value="<%= @recipe.get('image').small.url if @recipe %>"/>
         </div>
       </div>
