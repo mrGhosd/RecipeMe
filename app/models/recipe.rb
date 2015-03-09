@@ -2,6 +2,7 @@ class Recipe < ActiveRecord::Base
   belongs_to :user
   has_many :comments
   has_many :steps
+  has_one :image, as: :imageable
   mount_uploader :image, RecipeUploader
 
   validates :title, :description, presence: true
