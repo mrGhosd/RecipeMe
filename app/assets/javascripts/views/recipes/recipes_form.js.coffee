@@ -109,8 +109,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   getFileFromEvent: (event) ->
     original = event.originalEvent
-    console.log event
-#    original.dataTransfer.dropEffect = 'copy';
     if original.dataTransfer
       uploadedFile = original.dataTransfer.files[0]
     else
@@ -126,11 +124,14 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       image_id = $(".image-placeholder img").attr("image_id")
       formData.append('imageable_id', image_id)
 
+    console.log file
     request = new XMLHttpRequest();
     request.open("POST", "/api/images");
     request.send(formData);
-    request.onreadystatechange= ->
-      if (request.readyState==4 && request.status==200)
-        console.log JSON.parse(request.response)
+    request.onreadystatechange = ->
+      if request.readyState == 4
         response = JSON.parse(request.response)
-        $(".hidden-image-value-recipe").val(response.id)
+        $(".hidden-image-value-recipe").val(response.imageable_id)
+        $(".image-placeholder img").attr("image_id", response.imageable_id)
+        console.log "id is #{response.imageable_id}"
+
