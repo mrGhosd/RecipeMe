@@ -10,7 +10,6 @@ class RecipesController <ApplicationController
   end
 
   def create
-    binding.pry
     @recipe = Recipe.new(recipes_params)
     if @recipe.save
       render json: { success: true}, status: :ok
@@ -31,7 +30,7 @@ class RecipesController <ApplicationController
   def show
     recipe = Recipe.find(params[:id])
     respond_to do |format|
-      format.json { render json: recipe.to_json(methods: [:comments, :images, :steps]) }
+      format.json { render json: recipe.as_json(methods: [:comments, :image, :steps]) }
     end
   end
 

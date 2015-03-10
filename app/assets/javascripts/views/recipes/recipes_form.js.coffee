@@ -17,7 +17,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     if options['model']
       @model = options['model']
       @steps = @model.get('steps')
-      console.log @model
 
     this.render()
     @reader = new FileReader()
