@@ -23,26 +23,13 @@
             <img src="/images/add73.png" height="25" width="25" />
           </a>
         </div>
-        <div class="step-block">
-          <div class="step-description">
-            <textarea name="description" steps="true" class="form-control recipe-title"></textarea>
-          </div>
-          <div class="step-image">
-            <div class="step-placeholder empty">
-            </div>
-            <input type="file" name="image" steps="true" class="step-image" />
-          </div>
-          <div class="step-actions">
-            <a href="#" data-remote="true" class="btn btn-danger remove-step"><img src="/images/delete85.png" height="25" width="25" /></a>
-          </div>
-        </div>
-
+        <div class="steps-list"></div>
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
         <div class="col-md-2">
-          <div class="image-placeholder empty" id="recipePlaceholder" draggable="true">
+          <div class="image-placeholder <%= "empty" if !@recipe.get("image") %>" id="recipePlaceholder" draggable="true">
             <% if @recipe: %>
                 <img src="<%=  @recipe.get("image").name.url if @recipe %>" height="200" width="200" image_id="<%= @recipe.get("image").imageable_id if @recipe.get("image")  %>"/>
             <% end %>

@@ -1,10 +1,7 @@
 class RecipeMe.Models.Step extends Backbone.Model
-  fileAttribute: 'image'
 
-#  initialize: (options) ->
-#    @option = options
-#    if options != null
-#      @recipe = options.recipe
-#
-#    url: ->
-#      return "api/recipes/#{@recipe}/steps" if @option.id
+  initialize: (options) ->
+    @recipe = options.id if options.id
+
+    url: ->
+      return "api/recipes/#{@recipe.id}/steps" if @recipe.id

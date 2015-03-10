@@ -77,20 +77,28 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   addRecipeStep: (event)->
     event.preventDefault()
-    view = new RecipeMe.Views.RecipeStep()
-    $(".steps-group").append(view.render().el)
+    step = new RecipeMe.Models.Step(id: @model.id)
+    console.log step
+    this.renderRecipeStep(step)
 
   removeStep: (event)->
     console.log $(event.target).closest(".step-block").remove()
 
   render: ->
+    @steps.push({recipe_id: @model.id}) if @steps.length == 0
     if @model
-      $(@el).html(@template(recipe: @model, steps: @steps))
-      this
+      $(@el).html(@template(recipe: @model))
     else
       $(@el).html(@template())
-      this
+    @steps.each(@renderRecipeStep)
+    this
     $(".markItUp").markItUp(window.myHtmlSettings)
+
+
+  renderRecipeStep: (step) ->
+    view = new RecipeMe.Views.StepForm(model: step)
+    $(".steps-list").append(view.render().el)
+
 
   fileUploadAccept: (event) ->
     $("#recipe_form .recipe-image").val()
@@ -124,7 +132,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       image_id = $(".image-placeholder img").attr("image_id")
       formData.append('imageable_id', image_id)
 
-    console.log file
     request = new XMLHttpRequest();
     request.open("POST", "/api/images");
     request.send(formData);
@@ -133,5 +140,4 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
         response = JSON.parse(request.response)
         $(".hidden-image-value-recipe").val(response.imageable_id)
         $(".image-placeholder img").attr("image_id", response.imageable_id)
-        console.log "id is #{response.imageable_id}"
 

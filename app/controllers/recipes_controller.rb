@@ -2,7 +2,6 @@ class RecipesController <ApplicationController
   # protect_from_forgery except: :create
   # respond_to :json
   after_action :create_steps, only: :create
-  after_action :create_image, only: :create
 
   def index
     recipes = Recipe.all
@@ -52,9 +51,5 @@ class RecipesController <ApplicationController
       params[:steps].each do |k, v|
         @recipe.steps.create(v)
       end
-  end
-
-  def create_image
-    Image.find(params[:image_id]).update(imageable_id: @recipe.id) if params[:image_id].present?
   end
 end
