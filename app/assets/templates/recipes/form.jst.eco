@@ -44,7 +44,7 @@
         <div class="col-md-2">
           <div class="image-placeholder empty" id="recipePlaceholder" draggable="true">
             <% if @recipe: %>
-                <img src="<%=  @recipe.get("image").name.url if @recipe %>" height="200" width="200" />
+                <img src="<%=  @recipe.get("image").name.url if @recipe %>" height="200" width="200" image_id="<%= @recipe.get("image").imageable_id if @recipe.get("image")  %>"/>
             <% end %>
           </div>
           <input type="hidden" name="image_id" class="hidden-image-value-recipe" />

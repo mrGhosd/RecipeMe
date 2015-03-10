@@ -92,7 +92,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       this
     $(".markItUp").markItUp(window.myHtmlSettings)
 
-  fileUploadAccept: ->
+  fileUploadAccept: (event) ->
     $("#recipe_form .recipe-image").val()
     if $("#recipe_form .recipe-image").val() == "" || typeof $("#recipe_form .recipe-image").val() == "undefined"
       return false
@@ -101,6 +101,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       image = $("#recipe_form .recipe-image")[0].files[0]
       @reader.readAsDataURL(image)
       $(".image-placeholder").removeClass("empty")
+      this.createRecipeImage(event, "Recipe")
 
   updateRecipesCollection: ->
     RecipeMe.recipesCollection.fetch()
@@ -108,7 +109,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   getFileFromEvent: (event) ->
     original = event.originalEvent
-    original.dataTransfer.dropEffect = 'copy';
+#    original.dataTransfer.dropEffect = 'copy';
     uploadedFile = original.dataTransfer.files[0]
     return uploadedFile
 
@@ -117,6 +118,11 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     file = this.getFileFromEvent(event)
     formData.append('name', file)
     formData.append('imageable_type', type)
+    if $(".image-placeholder img").attr("image_id").length > 0
+      image_id = $(".image-placeholder img").attr("image_id")
+      formData.append('imageable_id', image_id)
+#      console.log image_id
+
     request = new XMLHttpRequest();
     request.open("POST", "/api/images");
     request.send(formData);
