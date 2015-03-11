@@ -12,19 +12,24 @@
     display: inline-block;
     float: left;
   }
-  .step-image {
+  div.step-image {
     margin-left: 25px;
+    position: relative;
     .step-placeholder {
       height: 70px;
       width: 100px;
       border-radius: 8px;
+      cursor: pointer;
+      img{
+        border-radius: 8px;
+      }
+      .download-image{}
       &.empty {
         border: 2px dotted #000000;
         background-image: url("/images/plus24.png");
         background-size: 30px 30px;
         background-repeat: no-repeat;
         background-position: center;
-        cursor: pointer;
       }
       &.entered {
         opacity: 0.3;
