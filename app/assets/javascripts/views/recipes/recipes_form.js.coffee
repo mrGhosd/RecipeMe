@@ -11,7 +11,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     'dragleave #recipePlaceholder': 'leaveDrag'
     'drop #recipePlaceholder': 'dropImage'
     'click .add-step': 'addRecipeStep'
-    'click .remove-step': 'removeStep'
 
   initialize: (options = {}) ->
     @form = this
@@ -68,7 +67,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     @steps.each (step) ->
       step.set({recipe_id: response.id})
       console.log step.get("id")
-      if step.get("id") == null
+      if step.get("id") == undefined
         step.url = "/api/recipes/#{response.id}/steps"
       else
         step.url = "/api/recipes/#{response.id}/steps/#{step.get("id")}"
@@ -111,17 +110,13 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       @step = new RecipeMe.Models.Step(recipe_id: @model.id)
     else
       @step = new RecipeMe.Models.Step()
+    console.log @step
     @steps.add(@step)
     this.renderRecipeStep(@step)
 
   renderRecipeStep: (step) ->
     view = new RecipeMe.Views.StepForm(model: step)
     $(".steps-list").append(view.render().el)
-
-  removeStep: (event)->
-    @steps.remove(@step)
-    $(event.target).closest(".step-block").remove()
-    console.log @steps
 
   render: ->
     if @model

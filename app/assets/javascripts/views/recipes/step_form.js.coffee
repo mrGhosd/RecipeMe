@@ -8,6 +8,7 @@ class RecipeMe.Views.StepForm extends Backbone.View
     'dragleave .step-placeholder': 'leaveDrag'
     'drop .step-placeholder': 'dropImage'
     'focusout .step-description': 'updateDescription'
+    'click .remove-step': 'removeStep'
 
   initialize: (params, event)->
     @model = params.model
@@ -46,6 +47,17 @@ class RecipeMe.Views.StepForm extends Backbone.View
   leaveDrag: (event) ->
     $(event.target).removeClass("hover")
 
+  removeStep: (event) ->
+    if @model.isNew()
+      console.log @model.collection
+      @model.collection.remove(@model)
+    else
+      @model.url = "/api/recipes/#{@model.get("recipe_id")}/steps/#{@model.get("id")}"
+      @model.destroy()
+    $(event.target).closest(".step-block").fadeOut()
+
+
+
   dropImage: (event) ->
     event.preventDefault()
     event.stopPropagation()
@@ -80,7 +92,7 @@ class RecipeMe.Views.StepForm extends Backbone.View
     if $(event.target).closest(".step-block").attr("image_id") && $(event.target).closest(".step-block").attr("image_id").length > 0
       image_id = $(event.target).closest(".step-block").attr("image_id")
       formData.append('imageable_id', image_id)
-    if @image == null
+    if @image == undefined
       @image = new RecipeMe.Models.Image()
     console.log @image
     @image.uploadImage(formData)

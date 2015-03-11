@@ -29,7 +29,7 @@ class StepsController < ApplicationController
   end
 
   def destroy
-    step = @recipe.find(params[:id])
+    step = @recipe.steps.find(params[:id])
     step.destroy
     head :ok
   end
