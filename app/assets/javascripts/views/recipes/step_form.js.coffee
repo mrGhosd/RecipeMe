@@ -10,10 +10,10 @@ class RecipeMe.Views.StepForm extends Backbone.View
 
   initialize: (params, event)->
     @model = params.model if params.model
+    @reader = new FileReader()
     this.render()
 
   initFileReader: (image)->
-    @reader = new FileReader()
     @reader.onload = (event) ->
       dataUri = event.target.result
       img = new Image(100, 75)
@@ -34,7 +34,29 @@ class RecipeMe.Views.StepForm extends Backbone.View
       @reader.readAsDataURL(image)
       $(event.target).prev(".step-placeholder").removeClass("empty")
 
-  
+  enterDrag: (event) ->
+    $(event.target).addClass("hover")
+
+  leaveDrag: (event) ->
+    $(event.target).removeClass("hover")
+
+  dropImage: (event) ->
+    event.preventDefault()
+    event.stopPropagation()
+    this.initFileReader($(event.target))
+    file = this.getFileFromEvent(event)
+    @reader.readAsDataURL(file)
+    $(event.target).removeClass("empty hover")
+#    this.createRecipeImage(event, "Recipe")
+    return false
+
+  getFileFromEvent: (event) ->
+    original = event.originalEvent
+    if original.dataTransfer
+      uploadedFile = original.dataTransfer.files[0]
+    else
+      uploadedFile = $(event.target)[0].files[0]
+    return uploadedFile
 
   triggerFileUpload: (event) ->
     if $(event.target).next("input.step-image").length > 0

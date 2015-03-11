@@ -20,6 +20,9 @@
       width: 100px;
       border-radius: 8px;
       cursor: pointer;
+      &.hover{
+        opacity: 0.3;
+      }
       img{
         border-radius: 8px;
       }
