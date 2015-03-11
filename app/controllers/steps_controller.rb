@@ -1,6 +1,6 @@
 class StepsController < ApplicationController
   before_action :load_recipe
-  after_action :create_image, only: :create
+  after_action :create_image, only: [:create, :update]
 
   def index
     render json: @recipe.steps.as_json(methods: :image)
@@ -13,13 +13,19 @@ class StepsController < ApplicationController
     else
       render json: @step.errors.as_json, status: :unforbidden_entity
     end
-
   end
 
   def update
     @step = @recipe.steps.find(params[:id])
-    @step.update(steps_params)
-    render json: @step.as_json
+    if @step.update(steps_params)
+      render json: @step.as_json
+    else
+      render json: @step.errors.as_json
+    end
+  end
+
+  def show
+    render json: @recipe.steps.as_json(methods: :image)
   end
 
   def destroy
@@ -39,6 +45,8 @@ class StepsController < ApplicationController
   end
 
   def create_image
-    Image.find(params[:image][:image_id]).update(imageable_id: @step.id) if params[:image][:image_id].present?
+    if params[:image][:image_id].present?
+      Image.find(params[:image][:image_id]).update(imageable_id: @step.id)
+    end
   end
 end

@@ -23,13 +23,9 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       @model = new RecipeMe.Models.Recipe()
       @steps = new RecipeMe.Collections.Steps()
 
-    @steps.on('change', this.logOut, this)
     this.render()
     @reader = new FileReader()
     this.initFileReader()
-
-  logOut: ->
-    console.log @steps
 
   initFileReader: ->
     @reader = new FileReader()
@@ -49,18 +45,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     attributes = window.appHelper.formSerialization($("#recipe_form"))
     console.log attributes
     this.createMainObject(attributes, this.createSteps)
-#    @model.save(attributes,
-#      success: (response, request)->
-#        console.log @model
-##        RecipeMe.currentUser.fetch()
-##        Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
-#      error: (response, request) ->
-#        errors = request.responseJSON
-#        $.each(errors, (key, value)->
-#          $("#recipe_form input[name=\"#{key}\"]").addClass("error")
-#          $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
-#        )
-#    )
 
 
   createMainObject: (attributes, callback) ->
@@ -76,28 +60,18 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
           $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
         )
       )
-#    @model.save(attributes,
-#      success: (response, request)->
-#        console.log @model
-#        this.callback(response)
-#      error: (response, request) ->
-#        errors = request.responseJSON
-#        $.each(errors, (key, value)->
-#          $("#recipe_form input[name=\"#{key}\"]").addClass("error")
-#          $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
-#        )
-#    )
 
 
   createSteps: (steps, response, request) ->
     @steps = steps
-    console.log response
-    console.log request
+    console.log @steps
     @steps.each (step) ->
-      image = step.get("image")
-      image_id = image.get("id")
       step.set({recipe_id: response.id})
-      step.url = "/api/recipes/#{response.id}/steps"
+      console.log step.get("id")
+      if step.get("id") == null
+        step.url = "/api/recipes/#{response.id}/steps"
+      else
+        step.url = "/api/recipes/#{response.id}/steps/#{step.get("id")}"
       step.save(
         success: (response, request) ->
           console.log response

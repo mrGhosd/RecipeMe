@@ -12,6 +12,16 @@ class ImagesController < ApplicationController
     end
   end
 
+  def index
+    image = Image.all
+    render json: image.as_json
+  end
+
+  def show
+    image = Image.find_by(imageable_id: params[:id], type: "Step").last
+    render json: image.as_json
+  end
+
   private
   def image_params
     params.permit(:imageable_id, :imageable_type, :name)

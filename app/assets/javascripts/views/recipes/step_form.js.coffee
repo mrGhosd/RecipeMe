@@ -39,7 +39,6 @@ class RecipeMe.Views.StepForm extends Backbone.View
       @reader.readAsDataURL(image)
       $(event.target).prev(".step-placeholder").removeClass("empty")
       this.createStepImage(event, "Step")
-      @model.save if @model
 
   enterDrag: (event) ->
     $(event.target).addClass("hover")
@@ -77,10 +76,15 @@ class RecipeMe.Views.StepForm extends Backbone.View
     file = this.getFileFromEvent(event)
     formData.append('name', file)
     formData.append('imageable_type', type)
+    console.log @image
     if $(event.target).closest(".step-block").attr("image_id") && $(event.target).closest(".step-block").attr("image_id").length > 0
       image_id = $(event.target).closest(".step-block").attr("image_id")
       formData.append('imageable_id', image_id)
+    if @image == null
+      @image = new RecipeMe.Models.Image()
+    console.log @image
     @image.uploadImage(formData)
+    @model.set("image", @image)
 
 
   render: ->

@@ -5,7 +5,9 @@ class RecipeMe.Models.Step extends Backbone.Model
     if options
       @step_id = options.id
       @recipe_id = options.recipe_id
-    this.set("image", new RecipeMe.Models.Image())
+    else
+      this.set("image", new RecipeMe.Models.Image())
+
 
 
   url: ->

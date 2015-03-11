@@ -19,7 +19,7 @@ class RecipesController <ApplicationController
   end
 
   def update
-   @recipe =  Recipe.find(params[:id])
+    @recipe =  Recipe.find(params[:id])
     if @recipe.update(recipes_params)
       render json: { success: true}, status: :ok
     else

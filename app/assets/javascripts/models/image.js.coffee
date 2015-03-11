@@ -2,21 +2,20 @@ class RecipeMe.Models.Image extends Backbone.Model
 
   initialize: (options = {}) ->
     @image = this
-    @image_id = options.id if options.id
+    @step_id = options.step_id if options.step_id
 
   url: ->
-    if @image_id
-      return "/api/images/#{@image_id}"
-    else
-      return "/api/images"
+    return "/api/images"
 
-  lol:(response, klass ) ->
+  setImageData:(response, klass ) ->
     json = JSON.parse(response)
+    console.log json
     klass.set({image_id: json.id})
+    console.log klass
 
 
   uploadImage: (data)->
-    this.makeRequest(data, this.lol, this)
+    this.makeRequest(data, this.setImageData, this)
 
   makeRequest: (data, callback, parent) ->
     request = new XMLHttpRequest();
