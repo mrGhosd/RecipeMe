@@ -11,14 +11,13 @@ class RecipeMe.Models.Recipe extends Backbone.Model
       response.steps.fetch()
     return response
 
-  setFile: (file) ->
-    setFromFile = (file) ->
-    reader = new FileReader()
-    self = this
-    reader.onload = ((f) ->
-      (e) ->
-        self.set image: e.target.result
-        return
-    )(file)
-    reader.readAsDataURL(file)
-    return
+
+  createFromForm: (recipe, steps, successCallback, errorCallback) ->
+    this.save(recipe,
+      success: (response, request)->
+        steps.callback(steps.steps, response, request)
+        successCallback(response, request)
+      error: (response, request) ->
+        errorCallback(response, request)
+    )
+

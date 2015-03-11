@@ -18,7 +18,9 @@ class RecipeMe.RecipesController
 
     recipe.fetch
       success: (model)->
-        view = new RecipeMe.Views.RecipeShow(model: model)
+        steps = model.get("steps")
+        steps.fetch({async: false})
+        view = new RecipeMe.Views.RecipeShow(model: model, steps: steps)
         $("section#main").html(view.el)
         view.render()
 

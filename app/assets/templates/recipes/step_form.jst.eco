@@ -1,9 +1,14 @@
 <div class="step-description">
-    <textarea name="description" steps="true" class="form-control recipe-title"></textarea>
+    <textarea name="description" steps="true" class="form-control step-description"><%= @step.get("description") if @step %></textarea>
 </div>
 <div class="step-image">
-    <div class="step-placeholder empty"></div>
-    <input type="file" name="image" steps="true" class="step-image hide" />
+    <div class="step-placeholder empty">
+      <% if @step.get("image").name: %>
+          <img src="<%= @step.get("image").name.url %>" height="75" width="100"/>
+      <% end %>
+    </div>
+    <input type="hidden" class="step_image_id" steps="true" />
+    <input type="file" name="image"  class="step-image hide" />
 </div>
 <div class="step-actions">
   <a href="#" data-remote="true" class="btn btn-danger remove-step">

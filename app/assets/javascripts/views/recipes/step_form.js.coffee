@@ -7,9 +7,10 @@ class RecipeMe.Views.StepForm extends Backbone.View
     'dragenter .step-placeholder': 'enterDrag'
     'dragleave .step-placeholder': 'leaveDrag'
     'drop .step-placeholder': 'dropImage'
+    'focusout .step-description': 'updateDescription'
 
   initialize: (params, event)->
-    @model = params.model if params.model
+    @model = params.model
     @reader = new FileReader()
     this.render()
 
@@ -23,6 +24,10 @@ class RecipeMe.Views.StepForm extends Backbone.View
     @reader.onerror = (event) ->
       console.log "ОШИБКА!"
 
+  updateDescription: (event) ->
+    text = $(event.target).val()
+    @model.set({description: text})
+
   uploadRecipeStepImage: (event) ->
     this.initFileReader($(event.target).prev(".step-placeholder"))
     $(event.target).val()
@@ -33,6 +38,8 @@ class RecipeMe.Views.StepForm extends Backbone.View
       image = $(event.target)[0].files[0]
       @reader.readAsDataURL(image)
       $(event.target).prev(".step-placeholder").removeClass("empty")
+      this.createStepImage(event, "Step")
+      @model.save if @model
 
   enterDrag: (event) ->
     $(event.target).addClass("hover")
@@ -47,7 +54,7 @@ class RecipeMe.Views.StepForm extends Backbone.View
     file = this.getFileFromEvent(event)
     @reader.readAsDataURL(file)
     $(event.target).removeClass("empty hover")
-#    this.createRecipeImage(event, "Recipe")
+    this.createStepImage(event, "Step")
     return false
 
   getFileFromEvent: (event) ->
@@ -63,6 +70,18 @@ class RecipeMe.Views.StepForm extends Backbone.View
       $(event.target).next("input.step-image").click()
     else
       $(event.target).parent().next("input.step-image").click()
+
+  createStepImage: (event, type) ->
+    formData = new FormData()
+    @image = @model.get("image")
+    file = this.getFileFromEvent(event)
+    formData.append('name', file)
+    formData.append('imageable_type', type)
+    if $(event.target).closest(".step-block").attr("image_id") && $(event.target).closest(".step-block").attr("image_id").length > 0
+      image_id = $(event.target).closest(".step-block").attr("image_id")
+      formData.append('imageable_id', image_id)
+    @image.uploadImage(formData)
+
 
   render: ->
     if @model

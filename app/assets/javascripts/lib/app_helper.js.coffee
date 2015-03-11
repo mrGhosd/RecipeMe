@@ -7,16 +7,14 @@ window.appHelper =
     formSerialization: (form)->
       attributes = {}
       elements = $('input, select, textarea', form)
-      if $('[steps=true]')
-        attributes["steps"] = this.serializeSteps(form)
 
       for element in elements
         if $(element).attr("type") == "submit" || $(element).attr("steps")
           continue
         if $(element).attr("type") == "file"
           attributes["#{$(element).attr('name')}"] =  $(element)[0].files[0] if $(element)[0].files[0]
-
           continue
+
         attributes["#{$(element).attr('name')}"] = $(element).val()
 
       return attributes
@@ -27,12 +25,10 @@ window.appHelper =
       for element, index in elements
         step = {}
         description = $(element).find("textarea").val()
-        image = $(element).find("input[type=file]")[0].files[0]
+        image = $(element).find("input.step_image_id").val()
         step["description"] = description
         step["image"] =  image
         steps[index] = step
-
-      console.log steps
       return steps
 
 

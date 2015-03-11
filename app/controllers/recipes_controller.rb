@@ -1,7 +1,8 @@
 class RecipesController <ApplicationController
   # protect_from_forgery except: :create
   # respond_to :json
-  after_action :create_steps, only: :create
+  # after_action :create_steps, only: :create
+  after_action :create_image, only: [:create, :update]
 
   def index
     recipes = Recipe.all
@@ -11,20 +12,21 @@ class RecipesController <ApplicationController
   def create
     @recipe = Recipe.new(recipes_params)
     if @recipe.save
-      render json: { success: true}, status: :ok
+      render json: @recipe.as_json, status: :ok
     else
       render json: @recipe.errors.to_json, status: :forbidden
     end
   end
 
   def update
-   recipe =  Recipe.find(params[:id])
-    if recipe.update(recipes_params)
+   @recipe =  Recipe.find(params[:id])
+    if @recipe.update(recipes_params)
       render json: { success: true}, status: :ok
     else
-      render json: recipe.errors.to_json, status: :forbidden
+      render json: @recipe.errors.to_json, status: :forbidden
     end
   end
+
 
   def show
     recipe = Recipe.find(params[:id])
@@ -47,9 +49,15 @@ class RecipesController <ApplicationController
     params.permit(:title, :user_id, :description, :steps)
   end
 
+  def create_image
+    Image.find(params[:image_id]).update(imageable_id: @recipe.id) if params[:image_id].present?
+  end
+
   def create_steps
-      params[:steps].each do |k, v|
-        @recipe.steps.create(v)
+      params[:steps].each_with_index do |k, v|
+        step = @recipe.steps.create(description: k[:description])
+        Image.find(k[:image]).update(imageable_id: step.id) if k[:image].present?
       end
   end
+
 end

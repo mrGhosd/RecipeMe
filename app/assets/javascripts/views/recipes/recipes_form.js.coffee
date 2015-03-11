@@ -14,13 +14,22 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     'click .remove-step': 'removeStep'
 
   initialize: (options = {}) ->
-    if options['model']
-      @model = options['model']
+    @form = this
+    if options.model
+      @model = options.model
       @steps = @model.get('steps')
+      @steps.fetch({async: false})
+    else
+      @model = new RecipeMe.Models.Recipe()
+      @steps = new RecipeMe.Collections.Steps()
 
+    @steps.on('change', this.logOut, this)
     this.render()
     @reader = new FileReader()
     this.initFileReader()
+
+  logOut: ->
+    console.log @steps
 
   initFileReader: ->
     @reader = new FileReader()
@@ -38,19 +47,65 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     $("#recipe_form input, #recipe_form textarea").removeClass("error")
     $(".error-text").remove()
     attributes = window.appHelper.formSerialization($("#recipe_form"))
-    @model = new RecipeMe.Models.Recipe() if !@model
-    @model.save(attributes,
-      success: (response, request)->
+    console.log attributes
+    this.createMainObject(attributes, this.createSteps)
+#    @model.save(attributes,
+#      success: (response, request)->
+#        console.log @model
+##        RecipeMe.currentUser.fetch()
+##        Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
+#      error: (response, request) ->
+#        errors = request.responseJSON
+#        $.each(errors, (key, value)->
+#          $("#recipe_form input[name=\"#{key}\"]").addClass("error")
+#          $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
+#        )
+#    )
+
+
+  createMainObject: (attributes, callback) ->
+    step = {steps: @steps, callback: this.createSteps}
+    @model.createFromForm(attributes, step,
+      success = (response, request) ->
         RecipeMe.currentUser.fetch()
         Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
-      error: (response, request) ->
+      error = (response, request) ->
         errors = request.responseJSON
         $.each(errors, (key, value)->
           $("#recipe_form input[name=\"#{key}\"]").addClass("error")
           $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
         )
-    )
-    @updateRecipesCollection()
+      )
+#    @model.save(attributes,
+#      success: (response, request)->
+#        console.log @model
+#        this.callback(response)
+#      error: (response, request) ->
+#        errors = request.responseJSON
+#        $.each(errors, (key, value)->
+#          $("#recipe_form input[name=\"#{key}\"]").addClass("error")
+#          $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
+#        )
+#    )
+
+
+  createSteps: (steps, response, request) ->
+    @steps = steps
+    console.log response
+    console.log request
+    @steps.each (step) ->
+      image = step.get("image")
+      image_id = image.get("id")
+      step.set({recipe_id: response.id})
+      step.url = "/api/recipes/#{response.id}/steps"
+      step.save(
+        success: (response, request) ->
+          console.log response
+          console.log request
+        error: (response, request) ->
+          console.log response
+          console.log request
+      )
 
   returnToList: (event)->
     Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
@@ -73,32 +128,36 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     @reader.readAsDataURL(file)
     $("#recipePlaceholder").removeClass("empty entered")
     this.createRecipeImage(event, "Recipe")
+    console.log @model
     return false
 
-  addRecipeStep: (event)->
+  addRecipeStep: (event) ->
     event.preventDefault()
-    step = new RecipeMe.Models.Step(id: @model.id)
-    console.log step
-    this.renderRecipeStep(step)
-
-  removeStep: (event)->
-    console.log $(event.target).closest(".step-block").remove()
-
-  render: ->
-    @steps.push({recipe_id: @model.id}) if @steps.length == 0
     if @model
-      $(@el).html(@template(recipe: @model))
+      @step = new RecipeMe.Models.Step(recipe_id: @model.id)
     else
-      $(@el).html(@template())
-    @steps.each(@renderRecipeStep)
-    this
-    $(".markItUp").markItUp(window.myHtmlSettings)
-
+      @step = new RecipeMe.Models.Step()
+    @steps.add(@step)
+    this.renderRecipeStep(@step)
 
   renderRecipeStep: (step) ->
     view = new RecipeMe.Views.StepForm(model: step)
     $(".steps-list").append(view.render().el)
 
+  removeStep: (event)->
+    @steps.remove(@step)
+    $(event.target).closest(".step-block").remove()
+    console.log @steps
+
+  render: ->
+    if @model
+      $(@el).html(@template(recipe: @model))
+    else
+      $(@el).html(@template())
+
+    @steps.each(@renderRecipeStep)
+    this
+    $(".markItUp").markItUp(window.myHtmlSettings)
 
   fileUploadAccept: (event) ->
     $("#recipe_form .recipe-image").val()
@@ -128,7 +187,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     file = this.getFileFromEvent(event)
     formData.append('name', file)
     formData.append('imageable_type', type)
-    if $(".image-placeholder img").attr("image_id").length > 0
+    if $(".image-placeholder img").attr("image_id") && $(".image-placeholder img").attr("image_id").length > 0
       image_id = $(".image-placeholder img").attr("image_id")
       formData.append('imageable_id', image_id)
 
@@ -138,6 +197,13 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     request.onreadystatechange = ->
       if request.readyState == 4
         response = JSON.parse(request.response)
-        $(".hidden-image-value-recipe").val(response.imageable_id)
-        $(".image-placeholder img").attr("image_id", response.imageable_id)
+        if response.id
+          $(".hidden-image-value-recipe").val(response.id)
+          $(".image-placeholder img").attr("image_id", response.id)
+        else
+          $(".hidden-image-value-recipe").val(response.imageable_id)
+          $(".image-placeholder img").attr("image_id", response.imageable_id)
+
+        console.log response
+
 
