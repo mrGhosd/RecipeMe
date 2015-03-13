@@ -134,7 +134,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       return false
     else
       $(".image-placeholder .image-view").remove()
-      image = $("#recipe_form .recipe-image")[0].files[0]
+      image = this.getFileFromEvent(event)
       @reader.readAsDataURL(image)
       $(".image-placeholder").removeClass("empty")
       this.createRecipeImage(event, "Recipe")
