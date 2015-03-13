@@ -1,6 +1,6 @@
-<div class="description"><%- @step.get("description") %></div>
-<div class="image">
+<p class="description">
   <% if @step.get("image"): %>
-      <img src="<%= @step.get("image").name.url %>" height="100" width="100" class="step-image"/>
+      <img src="<%= @step.get("image").name.url %>" height="100" width="100" class="step-image img-thumbnail"/>
   <% end %>
-</div>
+  <%- @step.get("description") %>
+</p>

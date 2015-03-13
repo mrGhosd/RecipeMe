@@ -52,14 +52,21 @@
   }
 }
 .recipe-step {
-  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding:10px;
+  min-height: 120px;
   &>div{
     display: inline-block;
   }
   .description{
-    float:left;
+    width:100%;
+    img{
+      height:100px;
+      width:100px;
+    }
   }
-  .image{
+  .step-image{
     float: right;
   }
 }
