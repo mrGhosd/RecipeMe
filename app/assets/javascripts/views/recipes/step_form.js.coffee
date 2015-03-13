@@ -21,7 +21,11 @@ class RecipeMe.Views.StepForm extends Backbone.View
       img = new Image(100, 75)
       img.class = "image-view"
       img.src = dataUri
-      image.html(img)
+      console.log image.find("img")
+      if image.find("img") == undefined
+        image.find(".step-placeholder").html(img)
+      else
+        image.parent().html(img)
     @reader.onerror = (event) ->
       console.log "ОШИБКА!"
 
@@ -85,18 +89,20 @@ class RecipeMe.Views.StepForm extends Backbone.View
   createStepImage: (event, type) ->
     formData = new FormData()
     @image = @model.get("image")
+    console.log @model
     file = this.getFileFromEvent(event)
     formData.append('name', file)
     formData.append('imageable_type', type)
-    console.log @image
     if $(event.target).closest(".step-block").attr("image_id") && $(event.target).closest(".step-block").attr("image_id").length > 0
       image_id = $(event.target).closest(".step-block").attr("image_id")
       formData.append('imageable_id', image_id)
     if @image == undefined
       @image = new RecipeMe.Models.Image()
-    console.log @image
+    else
+      @image = new RecipeMe.Models.Image(@image)
     @image.uploadImage(formData)
     @model.set("image", @image)
+    console.log @model
 
 
   render: ->
