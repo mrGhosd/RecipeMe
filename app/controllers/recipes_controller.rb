@@ -46,7 +46,7 @@ class RecipesController <ApplicationController
 
   private
   def recipes_params
-    params.permit(:title, :user_id, :description, :steps)
+    params.permit(:title, :user_id, :description, :steps, :tag_list)
   end
 
   def create_image
