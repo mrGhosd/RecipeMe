@@ -45,7 +45,7 @@ class StepsController < ApplicationController
   end
 
   def create_image
-    if params[:image][:image_id].present?
+    if params[:image].present? && params[:image][:image_id].present?
       Image.find(params[:image][:image_id]).update(imageable_id: @step.id)
       @step.update_image
     end

@@ -59,5 +59,4 @@ class RecipesController <ApplicationController
         Image.find(k[:image]).update(imageable_id: step.id) if k[:image].present?
       end
   end
-
 end
