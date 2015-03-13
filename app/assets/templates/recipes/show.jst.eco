@@ -2,9 +2,13 @@
   <fieldset>
     <legend><%= @recipe.get("title") %></legend>
       <div class="row">
-        <div class="col-md-9">
-          <div class="tags-list"><%- @recipe.get("tag_list").split(",").map (value) -> "<a href='#' data-remote='true'>#{value}</a>" %></div>
-          <div class="description"><%- @recipe.get("description") %></div>
+        <div class="col-md-9 recipe-data">
+          <div class="tags-list"><%- @recipe.get("tag_list").split(",").map (value) -> "<a href='#' data-remote='true' class='tag-data'>#{value}</a>" %></div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Описание</div>
+            <div class="panel-body"><%- @recipe.get("description") %></div>
+          </div>
+          <div class="description"></div>
           <div class="steps-line"></div>
         </div>
         <div class="col-md-3"><img src="<%=  @recipe.get("image").name.url %>" class="recipe-image img-thumbnail"/></div>

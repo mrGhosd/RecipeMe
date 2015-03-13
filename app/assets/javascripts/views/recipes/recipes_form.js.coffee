@@ -126,6 +126,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
     @steps.each(@renderRecipeStep)
     this
+    $(".recipe-tags").tagsinput()
     $(".markItUp").markItUp(window.myHtmlSettings)
 
   fileUploadAccept: (event) ->

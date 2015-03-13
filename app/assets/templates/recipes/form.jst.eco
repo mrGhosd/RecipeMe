@@ -5,14 +5,14 @@
       <input type="hidden" name="user_id" class="hidden-id-field" value="<%= RecipeMe.currentUser.id %>"/>
       <div class="form-group">
         <label for="title" class="control-label col-sm-1"><%= I18n.t('recipes.title') %></label>
-        <div class="col-md-2">
+        <div class="col-md-8">
           <input type="text" name="title" class="form-control recipe-title" value="<%=  @recipe.get('title') if @recipe %>"/>
         </div>
       </div>
       <div class="form-group">
         <label for="tag_list" class="control-label col-sm-1">Tags:</label>
-        <div class="col-md-2">
-          <input type="text" name="tag_list" class="form-control recipe-tags" value="<%=  @recipe.get('tag_list') if @recipe %>"/>
+        <div class="col-md-8">
+          <input type="text" name="tag_list" class="form-control recipe-tags" data-role="tagsinput" value="<%=  @recipe.get('tag_list') if @recipe %>"/>
         </div>
       </div>
       <div class="form-group">
@@ -35,8 +35,8 @@
     <div class="col-md-2">
       <div class="form-group">
         <div class="col-md-2">
-          <div class="image-placeholder <%= "empty" if  @recipe.get('image') == null %>" id="recipePlaceholder" draggable="true">
-            <% if @recipe: %>
+          <div class="image-placeholder <%= "empty" if  @recipe.get('image') == null || @recipe.get('image') == undefined %>" id="recipePlaceholder" draggable="true">
+            <% if @recipe.get("image"): %>
                 <img src="<%=  @recipe.get("image").name.url if @recipe.get("image") %>" height="200" width="200" image_id="<%= @recipe.get("image").imageable_id if @recipe.get("image")  %>"/>
             <% end %>
           </div>

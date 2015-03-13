@@ -51,3 +51,15 @@
     display: inline-block;
   }
 }
+.recipe-step {
+  height: 100px;
+  &>div{
+    display: inline-block;
+  }
+  .description{
+    float:left;
+  }
+  .image{
+    float: right;
+  }
+}

@@ -60,3 +60,16 @@
     background-color: red;
   }
 }
+.tags-list{
+  .tag-data{
+    background-color: #5bc0de;
+    padding: 5px;
+    border-radius: 8px;
+    color: #ffffff;
+  }
+}
+.recipe-data{
+  &>div{
+    margin-top: 10px;
+  }
+}
