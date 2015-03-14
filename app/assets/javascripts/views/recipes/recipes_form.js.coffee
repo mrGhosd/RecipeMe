@@ -63,10 +63,8 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   createSteps: (steps, response, request) ->
     @steps = steps
-    console.log @steps
     @steps.each (step) ->
       step.set({recipe_id: response.id})
-      console.log step.get("id")
       if step.get("id") == undefined
         step.url = "/api/recipes/#{response.id}/steps"
       else

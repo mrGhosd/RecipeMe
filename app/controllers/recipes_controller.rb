@@ -1,7 +1,4 @@
 class RecipesController <ApplicationController
-  # protect_from_forgery except: :create
-  # respond_to :json
-  # after_action :create_steps, only: :create
   after_action :create_image, only: :create
 
   def index

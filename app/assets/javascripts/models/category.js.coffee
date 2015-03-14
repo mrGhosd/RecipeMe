@@ -1,2 +1,2 @@
 class RecipeMe.Models.Category extends Backbone.Model
-  urlRoot: '/api/categories'
+  urlRoot: 'api/categories'

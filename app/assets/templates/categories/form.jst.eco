@@ -1,3 +1,31 @@
-<form accept-charset="UTF-8" data-type="json" id="recipe_form" class="form-horizontal" data-remote="true" enctype="multipart/form-data">
-  <input type="text" class="form-control" name="title" placeholder="Название"/>
+<form accept-charset="UTF-8" data-type="json" id="category_form" class="form-horizontal" data-remote="true" enctype="multipart/form-data" >
+  <input type="hidden" name="<%= $('meta[name="csrf-param"]').attr('content') %>" value="<%= $('meta[name="csrf-token"]').attr('content') %>" />
+  <div class="row">
+    <div class="col-md-10">
+      <div class="form-group">
+        <div class="col-md-8">
+          <input type="text" class="form-control" name="title" placeholder="Название"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-8">
+          <textarea type="text" class="form-control" name="description" placeholder="Описание"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <div class="image-placeholder empty">
+
+        </div>
+        <input type="hidden" name="image_id" class="category-image-value" />
+        <input type="file" name="image" id="category_image" class="category_image"/>
+      </div>
+    </div>
+  </div>
+  <div class="form-group"></div>
+  <div class="form-actions">
+    <input type="submit" class="btn btn-success submit-form" value="<%= I18n.t('application.form.save') %>"/>
+    <a href="#" class='btn btn-default back-button' data-remote="true"><%= I18n.t('application.form.back') %></a>
+  </div>
 </form>

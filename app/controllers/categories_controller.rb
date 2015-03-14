@@ -1,11 +1,18 @@
 class CategoriesController < ApplicationController
+
   def index
     categories = Category.all
     render json: categories.as_json(only: [:title, :created_at])
   end
 
   def create
-
+    binding.pry
+    @category = Category.new(category_params)
+    if @category.save
+      render json: @category.as_json, status: :ok
+    else
+      render json: @category.errors.as_json, status: :unforbidden_entity
+    end
   end
 
   def show
@@ -23,6 +30,6 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-
+    params.require(:category).permit(:title, :description, :image_id)
   end
 end
