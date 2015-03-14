@@ -1,4 +1,5 @@
 class RecipeMe.Views.CategoryIndex extends Backbone.View
+
   template: JST["categories/index"]
 
   initialize: (params) ->

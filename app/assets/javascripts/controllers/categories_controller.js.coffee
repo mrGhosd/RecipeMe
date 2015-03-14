@@ -7,3 +7,9 @@ class RecipeMe.CategoriesController
     view = new RecipeMe.Views.CategoryIndex({collection: @categories})
     $("section#main").html(view.el)
     view.render()
+
+  new: ->
+    model = new RecipeMe.Models.Category()
+    view = new RecipeMe.Views.CategoryForm(model: model)
+    $("section#main").html(view.el)
+    view.render()
