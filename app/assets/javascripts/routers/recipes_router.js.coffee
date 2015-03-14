@@ -12,6 +12,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     'categories': 'categoriesList'
     'categories/new': 'createCategory'
     'categories/:id/edit': 'editCategory'
+    'categories/:id': 'showCategory'
 
   initialize: ->
     this.setup()
@@ -49,6 +50,9 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   editCategory: (id) ->
     new RecipeMe.CategoriesController().edit(id)
+
+  showCategory: (id) ->
+    new RecipeMe.CategoriesController().show(id)
 
   userRecipes: (id) ->
     if RecipeMe.currentUser

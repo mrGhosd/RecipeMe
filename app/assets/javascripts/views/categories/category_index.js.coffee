@@ -14,6 +14,5 @@ class RecipeMe.Views.CategoryIndex extends Backbone.View
     this
 
   addCategory: (category) ->
-    console.log category
     view = new RecipeMe.Views.Category(model: category)
     $(".categories-list").prepend(view.render().el)

@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= @category.get("title") if @category.get("title") %>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-8">
+        <%= @category.get("description") if @category.get("title") %>
+      </div>
+      <div class="col-md-2">
+
+      </div>
+    </div>
+  </div>
+</div>

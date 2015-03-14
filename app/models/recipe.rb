@@ -1,5 +1,6 @@
 class Recipe < ActiveRecord::Base
   belongs_to :user
+  belongs_to :category
   has_many :comments, dependent: :destroy
   has_many :steps, dependent: :destroy
   has_one :image, as: :imageable, dependent: :destroy

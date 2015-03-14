@@ -16,10 +16,16 @@ class RecipeMe.CategoriesController
 
   edit: (id) ->
     category = new RecipeMe.Models.Category(id: id)
-    console.log category
     category.fetch
       success: (model)->
-        console.log model
         view = new RecipeMe.Views.CategoryForm({model: model})
+        $("section#main").html(view.el)
+        view.render()
+
+  show: (id) ->
+    category = new RecipeMe.Models.Category(id: id)
+    category.fetch
+      success: (model)->
+        view = new RecipeMe.Views.CategoryShow({model: model})
         $("section#main").html(view.el)
         view.render()
