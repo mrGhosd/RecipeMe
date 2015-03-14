@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   scope :api do
     resources :images, only: :create
     resources :users
+    resources :categories
     resources :recipes do
       resources :comments
       resources :steps

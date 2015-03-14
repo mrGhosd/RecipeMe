@@ -5,10 +5,10 @@ class RecipeMe.Models.Recipe extends Backbone.Model
   parse: (response) ->
     if response.comments
       response.comments = new RecipeMe.Collections.Comments({recipe: response.id})
-      response.comments.fetch()
+      response.comments.fetch({async: false})
     if response.steps
       response.steps = new RecipeMe.Collections.Steps({recipe: response.id})
-      response.steps.fetch()
+      response.steps.fetch({async: false})
     return response
 
 
