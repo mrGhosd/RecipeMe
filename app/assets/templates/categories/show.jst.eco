@@ -17,6 +17,6 @@
     </div>
   </div>
 </div>
-<div class="recipes_list">
-  <%= console.log @category.get("recipes") %>
-</div>
+<h3>Рецепты:</h3>
+<ul class="recipes_list">
+</ul>

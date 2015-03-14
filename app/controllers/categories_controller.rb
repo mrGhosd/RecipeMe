@@ -33,7 +33,7 @@ class CategoriesController < ApplicationController
   end
 
   def recipes
-    binding.pry
+    render json: @category.recipes.as_json(only: [:title, :id, :user_id], methods: [:image])
   end
 
   private

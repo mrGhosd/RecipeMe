@@ -2,7 +2,6 @@
     <textarea name="description" steps="true" class="form-control step-description"><%= @step.get("description") if @step %></textarea>
 </div>
 <div class="step-image">
-  <%= console.log @step.get("image") %>
     <div class="step-placeholder <%= "empty" if  @step.get('image') == null || @step.get('image') == undefined %>">
       <% if @step.get("image"): %>
           <img src="<%= @step.get("image").name.url %>" height="75" width="100"/>

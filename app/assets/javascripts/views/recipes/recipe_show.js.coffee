@@ -13,7 +13,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
       @comments = @model.get('comments')
       @comments.on('add', @render, this)
       @comments.on('reset', @render, this)
-    console.log @steps
     this.render()
 
   showCommentForm: ->

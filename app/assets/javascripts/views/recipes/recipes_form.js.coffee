@@ -22,6 +22,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       @model = new RecipeMe.Models.Recipe()
       @steps = new RecipeMe.Collections.Steps()
 
+    this.loadCategories()
     this.render()
     @reader = new FileReader()
     this.initFileReader()
@@ -36,6 +37,10 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       $(".image-placeholder").html(img)
     @reader.onerror = (event) ->
       console.log "ОШИБКА!"
+
+  loadCategories: ->
+    @categories = new RecipeMe.Collections.Categories()
+    @categories.fetch({async: false})
 
   createRecipe:(event) ->
     event.preventDefault()
@@ -118,9 +123,9 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   render: ->
     if @model
-      $(@el).html(@template(recipe: @model))
+      $(@el).html(@template(recipe: @model, categories: @categories))
     else
-      $(@el).html(@template())
+      $(@el).html(@template(categories: @categories))
 
     @steps.each(@renderRecipeStep)
     this

@@ -23,9 +23,9 @@
       </div>
   </fieldset>
   <% if RecipeMe.currentUser: %>
-  <div class="recipe-actions">
-    <a href="#" data-remote="true" class="btn btn-primary add-comment-button glyphicon glyphicon-plus" ></a>
-  </div>
+      <div class="recipe-actions">
+        <a href="#" data-remote="true" class="btn btn-primary add-comment-button glyphicon glyphicon-plus" ></a>
+      </div>
   <% end %>
   <div class="comment-form"></div>
   <div class="recipe-comments"></div>

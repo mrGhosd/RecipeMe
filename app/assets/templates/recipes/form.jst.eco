@@ -10,6 +10,16 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="title" class="control-label col-sm-1">Category</label>
+        <div class="col-md-8">
+          <select class="form-control" name="category_id">
+            <% for category in @categories.models: %>
+                <option value="<%= category.get("id") %>" <%="selected" if @recipe.get("category_id") == category.get("id") %> > <%= category.get("title") %> </option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
         <label for="tag_list" class="control-label col-sm-1">Tags:</label>
         <div class="col-md-8">
           <input type="text" name="tag_list" class="form-control recipe-tags" data-role="tagsinput" value="<%=  @recipe.get('tag_list') if @recipe %>"/>
