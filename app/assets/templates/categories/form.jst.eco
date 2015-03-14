@@ -4,12 +4,12 @@
     <div class="col-md-10">
       <div class="form-group">
         <div class="col-md-8">
-          <input type="text" class="form-control" name="title" placeholder="Название"/>
+          <input type="text" class="form-control" name="title" placeholder="Название" value="<%= @category.get("title") if @category.get("title") %>"/>
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-8">
-          <textarea type="text" class="form-control" name="description" placeholder="Описание"></textarea>
+          <textarea type="text" class="form-control" name="description" placeholder="Описание"><%= @category.get("description") if @category.get("description") %></textarea>
         </div>
       </div>
     </div>

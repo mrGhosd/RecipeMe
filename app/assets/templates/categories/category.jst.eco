@@ -4,7 +4,7 @@
 <% if RecipeMe.currentUser: %>
     <div class="actions">
       <%= console.log @category %>
-      <a href="#/category/<%= @category.get("id") %>/edit" class="btn btn-success btn-xs glyphicon glyphicon-edit edit-category"></a>
+      <a href="#/categories/<%= @category.get("id") %>/edit" class="btn btn-success btn-xs glyphicon glyphicon-edit edit-category"></a>
       <a href="#" class="btn btn-danger btn-xs glyphicon glyphicon-remove destroy-category"></a>
     </div>
 <% end %>

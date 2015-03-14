@@ -13,7 +13,6 @@ class RecipeMe.Views.CategoryForm extends Backbone.View
 
   submitCategory: (event) ->
     event.preventDefault()
-    console.log @model
     attributes = window.appHelper.formSerialization($("#category_form"))
     @model.save(attributes,
       success: (response, request) ->
