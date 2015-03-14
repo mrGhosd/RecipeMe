@@ -1,6 +1,14 @@
 class RecipeMe.Collections.Recipes extends Backbone.Collection
-  url: '/api/recipes'
   model: RecipeMe.Models.Recipe
+
+  initialize: (category_id) ->
+    @category = category_id if category_id
+
+  url: ->
+    if @category
+      "/api/categories/#{@category}/recipes"
+    else
+      return '/api/recipes'
 
   userRecipes: (user_id)->
     recipes = []

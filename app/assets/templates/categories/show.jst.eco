@@ -8,8 +8,15 @@
         <%= @category.get("description") if @category.get("title") %>
       </div>
       <div class="col-md-2">
-
+        <% if @category.get("image"): %>
+            <a href="<%=  @category.get("image").name.url if @category.get("image").name %>" data-lightbox="recipe-image" data-title="<%= @category.get("title") %>">
+                <img src="<%=  @category.get("image").name.url if @category.get("image").name %>" class="img-thumbnail" height="200" width="200" />
+            </a>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
+<div class="recipes_list">
+  <%= console.log @category.get("recipes") %>
 </div>

@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :load_category, except: [:index, :create]
+  after_action :create_image, only: [:create, :update]
   def index
     categories = Category.all
     render json: categories.as_json(only: [:id, :title, :created_at])
@@ -15,7 +16,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    render json: @category.as_json
+    render json: @category.as_json(methods: [:image, :recipes])
   end
 
   def update
@@ -31,6 +32,10 @@ class CategoriesController < ApplicationController
     head :ok
   end
 
+  def recipes
+    binding.pry
+  end
+
   private
 
   def load_category
@@ -39,5 +44,12 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:title, :description, :image_id)
+  end
+
+  def create_image
+    if params[:image][:image_id].present?
+      Image.find(params[:image][:image_id]).update(imageable_id: @category.id)
+      @category.update_image
+    end
   end
 end

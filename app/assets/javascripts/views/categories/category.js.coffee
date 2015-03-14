@@ -12,7 +12,8 @@ class RecipeMe.Views.Category extends Backbone.View
   destoryCategory: (event) ->
     event.preventDefault()
     @model.destroy
-    $(event.target).closest(".category-item").fadeOut('slow').remove()
+      complete: ->
+        $(event.target).closest(".category-item").fadeOut('slow').remove()
 
   render: ->
     $(@el).html(@template(category: @model))

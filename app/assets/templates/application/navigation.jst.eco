@@ -1,5 +1,6 @@
 <ul>
   <li><a href="/#recipes"> <img src="/images/book1.png" /> Рецепты</a></li>
+  <li><a href="/#categories"> <img src="/images/category.png" /> Категории</a></li>
   <li><a> <img src="/images/news29.png" /> Новости</a></li>
   <li><a> <img src="/images/review4.png" /> Отзывы</a></li>
   <li><a> <img src="/images/opened4.png" /> Обратная связь</a></li>

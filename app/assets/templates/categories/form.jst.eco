@@ -15,8 +15,10 @@
     </div>
     <div class="col-md-2">
       <div class="form-group">
-        <div class="image-placeholder empty">
-
+        <div class="image-placeholder <%= "empty" if  @category.get('image') == null || @category.get('image') == undefined %>">
+          <% if @category.get("image"): %>
+              <img src="<%=  @category.get("image").name.url if @category.get("image").name %>" height="200" width="200" image_id="<%= @category.get("image").imageable_id if @category.get("image")  %>"/>
+          <% end %>
         </div>
         <input type="hidden" name="image_id" class="category-image-value" />
         <input type="file" name="image" id="category_image" class="category_image"/>
