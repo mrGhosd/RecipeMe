@@ -1,0 +1,2 @@
+<a href="/#categories/new" data-remote="true" class="btn btn-primary">Новая категория</a>
+<div class="categories-list"></div>

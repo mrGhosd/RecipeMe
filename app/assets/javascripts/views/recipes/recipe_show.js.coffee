@@ -10,7 +10,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     if params
       @model = params.model
       @steps = @model.get("steps")
-#      @steps.fetch({async: false})
       @comments = @model.get('comments')
       @comments.on('add', @render, this)
       @comments.on('reset', @render, this)
