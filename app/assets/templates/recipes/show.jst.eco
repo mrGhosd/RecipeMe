@@ -5,7 +5,7 @@
         <div class="col-md-9 recipe-data">
           <div class="tags-list">
             <% if @recipe.get("tag_list"): %>
-            <%- @recipe.get("tag_list").split(",").map (value) -> "<a href='#' data-remote='true' class='tag-data'>#{value}</a>" %>
+                <%- @recipe.get("tag_list").split(",").map (value) -> "<a href='#' data-remote='true' class='tag-data'>#{value}</a>" %>
             <% end %>
           </div>
           <div class="panel panel-default">
@@ -15,12 +15,16 @@
           <div class="description"></div>
           <div class="steps-line"></div>
         </div>
-        <div class="col-md-3"><img src="<%=  @recipe.get("image").name.url %>" class="recipe-image img-thumbnail"/></div>
+        <div class="col-md-3">
+          <a href="<%= @recipe.get("image").name.url %>"  data-lightbox="recipe-image" data-title="<%= @recipe.get("title") %>">
+            <img src="<%=  @recipe.get("image").name.url %>" class="recipe-image img-thumbnail"/>
+          </a>
+        </div>
       </div>
   </fieldset>
   <% if RecipeMe.currentUser: %>
   <div class="recipe-actions">
-    <a href="#" data-remote="true" class="btn btn-primary add-comment-button glyphicon glyphicon-plus"></a>
+    <a href="#" data-remote="true" class="btn btn-primary add-comment-button glyphicon glyphicon-plus" ></a>
   </div>
   <% end %>
   <div class="comment-form"></div>

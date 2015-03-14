@@ -1,6 +1,8 @@
 <p class="description">
   <% if @step.get("image"): %>
-      <img src="<%= @step.get("image").name.url %>" height="100" width="100" class="step-image img-thumbnail"/>
+      <a href="<%= @step.get("image").name.url %>" data-lightbox="step" >
+        <img src="<%= @step.get("image").name.url %>" height="100" width="100" class="step-image img-thumbnail"/>
+      </a>
   <% end %>
   <%- @step.get("description") %>
 </p>
