@@ -3,6 +3,7 @@ class RecipeMe.Views.CategoryForm extends Backbone.View
 
   events:
     'submit #category_form': 'submitCategory'
+    'click .back-button': 'returnToList'
 
   initialize: (options = {}) ->
     if options.model
@@ -24,6 +25,9 @@ class RecipeMe.Views.CategoryForm extends Backbone.View
           $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#category_form input[name=\"#{key}\"]"))
         )
     )
+
+  returnToList: (event) ->
+    Backbone.history.navigate('/categories', {trigger: true, repalce: true})
 
   render: ->
     $(@el).html(@template(category: @model))

@@ -2,11 +2,10 @@ class CategoriesController < ApplicationController
 
   def index
     categories = Category.all
-    render json: categories.as_json(only: [:title, :created_at])
+    render json: categories.as_json(only: [:id, :title, :created_at])
   end
 
   def create
-    binding.pry
     @category = Category.new(category_params)
     if @category.save
       render json: @category.as_json, status: :ok

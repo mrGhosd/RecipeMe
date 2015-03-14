@@ -1,0 +1,13 @@
+.category-item{
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 10px;
+
+  .actions{
+    float: right;
+  }
+  &>div{
+    display:inline-block;
+  }
+}
