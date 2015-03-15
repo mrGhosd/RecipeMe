@@ -13,6 +13,13 @@
             <div class="panel-body"><%- @recipe.get("description") %></div>
           </div>
           <div class="description"></div>
+          <div class="recipe-info-actions">
+            <div class="info-action">
+                <a href="#" data-remote="true"
+                   class="btn btn-success glyphicon glyphicon-heart action-icon rate-icon"></a>
+                <a href="#" data-remote="true" class="action-value rate-value"><%= @recipe.get("rate") %> </a>
+            </div>
+          </div>
           <div class="steps-line"></div>
         </div>
         <div class="col-md-3">

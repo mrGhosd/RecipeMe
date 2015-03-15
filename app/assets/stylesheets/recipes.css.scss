@@ -73,3 +73,25 @@
     margin-top: 10px;
   }
 }
+.actions-background{
+  background-color: #000;
+  opacity: 0.3;
+  position: absolute;
+  top: 0px;
+}
+.recipe-info{
+  .info-item{
+    span{
+      margin-left: 5px;
+    }
+  }
+}
+.info-action{
+  .action-icon{
+    float: left;
+  }
+  .action-value{
+    font-size: 25px;
+    margin-left: 5px;
+  }
+}

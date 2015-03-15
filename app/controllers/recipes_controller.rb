@@ -1,9 +1,9 @@
-class RecipesController <ApplicationController
+class RecipesController < ApplicationController
   after_action :create_image, only: :create
 
   def index
     recipes = Recipe.all
-    render json: recipes.as_json(only: [:title, :id, :user_id], methods: [:image])
+    render json: recipes.as_json(only: [:title, :id, :user_id, :rate], methods: [:image])
   end
 
   def create
