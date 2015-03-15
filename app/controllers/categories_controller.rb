@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :load_category, except: [:index, :create]
   after_action :create_image, only: [:create, :update]
+
   def index
     categories = Category.all
     render json: categories.as_json(only: [:id, :title, :created_at])
@@ -47,7 +48,7 @@ class CategoriesController < ApplicationController
   end
 
   def create_image
-    if params[:image][:image_id].present?
+    if params[:image].present? && params[:image][:image_id].present?
       Image.find(params[:image][:image_id]).update(imageable_id: @category.id)
       @category.update_image
     end

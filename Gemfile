@@ -57,6 +57,7 @@ group :test do
   gem 'database_cleaner', '~> 1.0.1'
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
+  gem 'json_spec'
 end
 
 # Use ActiveModel has_secure_password
