@@ -8,7 +8,7 @@ class RecipeMe.Rate
     this.performRequest(@entity, @id, this.successRequest(), @object)
 
   performRequest: (entity, id, callback, object)->
-    data = {success: "true"}
+    data = {success: "true", "csrf-token": $('meta[name="csrf-token"]').attr('content')}
     request = new XMLHttpRequest();
     request.callback = callback
     request.onloadend = (response, request)->

@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   after_action :create_image, only: :create
+  include Rate
 
   def index
     recipes = Recipe.all

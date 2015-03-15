@@ -2,14 +2,18 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {sessions: 'sessions', registrations: 'registrations'}
 
   root 'main#index'
+  concern :rate do
+    post :rate
+  end
+
   scope :api do
     resources :images, only: :create
     resources :users
     resources :categories do
       get :recipes, on: :member
     end
-    resources :recipes do
-      resources :comments
+    resources :recipes, concerns: :rate do
+      resources :comments, concerns: :rate
       resources :steps
     end
   end
