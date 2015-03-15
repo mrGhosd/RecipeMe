@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'main#index'
   concern :rate do
-    post :rate
+    post :rating
   end
 
   scope :api do

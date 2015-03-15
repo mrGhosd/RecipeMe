@@ -1,4 +1,6 @@
 class CommentsController <ApplicationController
+  before_action :load_comment, only: [:create, :update, :show, :destroy, :rating]
+  before_action :change_object, only: :rating
   respond_to :json
 
   def index
@@ -39,6 +41,10 @@ class CommentsController <ApplicationController
   end
 
   private
+
+  def load_comment
+    @comment = Comment.find(params[:id])
+  end
 
   def comments_params
     params.require(:comment).permit(:recipe_id, :user_id, :text)

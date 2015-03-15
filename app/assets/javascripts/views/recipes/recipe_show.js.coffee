@@ -26,7 +26,10 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
 
   changeRate: ->
-    new RecipeMe.Rate(@model).changeRate()
+    new RecipeMe.Rate(@model).changeRate(
+      success = (response, request) ->
+        $(".rate-value").text(response.rate)
+    )
 
   render: ->
     $(@el).html(@template(recipe: @model))

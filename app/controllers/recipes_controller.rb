@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
   after_action :create_image, only: :create
+  before_action :load_recipe, only: [:create, :update, :show, :destroy, :rating]
+  before_action :change_object, only: :rating
   include Rate
 
   def index
@@ -8,7 +10,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipes_params)
     if @recipe.save
       render json: @recipe.as_json, status: :ok
     else
@@ -17,7 +18,6 @@ class RecipesController < ApplicationController
   end
 
   def update
-    @recipe =  Recipe.find(params[:id])
     if @recipe.update(recipes_params)
       render json: { success: true}, status: :ok
     else
@@ -27,15 +27,13 @@ class RecipesController < ApplicationController
 
 
   def show
-    recipe = Recipe.find(params[:id])
     respond_to do |format|
-      format.json { render json: recipe.as_json(methods: [:comments, :image, :steps, :tag_list]) }
+      format.json { render json: @recipe.as_json(methods: [:comments, :image, :steps, :tag_list]) }
     end
   end
 
   def destroy
-    recipe = Recipe.find(params[:id])
-    if recipe.destroy
+    if @recipe.destroy
       render json: { success: true}, status: :ok
     else
       render json: { success: false}, status: :forbidden
@@ -45,6 +43,10 @@ class RecipesController < ApplicationController
   private
   def recipes_params
     params.permit(:title, :user_id, :description, :steps, :tag_list, :category_id)
+  end
+
+  def load_recipe
+    @recipe = Recipe.find(params[:recipe_id] || params[:id])
   end
 
   def create_image

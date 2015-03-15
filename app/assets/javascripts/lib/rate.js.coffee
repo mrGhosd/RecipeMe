@@ -4,21 +4,16 @@ class RecipeMe.Rate
     @id = object.get("id")
     @entity = this.defineEntity(object)
 
-  changeRate: ->
-    this.performRequest(@entity, @id, this.successRequest(), @object)
+  changeRate:(callback) ->
+    this.performRequest(@entity, @id, @object, callback)
 
-  performRequest: (entity, id, callback, object)->
-    data = {success: "true", "csrf-token": $('meta[name="csrf-token"]').attr('content')}
-    request = new XMLHttpRequest();
-    request.callback = callback
-    request.onloadend = (response, request)->
-      this.callback(this.response, object)
-    request.open("POST", "/api/#{entity}/#{id}/rate");
-    request.send(data);
-
-  successRequest: (response, object) ->
-    console.log response
-    console.log object
+  performRequest: (entity, id, object, callback)->
+    $.ajax "/api/#{entity}/#{id}/rating",
+      type: "POST"
+      data: {id: object.get("id")}
+      callback: callback
+      success: (response, request) ->
+        this.callback(response, request)
 
   defineEntity: (object) ->
     if object instanceof RecipeMe.Models.Recipe
