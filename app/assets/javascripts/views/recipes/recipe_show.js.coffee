@@ -5,6 +5,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
   events:
     'click .back-button': 'returnToList'
     'click .add-comment-button': 'showCommentForm'
+    'click .rate-icon': 'changeRate'
 
   initialize: (params) ->
     if params
@@ -23,6 +24,9 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
   returnToList: (event)->
     Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
+
+  changeRate: ->
+    new RecipeMe.Rate(@model).changeRate()
 
   render: ->
     $(@el).html(@template(recipe: @model))

@@ -12,6 +12,10 @@ class RecipeMe.Models.Recipe extends Backbone.Model
     return response
 
 
+  checkoutRate: ->
+
+
+
   createFromForm: (recipe, steps, successCallback, errorCallback) ->
     this.save(recipe,
       success: (response, request)->
