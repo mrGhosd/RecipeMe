@@ -1,9 +1,14 @@
 <span class="comment-text"><%- @comment.get('text') if @comment %></span>
 <span class="comment-create-at"><%= window.appHelper.dateFormater(@comment.get('created_at')) if @comment %></span>
-
+<div class="comment-info-actions">
+  <div class="info-item">
+    <a href="#" data-remote="true" class="btn btn-success btn-xs info-label comment-rate-action glyphicon glyphicon-heart"></a>
+    <a href="#" data-remote="true" class="info-value comment-rate-value"><%= @comment.get("rate") %></a>
+  </div>
+</div>
 <% if RecipeMe.currentUser && RecipeMe.currentUser.get('id') == @comment.get('user_id'): %>
     <div class="actions-for-comment">
-        <a href="#" class="btn btn-success edit-comment glyphicon glyphicon-pencil"
+        <a href="#" class="btn btn-primary edit-comment glyphicon glyphicon-pencil"
            data-comment="<%= @comment.get('id') if @comment %>"
            data-recipe="<%= @comment.get('recipe_id') if @comment %>"
            data-remote="true"></a>
