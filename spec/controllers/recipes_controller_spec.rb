@@ -1,12 +1,15 @@
 require 'rails_helper'
 
 describe RecipesController do
-  let!(:recipe) { create :recipe }
+  # login_user
+  let!(:user) { create :user }
+  let!(:recipe) { create :recipe, user_id: user.id }
+  let!(:image) { create :image, imageable_id: recipe.id, imageable_type: "Recipe" }
 
   describe "GET #index" do
     it "return a list of recipes" do
       get :index
-      expect(response.body).to eq(Recipe.all.to_json(methods: [:comments, :images]))
+      expect(response.body).to eq(Recipe.all.to_json(only: [:title, :id, :user_id], methods: [:image]))
     end
 
     it "render recipes as json" do
@@ -17,12 +20,12 @@ describe RecipesController do
 
   describe "GET #show" do
     it "return a recipe with id" do
-      get :show, id: recipe.id
-      expect(response.body).to eq(recipe.to_json(methods: [:comments, :images]))
+      get :show, id: recipe.id, format: :json
+      expect(response.body).to eq(recipe.to_json(methods: [:comments, :image, :steps, :tag_list]))
     end
 
     it "return 200 status" do
-      get :show, id: recipe.id
+      get :show, id: recipe.id, format: :json
       expect(response.status).to eq(200)
     end
   end

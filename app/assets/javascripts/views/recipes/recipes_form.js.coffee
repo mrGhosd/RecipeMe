@@ -104,7 +104,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     @reader.readAsDataURL(file)
     $("#recipePlaceholder").removeClass("empty entered")
     this.createRecipeImage(event, "Recipe")
-    console.log @model
     return false
 
   addRecipeStep: (event) ->

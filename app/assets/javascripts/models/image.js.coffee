@@ -9,9 +9,7 @@ class RecipeMe.Models.Image extends Backbone.Model
 
   setImageData:(response, klass ) ->
     json = JSON.parse(response)
-    console.log json
     klass.set({image_id: json.id})
-    console.log klass
 
 
   uploadImage: (data)->
