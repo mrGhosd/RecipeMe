@@ -1,6 +1,7 @@
 class CommentsController <ApplicationController
-  before_action :load_comment, only: [:create, :update, :show, :destroy, :rating]
+  before_action :load_comment, only: [:update, :show, :destroy, :rating]
   before_action :change_object, only: :rating
+  include Rate
   respond_to :json
 
   def index
@@ -11,29 +12,26 @@ class CommentsController <ApplicationController
   def create
     comment = Comment.new(comments_params)
     if comment.save
-      render json: comment.to_json, status: :ok
+      render json: @comment.to_json, status: :ok
     else
-      render json: comment.errors.to_json, status: :forbidden
+      render json: @comment.errors.to_json, status: :forbidden
     end
   end
 
   def show
-    comment = Comment.find(params[:id])
-    render json: comment.to_json
+    render json: @comment.to_json
   end
 
   def update
-    comment = Comment.find(params[:id])
     if comment.update(comments_params)
-      render json: comment.to_json, status: :ok
+      render json: @comment.to_json, status: :ok
     else
-      render json: comment.errors.to_json, status: :forbidden
+      render json: @comment.errors.to_json, status: :forbidden
     end
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    if comment.destroy
+    if @comment.destroy
       render json: { success: true}, status: :ok
     else
       render json: { success: false}, status: :forbidden

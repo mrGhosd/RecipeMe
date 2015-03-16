@@ -8,7 +8,7 @@ class RecipeMe.Rate
     this.performRequest(@entity, @id, @object, callback)
 
   performRequest: (entity, id, object, callback)->
-    $.ajax "/api/#{entity}/#{id}/rating",
+    $.ajax this.url(@object),
       type: "POST"
       data: {id: object.get("id")}
       callback: callback
@@ -20,3 +20,9 @@ class RecipeMe.Rate
       return "recipes"
     else if object instanceof RecipeMe.Models.Comment
       return "comments"
+
+  url: (entity) ->
+    if entity instanceof RecipeMe.Models.Recipe
+      return "/api/#{@entity}/#{@id}/rating"
+    else if entity instanceof RecipeMe.Models.Comment
+      return "/api/recipes/#{entity.get("recipe_id")}/#{@entity}/#{@id}/rating"

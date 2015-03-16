@@ -7,8 +7,11 @@ class RecipeMe.Views.Comment extends Backbone.View
   events:
     'click .edit-comment': 'editComment'
     'click .remove-comment': 'deleteComment'
+    'click .comment-rate-action': 'changeRate'
 
-  initialize: ->
+  initialize: (params)->
+    if params.model
+      @model = params.model
     this.render()
 
   editComment: (event)->
@@ -37,6 +40,12 @@ class RecipeMe.Views.Comment extends Backbone.View
     view = new RecipeMe.Views.CommentForm({model: options})
     comment_block.hide()
     comment_block.after view.render().el
+
+  changeRate: (event) ->
+    new RecipeMe.Rate(@model).changeRate(
+      success = (response, request) ->
+        $(event.target).next("a.comment-rate-value").text(response.rate)
+    )
 
   deleteComment: (event)->
     button = $(event.currentTarget)

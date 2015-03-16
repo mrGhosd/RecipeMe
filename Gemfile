@@ -29,6 +29,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem "markitup-rails"
 gem "devise"
+gem 'redis'
 gem 'acts-as-taggable-on'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
