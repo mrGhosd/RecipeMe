@@ -6,6 +6,8 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     'click .back-button': 'returnToList'
     'click .add-comment-button': 'showCommentForm'
     'click .rate-icon': 'changeRate'
+    'mouseover .rate-value': 'showVotedUsersPopup'
+    'mouseleave .rate-value': 'hideVotedUsersPopup'
 
   initialize: (params) ->
     if params
@@ -36,6 +38,14 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     @steps.each(@addStep)
     @comments.each(@addComment)
     this
+
+  showVotedUsersPopup: (event) ->
+    popup = $("<div class='popup-view'></div>")
+    $(event.target).after(popup.hide().fadeIn())
+
+  hideVotedUsersPopup: (event) ->
+    $(".popup-view").remove()
+    $(".popup-view").fadeOut()
 
 
   addStep: (step) ->
