@@ -1,8 +1,5 @@
 module Rate
-
-  def change_object
-    @@object = !!@recipe ? @recipe : @comment
-  end
+  include ChangeObject
 
   def rating
     if @@object.update_rating(current_user)

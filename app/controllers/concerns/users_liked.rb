@@ -1,13 +1,8 @@
 module UsersLiked
-  def change_object
-    @@object = !!@recipe ? @recipe : @comment
-  end
-
+  include ChangeObject
 
   def liked_users
-
-  end
-
-  def voted_users
+    users = Vote.users(@@object.id, @@object.class.to_s)
+    render json: users.to_json
   end
 end

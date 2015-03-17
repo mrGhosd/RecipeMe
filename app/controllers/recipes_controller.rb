@@ -1,8 +1,10 @@
 class RecipesController < ApplicationController
   after_action :create_image, only: :create
-  before_action :load_recipe, only: [:create, :update, :show, :destroy, :rating]
-  before_action :change_object, only: :rating
+  before_action :load_recipe, only: [:create, :update, :show, :destroy, :rating, :liked_users]
+  before_action :change_object, only: [:rating, :liked_users]
+  include ChangeObject
   include Rate
+  include UsersLiked
 
   def index
     recipes = Recipe.all

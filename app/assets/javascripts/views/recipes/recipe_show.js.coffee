@@ -28,10 +28,13 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
 
   changeRate: ->
-    new RecipeMe.Rate(@model).changeRate(
-      success = (response, request) ->
-        $(".rate-value").text(response.rate)
-    )
+    if RecipeMe.currentUser
+      new RecipeMe.Rate(@model).changeRate(
+        success = (response, request) ->
+          $(".rate-value").text(response.rate)
+      )
+    else
+      return false
 
   render: ->
     $(@el).html(@template(recipe: @model))
@@ -40,8 +43,10 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     this
 
   showVotedUsersPopup: (event) ->
-    popup = $("<div class='popup-view'></div>")
-    $(event.target).after(popup.hide().fadeIn())
+    if RecipeMe.currentUser || $(".popup-view")
+      new RecipeMe.LikedUsers(@model).showUsersPopup()
+    else
+      return false
 
   hideVotedUsersPopup: (event) ->
     $(".popup-view").remove()
