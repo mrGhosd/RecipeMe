@@ -8,6 +8,8 @@ class RecipeMe.Views.Comment extends Backbone.View
     'click .edit-comment': 'editComment'
     'click .remove-comment': 'deleteComment'
     'click .comment-rate-action': 'changeRate'
+    'mouseover .comment-rate-value': 'showVotedUsersPopup'
+    'mouseleave .comment-rate-value': 'hideVotedUsersPopup'
 
   initialize: (params)->
     if params.model
@@ -62,6 +64,16 @@ class RecipeMe.Views.Comment extends Backbone.View
         console.log request
     comment = button.closest(".comment")
     comment.fadeOut('slow')
+
+  showVotedUsersPopup: (event) ->
+    if RecipeMe.currentUser || $(".popup-view")
+      new RecipeMe.LikedUsers(@model).showUsersPopup()
+    else
+      return false
+
+  hideVotedUsersPopup: (event) ->
+    $(".popup-view").remove()
+    $(".popup-view").fadeOut()
 
   render: ->
     $(@el).html(@template(comment: @model))

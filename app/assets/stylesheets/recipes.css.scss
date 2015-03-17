@@ -100,6 +100,7 @@
   height: 250px;
   width:200px;
   position: absolute;
+  z-index: 100000;
   .liked-item{
     display: inline-block;
     margin-left: 5px;

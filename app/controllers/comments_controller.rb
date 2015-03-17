@@ -1,7 +1,9 @@
 class CommentsController <ApplicationController
-  before_action :load_comment, only: [:update, :show, :destroy, :rating]
-  before_action :change_object, only: :rating
+  before_action :load_comment, only: [:update, :show, :destroy, :rating, :liked_users]
+  before_action :change_object, only: [:rating, :liked_users]
+  include ChangeObject
   include Rate
+  include UsersLiked
   respond_to :json
 
   def index
