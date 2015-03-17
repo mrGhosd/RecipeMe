@@ -2,7 +2,8 @@ class CallbacksController < ApplicationController
   before_action :load_callback, except: [:index, :create]
 
   def index
-
+    @callbacks = ::Callback.all
+    render json: @callbacks.as_json
   end
 
   def create

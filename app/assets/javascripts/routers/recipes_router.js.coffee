@@ -13,6 +13,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     'categories/new': 'createCategory'
     'categories/:id/edit': 'editCategory'
     'categories/:id': 'showCategory'
+    'callbacks': 'callbacksList'
 
   initialize: ->
     this.setup()
@@ -53,6 +54,11 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   showCategory: (id) ->
     new RecipeMe.CategoriesController().show(id)
+
+  callbacksList: ->
+    view = new RecipeMe.Views.CallbackIndex()
+    $("section#main").html(view.el)
+    view.render()
 
   userRecipes: (id) ->
     if RecipeMe.currentUser
