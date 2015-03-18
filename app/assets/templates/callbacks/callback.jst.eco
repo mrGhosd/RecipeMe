@@ -1,7 +1,19 @@
-<div class="callback-item">
-  <div class="author"><%= @callback.get("author") if @callback %></div>
-  <div class="message"><%= @callback.get("text") if @callback %></div>
-  <div class="actions">
-    <a href="#" data-remote="true" class="btn btn-danger btn-xs glyphicon glyphicon-remove destroy-callback"></a>
+<div class="info-block">
+  <div class="author">
+    <% if @callback.get("user_id"): %>
+        <a href="/#users/<%= @callback.get("user_id") if @callback %>">
+          <%= @callback.get("author") if @callback %>
+        </a>
+    <% else: %>
+        <%= @callback.get("author") if @callback %>
+    <% end %>
+
   </div>
+  <div class="message"><%= @callback.get("text") if @callback %></div>
 </div>
+<% if RecipeMe.currentUser && RecipeMe.currentUser.get("id") == @callback.get("user_id"): %>
+<div class="actions">
+<a href="#" data-remote="true" class="btn btn-success btn-xs glyphicon glyphicon-edit update-callback"></a>
+<a href="#" data-remote="true" class="btn btn-danger btn-xs glyphicon glyphicon-remove destroy-callback"></a>
+</div>
+<% end %>

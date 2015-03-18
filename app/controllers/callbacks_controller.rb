@@ -7,7 +7,6 @@ class CallbacksController < ApplicationController
   end
 
   def create
-    binding.pry
     @callback = ::Callback.new(callback_params)
     if @callback.save
       render json: @callback.as_json, status: :ok
@@ -17,11 +16,14 @@ class CallbacksController < ApplicationController
   end
 
   def show
-
   end
 
   def update
-
+    if @callback.update(callback_params)
+      render json: @callback.as_json, status: :ok
+    else
+      render json: @callback.errors.as_json, status: :unprocessible_entity
+    end
   end
 
   def destroy
