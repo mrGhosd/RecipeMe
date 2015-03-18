@@ -1,4 +1,7 @@
 <div class="callback-item">
   <div class="author"><%= @callback.get("author") if @callback %></div>
   <div class="message"><%= @callback.get("text") if @callback %></div>
+  <div class="actions">
+    <a href="#" data-remote="true" class="btn btn-danger btn-xs glyphicon glyphicon-remove destroy-callback"></a>
+  </div>
 </div>

@@ -25,7 +25,8 @@ class CallbacksController < ApplicationController
   end
 
   def destroy
-
+    @callback.destroy
+    head :ok
   end
 
   private
@@ -35,6 +36,6 @@ class CallbacksController < ApplicationController
   end
 
   def load_callback
-    @callback = Callback.find(params[:id])
+    @callback = ::Callback.find(params[:id])
   end
 end
