@@ -27,6 +27,11 @@ class NewsController < ApplicationController
     end
   end
 
+  def destroy
+    @news.destroy
+    head :ok
+  end
+
   private
 
   def load_news
