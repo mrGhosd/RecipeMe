@@ -3,8 +3,9 @@ class RecipeMe.Views.NewsIndex extends Backbone.View
   className: "news-main"
 
   initialize: (params) ->
-    if params.collection
-      @collection = params.collection
+    @collection = params.collection
+    @collection.on('reset', @render, this)
+    @collection.on('add', @render, this)
 
   render: ->
     $(@el).html(@template())
