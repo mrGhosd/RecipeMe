@@ -7,6 +7,7 @@ class CallbacksController < ApplicationController
   end
 
   def create
+    binding.pry
     @callback = ::Callback.new(callback_params)
     if @callback.save
       render json: @callback.as_json, status: :ok

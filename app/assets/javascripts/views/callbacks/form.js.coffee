@@ -6,9 +6,9 @@ class RecipeMe.Views.CallbackForm extends Backbone.View
 
   initialize: (params) ->
     if params
-      @callbacks = params.collection
-    else
-      @callback = new RecipeMe.Models.Callback()
+      @callbacks = new RecipeMe.Collections.Callbacks()
+
+    @callback = new RecipeMe.Models.Callback()
 
 
   render: ->
@@ -16,7 +16,18 @@ class RecipeMe.Views.CallbackForm extends Backbone.View
     this
 
   createCallback: (event) ->
+    callbacks = @collection
     event.preventDefault()
     event.stopPropagation()
     attributes = window.appHelper.formSerialization($("#callback-form"))
-    @collection.add(attributes)
+    @callback.save(attributes,
+      success: (response, request) ->
+        callbacks.add(response)
+      error: (response, request) ->
+        errors = request.responseJSON
+        $.each(errors, (key, value)->
+          $("#callback-form input[name=\"#{key}\"]").addClass("error")
+          $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#callback-form input[name=\"#{key}\"]"))
+        )
+    )
+
