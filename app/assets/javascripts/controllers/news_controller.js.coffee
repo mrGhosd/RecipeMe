@@ -20,3 +20,11 @@ class RecipeMe.NewsController
         view = new RecipeMe.Views.NewsForm({model: model})
         $("section#main").html(view.el)
         view.render()
+
+  show: (id) ->
+    news = new RecipeMe.Models.New({id: id})
+    news.fetch
+      success: (model) ->
+        view = new RecipeMe.Views.NewsShow({model: model})
+        $("section#main").html(view.el)
+        view.render()

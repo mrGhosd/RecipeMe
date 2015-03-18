@@ -1,5 +1,9 @@
 <div class="main-info panel panel-default">
-    <div class="title panel-heading"><%= @news.get("title") if @news.get("title") %></div>
+    <div class="title panel-heading">
+      <a href="/#news/<%= @news.get("id") if @news.get("id") %>">
+        <%= @news.get("title") if @news.get("title") %>
+      </a>
+    </div>
     <div class="new-item-content panel-body">
       <div class="description"><%= @news.get("title") if @news.get("title") %></div>
       <div class="image-data">

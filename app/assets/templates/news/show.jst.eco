@@ -1,0 +1,15 @@
+<fieldser>
+  <legend>
+    <%= @news.get("title") if @news.get("title") %>
+  </legend>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= @news.get("text") if @news.get("text") %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</fieldser>
