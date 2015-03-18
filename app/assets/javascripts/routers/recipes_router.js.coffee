@@ -14,6 +14,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     'categories/:id/edit': 'editCategory'
     'categories/:id': 'showCategory'
     'callbacks': 'callbacksList'
+    'news': 'newsList'
 
   initialize: ->
     this.setup()
@@ -59,6 +60,9 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     view = new RecipeMe.Views.CallbackIndex()
     $("section#main").html(view.el)
     view.render()
+
+  newsList: ->
+    new RecipeMe.NewsController().index()
 
   userRecipes: (id) ->
     if RecipeMe.currentUser
