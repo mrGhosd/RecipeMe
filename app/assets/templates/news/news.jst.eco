@@ -1,5 +1,5 @@
 <div class="main-info">
-    <div class="title"></div>
-    <div class="description"></div>
+    <div class="title"><%= @news.get("title") if @news.get("title") %></div>
+    <div class="description"><%= @news.get("title") if @news.get("title") %></div>
 </div>
 <div class="image"></div>
