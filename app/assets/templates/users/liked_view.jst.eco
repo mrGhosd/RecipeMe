@@ -1,3 +1,4 @@
 <div class="liked-item">
+  <%= console.log @user %>
   <img src="<%= @user.get("avatar").url if @user.get("avatar") != null || @user.get("avatar") != undefined %>" height="50" width="50" class="img-circle" />
 </div>

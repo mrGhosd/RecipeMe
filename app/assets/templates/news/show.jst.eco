@@ -8,6 +8,13 @@
         <div class="panel-body">
           <%= @news.get("text") if @news.get("text") %>
         </div>
+        <div class="news-info-actions">
+          <div class="info-action">
+            <a href="#" data-remote="true"
+               class="btn btn-success glyphicon glyphicon-heart action-icon rate-icon"></a>
+            <a href="#" data-remote="true" class="action-value rate-value"><%= @news.get("rate") %> </a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-2"></div>

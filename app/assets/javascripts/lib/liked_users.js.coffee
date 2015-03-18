@@ -33,4 +33,4 @@ class RecipeMe.LikedUsers
     else if entity == "comment"
       return "api/recipes/#{@object.get("recipe_id")}/comments/#{@object.get("id")}/liked_users"
     else if entity == "news"
-      return "api/news/#{@object.get("id")}"
+      return "api/news/#{@object.get("id")}/liked_users"

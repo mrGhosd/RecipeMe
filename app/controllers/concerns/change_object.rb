@@ -1,5 +1,11 @@
 module ChangeObject
   def change_object
-    @@object = !!@recipe ? @recipe : @comment
+    @@object = if !!@recipe
+                 @recipe
+               elsif !!@comment
+                 @comment
+               elsif !!@news
+                 @news
+               end
   end
 end

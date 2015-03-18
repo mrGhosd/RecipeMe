@@ -1,5 +1,9 @@
 class NewsController < ApplicationController
   before_filter :load_news, except: [:index, :create]
+  before_action :change_object, only: [:rating, :liked_users]
+  include ChangeObject
+  include Rate
+  include UsersLiked
 
   def index
     @news = News.all
@@ -35,7 +39,7 @@ class NewsController < ApplicationController
   private
 
   def load_news
-    @news = News.find(params[:id])
+    @news = News.find(params[:id] || params[:news_id])
   end
 
   def news_params
