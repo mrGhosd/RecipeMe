@@ -1,2 +1,2 @@
-<a href="#" data-remote="true" class="btn btn-primary glyphicon glyphicon-plus"></a>
+<a href="/#news/new" class="btn btn-primary glyphicon glyphicon-plus"></a>
 <div class="news-list"></div>

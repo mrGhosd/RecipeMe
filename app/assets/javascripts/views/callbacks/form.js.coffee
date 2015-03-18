@@ -17,7 +17,6 @@ class RecipeMe.Views.CallbackForm extends Backbone.View
     this
 
   createCallback: (event) ->
-    console.log @collection
     callbacks = @collection
     event.preventDefault()
     event.stopPropagation()

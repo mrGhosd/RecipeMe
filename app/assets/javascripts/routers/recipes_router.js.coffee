@@ -16,6 +16,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     'callbacks': 'callbacksList'
     'news': 'newsList'
     'news/new': 'newNews'
+    'news/:id/edit': 'editNews'
 
   initialize: ->
     this.setup()
@@ -67,6 +68,11 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   newNews: ->
     new RecipeMe.NewsController().new()
+
+  editNews: (id) ->
+    new RecipeMe.NewsController().edit(id)
+
+
   userRecipes: (id) ->
     if RecipeMe.currentUser
       user_recipes = new RecipeMe.Collections.Recipes(@collection.currentUserRecipes())

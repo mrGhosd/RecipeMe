@@ -24,5 +24,5 @@ class RecipeMe.Views.NewsForm extends Backbone.View
     )
 
   render: ->
-    $(@el).html(@template())
+    $(@el).html(@template(news: @model))
     this

@@ -1,14 +1,15 @@
 <form class="form-horizontal" id="news-form">
   <div class="form-group">
     <div class="col-md-4">
-      <input type="text" name="title" class="form-control" placeholder="Заголовок" />
+      <input type="text" name="title" class="form-control" placeholder="Заголовок" value="<%= @news.get("title") if @news.get("title") %>" />
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-md-4">
-      <textarea name="text" class="form-control" placeholder="текст"></textarea>
+      <textarea name="text" class="form-control" placeholder="текст"><%= @news.get("text") if @news.get("text") %></textarea>
     </div>
   </div>
   <input type="submit" class="btn btn-success" value="Отправить!"/>
+  <a href="/#news" class="btn btn-default">Назад</a>
 </form>
