@@ -5,6 +5,7 @@ class RecipeMe.Views.NewsShow extends Backbone.View
     'click .rate-icon': 'changeRate'
     'mouseover .rate-value': 'showVotedUsersPopup'
     'mouseleave .rate-value': 'hideVotedUsersPopup'
+    'click .back-button': 'returnToNewsList'
 
   initialize: (params) ->
     if params
@@ -28,6 +29,10 @@ class RecipeMe.Views.NewsShow extends Backbone.View
   hideVotedUsersPopup: (event) ->
     $(".popup-view").remove()
     $(".popup-view").fadeOut()
+
+  returnToNewsList: (event)->
+    event.preventDefault()
+    Backbone.history.navigate('/news', {trigger: true, repalce: true})
 
   render: ->
     $(@el).html(@template(news: @news))
