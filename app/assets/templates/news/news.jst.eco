@@ -4,10 +4,15 @@
       <div class="description"><%= @news.get("title") if @news.get("title") %></div>
       <div class="image-data">
         <div class="image"></div>
-        <div class="news-action">
-          <a href="/#news/<%= @news.get("id") %>/edit" class="btn btn-success btn-xs glyphicon glyphicon-edit"></a>
-          <a href="#" data-remote="true" class="btn btn-danger btn-xs glyphicon glyphicon-remove destroy-news"></a>
+        <div class="news-info">
+          <p class="info-item glyphicon glyphicon-heart"><span><%= @news.get("rate") %></span></p>
         </div>
+        <% if RecipeMe.currentUser: %>
+            <div class="news-action">
+              <a href="/#news/<%= @news.get("id") %>/edit" class="btn btn-success btn-xs glyphicon glyphicon-edit"></a>
+              <a href="#" data-remote="true" class="btn btn-danger btn-xs glyphicon glyphicon-remove destroy-news"></a>
+            </div>
+        <%= end %>
       </div>
     </div>
 </div>

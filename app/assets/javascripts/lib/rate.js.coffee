@@ -20,9 +20,11 @@ class RecipeMe.Rate
       return "recipes"
     else if object instanceof RecipeMe.Models.Comment
       return "comments"
+    else if object instanceof RecipeMe.Models.New
+      return "news"
 
   url: (entity) ->
-    if entity instanceof RecipeMe.Models.Recipe
+    if entity instanceof RecipeMe.Models.Recipe || entity instanceof RecipeMe.Models.New
       return "/api/#{@entity}/#{@id}/rating"
     else if entity instanceof RecipeMe.Models.Comment
       return "/api/recipes/#{entity.get("recipe_id")}/#{@entity}/#{@id}/rating"

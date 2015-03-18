@@ -19,6 +19,8 @@ class RecipeMe.LikedUsers
       return "recipe"
     else if @object instanceof RecipeMe.Models.Comment
       return "comment"
+    else if @object instanceof RecipeMe.Models.New
+      return "news"
 
   showUsersPopup: ->
     popup = $("<div class='popup-view'></div>")
@@ -30,3 +32,5 @@ class RecipeMe.LikedUsers
       return "api/recipes/#{@object.get("id")}/liked_users"
     else if entity == "comment"
       return "api/recipes/#{@object.get("recipe_id")}/comments/#{@object.get("id")}/liked_users"
+    else if entity == "news"
+      return "api/news/#{@object.get("id")}"
