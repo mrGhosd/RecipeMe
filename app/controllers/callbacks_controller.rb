@@ -7,7 +7,12 @@ class CallbacksController < ApplicationController
   end
 
   def create
-
+    @callback = ::Callback.new(callback_params)
+    if @callback.save
+      render json: @callback.as_json, status: :ok
+    else
+      render json: @callback.errors.to_json, status: :uprocessible_entity
+    end
   end
 
   def show
@@ -25,7 +30,7 @@ class CallbacksController < ApplicationController
   private
 
   def callback_params
-
+    params.require(:callback).permit(:author, :user_id, :text)
   end
 
   def load_callback

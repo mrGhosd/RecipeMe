@@ -1,2 +1,3 @@
-<a href="#" class="btn btn-primary glyphicon glyphicon-plus add-callback"></a>
+<a href="#" class="btn btn-primary glyphicon glyphicon-plus add-callback" data-remote="true"></a>
+<div class="callback-form"></div>
 <div class="callbacks-list"></div>

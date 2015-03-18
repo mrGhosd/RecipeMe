@@ -1,0 +1,22 @@
+<form id="callback-form">
+  <input type="hidden" name="user_id" class="hidden-user-id" value="<%= RecipeMe.currentUser.get("id") if RecipeMe.currentUser %>"/>
+  <div class="form-group">
+    <div class="col-md-8">
+      <% if RecipeMe.currentUser && RecipeMe.currentUser.get("nickname"):  %>
+          <% @name = RecipeMe.currentUser.get("nickname") %>
+      <% else if RecipeMe.currentUser && !RecipeMe.currentUser.get("nickname"): %>
+          <% @name = RecipeMe.currentUser.get("email") %>
+      <% end %>
+      <input type="text" class="form-control callbac-author" name="author"
+        value="<%= @name %>"
+        disabled="<%= "disabled" if RecipeMe.currentUser %>"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-8">
+      <textarea name="text" class="form-control callback-text"></textarea>
+    </div>
+  </div>
+  <input type="submit" class="btn btn-success submit-callback" value="Save"/>
+</form>

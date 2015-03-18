@@ -1,0 +1,4 @@
+<div class="callback-item">
+  <div class="author"><%= @callback.get("author") if @callback %></div>
+  <div class="message"><%= @callback.get("text") if @callback %></div>
+</div>
