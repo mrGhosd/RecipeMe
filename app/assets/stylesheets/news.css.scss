@@ -5,3 +5,11 @@
 .news-info-actions{
   padding: 10px;
 }
+.new-item-content{
+  &>div{
+    display: inline-block;
+  }
+  .image-data{
+    float:right;
+  }
+}

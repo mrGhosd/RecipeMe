@@ -7,7 +7,11 @@
     <div class="new-item-content panel-body">
       <div class="description"><%= @news.get("title") if @news.get("title") %></div>
       <div class="image-data">
-        <div class="image"></div>
+        <div class="image">
+          <% if @news.get("image"): %>
+            <img src="<%= @news.get("image").name.url if @news.get("image").name.url %>" height="150" width="150" class="img-thumbnail"/>
+          <% end %>
+        </div>
         <div class="news-info">
           <p class="info-item glyphicon glyphicon-heart"><span><%= @news.get("rate") %></span></p>
         </div>

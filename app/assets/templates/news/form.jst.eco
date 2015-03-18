@@ -1,15 +1,28 @@
 <form class="form-horizontal" id="news-form">
-  <div class="form-group">
-    <div class="col-md-4">
-      <input type="text" name="title" class="form-control" placeholder="Заголовок" value="<%= @news.get("title") if @news.get("title") %>" />
-    </div>
-  </div>
+  <div class="row">
+    <div class="col-md-10">
+      <div class="form-group">
+        <div class="col-md-8">
+          <input type="text" name="title" class="form-control" placeholder="Заголовок" value="<%= @news.get("title") if @news.get("title") %>" />
+        </div>
+      </div>
 
-  <div class="form-group">
-    <div class="col-md-4">
-      <textarea name="text" class="form-control" placeholder="текст"><%= @news.get("text") if @news.get("text") %></textarea>
+      <div class="form-group">
+        <div class="col-md-8">
+          <textarea name="text" class="form-control" placeholder="Текст"><%= @news.get("text") if @news.get("text") %></textarea>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="col-md-2">
+      <div class="image-placeholder <%= "empty" if  @news.get('image') == null || @news.get('image') == undefined %>" id="newsPlaceholder" draggable="true">
+        <% if @news.get("image"): %>
+            <img src="<%=  @news.get("image").name.url if @news.get("image") %>" height="200" width="200" image_id="<%= @news.get("image").imageable_id if @news.get("image")  %>"/>
+        <% end %>
+      </div>
+      <input type="hidden" name="image_id" class="hidden-image-value-news" />
+      <input type="file" name="image" id="news_image" class="news-image" />
+    </div>
   <input type="submit" class="btn btn-success" value="Отправить!"/>
   <a href="/#news" class="btn btn-default">Назад</a>
+  </div>
 </form>
