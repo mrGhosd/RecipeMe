@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318134136) do
+ActiveRecord::Schema.define(version: 20150321141410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authorizations", force: true do |t|
+    t.integer "user_id"
+    t.string  "provider"
+    t.string  "uid"
+  end
+
+  add_index "authorizations", ["user_id"], name: "index_authorizations_on_user_id", using: :btree
 
   create_table "callbacks", force: true do |t|
     t.integer  "user_id"

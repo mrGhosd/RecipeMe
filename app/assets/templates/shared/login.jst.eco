@@ -13,4 +13,5 @@
     </div>
   </div>
   </fieldset>
+  <a href="/users/auth/facebook">Facebook</a>
 </form>
