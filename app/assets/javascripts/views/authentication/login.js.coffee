@@ -9,17 +9,17 @@ class RecipeMe.Views.LoginView extends Backbone.View
 
   omniauthLogin: (event) ->
     event.preventDefault()
-    if $(event.target).attr("require-email") != undefined
+    link = $(event.target).parent()
+    console.log
+    if link.attr("require-email") != undefined
       modal = new RecipeMe.Views.CommonModal()
-      emailView = new RecipeMe.Views.AdditionalEmail({url: $(event.target).attr("href")})
+      emailView = new RecipeMe.Views.AdditionalEmail({url: link.attr("href")})
       $("#myModal").html($(modal.render().el).modal('show'))
       $("#common-modal").removeClass("modal-lg")
       $("#common-modal .modal-body").html(emailView.render().el)
       $("#common-modal").modal('show')
-
-
     else
-      window.location.href = $(event.target).attr("href")
+      window.location.href = link.attr("href")
 
   render: ->
     $(@el).html(@template())
