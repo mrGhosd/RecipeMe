@@ -13,5 +13,9 @@
     </div>
   </div>
   </fieldset>
-  <a href="/users/auth/facebook">Facebook</a>
+  <div class="omniauth-links">
+    <a href="/users/auth/facebook" class="facebook">Facebook</a>
+    <a href="/users/auth/twitter" class="twitter" require-email="true">Twitter</a>
+  </div>
+
 </form>

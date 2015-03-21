@@ -1,0 +1,5 @@
+<h4>Введите, пожалуйста, свой электронный адрес:</h4>
+<form class='additional-emal form-horizaontal'>
+  <input type='text' class='form-control additional-email' placeholder='Emal:' />
+  <input type="submit" class="submit-twitter-email btn btn-success" value="send" />
+</form>
