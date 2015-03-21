@@ -14,7 +14,9 @@
         <div class="col-md-8">
           <select class="form-control" name="category_id">
             <% for category in @categories.models: %>
-                <option value="<%= category.get("id") %>" <%="selected" if @recipe.get("category_id") == category.get("id") %> > <%= category.get("title") %> </option>
+                <option value="<%= category.get("id") %>" <%="selected" if @recipe.get("category_id") == category.get("id") %> >
+                  <%= category.get("title") %>
+                </option>
             <% end %>
           </select>
         </div>
@@ -30,6 +32,17 @@
         <div class="col-md-6">
           <textarea class="form-control recipe-description markItUp"
           id="recipe-description" name="description"><%= @recipe.get('description') if @recipe %></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ingridients-title">
+          <p><strong>Ингридиенты:</strong></p>
+          <a href="#" date-remote="true" class="btn btn-success add-ingridient">
+            <img src="/images/add73.png" height="25" width="25" />
+          </a>
+        </div>
+        <div class="ingridients-body">
+
         </div>
       </div>
       <div class="form-group steps-group">

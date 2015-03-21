@@ -6,6 +6,8 @@ class Recipe < ActiveRecord::Base
   has_one :image, as: :imageable, dependent: :destroy
   has_many :taggings
   has_many :tags, through: :taggings
+  has_many :recipe_ingridients
+  has_many :ingridients, through: :recipe_ingridients
   acts_as_taggable
 
   validates :title, :description, presence: true
