@@ -1,30 +1,27 @@
 class IngridientsController < ApplicationController
   # after_action :update_recipe_connection, only: :create
-  # before_action :test_action, only: :create
   def index
     @ingridients = Ingridient.all
     render json: @ingridients.as_json
   end
 
-  def test_action
 
-    ingridient = Ingridient.find_by name: params[:name]
-    if ingridient.present?
-      if update_recipe_connection(ingridient)
-        render json:ingridient.as_json, status: :ok
-      else
-        render json:ingridient.errors.as_json, status: :unprocessible_entity
-      end
-    end
-  end
 
   def create
-    @ingridient = Ingridient.new(ingridient_params)
-    if @ingridient.save
-      update_recipe_connection(@ingridient)
-      render json:@ingridient.as_json, status: :ok
+    @ingridient = Ingridient.find_by name: params[:name]
+    if @ingridient.present?
+      if update_recipe_connection(@ingridient)
+        render json:@ingridient.as_json, status: :ok
+      else
+        render json:@ingridient.errors.as_json, status: :unprocessible_entity
+      end
     else
-      render json:@ingridient.errors.as_json, status: :unprocessible_entity
+      @ingridient = Ingridient.new(ingridient_params)
+      if @ingridient.save
+        render json:@ingridient.as_json, status: :ok
+      else
+        render json:@ingridient.errors.as_json, status: :unprocessible_entity
+      end
     end
   end
 
@@ -41,11 +38,6 @@ class IngridientsController < ApplicationController
   end
 
   private
-
-  def create_ingridient
-
-  end
-
 
   def ingridient_params
     params.permit(:name)
