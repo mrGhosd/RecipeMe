@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :users
     resources :callbacks
     resources :news, concerns: [:rate, :users_liked]
+    resources :ingridients
     resources :categories do
       get :recipes, on: :member
     end

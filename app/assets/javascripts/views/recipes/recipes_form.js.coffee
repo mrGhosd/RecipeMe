@@ -11,6 +11,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     'dragleave #recipePlaceholder': 'leaveDrag'
     'drop #recipePlaceholder': 'dropImage'
     'click .add-step': 'addRecipeStep'
+    'click .add-ingridient': 'addIngridient'
 
   initialize: (options = {}) ->
     @form = this
@@ -18,9 +19,16 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       @model = options.model
       @steps = @model.get('steps')
       @steps.fetch({async: false})
+      @current_ingridients = @model.get('ingridients')
+      @current_ingridients.fetch({async: false})
     else
       @model = new RecipeMe.Models.Recipe()
       @steps = new RecipeMe.Collections.Steps()
+      @current_ingridients = new RecipeMe.Collections.Ingridients()
+
+    @common_ingridients = new RecipeMe.Collections.Ingridients()
+    @common_ingridients.fetch({async: false})
+
 
     this.loadCategories()
     this.render()
@@ -53,7 +61,9 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   createMainObject: (attributes, callback) ->
     step = {steps: @steps, callback: this.createSteps}
-    @model.createFromForm(attributes, step,
+    console.log @ingridients
+    ingridients = {ingridients: @current_ingridients, callback: this.createIngridients}
+    @model.createFromForm(attributes, step, ingridients,
       success = (response, request) ->
         RecipeMe.currentUser.fetch()
         Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
@@ -63,6 +73,20 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
           $("#recipe_form input[name=\"#{key}\"]").addClass("error")
           $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
         )
+      )
+
+
+  createIngridients: (ingridients, response, request) ->
+    @ingridients = ingridients
+    @ingridients.each (ingridient) ->
+      ingridient.set({recipe_id: response.id})
+      ingridient.save(
+        success: (response, request) ->
+          console.log response
+          console.log request
+        error: (response, request) ->
+          console.log response
+          console.log request
       )
 
 
@@ -112,9 +136,16 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       @step = new RecipeMe.Models.Step(recipe_id: @model.id)
     else
       @step = new RecipeMe.Models.Step()
-    console.log @step
     @steps.add(@step)
     this.renderRecipeStep(@step)
+
+  addIngridient: (event) ->
+    event.preventDefault()
+    @ingridient = new RecipeMe.Models.Ingridient()
+    @current_ingridients.add(@ingridient)
+    view = new RecipeMe.Views.IngridientForm(model: @ingridient, collection: @common_ingridients)
+    $(".ingridients-list").append(view.render().el)
+
 
   renderRecipeStep: (step) ->
     view = new RecipeMe.Views.StepForm(model: step)

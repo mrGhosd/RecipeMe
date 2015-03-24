@@ -9,7 +9,7 @@ window.appHelper =
       elements = $('input, select, textarea', form)
 
       for element in elements
-        if $(element).attr("type") == "submit" || $(element).attr("steps")
+        if $(element).attr("type") == "submit" || $(element).attr("steps") || $(element).attr("ingridients")
           continue
         if $(element).attr("type") == "file"
 #          attributes["#{$(element).attr('name')}"] =  $(element)[0].files[0] if $(element)[0].files[0]

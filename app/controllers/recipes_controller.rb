@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   after_action :create_image, only: :create
-  before_action :load_recipe, only: [:create, :update, :show, :destroy, :rating, :liked_users]
+  before_action :load_recipe, only: [:show, :destroy, :rating, :liked_users]
   before_action :change_object, only: [:rating, :liked_users]
   include ChangeObject
   include Rate
@@ -12,6 +12,7 @@ class RecipesController < ApplicationController
   end
 
   def create
+    @recipe = Recipe.new(recipes_params)
     if @recipe.save
       render json: @recipe.as_json, status: :ok
     else

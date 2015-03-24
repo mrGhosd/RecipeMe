@@ -16,10 +16,11 @@ class RecipeMe.Models.Recipe extends Backbone.Model
 
 
 
-  createFromForm: (recipe, steps, successCallback, errorCallback) ->
+  createFromForm: (recipe, steps, ingridients, successCallback, errorCallback) ->
     this.save(recipe,
       success: (response, request)->
         steps.callback(steps.steps, response, request)
+        ingridients.callback(ingridients.ingridients, response, request)
         successCallback(response, request)
       error: (response, request) ->
         errorCallback(response, request)

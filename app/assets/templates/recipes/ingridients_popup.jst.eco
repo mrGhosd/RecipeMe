@@ -1,0 +1,5 @@
+<% for ingridient in @collection: %>
+    <div class="ingridient">
+      <a href="#" data-remote="true" class="ingridient-value"><%= ingridient.get("name") %></a>
+    </div>
+<% end %>
