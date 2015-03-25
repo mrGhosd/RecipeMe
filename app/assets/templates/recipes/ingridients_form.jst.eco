@@ -1,11 +1,11 @@
 <div class="ingridient-name">
   <div class="col-md-4">
-    <input type="text" name="ingridient-name" class="form-control ingridient-name" ingridients="true" value="<%= @ingridient.get("name") if @ingridient.get("name") %>"/>
+    <input type="text" name="ingridient-name" class="form-control ingridient-name" ingridients="true" value="<%= @ingridient.get("name") if @ingridient.get("name") %>" <%= disabled="disabled" if @ingridient.get("id") %> />
   </div>
 </div>
 <div class="ingridient-size">
     <div class="col-md-1">
-      <input type="text" name="size" class="form-control ingridient-size" ingridients="true" value="<%= @ingridient.get("size") if @ingridient.get("size") %>"/>
+      <input type="text" name="size" class="form-control ingridient-size" ingridients="true" value="<%= @ingridient.get("size") if @ingridient.get("size") %>" <%= disabled="disabled" if @ingridient.get("id") %>/>
     </div>
 </div>
 <div class="ingridient-action">

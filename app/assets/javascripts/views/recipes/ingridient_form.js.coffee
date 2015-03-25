@@ -24,6 +24,7 @@ class RecipeMe.Views.IngridientForm extends Backbone.View
     if @model.isNew()
       @model.collection.remove(@model)
     else
+      @model.url =  "api/recipes/#{@model.collection.recipe}/ingridients/#{@model.get("id")}"
       @model.destroy()
     $(event.target).closest(".ingridient-item").remove()
 

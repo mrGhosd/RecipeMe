@@ -1,6 +1,7 @@
 class IngridientsController < ApplicationController
-  before_action :load_recipe, only: [:recipe_ingridients]
-  after_action :update_recipe_connection, only: :create
+  before_action :load_recipe, only: :recipe_ingridients
+  before_action :load_ingridient, only: :destroy
+  after_action :update_recipe_connection, only: [:create]
   def index
     @ingridients = Ingridient.all
     render json: @ingridients.as_json
@@ -34,12 +35,15 @@ class IngridientsController < ApplicationController
   end
 
   def destroy
-
+    @ingridient.destroy
+    head :ok
   end
 
   private
 
-
+  def load_ingridient
+    @ingridient = Ingridient.find(params[:id])
+  end
 
   def load_recipe
     @recipe = Recipe.find(params[:recipe_id])
