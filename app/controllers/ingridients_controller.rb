@@ -1,6 +1,6 @@
 class IngridientsController < ApplicationController
   before_action :load_recipe, only: :recipe_ingridients
-  before_action :load_ingridient, only: :destroy
+  before_action :load_ingridient, only: [:update, :destroy]
   after_action :update_recipe_connection, only: [:create]
   def index
     @ingridients = Ingridient.all
@@ -31,7 +31,11 @@ class IngridientsController < ApplicationController
   end
 
   def update
-
+    if @ingridient.save(ingridient_params)
+      render json: @ingridient.as_json, status: :ok
+    else
+      render json: @ingridient.errors.as_json, status: :unprocessible_entity
+    end
   end
 
   def destroy

@@ -5,6 +5,12 @@ class RecipeMe.Collections.Ingridients extends Backbone.Collection
     if params
       @recipe = params.recipe
 
+  parse: (response) ->
+#    response.each (model) ->
+#      console.log model
+    return response
+
+
   url: ->
     if @recipe
       return "api/recipes/#{@recipe}/ingridients"

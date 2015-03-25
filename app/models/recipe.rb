@@ -32,7 +32,8 @@ class Recipe < ActiveRecord::Base
 
   def ingridients_list
     self.ingridients.map do |ingridient|
-      ingridient.attributes.merge({size: ingridient.recipe_ingridients.find_by(ingridient_id: ingridient.id).size})
+      ingridient.attributes.merge({size: ingridient.recipe_ingridients.find_by(ingridient_id: ingridient.id).size,
+                                  recipe: self.id})
     end
   end
 end

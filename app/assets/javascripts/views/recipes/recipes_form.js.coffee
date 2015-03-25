@@ -80,7 +80,10 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     @ingridients = ingridients
     @ingridients.each (ingridient) ->
       ingridient.set({recipe_id: response.id})
-      ingridient.url = "api/recipes/#{response.id}/ingridients"
+      if ingridient.get("id") == undefined
+        ingridient.url = "api/recipes/#{response.id}/ingridients"
+      else
+        ingridient.url = "/api/recipes/#{response.id}/ingridients/#{ingridient.get("id")}"
       console.log ingridient
       ingridient.save(
         success: (response, request) ->
@@ -143,7 +146,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   addIngridient: (event) ->
     event.preventDefault()
-    @ingridient = new RecipeMe.Models.Ingridient()
+    @ingridient = new RecipeMe.Models.Ingridient(recipe: @model.get("id"))
     @current_ingridients.add(@ingridient)
     view = new RecipeMe.Views.IngridientForm(model: @ingridient, collection: @common_ingridients)
     $(".ingridients-list").append(view.render().el)
@@ -154,6 +157,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     $(".steps-list").append(view.render().el)
 
   renderRecipeIngridient: (ingridient) ->
+    console.log ingridient.url()
     view = new RecipeMe.Views.IngridientForm(model: ingridient)
     $(".ingridients-list").append(view.render().el)
 

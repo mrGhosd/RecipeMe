@@ -31,7 +31,7 @@ class RecipesController < ApplicationController
 
   def show
     respond_to do |format|
-      format.json { render json: @recipe.as_json(methods: [:comments, :image, :steps, :tag_list], include: {ingridients: {include: :recipe_ingridients}}) }
+      format.json { render json: @recipe.as_json(methods: [:comments, :image, :steps, :tag_list, :ingridients]) }
     end
   end
 
