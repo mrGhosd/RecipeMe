@@ -2,6 +2,10 @@ class RecipeMe.Models.Recipe extends Backbone.Model
   urlRoot: '/api/recipes'
   fileAttribute: 'image'
 
+  initialize: (params = {}) ->
+    if !params
+      this.set("image", new RecipeMe.Models.Image())
+
   parse: (response) ->
     if response.comments
       response.comments = new RecipeMe.Collections.Comments({recipe: response.id})

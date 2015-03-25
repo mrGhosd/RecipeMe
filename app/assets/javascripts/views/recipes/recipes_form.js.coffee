@@ -55,13 +55,12 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     $("#recipe_form input, #recipe_form textarea").removeClass("error")
     $(".error-text").remove()
     attributes = window.appHelper.formSerialization($("#recipe_form"))
-    console.log attributes
-    this.createMainObject(attributes, this.createSteps)
+    @model.set(attributes)
+    this.createMainObject(@model.attributes, this.createSteps)
 
 
   createMainObject: (attributes, callback) ->
     step = {steps: @steps, callback: this.createSteps}
-    console.log @ingridients
     ingridients = {ingridients: @current_ingridients, callback: this.createIngridients}
     @model.createFromForm(attributes, step, ingridients,
       success = (response, request) ->
@@ -199,26 +198,19 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
   createRecipeImage: (event, type) ->
     formData = new FormData()
+    @image = @model.get("image")
     file = this.getFileFromEvent(event)
     formData.append('name', file)
     formData.append('imageable_type', type)
-    if $(".image-placeholder img").attr("image_id") && $(".image-placeholder img").attr("image_id").length > 0
-      image_id = $(".image-placeholder img").attr("image_id")
-      formData.append('imageable_id', image_id)
+#    if $(".image-placeholder img").attr("image_id") && $(".image-placeholder img").attr("image_id").length > 0
+#      image_id = $(".image-placeholder img").attr("image_id")
+#      formData.append('imageable_id', image_id)
+    if @image == undefined
+      @image = new RecipeMe.Models.Image()
+    else
+      @image = new RecipeMe.Models.Image(@image)
 
-    request = new XMLHttpRequest();
-    request.open("POST", "/api/images");
-    request.send(formData);
-    request.onreadystatechange = ->
-      if request.readyState == 4
-        response = JSON.parse(request.response)
-        if response.id
-          $(".hidden-image-value-recipe").val(response.id)
-          $(".image-placeholder img").attr("image_id", response.id)
-        else
-          $(".hidden-image-value-recipe").val(response.imageable_id)
-          $(".image-placeholder img").attr("image_id", response.imageable_id)
-
-        console.log response
-
+    @image.uploadImage(formData)
+    @model.set("image", @image)
+    console.log @model
 

@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  after_action :create_image, only: :create
+  after_action :create_image, only: [:create, :update]
   before_action :load_recipe, only: [:update, :show, :destroy, :rating, :liked_users]
   before_action :change_object, only: [:rating, :liked_users]
   include ChangeObject
@@ -45,7 +45,7 @@ class RecipesController < ApplicationController
 
   private
   def recipes_params
-    params.permit(:title, :user_id, :description, :steps, :tag_list, :category_id)
+    params.permit(:title, :user_id, :description,  :tag_list, :category_id, :steps => [])
   end
 
   def load_recipe
@@ -53,7 +53,10 @@ class RecipesController < ApplicationController
   end
 
   def create_image
-    Image.find(params[:image_id]).update(imageable_id: @recipe.id) if params[:image_id].present?
+    if params[:image].present? || params[:image][:image_id].present?
+      Image.find(params[:image][:image_id]).update(imageable_id: @recipe.id)
+      # @recipe.update_image
+    end
   end
 
   def create_steps
