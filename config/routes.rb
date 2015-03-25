@@ -16,11 +16,14 @@ Rails.application.routes.draw do
     resources :users
     resources :callbacks
     resources :news, concerns: [:rate, :users_liked]
-    resources :ingridients
+    resources :ingridients, only: [:index]
     resources :categories do
       get :recipes, on: :member
     end
     resources :recipes, concerns: [:rate, :users_liked] do
+      resources :ingridients, except: :index do
+        get :index, on: :collection, to: "ingridients#recipe_ingridients"
+      end
       resources :comments, concerns: [:rate, :users_liked]
       resources :steps
     end

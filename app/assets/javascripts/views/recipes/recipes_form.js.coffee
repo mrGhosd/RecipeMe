@@ -80,6 +80,8 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     @ingridients = ingridients
     @ingridients.each (ingridient) ->
       ingridient.set({recipe_id: response.id})
+      ingridient.url = "api/recipes/#{response.id}/ingridients"
+      console.log ingridient
       ingridient.save(
         success: (response, request) ->
           console.log response
@@ -151,13 +153,19 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     view = new RecipeMe.Views.StepForm(model: step)
     $(".steps-list").append(view.render().el)
 
+  renderRecipeIngridient: (ingridient) ->
+    view = new RecipeMe.Views.IngridientForm(model: ingridient)
+    $(".ingridients-list").append(view.render().el)
+
   render: ->
+    console.log @current_ingridients
     if @model
       $(@el).html(@template(recipe: @model, categories: @categories))
     else
       $(@el).html(@template(categories: @categories))
 
     @steps.each(@renderRecipeStep)
+    @current_ingridients.each(@renderRecipeIngridient)
     this
     $(".recipe-tags").tagsinput()
     $(".markItUp").markItUp(window.myHtmlSettings)

@@ -53,7 +53,6 @@ class RecipeMe.Views.StepForm extends Backbone.View
 
   removeStep: (event) ->
     if @model.isNew()
-      console.log @model.collection
       @model.collection.remove(@model)
     else
       @model.url = "/api/recipes/#{@model.get("recipe_id")}/steps/#{@model.get("id")}"

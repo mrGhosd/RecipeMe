@@ -3,8 +3,9 @@ class RecipeMe.Views.IngridientForm extends Backbone.View
   className: 'ingridient-item'
   events:
     'keydown .ingridient-name': 'showIngridientsPopup'
-    'focusout .ingridient-name': 'updateName'
-    'focusout .ingridient-size': 'updateSize'
+    'focusout input.ingridient-name': 'updateName'
+    'focusout input.ingridient-size': 'updateSize'
+    'click .remove-ingridient': 'removeIngridient'
 
   initialize: (params) ->
     if params
@@ -12,12 +13,19 @@ class RecipeMe.Views.IngridientForm extends Backbone.View
       @collection = params.collection
 
   updateName: (event) ->
-    text = $(event.target).val()
+    text = $(event.currentTarget).val()
     @model.set({name: text})
 
   updateSize: (event) ->
-    text = $(event.target).val()
+    text = $(event.currentTarget).val()
     @model.set({size: text})
+
+  removeIngridient: (event) ->
+    if @model.isNew()
+      @model.collection.remove(@model)
+    else
+      @model.destroy()
+    $(event.target).closest(".ingridient-item").remove()
 
   showIngridientsPopup: (event) ->
     $(".ingridient-popup").remove()

@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   after_action :create_image, only: :create
-  before_action :load_recipe, only: [:show, :destroy, :rating, :liked_users]
+  before_action :load_recipe, only: [:update, :show, :destroy, :rating, :liked_users]
   before_action :change_object, only: [:rating, :liked_users]
   include ChangeObject
   include Rate
@@ -31,7 +31,7 @@ class RecipesController < ApplicationController
 
   def show
     respond_to do |format|
-      format.json { render json: @recipe.as_json(methods: [:comments, :image, :steps, :tag_list]) }
+      format.json { render json: @recipe.as_json(methods: [:comments, :image, :steps, :tag_list], include: {ingridients: {include: :recipe_ingridients}}) }
     end
   end
 

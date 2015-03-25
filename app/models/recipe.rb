@@ -29,4 +29,10 @@ class Recipe < ActiveRecord::Base
       ActsAsTaggableOn::Tag.where(name: n.strip).first_or_create!
     end
   end
+
+  def ingridients_list
+    self.ingridients.map do |ingridient|
+      ingridient.attributes.merge({size: ingridient.recipe_ingridients.find_by(ingridient_id: ingridient.id).size})
+    end
+  end
 end

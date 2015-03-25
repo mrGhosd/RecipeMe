@@ -1,6 +1,15 @@
 class RecipeMe.Collections.Ingridients extends Backbone.Collection
   model: RecipeMe.Models.Ingridient
-  url: '/api/ingridients'
+
+  initialize: (params) ->
+    if params
+      @recipe = params.recipe
+
+  url: ->
+    if @recipe
+      return "api/recipes/#{@recipe}/ingridients"
+    else
+      return "api/ingridients"
 
   search: (letters) ->
     return null if letters == " "
