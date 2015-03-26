@@ -1,6 +1,28 @@
-<ul>
-  <li><a href="/#recipes"> <img src="/images/book1.png" /> Рецепты</a></li>
-  <li><a href="/#categories"> <img src="/images/category.png" /> Категории</a></li>
-  <li><a href="/#news"> <img src="/images/news29.png" /> Новости</a></li>
-  <li><a href="/#callbacks"> <img src="/images/review4.png" /> Отзывы</a></li>
-</ul>
+<div class="quick-panel">
+    <div class="user_block">
+      <div class="user-avatar">
+          <% if @user.get("avatar").url: %>
+            <img src="<%= @user.get("avatar").url %>" height=70 width="70" class="img-circle"/>
+          <% end %>
+      </div>
+      <div class="user-short-info">
+          <div class="user-name">
+            <a href="/#users/<%= @user.get("id") %>"><span class="user-correct-naming"><%= @user.get("correct_naming") %></span></a>
+            <% if @user.get("email") != @user.get("correct_naming"): %>
+                <span class="user-email"><%= @user.get("email") %></span>
+            <% end %>
+          </div>
+          <div class="user-online">
+            <span class="title">Последняя авторизация в</span>
+            <span class="last"><%= @user.get("last_sign_in_at_h") %></span>
+          </div>
+      </div>
+
+    </div>
+    <ul class="app-navigation-block">
+      <li><a href="/#recipes"> <img src="/images/book1.png" /> Рецепты</a></li>
+      <li><a href="/#categories"> <img src="/images/category.png" /> Категории</a></li>
+      <li><a href="/#news"> <img src="/images/news29.png" /> Новости</a></li>
+      <li><a href="/#callbacks"> <img src="/images/review4.png" /> Отзывы</a></li>
+    </ul>
+</div>

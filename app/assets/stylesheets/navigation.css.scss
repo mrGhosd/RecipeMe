@@ -28,3 +28,26 @@
     }
   }
 }
+.user_block{
+
+  &>div{
+    padding: 10px;
+    display: inline-block;
+  }
+  .user-avatar{
+    float: left;
+  }
+  .user-short-info{
+    .user-name{
+      *{
+        display: block;
+      }
+    }
+    .user-online{
+      font-size: 11px;
+      *{
+        display:block;
+      }
+    }
+  }
+}

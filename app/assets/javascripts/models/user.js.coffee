@@ -4,9 +4,6 @@ class RecipeMe.Models.User extends Backbone.Model
 
   initialize: (options) ->
     @params = options
-#    this.url()
-#    this.fetch().done ->
-#      console.log this
 
   url: ->
     if @params.id
@@ -15,7 +12,8 @@ class RecipeMe.Models.User extends Backbone.Model
       return "/api/users"
 
   parse: (response) ->
-    recipes = new RecipeMe.Collections.Recipes({user: response.id})
-    recipes.fetch()
-    response["recipes"] = recipes
+    if response.followers
+      response.followers = new RecipeMe.Collections.Users(response.followers)
+    if response.following
+      response.following = new RecipeMe.Collections.Users(response.following)
     return response

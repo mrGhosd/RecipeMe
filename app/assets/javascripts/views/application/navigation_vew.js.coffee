@@ -6,6 +6,8 @@ class RecipeMe.Views.NavigationView extends Backbone.View
 
   initialize:(options = {}) ->
     @view = options.view if options.view
+    @user = RecipeMe.currentUser
+    @user.fetch({async: false})
 
     this.render()
 
@@ -13,7 +15,8 @@ class RecipeMe.Views.NavigationView extends Backbone.View
     @view.toggleLeftMenu(false)
 
   render: ->
-    $(@el).html(@template())
+    console.log @user
+    $(@el).html(@template(user: @user))
     this
 
 

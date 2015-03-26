@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   end
 
   def follow!(followed)
-    relationships.create!(:followed_id => followed.id)
+    relationships.create!(followed_id: followed.id)
   end
 
   def unfollow!(followed)
@@ -59,6 +59,10 @@ class User < ActiveRecord::Base
 
   def create_authorization(auth)
     self.authorizations.create(provider: auth.provider, uid: auth.uid.to_s)
+  end
+
+  def last_sign_in_at_h
+    self.last_sign_in_at.strftime('%H:%M:%S %d.%m.%Y')
   end
 
 

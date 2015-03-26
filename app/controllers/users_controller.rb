@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
 
+  def index
+
+  end
+
   def show
     user = User.find(params[:id])
-    render json: user.as_json
+    render json: user.as_json(methods: [:followers, :following, :correct_naming, :last_sign_in_at_h])
   end
 
   def update
