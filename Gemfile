@@ -50,6 +50,12 @@ gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 gem 'omniauth-instagram'
 
+gem "letter_opener"
+gem 'letter_opener_web'
+
+gem 'sidekiq'
+gem 'sidetiq'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
