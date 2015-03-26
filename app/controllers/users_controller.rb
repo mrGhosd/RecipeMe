@@ -1,12 +1,20 @@
 class UsersController < ApplicationController
-
+  before_action :load_user, only: [:following, :followers]
   def index
 
   end
 
   def show
     user = User.find(params[:id])
-    render json: user.as_json(methods: [:followers, :following, :correct_naming, :last_sign_in_at_h])
+    render json: user.as_json(methods: [:followers_list, :following_list, :correct_naming, :last_sign_in_at_h])
+  end
+
+  def following
+    render json: @user.following.as_json(methods: [:last_sign_in_at_h, :correct_naming])
+  end
+
+  def followers
+    render json: @user.followers.as_json(methods: [:last_sign_in_at_h, :correct_naming])
   end
 
   def update
@@ -19,6 +27,10 @@ class UsersController < ApplicationController
   end
 
   private
+  def load_user
+    @user = User.find(params[:id])
+  end
+
   def user_params
     params.permit(:email, :password,
                   :nickname, :surname,

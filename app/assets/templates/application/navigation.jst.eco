@@ -25,4 +25,24 @@
       <li><a href="/#news"> <img src="/images/news29.png" /> Новости</a></li>
       <li><a href="/#callbacks"> <img src="/images/review4.png" /> Отзывы</a></li>
     </ul>
+    <div class="followers-block">
+      <p class="title">Ваши подписчики</p>
+      <div class="followers-list">
+        <% for user in @user.get("followers_list").models.slice(0,5): %>
+            <a href="/#users/<%= user.get("id") %>" class="user-image">
+              <% if user.get("avatar").url: %>
+                  <% path = user.get("avatar").url %>
+              <% else: %>
+                  <% path = "/images/user8.png"  %>
+              <% end %>
+              <img src="<%= path %>" height="70" width="70" />
+              <span class="name"><%= user.get("correct_naming") %></span>
+            </a>
+        <% end %>
+      </div>
+    </div>
+    <div class="following-block">
+      <p class="title">Вы подписаны</p>
+      <div class="following-list"></div>
+    </div>
 </div>

@@ -12,8 +12,13 @@ class RecipeMe.Models.User extends Backbone.Model
       return "/api/users"
 
   parse: (response) ->
-    if response.followers
-      response.followers = new RecipeMe.Collections.Users(response.followers)
-    if response.following
-      response.following = new RecipeMe.Collections.Users(response.following)
+    if response.followers_list
+      response.followers_list = new RecipeMe.Collections.Users(response.followers_list)
+      response.followers_list.url = "api/users/#{response.id}/followers"
+      response.followers_list.fetch({async: false})
+
+    if response.following_list
+      response.following_list = new RecipeMe.Collections.Users(response.following_list)
+      response.following_list.url = "api/users/#{response.id}/following"
+      response.following_list.fetch({async: false})
     return response

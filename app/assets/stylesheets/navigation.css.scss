@@ -5,6 +5,7 @@
   z-index: 100000;
   display:none;
   top: 0px;
+  width: 0px;
   ul{
     list-style-type: none;
     margin: 0px;
@@ -29,7 +30,6 @@
   }
 }
 .user_block{
-
   &>div{
     padding: 10px;
     display: inline-block;
@@ -47,6 +47,26 @@
       font-size: 11px;
       *{
         display:block;
+      }
+    }
+  }
+}
+.followers-block{
+  padding: 10px;
+  p.title{
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+  }
+  .followers-list{
+    a{
+      display: inline-block;
+      margin-right: 20px;
+      margin-bottom: 15px;
+      text-align: center;
+      span{
+        font-size: 10px;
+        display: block;
       }
     }
   }

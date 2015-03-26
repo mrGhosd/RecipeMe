@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 
   include Rate
 
+  after_create :set_nickname
 
   def following?(followed)
     relationships.find_by_followed_id(followed)
@@ -29,6 +30,14 @@ class User < ActiveRecord::Base
 
   def unfollow!(followed)
     relationships.find_by_followed_id(followed).destroy
+  end
+
+  def following_list
+    self.followers.order(name: :asc).limit(6)
+  end
+
+  def followers_list
+    self.following.order(name: :asc).limit(6)
   end
 
 
@@ -62,9 +71,14 @@ class User < ActiveRecord::Base
   end
 
   def last_sign_in_at_h
-    self.last_sign_in_at.strftime('%H:%M:%S %d.%m.%Y')
+    self.last_sign_in_at.strftime('%H:%M:%S %d.%m.%Y') if self.last_sign_in_at
   end
 
 
+  private
 
+  def set_nickname
+    nick_arr = self.email.partition("@")
+    self.update(nickname: nick_arr[0])
+  end
 end
