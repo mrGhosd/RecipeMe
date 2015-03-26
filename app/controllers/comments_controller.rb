@@ -1,6 +1,8 @@
 class CommentsController <ApplicationController
   before_action :load_comment, only: [:update, :show, :destroy, :rating, :liked_users]
   before_action :change_object, only: [:rating, :liked_users]
+  after_action :mail_send, only: :create
+
   include ChangeObject
   include Rate
   include UsersLiked
@@ -12,8 +14,8 @@ class CommentsController <ApplicationController
   end
 
   def create
-    comment = Comment.new(comments_params)
-    if comment.save
+    @comment = Comment.new(comments_params)
+    if @comment.save
       render json: @comment.to_json, status: :ok
     else
       render json: @comment.errors.to_json, status: :forbidden
@@ -44,6 +46,10 @@ class CommentsController <ApplicationController
 
   def load_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def mail_send
+    Comment.send_recipe_author_message(@comment)
   end
 
   def comments_params

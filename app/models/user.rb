@@ -11,6 +11,17 @@ class User < ActiveRecord::Base
 
   include Rate
 
+
+  def correct_naming
+    if self.nickname
+      "#{self.nickname}"
+    elsif self.surname && self.name
+      "#{self.surname} #{self.name}"
+    else
+      "#{self.email}"
+    end
+  end
+
   def self.from_omniauth(auth)
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
     return authorization.user if authorization
@@ -29,5 +40,7 @@ class User < ActiveRecord::Base
   def create_authorization(auth)
     self.authorizations.create(provider: auth.provider, uid: auth.uid.to_s)
   end
+
+
 
 end

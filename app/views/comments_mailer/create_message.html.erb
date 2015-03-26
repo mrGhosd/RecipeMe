@@ -1,0 +1,7 @@
+<p>Здравствуйте!</p>
+
+<p>Пользователь <%= raw link_to @comment_author.correct_naming, "http://localhost:3000/#users/#{@comment_author.id}", target: '_blank' %>
+добавил комментарий к <%= raw link_to "вашей", "http://localhost:3000/#recipes/#{@recipe.id}", target: '_blank' %> записи:</p>
+<p class="comment-text">
+  <%= @comment.text.html_safe %>
+</p>
