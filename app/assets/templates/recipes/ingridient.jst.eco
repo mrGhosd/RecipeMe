@@ -1,0 +1,4 @@
+<a href="#" data-remote="true">
+  <span class="name"><%= @ingridient.get("name") %></span>
+  <span class="size"><%= @ingridient.get("size") %></span>
+</a>

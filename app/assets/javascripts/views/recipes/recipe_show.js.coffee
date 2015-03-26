@@ -14,6 +14,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
       @model = params.model
       @steps = @model.get("steps")
       @comments = @model.get('comments')
+      @ingridients = @model.get('ingridients')
       @comments.on('add', @render, this)
       @comments.on('reset', @render, this)
     this.render()
@@ -40,6 +41,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     $(@el).html(@template(recipe: @model))
     @steps.each(@addStep)
     @comments.each(@addComment)
+    @ingridients.each(@addIngridient)
     this
 
   showVotedUsersPopup: (event) ->
@@ -61,6 +63,10 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     if !_.isEqual(comment.attributes, {recipe: comment.get("recipe")})
       view = new RecipeMe.Views.Comment({model: comment})
       $(".recipe-comments").prepend view.render().el
+
+  addIngridient: (ingridient) ->
+    view = new RecipeMe.Views.Ingridient({model: ingridient})
+    $(".ingiridents-list").append(view.render().el)
 
 
   showComments: (comment)->

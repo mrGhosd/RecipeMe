@@ -8,6 +8,10 @@
                 <%- @recipe.get("tag_list").split(",").map (value) -> "<a href='#' data-remote='true' class='tag-data'>#{value}</a>" %>
             <% end %>
           </div>
+          <div class="ingridients-block">
+            <p class="ingridients-list-title">Ингридиенты:</p>
+            <div class="ingiridents-list"></div>
+          </div>
           <div class="panel panel-default">
             <div class="panel-heading">Описание</div>
             <div class="panel-body"><%- @recipe.get("description") %></div>
