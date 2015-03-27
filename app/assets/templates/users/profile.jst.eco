@@ -38,10 +38,17 @@
         </div>
       </div>
     </div>
+    <%= console.log @user.get("following_list") %>
+
     <div class="col-md-3">
-      <%= console.log @user %>
       <img src="<%= @user.get('avatar').url if @user.get('avatar') %>" class="recipe-image img-thumbnail"/>
     </div>
+  </div>
+  <div class="row">
+    <% if window.appHelper.collectionCheck(@user.get("followers_list"), RecipeMe.currentUser): %>
+    <% else: %>
+        <a class="btn btn-default add-following" href="#" data-remote="true">Подписаться</a>
+    <% end %>
   </div>
   <div class="row">
     <fieldset>

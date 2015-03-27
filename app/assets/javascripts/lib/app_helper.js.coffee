@@ -40,6 +40,13 @@ window.appHelper =
           found = true
           return found
 
+    collectionCheck: (collection, object) ->
+      found = false
+      for element in collection.model
+        if element.get("id") == object.get("id")
+          found = true
+          return found
+
     dateFormater: (date) ->
       d = new Date(date)
       dformat = [d.getHours(),
