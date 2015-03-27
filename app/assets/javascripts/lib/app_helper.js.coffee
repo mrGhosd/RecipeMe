@@ -12,7 +12,6 @@ window.appHelper =
         if $(element).attr("type") == "submit" || $(element).attr("steps") || $(element).attr("ingridients")
           continue
         if $(element).attr("type") == "file"
-#          attributes["#{$(element).attr('name')}"] =  $(element)[0].files[0] if $(element)[0].files[0]
           continue
 
         attributes["#{$(element).attr('name')}"] = $(element).val()
@@ -42,10 +41,11 @@ window.appHelper =
 
     collectionCheck: (collection, object) ->
       found = false
-      for element in collection.model
+      for element in collection.models
         if element.get("id") == object.get("id")
           found = true
           return found
+      return found
 
     dateFormater: (date) ->
       d = new Date(date)

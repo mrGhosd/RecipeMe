@@ -14,4 +14,5 @@ class RelationshipsController < ApplicationController
       format.json { render json: { success: true }.to_json, status: :ok }
     end
   end
+
 end

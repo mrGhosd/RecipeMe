@@ -16,7 +16,6 @@ class RecipeMe.Views.NavigationView extends Backbone.View
     @view.toggleLeftMenu(false)
 
   render: ->
-    console.log @user
     $(@el).html(@template(user: @user))
     this
 

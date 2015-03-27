@@ -13,8 +13,3 @@ class RecipeMe.Views.ApplicationView extends Backbone.View
   render: ->
     $(@el).html(@template())
     this
-
-#  navigate: (event)->
-#    event.preventDefault();
-#    console.log event.target
-#    Backbone.history.navigate(event.target.pathname, {trigger: true})

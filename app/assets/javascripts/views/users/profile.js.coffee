@@ -3,6 +3,8 @@ class RecipeMe.Views.UserProfile extends Backbone.View
   'events':
     'click .edit-profile': 'showModalEdit'
     'click .toggle-user-recipes': 'toggleUserRecipes'
+    'click .add-following': 'createFollowing'
+    'click .remove-following': 'deleteFollowing'
 
   initialize: (params)->
     @params = params
@@ -36,3 +38,27 @@ class RecipeMe.Views.UserProfile extends Backbone.View
     $("#myModal .modal-body").html(view.el)
     view.render()
 
+  createFollowing: (event) ->
+    $.ajax "/api/relationships",
+      type: "POST"
+      data: { id: @params.user.get("id") }
+      success: (response, request) ->
+        $(event.target).text("Отписаться")
+                       .removeClass("add-following")
+                       .addClass("remove-following")
+
+        console.log request
+      error: (response, request) ->
+        console.log response
+        console.log request
+
+  deleteFollowing: (event) ->
+    $.ajax "/api/relationships/#{@params.user.get("id")}",
+      type: "DELETE"
+      success: (response, request) ->
+        $(event.target).text("Подписаться")
+                       .removeClass("remove-following")
+                       .addClass("add-following")
+      error: (response, request) ->
+        console.log response
+        console.log request
