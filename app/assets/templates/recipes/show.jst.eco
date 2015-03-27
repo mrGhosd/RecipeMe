@@ -1,6 +1,13 @@
 <div class="recipe-show form-horizontal col-md-12">
   <fieldset>
-    <legend><%= @recipe.get("title") %></legend>
+    <legend>
+      <%= @recipe.get("title") %>
+      <div class="info-block">
+        <a href="/#users/<%= @recipe.get("user").id %>"><%= @recipe.get("user").nickname %></a>
+        в
+        <span class="date"><%= @recipe.get("created_at_h") %></span>
+      </div>
+    </legend>
       <div class="row">
         <div class="col-md-9 recipe-data">
           <div class="tags-list">

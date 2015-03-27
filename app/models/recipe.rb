@@ -42,4 +42,8 @@ class Recipe < ActiveRecord::Base
                                   recipe: self.id})
     end
   end
+
+  def created_at_h
+    self.created_at.strftime('%H:%M:%S %d.%m.%Y') if self.created_at
+  end
 end

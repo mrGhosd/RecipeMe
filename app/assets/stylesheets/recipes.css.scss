@@ -106,3 +106,17 @@
     margin-left: 5px;
   }
 }
+.recipe-show{
+  fieldset{
+    legend{
+      .info-block{
+        float: right;
+        font-size: 13px;
+        margin-top: 10px;
+        .date{
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
