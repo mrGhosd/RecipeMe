@@ -1,4 +1,5 @@
 <div class="quick-panel">
+  <% if RecipeMe.currentUser: %>
     <div class="user_block">
       <div class="user-avatar">
           <% if @user.get("avatar").url: %>
@@ -19,16 +20,18 @@
       </div>
 
     </div>
+  <% end %>
     <ul class="app-navigation-block">
       <li><a href="/#recipes"> <img src="/images/book1.png" /> Рецепты</a></li>
       <li><a href="/#categories"> <img src="/images/category.png" /> Категории</a></li>
       <li><a href="/#news"> <img src="/images/news29.png" /> Новости</a></li>
       <li><a href="/#callbacks"> <img src="/images/review4.png" /> Отзывы</a></li>
     </ul>
+  <% if RecipeMe.currentUser: %>
     <div class="followers-block">
       <p class="title">Ваши подписчики</p>
       <div class="followers-list">
-        <% for user in @user.get("followers_list").models.slice(0,5): %>
+        <% for user in @user.get("followers_list").models.slice(0,6): %>
             <a href="/#users/<%= user.get("id") %>" class="user-image">
               <% if user.get("avatar").url: %>
                   <% path = user.get("avatar").url %>
@@ -43,6 +46,19 @@
     </div>
     <div class="following-block">
       <p class="title">Вы подписаны</p>
-      <div class="following-list"></div>
+      <div class="following-list">
+        <% for user in @user.get("following_list").models.slice(0,6): %>
+            <a href="/#users/<%= user.get("id") %>" class="user-image">
+              <% if user.get("avatar").url: %>
+                  <% path = user.get("avatar").url %>
+                  <% else: %>
+                  <% path = "/images/user8.png"  %>
+              <% end %>
+              <img src="<%= path %>" height="70" width="70" />
+              <span class="name"><%= user.get("correct_naming") %></span>
+            </a>
+        <% end %>
+      </div>
     </div>
+  <% end %>
 </div>

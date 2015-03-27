@@ -6,8 +6,9 @@ class RecipeMe.Views.NavigationView extends Backbone.View
 
   initialize:(options = {}) ->
     @view = options.view if options.view
-    @user = RecipeMe.currentUser
-    @user.fetch({async: false})
+    if RecipeMe.currentUser
+      @user = RecipeMe.currentUser
+      @user.fetch({async: false})
 
     this.render()
 

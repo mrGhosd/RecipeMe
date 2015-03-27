@@ -71,3 +71,23 @@
     }
   }
 }
+.following-block{
+  padding: 10px;
+  p.title{
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+  }
+  .following-list{
+    a{
+      display: inline-block;
+      margin-right: 20px;
+      margin-bottom: 15px;
+      text-align: center;
+      span{
+        font-size: 10px;
+        display: block;
+      }
+    }
+  }
+}
