@@ -9,15 +9,41 @@ class RecipeMe.Views.NavigationView extends Backbone.View
     if RecipeMe.currentUser
       @user = RecipeMe.currentUser
       @user.fetch({async: false})
-
+      @following = new RecipeMe.Collections.Users(RecipeMe.currentUser.get("following_list").first(6))
+      @followers = new RecipeMe.Collections.Users(RecipeMe.currentUser.get("followers_list").first(6))
+    @listenTo(Backbone, "navigationMenu", @removeFollowingMessage)
     this.render()
 
   hideNavigationMenu: (e)->
     @view.toggleLeftMenu(false)
 
+  removeFollowingMessage: ->
+    @user.fetch({async: false})
+    @following = new RecipeMe.Collections.Users(RecipeMe.currentUser.get("following_list").first(6))
+    this.updateFolowersFollowingList()
+
+
+  updateFolowersFollowingList: ->
+    $(".following-block .following-list").html("")
+    $(".following-block").find(".following-count").text(@following.length)
+    @following.each(@addFollowing)
+
   render: ->
     $(@el).html(@template(user: @user))
+    @followers.each(@addFollower)
+    @following.each(@addFollowing)
     this
+
+
+
+  addFollower: (user) ->
+    view = new RecipeMe.Views.UserListItem({model: user})
+    $(".followers-block .followers-list").prepend(view.render().el)
+
+  addFollowing: (user) ->
+    view = new RecipeMe.Views.UserListItem({model: user})
+    $(".following-block .following-list").prepend(view.render().el)
+
 
 
 

@@ -6,7 +6,7 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:id])
     current_user.follow!(@user)
     respond_to do |format|
-      format.json { render json: { success: true }.to_json, status: :ok }
+      format.json { render json: @user.as_json, status: :ok }
     end
   end
 
@@ -14,7 +14,7 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:id])
     current_user.unfollow!(@user)
     respond_to do |format|
-      format.json { render json: { success: true }.to_json, status: :ok }
+      format.json { render json: @user.as_json, status: :ok }
     end
   end
 

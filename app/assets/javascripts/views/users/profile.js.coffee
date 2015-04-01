@@ -46,11 +46,12 @@ class RecipeMe.Views.UserProfile extends Backbone.View
         $(event.target).text("Отписаться")
                        .removeClass("add-following")
                        .addClass("remove-following")
-
-        console.log request
+        Backbone.trigger("navigationMenu", response)
       error: (response, request) ->
         console.log response
         console.log request
+
+
 
   deleteFollowing: (event) ->
     $.ajax "/api/relationships/#{@params.user.get("id")}",
@@ -59,6 +60,8 @@ class RecipeMe.Views.UserProfile extends Backbone.View
         $(event.target).text("Подписаться")
                        .removeClass("remove-following")
                        .addClass("add-following")
+        Backbone.trigger("navigationMenu", response)
       error: (response, request) ->
         console.log response
         console.log request
+

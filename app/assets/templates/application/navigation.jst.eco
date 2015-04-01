@@ -30,35 +30,11 @@
   <% if RecipeMe.currentUser: %>
     <div class="followers-block">
       <p class="title">Ваши подписчики <%= @user.get("followers_list").models.length %></p>
-      <div class="followers-list">
-        <% for user in @user.get("followers_list").models.slice(0,6): %>
-            <a href="/#users/<%= user.get("id") %>" class="user-image">
-              <% if user.get("avatar").url: %>
-                  <% path = user.get("avatar").url %>
-              <% else: %>
-                  <% path = "/images/user8.png"  %>
-              <% end %>
-              <img src="<%= path %>" height="70" width="70" />
-              <span class="name"><%= user.get("correct_naming") %></span>
-            </a>
-        <% end %>
-      </div>
+      <div class="followers-list"></div>
     </div>
     <div class="following-block">
-      <p class="title">Вы подписаны <%= @user.get("following_list").models.length %></p>
-      <div class="following-list">
-        <% for user in @user.get("following_list").models.slice(0,6): %>
-            <a href="/#users/<%= user.get("id") %>" class="user-image">
-              <% if user.get("avatar").url: %>
-                  <% path = user.get("avatar").url %>
-                  <% else: %>
-                  <% path = "/images/user8.png"  %>
-              <% end %>
-              <img src="<%= path %>" height="70" width="70" />
-              <span class="name"><%= user.get("correct_naming") %></span>
-            </a>
-        <% end %>
-      </div>
+      <p class="title">Вы подписаны <span class="following-count"><%= @user.get("following_list").models.length %></span></p>
+      <div class="following-list"></div>
     </div>
   <% end %>
 </div>

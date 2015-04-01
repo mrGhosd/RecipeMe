@@ -9,6 +9,8 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     'users/:id': 'userProfile'
     'users/:id/recipes': 'userRecipes'
     'users/:id/edit': 'editProfile'
+    'users/:id/followers': 'followersList'
+    'users/:id/following': 'followingList'
     'categories': 'categoriesList'
     'categories/new': 'createCategory'
     'categories/:id/edit': 'editCategory'
@@ -46,6 +48,9 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   userProfile: (id) ->
     new RecipeMe.UsersController().show(id)
+
+  followersList: (id) ->
+
 
   categoriesList: ->
     new RecipeMe.CategoriesController().index()
