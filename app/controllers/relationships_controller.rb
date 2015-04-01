@@ -21,11 +21,11 @@ class RelationshipsController < ApplicationController
   private
 
   def send_new_follower_mail
-
+   User.send_follow_message(@user, current_user)
   end
 
   def send_follower_has_been_removed
-
+    User.send_unfollow_message(@user, current_user)
   end
 
 end

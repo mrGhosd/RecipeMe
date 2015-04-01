@@ -66,6 +66,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.send_follow_message(user, follower)
+    UsersMailer.follow(user, follower).deliver
+  end
+
+  def self.send_unfollow_message(user, follower)
+    UsersMailer.unfollow(user, follower).deliver
+  end
+
   def create_authorization(auth)
     self.authorizations.create(provider: auth.provider, uid: auth.uid.to_s)
   end
