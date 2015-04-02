@@ -3,12 +3,13 @@ class RecipeMe.Views.UsersList extends Backbone.View
   className: "users-list"
 
   initialize: (params) ->
-    if params.collection
+    if params
       @collection = params.collection
+      @user = params.user
 
 
   render: ->
-    $(@el).html(@template())
+    $(@el).html(@template({user: @user}))
     @collection.each(@addUser)
     this
 
