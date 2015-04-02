@@ -27,5 +27,4 @@ class RelationshipsController < ApplicationController
   def send_follower_has_been_removed
     User.send_unfollow_message(@user, current_user)
   end
-
 end

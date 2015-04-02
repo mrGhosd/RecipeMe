@@ -24,3 +24,19 @@
   padding: 10px;
   float: left;
 }
+.users-list{
+  .user-list-item{
+    margin-right :50px;
+    &:hover{
+      border: 1px solid #ccc;
+      border-radius:8px;
+    }
+    img{
+      display: block;
+    }
+    span{
+      text-align: center;
+      display: block;
+    }
+  }
+}

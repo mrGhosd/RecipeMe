@@ -53,10 +53,11 @@
 }
 .followers-block{
   padding: 10px;
-  p.title{
+  .title{
     font-size: 18px;
     font-weight: 400;
     color: #fff;
+    cursor: pointer;
   }
   .followers-list{
     a{
@@ -73,10 +74,11 @@
 }
 .following-block{
   padding: 10px;
-  p.title{
+  .title{
     font-size: 18px;
     font-weight: 400;
     color: #fff;
+    cursor: pointer;
   }
   .following-list{
     a{

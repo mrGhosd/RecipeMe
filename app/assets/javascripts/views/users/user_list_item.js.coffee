@@ -3,9 +3,10 @@ class RecipeMe.Views.UserListItem extends Backbone.View
   className: "user-list-item"
 
   initialize: (params) ->
-    if params.model
+    if params
       @model = params.model
+      @size = params.size
 
   render: ->
-    $(@el).html(@template(user: @model))
+    $(@el).html(@template(user: @model, size: @size))
     this

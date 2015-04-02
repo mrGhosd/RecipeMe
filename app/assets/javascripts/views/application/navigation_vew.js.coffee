@@ -30,18 +30,19 @@ class RecipeMe.Views.NavigationView extends Backbone.View
 
   render: ->
     $(@el).html(@template(user: @user))
-    @followers.each(@addFollower)
-    @following.each(@addFollowing)
+    if RecipeMe.currentUser
+      @followers.each(@addFollower)
+      @following.each(@addFollowing)
     this
 
 
 
   addFollower: (user) ->
-    view = new RecipeMe.Views.UserListItem({model: user})
+    view = new RecipeMe.Views.UserListItem({model: user, size: 70})
     $(".followers-block .followers-list").prepend(view.render().el)
 
   addFollowing: (user) ->
-    view = new RecipeMe.Views.UserListItem({model: user})
+    view = new RecipeMe.Views.UserListItem({model: user, size: 70})
     $(".following-block .following-list").prepend(view.render().el)
 
 
