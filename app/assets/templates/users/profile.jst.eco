@@ -46,7 +46,9 @@
     <% if window.appHelper.collectionCheck(@user.get("followers_list"), RecipeMe.currentUser): %>
         <a class="btn btn-default remove-following" href="#" data-remote="true">Отписаться</a>
     <% else: %>
-        <a class="btn btn-default add-following" href="#" data-remote="true">Подписаться</a>
+        <% if @user.get("id") != RecipeMe.currentUser.get("id"): %>
+            <a class="btn btn-default add-following" href="#" data-remote="true">Подписаться</a>
+        <% end %>
     <% end %>
   </div>
   <div class="row">

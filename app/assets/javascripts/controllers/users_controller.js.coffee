@@ -18,7 +18,11 @@ class RecipeMe.UsersController
     model.fetch
       success: (user) ->
         followers = new RecipeMe.Collections.Users({usersURL: "api/users/#{model.get("id")}/followers"})
-        followers.fetch ->
+        followers.fetch
+          success: (collection) ->
+            view = new RecipeMe.Views.UsersList({collection: collection, user: user})
+            $("section#main").html(view.el)
+            view.render()
 
   following: (id) ->
     model = new RecipeMe.Models.User({id: id})

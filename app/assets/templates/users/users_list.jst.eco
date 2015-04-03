@@ -1,3 +1,2 @@
-<h3>Ваши подписчики</h3>
 <a href="/#users/<%= @user.get("id") if @user %>" class="btn btn-default">На профиль</a>
 <div class="main-users-list"></div>

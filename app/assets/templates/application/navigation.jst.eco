@@ -29,7 +29,7 @@
     </ul>
   <% if RecipeMe.currentUser: %>
     <div class="followers-block">
-      <a class="title">Ваши подписчики <%= @user.get("followers_list").models.length %></a>
+      <a href="/#users/<%= @user.get("id") if @user %>/followers" class="title">Ваши подписчики <%= @user.get("followers_list").models.length %></a>
       <div class="followers-list"></div>
     </div>
     <div class="following-block">

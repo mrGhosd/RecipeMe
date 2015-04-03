@@ -50,7 +50,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     new RecipeMe.UsersController().show(id)
 
   followersList: (id) ->
-
+    new RecipeMe.UsersController().followers(id)
   followingList: (id) ->
     new RecipeMe.UsersController().following(id)
 
