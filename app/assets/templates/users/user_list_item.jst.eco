@@ -1,9 +1,9 @@
 <a href="/#users/<%= @user.get("id") if @user %>" class="user-image">
   <% if @user && @user.get("avatar").url: %>
-      <% path = user.get("avatar").url %>
+      <% path = @user.get("avatar").url %>
       <% else: %>
       <% path = "/images/user8.png"  %>
   <% end %>
-  <img src="<%= path %>" height="<%= @size if @size %>" width="<%= @size if @size %>" />
+  <img src="<%= path %>" height="<%= @size if @size %>" width="<%= @size if @size %>" class="img-thumbnail" />
   <span class="name"><%= @user.get("correct_naming") if @user %></span>
 </a>

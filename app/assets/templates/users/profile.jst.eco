@@ -39,7 +39,19 @@
       </div>
     </div>
     <div class="col-md-3">
-      <img src="<%= @user.get('avatar').url if @user.get('avatar') %>" class="recipe-image img-thumbnail"/>
+      <img height="200" width="200" src="<%= @user.get('avatar').url if @user.get('avatar') %>" class="recipe-image img-thumbnail"/>
+      <div class="user-connections-block">
+        <div class="followers">
+          <a class="followers-list-link" href="/#users/<%= @user.get("id") %>/followers">
+            Подписчики: <%= @user.get("followers_list").length %>
+          </a>
+        </div>
+        <div class="following">
+          <a class="followers-list-link" href="/#users/<%= @user.get("id") %>/following">
+            Подписки <%= @user.get("following_list").length %>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">
