@@ -7,7 +7,6 @@
     <% else: %>
         <%= @callback.get("author") if @callback %>
     <% end %>
-
   </div>
   <div class="message"><%= @callback.get("text") if @callback %></div>
 </div>
