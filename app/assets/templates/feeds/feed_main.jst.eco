@@ -1,0 +1,11 @@
+<div class="user-block">
+  <div class="user-image">
+    <img src="<%= @user.get("avatar").url if @user.get("avatar").url %>" height="80" width="80" class="img-circle " />
+  </div>
+  <div class="user-feed-info">
+    <p class="title-date">
+      <a href="/#users/<%= @user.get("id") if @user.get("id") %>"><%= @user.get("correct_naming") %></a>
+      <span> <%= window.appHelper.dateFormater(@feed.get("created_at")) %></span>
+    </p>
+  </div>
+</div>

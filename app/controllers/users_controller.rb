@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   before_action :load_user, only: [:following, :followers]
-  def index
 
-  end
 
   def show
     user = User.find(params[:id])
@@ -15,6 +13,11 @@ class UsersController < ApplicationController
 
   def followers
     render json: @user.followers.as_json(methods: [:last_sign_in_at_h, :correct_naming])
+  end
+
+  def feed
+    feed = current_user.feed
+    render json: feed.as_json, status: :ok
   end
 
   def update

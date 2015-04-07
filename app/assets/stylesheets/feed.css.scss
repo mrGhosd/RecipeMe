@@ -1,0 +1,27 @@
+.feed-item{
+  .user-block{
+    &>div{
+      display: inline-block;
+    }
+    margin-bottom: 20px;
+
+    .user-image{
+//      float:left;
+
+      img{
+        border: 2px solid #ccc;
+      }
+    }
+    .user-feed-info{
+      width: 80%;
+      .title-date{
+        border-bottom: 3px solid #ddd;
+
+        span{
+          display: block;
+          float: right;
+        }
+      }
+    }
+  }
+}
