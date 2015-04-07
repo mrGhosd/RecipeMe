@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def feed
+    UserUpdate.from_users_followed_by(self)
+  end
+
   def self.send_follow_message(user, follower)
     UsersMailer.follow(user, follower).deliver
   end
