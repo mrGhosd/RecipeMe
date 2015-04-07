@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 20150406231739) do
     t.integer  "user_id"
     t.string   "update_type"
     t.integer  "update_id"
+    t.string   "update_entity"
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"

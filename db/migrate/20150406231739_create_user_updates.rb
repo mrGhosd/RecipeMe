@@ -4,7 +4,7 @@ class CreateUserUpdates < ActiveRecord::Migration
       t.belongs_to :user, index: true
       t.string :update_type
       t.integer :update_id
-      t.string :update_type
+      t.string :update_entity, index: true
       t.string :type, index: true
       t.timestamps
     end

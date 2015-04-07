@@ -51,6 +51,6 @@ class Recipe < ActiveRecord::Base
   private
 
   def update_user_recipe
-    RecipeUpdate.create(user_id: self.user.id, update_type: 'create', update_id: self.id)
+    RecipeUpdate.create(user_id: self.user.id, update_type: 'create', update_entity: self.class.to_s, update_id: self.id)
   end
 end
