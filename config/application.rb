@@ -18,6 +18,7 @@ module RecipeMe
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.{rb,yml}"]
+    config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.

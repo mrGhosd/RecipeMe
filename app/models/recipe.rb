@@ -9,6 +9,7 @@ class Recipe < ActiveRecord::Base
   has_many :recipe_ingridients
   has_many :ingridients, through: :recipe_ingridients
   acts_as_taggable
+  after_create :update_user_recipe
 
   validates :title, :description, presence: true
 
@@ -45,5 +46,11 @@ class Recipe < ActiveRecord::Base
 
   def created_at_h
     self.created_at.strftime('%H:%M:%S %d.%m.%Y') if self.created_at
+  end
+
+  private
+
+  def update_user_recipe
+    RecipeUpdate.create(user_id: self.user.id, update_type: 'create', update_id: self.id)
   end
 end

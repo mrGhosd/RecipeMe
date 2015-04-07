@@ -133,12 +133,15 @@ ActiveRecord::Schema.define(version: 20150406231739) do
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "user_updates", force: true do |t|
+    t.integer  "user_id"
     t.string   "update_type"
     t.integer  "update_id"
-    t.string   "update_entity"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "user_updates", ["user_id"], name: "index_user_updates_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

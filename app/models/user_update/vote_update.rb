@@ -1,0 +1,3 @@
+class VoteUpdate < UserUpdate
+
+end
