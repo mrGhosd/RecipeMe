@@ -7,6 +7,6 @@ class RecipeMe.Collections.Feeds extends Backbone.Collection
 
   url: (option) ->
     if option != null
-      return "api/users/#{@user}/feed"
+      return "api/users/#{@user}/feeds"
 
 

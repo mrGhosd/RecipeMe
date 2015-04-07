@@ -9,6 +9,8 @@ class RecipeMe.Views.FeedMain extends Backbone.View
       @user.fetch({async: false})
 
   render: ->
-    render: ->
     $(@el).html(@template({feed: @feed, user: @user}))
+    if @feed.get("body")
+      body = @feed.get("body")
+      $(@el).find(".feed-body").html(body.render().el)
     this

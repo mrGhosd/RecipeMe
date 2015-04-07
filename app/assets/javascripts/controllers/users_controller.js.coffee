@@ -39,11 +39,9 @@ class RecipeMe.UsersController
     model = new RecipeMe.Models.User({id: id})
     model.fetch
       success: (user) ->
-        console.log user
         feed = new RecipeMe.Collections.Feeds({user: user.id})
         feed.fetch
           success: (collection) ->
-            console.log collection
             view = new RecipeMe.Views.FeedList({collection: collection})
             $("section#main").html(view.el)
             view.render()

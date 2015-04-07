@@ -1,0 +1,15 @@
+<div class="feed-recipe-image">
+  <a href="<%= @recipe.get("image").name.url %>"  data-lightbox="recipe-image" data-title="<%= @recipe.get("title") %>">
+    <img src="<%= @recipe.get("image").name.url %>" height="100" width="100" class="img-thumbnail"/>
+  </a>
+</div>
+<div class="feed-recipe-info">
+  <div class="title">
+    <a href="/#recipes/<%= @recipe.get("id") if @recipe.get("id") %>"><%= @recipe.get("title") if @recipe.get("title") %></a>
+  </div>
+  <div class="tags">
+    <% if @recipe.get("tag_list"): %>
+        <%- @recipe.get("tag_list").split(",").map (value) -> "<a href='#' data-remote='true' class='tag-data'>#{value}</a>" %>
+    <% end %>
+  </div>
+</div>
