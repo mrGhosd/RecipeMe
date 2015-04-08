@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       get :following, on: :member
       get :followers, on: :member
     end
+
     resources :callbacks
     resources :news, concerns: [:rate, :users_liked]
     resources :ingridients, only: [:index]

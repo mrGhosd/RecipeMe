@@ -1,0 +1,5 @@
+
+<div class="link-to-recipe"><img src="/images/<%= @icon %>" class="feed-action" />Комментарий к рецепту <a href="/#recipes/<%= @recipe.id if @recipe %>"><%= @recipe.title %></a></div>
+<div class="comment-text">
+  <%= @comment.get("text") %>
+</div>

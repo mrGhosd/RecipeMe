@@ -25,6 +25,20 @@
     }
     .feed-body{
       width: 80%;
+      .comment-feed-item{
+        .link-to-recipe{
+          .feed-action{
+            height: 30px;
+            margin-right: 10px;
+          }
+        }
+        .comment-text{
+          border: 1px solid #ccc;
+          position: relative;
+          border-radius: 4px;
+          padding: 10px;
+        }
+      }
       .recipe-feed-item{
         padding: 10px;
         position: relative;
