@@ -3,11 +3,12 @@ class RecipeMe.Views.FeedRecipe extends Backbone.View
   className: 'recipe-feed-item'
 
   initialize: (params) ->
-    if params.model
+    if params
       @recipe = params.model
+      @icon = params.icon
 
     this.render()
 
   render: ->
-    $(@el).html(@template(recipe: @recipe))
+    $(@el).html(@template(recipe: @recipe, icon: @icon))
     this

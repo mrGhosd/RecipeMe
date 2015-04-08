@@ -5,6 +5,6 @@ class Vote < ActiveRecord::Base
   after_create :update_vote
 
   def update_vote
-    VoteUpdate.create(user_id: self.user.id, update_type: 'create', update_entity: self.class.to_s, update_id: self.id)
+    VoteUpdate.create(user_id: self.user.id, update_type: 'create', update_entity: self.class.to_s, update_entity_for: self.voteable_type, update_id: self.voteable_id)
   end
 end

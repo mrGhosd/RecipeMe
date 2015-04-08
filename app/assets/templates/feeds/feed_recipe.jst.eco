@@ -1,3 +1,6 @@
+<div class="feed-action-image">
+    <img src="/images/<%= @icon %>" class="feed-action" />
+</div>
 <div class="feed-recipe-image">
   <a href="<%= @recipe.get("image").name.url %>"  data-lightbox="recipe-image" data-title="<%= @recipe.get("title") %>">
     <img src="<%= @recipe.get("image").name.url %>" height="100" width="100" class="img-thumbnail"/>

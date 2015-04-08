@@ -12,6 +12,7 @@ class Comment <ActiveRecord::Base
   end
 
   def update_comment
-    CommentUpdate.create(user_id: self.user.id, update_type: 'create', update_entity: self.class.to_s, update_id: self.id)
+    CommentUpdate.create(user_id: self.user.id, update_type: 'create',
+    update_entity: self.class.to_s, update_entity_for: self.class.to_s, update_id: self.id)
   end
 end

@@ -27,14 +27,22 @@
       width: 80%;
       .recipe-feed-item{
         padding: 10px;
+        position: relative;
         border: 1px solid #BBBBBB;
         border-radius: 4px;
-        height: 115px;
+        &>div{
+          display: inline-block;
+        }
+        .feed-action{
+          position: absolute;
+          top: 0;
+          left: 0px;
+          height: 55px;
+          width: 55px;
+        }
         .feed-recipe-image{
-          float:left;
         }
         .feed-recipe-info{
-          float: left;
           margin-left: 30px;
           .tags{
             margin-top: 30px;

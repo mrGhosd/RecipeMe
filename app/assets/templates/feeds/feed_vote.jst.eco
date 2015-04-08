@@ -1,0 +1,1 @@
+<p>Добавил +1 к рецепту <a href="/#recipes/<%= @recipe.get("id") %>"><%= @recipe.get("title") %></a> </p>
