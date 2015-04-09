@@ -22,13 +22,13 @@
     </div>
   <% end %>
     <ul class="app-navigation-block">
-      <li><a href="/#recipes"> <img src="/images/book1.png" /> Рецепты</a></li>
-      <li><a href="/#categories"> <img src="/images/category.png" /> Категории</a></li>
-      <li><a href="/#news"> <img src="/images/news29.png" /> Новости</a></li>
+      <li><a href="/#recipes"> <img src="/images/book1.png" /> <%= I18n.t('menu.recipe') %></a></li>
+      <li><a href="/#categories"> <img src="/images/category.png" /><%= I18n.t('menu.category') %></a></li>
+      <li><a href="/#news"> <img src="/images/news29.png" /> <%= I18n.t('menu.news') %></a></li>
       <% if RecipeMe.currentUser: %>
-          <li><a href="/#users/<%= RecipeMe.currentUser.get("id") %>/feed"> <img src="/images/news29.png" /> Обновления пользователей</a></li>
+          <li><a href="/#users/<%= RecipeMe.currentUser.get("id") %>/feed"> <img src="/images/news29.png" /><%= I18n.t('menu.updates') %></a></li>
       <% end %>
-      <li><a href="/#callbacks"> <img src="/images/review4.png" /> Отзывы</a></li>
+      <li><a href="/#callbacks"> <img src="/images/review4.png" /> <%= I18n.t('menu.feedback') %></a></li>
     </ul>
   <% if RecipeMe.currentUser: %>
     <div class="followers-block">
