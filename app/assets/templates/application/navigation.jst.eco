@@ -25,6 +25,9 @@
       <li><a href="/#recipes"> <img src="/images/book1.png" /> Рецепты</a></li>
       <li><a href="/#categories"> <img src="/images/category.png" /> Категории</a></li>
       <li><a href="/#news"> <img src="/images/news29.png" /> Новости</a></li>
+      <% if RecipeMe.currentUser: %>
+          <li><a href="/#users/<%= RecipeMe.currentUser.get("id") %>/feed"> <img src="/images/news29.png" /> Обновления пользователей</a></li>
+      <% end %>
       <li><a href="/#callbacks"> <img src="/images/review4.png" /> Отзывы</a></li>
     </ul>
   <% if RecipeMe.currentUser: %>
