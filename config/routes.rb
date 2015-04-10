@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :feeds, only: [:index, :show]
       get :following, on: :member
+      post :locale, on: :collection
       get :followers, on: :member
     end
 

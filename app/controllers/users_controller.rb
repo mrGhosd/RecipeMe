@@ -20,6 +20,12 @@ class UsersController < ApplicationController
     render json: feed.as_json, status: :ok
   end
 
+  def locale
+    locale = params[:locale].downcase.eql?("en") ? "ru" : "en"
+    session[:locale] = locale
+    head :ok
+  end
+
   def update
     user = User.find(params[:id])
     if user.update(user_params)

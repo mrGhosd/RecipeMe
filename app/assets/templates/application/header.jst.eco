@@ -6,7 +6,7 @@
 <div class="logo">
   <a href="/#recipes"><span>RecipeMe</span></a>
 </div>
-<a href="#" data-remote="true" class="btn btn-primary">EN</a>
+<a href="#" data-remote="true" class="btn btn-primary locale-switcher"><%= I18n.currentLocale().toUpperCase() %></a>
 <% if !RecipeMe.currentUser: %>
     <div class="auth-buttons">
       <input type="button" class="btn btn-primary login-window" value="<%= I18n.t('application.login') %>" data-toggle="modal" data-target="#myModal"/>

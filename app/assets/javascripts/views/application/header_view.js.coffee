@@ -7,6 +7,7 @@ class RecipeMe.Views.HeaderView extends Backbone.View
     "click .registration-window": 'registrationDialog'
     "click .sign-out-button": 'signOut'
     "click .menu-item": 'showNavigationMenu'
+    "click .locale-switcher": 'toggleCurrentLocale'
 
   initialize: ->
     this.render()
@@ -51,6 +52,17 @@ class RecipeMe.Views.HeaderView extends Backbone.View
         $(this).dequeue()
       )
       $(".mask").addClass("hide")
+
+  toggleCurrentLocale: (event) ->
+    event.preventDefault()
+    $.ajax "api/users/locale",
+      type: "POST"
+      data: {locale: $(event.target).text()}
+      success: (data, textStatus, jqXHR) ->
+        window.location.reload()
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log jqXHR.responseText
+
 
 
   render: ->
