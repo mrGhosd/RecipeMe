@@ -32,6 +32,12 @@
             </div>
           </div>
           <div class="steps-line"></div>
+          <% if RecipeMe.currentUser: %>
+              <div class="recipe-actions">
+                <a href="#" data-remote="true" class="btn btn-primary add-comment-button glyphicon glyphicon-plus" ></a>
+              </div>
+          <% end %>
+          <div class="comment-form"></div>
         </div>
         <div class="col-md-3">
           <a href="<%= @recipe.get("image").name.url %>"  data-lightbox="recipe-image" data-title="<%= @recipe.get("title") %>">
@@ -40,12 +46,6 @@
         </div>
       </div>
   </fieldset>
-  <% if RecipeMe.currentUser: %>
-      <div class="recipe-actions">
-        <a href="#" data-remote="true" class="btn btn-primary add-comment-button glyphicon glyphicon-plus" ></a>
-      </div>
-  <% end %>
-  <div class="comment-form"></div>
   <div class="recipe-comments"></div>
   <div class="form-actions">
     <a href="#" data-remote="true" class="btn btn-default back-button"><%= I18n.t('application.form.back') %></a>

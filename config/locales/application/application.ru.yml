@@ -8,3 +8,4 @@ ru:
    form:
     save: 'Сохранить'
     back: 'Назад'
+    cancel: 'Отмена'

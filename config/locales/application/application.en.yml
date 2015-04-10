@@ -8,3 +8,4 @@ en:
     form:
       save: 'Save'
       back: 'Back'
+      cancel: 'Cancel'
