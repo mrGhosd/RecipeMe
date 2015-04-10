@@ -1,5 +1,9 @@
 en:
   recipes:
-    title: "Title:"
-    description: "Description:"
-    image: "Image:"
+    title: "Title"
+    description: "Description"
+    image: "Image"
+    category: 'Category'
+    tags: 'Tags'
+    ingridients: 'Ingridients'
+    steps: 'Steps'

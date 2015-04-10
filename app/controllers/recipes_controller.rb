@@ -53,9 +53,8 @@ class RecipesController < ApplicationController
   end
 
   def create_image
-    if params[:image].present? || params[:image][:image_id].present?
-      Image.find(params[:image][:image_id]).update(imageable_id: @recipe.id)
-      # @recipe.update_image
+    if params[:image].present? || (params[:image].present? && params[:image][:image_id].present?)
+      Image.find(params[:image][:image_id] || params[:image][:id]).update(imageable_id: @recipe.id)
     end
   end
 

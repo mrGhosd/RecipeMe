@@ -1,5 +1,9 @@
 ru:
   recipes:
-    title: "Название:"
-    description: "Описание:"
-    image: "Изображение:"
+    title: "Название"
+    description: "Описание"
+    image: "Изображение"
+    category: 'Категория'
+    tags: 'Теги'
+    ingridients: 'Ингридиенты'
+    steps: 'Шаги'

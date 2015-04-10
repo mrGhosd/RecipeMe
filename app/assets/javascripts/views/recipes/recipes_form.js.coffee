@@ -69,8 +69,11 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
       error = (response, request) ->
         errors = request.responseJSON
         $.each(errors, (key, value)->
-          $("#recipe_form input[name=\"#{key}\"]").addClass("error")
-          $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
+          $("#recipe_form input[name=\"#{key}\"], #recipe_form textarea[name=\"#{key}\"]").addClass("error")
+          if key == "description"
+            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form textarea[name=\"#{key}\"]"))
+          else
+            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
         )
       )
 
