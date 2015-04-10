@@ -7,3 +7,6 @@ en:
     tags: 'Tags'
     ingridients: 'Ingridients'
     steps: 'Steps'
+    show:
+      ingridients: 'Ingridients'
+      in: 'in'

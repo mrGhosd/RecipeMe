@@ -7,3 +7,6 @@ ru:
     tags: 'Теги'
     ingridients: 'Ингридиенты'
     steps: 'Шаги'
+    show:
+      ingridients: 'Ингридиенты'
+      in: 'в'
