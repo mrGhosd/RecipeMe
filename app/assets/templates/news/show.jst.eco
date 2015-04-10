@@ -17,7 +17,13 @@
         </div>
       </div>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-2">
+      <% if @news.get("image").name: %>
+          <a href="<%= @news.get("image").name.url %>"  data-lightbox="recipe-image" data-title="<%= @news.get("title") %>">
+            <img src="<%=  @news.get("image").name.url %>" class="recipe-image img-thumbnail"/>
+          </a>
+      <% end %>
+    </div>
   </div>
   <a href="#" date-remote="true" class="btn btn-default back-button">Back</a>
 </fieldser>
