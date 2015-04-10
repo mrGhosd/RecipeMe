@@ -1,1 +1,14 @@
 en:
+  authentication:
+    title:
+      modal: 'RecipeMe - Authentication'
+      auth: 'Sign in'
+      register: 'Sign up'
+      restore_password: 'Restore password'
+    fields:
+      email: 'Email'
+      password: 'Password'
+      password_confirmation: 'Password confirmation'
+    buttons:
+      save: 'Send'
+      cancel: 'Cancel'

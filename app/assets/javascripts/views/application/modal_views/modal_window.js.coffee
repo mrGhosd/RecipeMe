@@ -8,7 +8,6 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
     this.render()
 
   changeModalView:(event) ->
-
     chosenView = $(event.target).data("view")
     $(".modal-body .nav.nav-tabs>li").removeClass("active")
     $(event.currentTarget).addClass("active")

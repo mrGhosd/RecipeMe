@@ -2,19 +2,26 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title">Modal title</h4>
+      <h4 class="modal-title"><%= I18n.t('authentication.title.modal') %></h4>
     </div>
     <div class="modal-body">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#" data-remote="true" data-view="login">Авторизация</a></li>
-        <li><a href="#" data-remote="true" data-view="registration">Регистрация</a></li>
-        <li><a href="#" data-remote="true" data-view="recovery">Восстановление пароля</a></li>
+        <li class="sign_in active"><a href="#" data-remote="true" data-view="login"><%= I18n.t('authentication.title.auth') %></a></li>
+        <li class="sign_up"><a href="#" data-remote="true" data-view="registration"><%= I18n.t('authentication.title.register') %></a></li>
+        <li><a href="#" data-remote="true" data-view="recovery"><%= I18n.t('authentication.title.restore_password') %></a></li>
       </ul>
       <div class="row"></div>
       <div class="actions-views"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-        <button type="button" class="btn btn-primary send-data">Сохранить изменения</button>
+        <div class="omniauth-links">
+          <a href="/users/auth/facebook" class="facebook"><img src="/images/facebook-icon.png" height="30" width="30"/></a>
+          <a href="/users/auth/vkontakte" class="vkontakte" require-email="true">Vkontakte</a>
+          <a href="/users/auth/twitter" class="twitter" require-email="true"><img src="/images/Web-Twitter-alt-4-Metro-icon.png" height="30" width="30"/></a>
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><%= I18n.t('authentication.buttons.cancel') %></button>
+            <button type="button" class="btn btn-primary send-data"><%= I18n.t('authentication.buttons.save') %></button>
+        </div>
       </div>
     </div>
   </div><!-- /.modal-content -->

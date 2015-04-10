@@ -1,18 +1,18 @@
 <form class="form-horizontal" action="/users">
   <div class="form-group">
-    <label for="email" class="control-label col-md-4">Электронная почта:</label>
+    <label for="email" class="control-label col-md-4"><%= I18n.t('authentication.fields.email') %></label>
     <div class="col-md-6">
       <input type="email" class="form-control" id="user_email" name="email"/>
     </div>
   </div>
   <div class="form-group">
-    <label for="password" class="control-label col-md-4">Пароль:</label>
+    <label for="password" class="control-label col-md-4"><%= I18n.t('authentication.fields.password') %></label>
     <div class="col-md-6">
       <input type="password" class="form-control" id="user_password" name="password"/>
     </div>
   </div>
   <div class="form-group">
-    <label for="password_confirmation" class="control-label col-md-4">Повторите пароль:</label>
+    <label for="password_confirmation" class="control-label col-md-4"><%= I18n.t('authentication.fields.password_confirmation') %></label>
     <div class="col-md-6">
       <input type="password" class="form-control" id="user_password_confirmation" name="password_confirmation"/>
     </div>

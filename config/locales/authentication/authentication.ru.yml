@@ -1,1 +1,14 @@
 ru:
+  authentication:
+    title:
+      modal: 'RecipeMe - Авторизация'
+      auth: 'Войти'
+      register: 'Регистрация'
+      restore_password: 'Восстановление пароля'
+    fields:
+      email: 'Электронная почта'
+      password: 'Пароль'
+      password_confirmation: 'Повторите пароль'
+    buttons:
+      save: 'Отправить'
+      cancel: 'Отмена'

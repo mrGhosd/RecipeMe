@@ -20,6 +20,8 @@ class RecipeMe.Views.HeaderView extends Backbone.View
 
   registrationDialog: ->
     modalView = new RecipeMe.Views.ModalWindow({el: ".modal"})
+    $("#authModal .nav-tabs li").removeClass("active")
+    $("#authModal .nav-tabs li.sign_up").addClass("active")
     registration = new RecipeMe.Views.RegistrationView({el: ".actions-views"})
 
   signOut: ->

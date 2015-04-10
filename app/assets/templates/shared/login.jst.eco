@@ -1,22 +1,18 @@
 <form class="form-horizontal login-form" action="/users/sign_in">
   <fieldset>
   <div class="form-group">
-    <label for="email" class="control-label col-md-4">Электронная почта:</label>
+    <label for="email" class="control-label col-md-4"><%= I18n.t('authentication.fields.email') %></label>
     <div class="col-md-6">
       <input type="text" class="form-control" id="user_email" name="email"/>
     </div>
   </div>
   <div class="form-group">
-    <label for="password" class="control-label col-md-4">Пароль:</label>
+    <label for="password" class="control-label col-md-4"><%= I18n.t('authentication.fields.password') %></label>
     <div class="col-md-6">
       <input type="password" class="form-control" id="user_password" name="password"/>
     </div>
   </div>
   </fieldset>
-  <div class="omniauth-links">
-    <a href="/users/auth/facebook" class="facebook"><img src="/images/facebook-icon.png" height="30" width="30"/></a>
-    <a href="/users/auth/vkontakte" class="vkontakte" require-email="true">Vkontakte</a>
-    <a href="/users/auth/twitter" class="twitter" require-email="true"><img src="/images/Web-Twitter-alt-4-Metro-icon.png" height="30" width="30"/></a>
-  </div>
+
 
 </form>
