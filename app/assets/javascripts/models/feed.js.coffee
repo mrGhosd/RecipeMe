@@ -24,7 +24,6 @@ class RecipeMe.Models.Feed extends Backbone.Model
       view = new RecipeMe.Views.FeedComment({model: comment, recipe: response.recipe, icon: "add73.png"})
       response.body = view
     if response.update_entity == "Vote" && response.update_entity_for == "Comment"
-      console.log response
       comment = new RecipeMe.Models.Comment({recipe: response.recipe.id, id: response.update_id})
       comment.fetch({async: false})
       view = new RecipeMe.Views.FeedComment({model: comment, recipe: response.recipe, icon: "up_filled-32.png"})
