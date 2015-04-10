@@ -5,3 +5,6 @@ ru:
     news: "Новости"
     feedback: "Отзывы"
     updates: "Обновления"
+    followers: 'Ваши подписчики'
+    following: 'Вы подписаны'
+    last_sign_in: 'Последняя авторизация в'

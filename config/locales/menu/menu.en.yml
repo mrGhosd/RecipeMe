@@ -5,3 +5,6 @@ en:
     news: "News"
     feedback: "Feedback"
     updates: "Updates"
+    followers: 'Followers'
+    following: 'Following'
+    last_sign_in: 'Last sign in at'
