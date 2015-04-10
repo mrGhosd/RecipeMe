@@ -1,5 +1,5 @@
 <div class="step-description">
-    <textarea name="description" steps="true" class="form-control step-description"><%= @step.get("description") if @step %></textarea>
+    <textarea name="description" placeholder="<%= I18n.t('steps.text') %>" steps="true" class="form-control step-description"><%= @step.get("description") if @step %></textarea>
 </div>
 <div class="step-image">
     <div class="step-placeholder <%= "empty" if  @step.get('image') == null || @step.get('image') == undefined %>">
