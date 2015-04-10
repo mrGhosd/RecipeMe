@@ -1,0 +1,14 @@
+en:
+  user:
+    profile_header: 'Users profile'
+    edit_profile: 'Profile edit'
+    surname: 'Surname'
+    name: 'Name'
+    nickname: 'Nickname'
+    city: 'City'
+    birth: 'Date of birth'
+    recipes: 'User recipes'
+    followers: 'Followers'
+    following: 'Following'
+    follow: 'Follow'
+    unfollow: 'Unfollow'

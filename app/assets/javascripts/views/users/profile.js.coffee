@@ -34,7 +34,7 @@ class RecipeMe.Views.UserProfile extends Backbone.View
     $("#myModal").html(modal.el).modal('show')
     view = new RecipeMe.Views.EditProfile({user: @params.user})
     modal.render()
-    $("#myModal .modal-title").html("<h3>Редактировать пользователя</h3>")
+    $("#myModal .modal-title").html("<h3>#{I18n.t('user.edit_profile')}</h3>")
     $("#myModal .modal-body").html(view.el)
     view.render()
 
@@ -43,7 +43,7 @@ class RecipeMe.Views.UserProfile extends Backbone.View
       type: "POST"
       data: { id: @params.user.get("id") }
       success: (response, request) ->
-        $(event.target).text("Отписаться")
+        $(event.target).text("#{I18n.t('user.unfollow')}")
                        .removeClass("add-following")
                        .addClass("remove-following")
         Backbone.trigger("navigationMenu", response)

@@ -1,0 +1,14 @@
+ru:
+  user:
+    profile_header: 'Профиль пользователя'
+    edit_profile: 'Редактирование профиля'
+    surname: 'Фамилия'
+    name: 'Имя'
+    nickname: 'Ник'
+    city: 'Город'
+    birth: 'Дата рождения'
+    recipes: 'Рецепты пользователя'
+    followers: 'Подписчики'
+    following: 'Подписки'
+    follow: 'Подписаться'
+    unfollow: 'Отписаться'

@@ -1,38 +1,38 @@
 <div class="user_profile form-horizontal col-md-12">
   <fieldset>
     <legend>
-      <h4>Страница пользователя</h4>
+      <h4><%= I18n.t('user.profile_header') %></h4>
       <a href="#" class="btn btn-primary glyphicon glyphicon-edit btn-xs edit-profile" data-remote="true"></a>
     </legend>
   </fieldset>
   <div class="row">
     <div class="col-md-9">
       <div class="form-group">
-        <label for="surname" class="control-label col-md-3">Фамилия:</label>
+        <label for="surname" class="control-label col-md-3"><%= I18n.t('user.surname') %>:</label>
         <div class="col-md-6">
           <input type="text" value="<%= @user.get('surname') if @user %>" class="inline-input form-control" disabled="disabled"/>
         </div>
       </div>
       <div class="form-group">
-        <label for="name" class="control-label col-md-3">Имя:</label>
+        <label for="name" class="control-label col-md-3"><%= I18n.t('user.name') %>:</label>
         <div class="col-md-6">
           <input type="text" value="<%= @user.get("name")%>" class="inline-input form-control" disabled="disabled"/>
         </div>
       </div>
       <div class="form-group">
-        <label for="nickname" class="control-label col-md-3">Ник:</label>
+        <label for="nickname" class="control-label col-md-3"><%= I18n.t('user.nickname') %>:</label>
         <div class="col-md-6">
           <input type="text" value="<%= @user.get("nickname")%>" class="inline-input form-control" disabled="disabled"/>
         </div>
       </div>
       <div class="form-group">
-        <label for="city" class="control-label col-md-3">Город:</label>
+        <label for="city" class="control-label col-md-3"><%= I18n.t('user.city') %>:</label>
         <div class="col-md-6">
           <input type="text" value="<%= @user.get("city")%>" class="inline-input form-control" disabled="disabled"/>
         </div>
       </div>
       <div class="form-group">
-        <label for="date_of_birth" class="control-label col-md-3">Дата рождения:</label>
+        <label for="date_of_birth" class="control-label col-md-3"><%= I18n.t('user.birth') %>:</label>
         <div class="col-md-6">
           <input type="text" value="<%= window.appHelper.dateOfBirthFormat @user.get("date_of_birth")%>" class="inline-input form-control" disabled="disabled"/>
         </div>
@@ -43,12 +43,12 @@
       <div class="user-connections-block">
         <div class="followers">
           <a class="followers-list-link" href="/#users/<%= @user.get("id") %>/followers">
-            Подписчики: <%= @user.get("followers_list").length %>
+            <%= I18n.t('user.followers') %>: <%= @user.get("followers_list").length %>
           </a>
         </div>
         <div class="following">
           <a class="followers-list-link" href="/#users/<%= @user.get("id") %>/following">
-            Подписки <%= @user.get("following_list").length %>
+            <%= I18n.t('user.following') %> <%= @user.get("following_list").length %>
           </a>
         </div>
       </div>
@@ -56,17 +56,17 @@
   </div>
   <div class="row">
     <% if window.appHelper.collectionCheck(@user.get("followers_list"), RecipeMe.currentUser): %>
-        <a class="btn btn-default remove-following" href="#" data-remote="true">Отписаться</a>
+        <a class="btn btn-default remove-following" href="#" data-remote="true"><%= I18n.t('user.unfollow') %></a>
     <% else: %>
         <% if @user.get("id") != RecipeMe.currentUser.get("id"): %>
-            <a class="btn btn-default add-following" href="#" data-remote="true">Подписаться</a>
+            <a class="btn btn-default add-following" href="#" data-remote="true"><%= I18n.t('user.follow') %></a>
         <% end %>
     <% end %>
   </div>
   <div class="row">
     <fieldset>
       <legend>
-        <h4>Рецепты пользователя</h4>
+        <h4><%= I18n.t('user.recipes') %></h4>
         <a href="#" data-remote="true" class="btn btn-warning glyphicon glyphicon-arrow-down btn-xs toggle-user-recipes"></a>
       </legend>
         <div class="user-recipes-body"></div>
