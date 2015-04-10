@@ -4,19 +4,19 @@
     <div class="col-md-10">
       <div class="form-group">
         <div class="col-md-8">
-          <input type="text" class="form-control" name="title" placeholder="Название" value="<%= @category.get("title") if @category.get("title") %>"/>
+          <input type="text" class="form-control" name="title" placeholder="<%= I18n.t('category.title') %>" value="<%= @category.get("title") if @category.get("title") %>"/>
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-8">
-          <textarea type="text" class="form-control" name="description" placeholder="Описание"><%= @category.get("description") if @category.get("description") %></textarea>
+          <textarea type="text" class="form-control" name="description" placeholder="<%= I18n.t('category.description') %>"><%= @category.get("description") if @category.get("description") %></textarea>
         </div>
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
-        <div class="image-placeholder <%= "empty" if  @category.get('image') == null || @category.get('image') == undefined %>">
-          <% if @category.get("image"): %>
+        <div class="image-placeholder <%= "empty" if  @category.get('image').name == null || @category.get('image').name == undefined %>">
+          <% if @category.get("image").name: %>
               <img src="<%=  @category.get("image").name.url if @category.get("image").name %>" height="200" width="200" image_id="<%= @category.get("image").imageable_id if @category.get("image")  %>"/>
           <% end %>
         </div>

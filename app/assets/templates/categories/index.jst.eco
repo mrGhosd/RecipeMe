@@ -1,2 +1,2 @@
-<a href="/#categories/new" class="btn btn-primary">Новая категория</a>
+<a href="/#categories/new" class="btn btn-primary"><%= I18n.t('category.new') %></a>
 <div class="categories-list"></div>
