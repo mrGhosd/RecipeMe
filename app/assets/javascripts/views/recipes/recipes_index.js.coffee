@@ -4,18 +4,22 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
 
   events:
     'click .destroy-recipe': 'destroyRecipe'
-    'scroll': 'checkScroll'
+    'scroll window': 'checkScroll'
 
   initialize: (param)->
+    @klass = this
+    @page = 1
     @collection = param.collection
     @collection.on('reset', @render, this)
     @collection.on('add', @render, this)
-#    $(window).scroll(this.checkScroll())
+    this.on('scroll', this.checkScroll)
+    $(window).on('scroll', this.checkScroll)
 
-  render: ->
-    $(@el).html(@template())
-    @collection.each(@addRecipe)
-    this
+  checkScroll: (event) ->
+    if $(document).height() <= $(window).scrollTop() + $(window).height()
+      if $(".upload-image").length == 0
+        gif = $("<img src='/images/ajax-loader.gif' class='upload-image'/>")
+        $(".main-content").after(gif)
 
   addRecipe: (recipe) ->
     view = new RecipeMe.Views.Recipe(model: recipe)
@@ -27,5 +31,16 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
       success: ->
         $(event.target).closest("li").fadeOut('slow')
 
-  checkScroll: ->
-    console.log this.el.scrollHeight
+  uploadRecipes: (event) ->
+    gif = $("<img src='/images/ajax-loader.gif' class='upload-image'/>")
+    $(".main-content").after(gif)
+
+
+  render: ->
+    $(@el).html(@template())
+    @collection.each(@addRecipe)
+    this
+
+
+
+
