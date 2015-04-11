@@ -7,7 +7,7 @@ class NewsController < ApplicationController
   include UsersLiked
 
   def index
-    @news = News.all
+    @news = News.paginate(page: params[:page] || 1, per_page: 5)
     render json: @news.as_json(methods: :image)
   end
 
