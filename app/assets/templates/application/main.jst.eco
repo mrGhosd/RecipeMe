@@ -6,6 +6,6 @@
     <section id='main'>
     </section>
   </div>
-  <div id="footer"></div>
+  <footer class="footer"></footer>
   <div class="mask hide"></div>
 </div>
