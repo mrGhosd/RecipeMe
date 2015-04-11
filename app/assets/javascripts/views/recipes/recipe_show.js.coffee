@@ -10,6 +10,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     'mouseleave .rate-value': 'hideVotedUsersPopup'
 
   initialize: (params) ->
+    @page = 1
     if params
       @model = params.model
       @steps = @model.get("steps")
@@ -42,7 +43,14 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     @steps.each(@addStep)
     @comments.each(@addComment)
     @ingridients.each(@addIngridient)
+    window.scrollUpload.init(@page, "api/recipes/#{@model.get('id')}/comments", $("div.recipe-comments"), this.successCommentsUpload)
     this
+
+  successCommentsUpload: (response, request) ->
+    for model in response
+      comment = new RecipeMe.Models.Comment(model)
+      view = new RecipeMe.Views.Comment(model: comment)
+      $("div.recipe-comments").append(view.render().el)
 
   showVotedUsersPopup: (event) ->
     if RecipeMe.currentUser || $(".popup-view")
