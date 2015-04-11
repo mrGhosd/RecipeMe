@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   after_action :create_image, only: [:create, :update]
 
   def index
-    categories = Category.all
+    categories = Category.paginate(page: params[:page] || 1, per_page: 10)
     render json: categories.as_json(only: [:id, :title, :created_at])
   end
 
