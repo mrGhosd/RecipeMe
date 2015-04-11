@@ -4,11 +4,13 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
 
   events:
     'click .destroy-recipe': 'destroyRecipe'
+    'scroll': 'checkScroll'
 
   initialize: (param)->
     @collection = param.collection
     @collection.on('reset', @render, this)
     @collection.on('add', @render, this)
+#    $(window).scroll(this.checkScroll())
 
   render: ->
     $(@el).html(@template())
@@ -24,3 +26,6 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
     model.destroy
       success: ->
         $(event.target).closest("li").fadeOut('slow')
+
+  checkScroll: ->
+    console.log this.el.scrollHeight

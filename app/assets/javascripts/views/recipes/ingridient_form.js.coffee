@@ -2,9 +2,8 @@ class RecipeMe.Views.IngridientForm extends Backbone.View
   template: JST['recipes/ingridients_form']
   className: 'ingridient-item'
   events:
-    'focusin  .ingridient-name': 'showIngridientsPopup'
+    'click .ingridient-name':'showIngridientsPopup'
     'keydown .ingridient-name': 'showIngridientsPopup'
-    'focusout .ingridient-name': 'hideIngridientsPopup'
     'focusout input.ingridient-name': 'updateName'
     'focusout input.ingridient-size': 'updateSize'
     'click .remove-ingridient': 'removeIngridient'
@@ -29,9 +28,6 @@ class RecipeMe.Views.IngridientForm extends Backbone.View
       @model.url =  "api/recipes/#{@model.collection.recipe}/ingridients/#{@model.get("id")}"
       @model.destroy()
     $(event.target).closest(".ingridient-item").remove()
-
-  hideIngridientsPopup: (event) ->
-    $(".ingridient-popup").remove()
 
   showIngridientsPopup: (event) ->
     $(".ingridient-popup").remove()

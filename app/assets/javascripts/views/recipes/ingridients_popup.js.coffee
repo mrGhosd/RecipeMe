@@ -6,10 +6,15 @@ class RecipeMe.Views.IngridientPopup extends Backbone.View
 
   initialize: ->
 
+
   ingidientElementChose: (event) ->
+    event.preventDefault()
+    event.stopPropagation()
     value  = $(event.target).text()
-    console.log $(event.target).closest(".ingridient-popup").prev(".ingridient-name")
     $(event.target).closest(".ingridient-popup").prev(".ingridient-name").val(value)
+    $(".ingridient-popup").remove()
+
+  hideIngridientsPopup: (event) ->
     $(".ingridient-popup").remove()
 
   render: (params) ->
