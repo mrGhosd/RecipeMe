@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
   include UsersLiked
 
   def index
-    recipes = Recipe.all
+    recipes = Recipe.paginate(page: params[:page] || 1, per_page: 12)
     render json: recipes.as_json(only: [:title, :id, :user_id, :rate], methods: [:image])
   end
 
