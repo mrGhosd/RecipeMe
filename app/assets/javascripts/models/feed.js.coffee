@@ -2,9 +2,13 @@ class RecipeMe.Models.Feed extends Backbone.Model
   initialize: (params) ->
     if params.id
       @user = params.id
+      @feed = params.feed
 
   url: ->
-    if @user
+    console.log @user+ " " + @feed
+    if @user && @feed
+      return "api/users/#{@user}/feeds/#{@feed}"
+    else if @user
       return "api/users/#{@user}/feeds"
 
   parse: (response) ->
