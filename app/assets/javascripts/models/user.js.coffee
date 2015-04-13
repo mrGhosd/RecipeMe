@@ -1,5 +1,4 @@
 class RecipeMe.Models.User extends Backbone.Model
-#  urlRoot: '/api/users'
   fileAttribute: 'avatar'
 
   initialize: (options) ->

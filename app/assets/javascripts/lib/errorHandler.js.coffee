@@ -13,7 +13,7 @@ class RecipeMe.ErrorHandler
   showErrorPage: ->
     if @status == 404
       this.status404()
-    if @status == 422
+    if @status == 422 || @status == 401
       this.forbidden()
 
 

@@ -9,17 +9,23 @@ class RecipeMe.NewsController
     view.render()
 
   new: ->
-    view = new RecipeMe.Views.NewsForm()
-    $("section#main").html(view.el)
-    view.render()
+    if RecipeMe.currentUser
+      view = new RecipeMe.Views.NewsForm()
+      $("section#main").html(view.el)
+      view.render()
+    else
+      new RecipeMe.ErrorHandler().forbidden()
 
   edit: (id) ->
     news = new RecipeMe.Models.New({id: id})
     news.fetch
       success: (model) ->
-        view = new RecipeMe.Views.NewsForm({model: model})
-        $("section#main").html(view.el)
-        view.render()
+        if RecipeMe.currentUser
+          view = new RecipeMe.Views.NewsForm({model: model})
+          $("section#main").html(view.el)
+          view.render()
+        else
+          new RecipeMe.ErrorHandler().forbidden()
 
   show: (id) ->
     news = new RecipeMe.Models.New({id: id})

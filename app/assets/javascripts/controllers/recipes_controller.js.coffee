@@ -27,7 +27,7 @@ class RecipeMe.RecipesController
     recipe = new RecipeMe.Models.Recipe(id: id)
     recipe.fetch
       success: (model) ->
-        if RecipeMe.currentUser.isResourceOwner(model)
+        if RecipeMe.currentUser && RecipeMe.currentUser.isResourceOwner(model)
           view = new RecipeMe.Views.RecipesForm({model: model})
           $("section#main").html(view.el)
           view.render()

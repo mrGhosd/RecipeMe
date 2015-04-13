@@ -12,6 +12,8 @@ class RecipeMe.UsersController
         profile = new RecipeMe.Views.UserProfile({user: user, recipes: user_recipes})
         $("section#main").html(profile.el)
         profile.render()
+      error: (response, request) ->
+        new RecipeMe.ErrorHandler(response, request).showErrorPage()
 
   followers: (id) ->
     model = new RecipeMe.Models.User({id: id})
@@ -23,6 +25,8 @@ class RecipeMe.UsersController
             view = new RecipeMe.Views.UsersList({collection: collection, user: user})
             $("section#main").html(view.el)
             view.render()
+      error: (response, request) ->
+        new RecipeMe.ErrorHandler(response, request).showErrorPage()
 
   following: (id) ->
     model = new RecipeMe.Models.User({id: id})
@@ -34,6 +38,8 @@ class RecipeMe.UsersController
             view = new RecipeMe.Views.UsersList({collection: collection, user: user})
             $("section#main").html(view.el)
             view.render()
+      error: (response, request) ->
+        new RecipeMe.ErrorHandler(response, request).showErrorPage()
 
   userFeed: (id) ->
     model = new RecipeMe.Models.User({id: id})
@@ -42,8 +48,12 @@ class RecipeMe.UsersController
         feed = new RecipeMe.Collections.Feeds({user: user.id})
         feed.fetch
           success: (collection) ->
-            console.log collection
-            view = new RecipeMe.Views.FeedList({collection: collection})
-            $("section#main").html(view.el)
-            view.render()
+            if RecipeMe.currentUser && RecipeMe.currentUser.get("id") == user.get("id")
+              view = new RecipeMe.Views.FeedList({collection: collection})
+              $("section#main").html(view.el)
+              view.render()
+            else
+              new RecipeMe.ErrorHandler(response, request).showErrorPage()
+      error: (response, request) ->
+        new RecipeMe.ErrorHandler(response, request).showErrorPage()
 

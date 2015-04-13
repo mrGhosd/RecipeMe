@@ -14,8 +14,10 @@ class Ability
 
   def guest_abilities
     can :locale, User
-    can :read, :all
-    can :create, Callback
+    can [:read, :recipe_ingridients], [Recipe, Category, Ingridient, Step, Callback, News, Comment]
+    can [:read, :create], Callback
+    can [:read, :recipes], Category
+
   end
 
   def current_user_abilities
@@ -26,9 +28,9 @@ class Ability
     can [:read, :create, :update, :destroy], Step
     can [:create, :destroy, :index], Relationship
     can :create, Image
-    can :read, User
-    can [:following, :followers], User
+    can [:read, :following, :followers], User
     can [:update, :destroy], User, id: user.id
+
   end
 
   def admin_abilities
