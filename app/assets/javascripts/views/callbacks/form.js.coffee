@@ -17,9 +17,10 @@ class RecipeMe.Views.CallbackForm extends Backbone.View
     this
 
   createCallback: (event) ->
-    callbacks = @collection
     event.preventDefault()
     event.stopPropagation()
+    $(".error-text").remove()
+    callbacks = @collection
     attributes = window.appHelper.formSerialization($("#callback-form"))
     @callback.save(attributes,
       success: (response, request) ->
@@ -30,11 +31,16 @@ class RecipeMe.Views.CallbackForm extends Backbone.View
           $(".callbacks-list").prepend(view.render().el)
           $("#callback-form").remove()
       error: (response, request) ->
-        errors = request.responseJSON
-        $.each(errors, (key, value)->
-          $("#callback-form input[name=\"#{key}\"]").addClass("error")
-          $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#callback-form input[name=\"#{key}\"]"))
-        )
+        error = new RecipeMe.ErrorHandler(response, request)
+        console.log error
+        if error.status == 401
+          error.formMessageForbidden($("#callback-form"))
+        else
+          errors = request.responseJSON
+          $.each(errors, (key, value)->
+            $("#callback-form input[name=\"#{key}\"]").addClass("error")
+            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#callback-form input[name=\"#{key}\"]"))
+          )
     )
 
   removeForm: (event) ->

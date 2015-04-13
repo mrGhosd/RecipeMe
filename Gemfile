@@ -50,6 +50,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 gem 'omniauth-instagram'
+gem 'cancancan'
 
 gem "letter_opener"
 gem 'letter_opener_web'

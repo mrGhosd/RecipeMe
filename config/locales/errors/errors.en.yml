@@ -1,0 +1,3 @@
+en:
+  errors:
+    forbidden: 'You need authorize to continue'

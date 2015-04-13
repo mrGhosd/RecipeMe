@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
     self.following.order(name: :asc).limit(6)
   end
 
+  def is_admin?
+    false
+  end
+
 
   def correct_naming
     if self.nickname
