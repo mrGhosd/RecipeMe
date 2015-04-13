@@ -19,7 +19,10 @@ class Ability
   def current_user_abilities
     guest_abilities
     can :create, Recipe
-    can [:update, :destroy], Recipe, id: user.id
+    can [:update, :destroy], Recipe, user_id: @user.id
+    can [:read, :create, :destroy, :update, :recipe_ingridients], Ingridient
+    can [:read, :create, :update, :destroy], Step
+    can :create, Image
   end
 
   def admin_abilities

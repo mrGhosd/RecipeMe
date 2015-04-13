@@ -12,7 +12,4 @@ class ApplicationController < ActionController::Base
     I18n.locale = cookies[:locale] || session[:locale] || I18n.default_locale
   end
 
-  def main
-
-  end
 end

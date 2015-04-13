@@ -17,4 +17,5 @@ class RecipeMe.ErrorHandler
     )
 
   status404: ->
-
+    view = new RecipeMe.Views.NotFound()
+    $("section#main").html(view.render().el)

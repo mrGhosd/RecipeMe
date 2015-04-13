@@ -15,12 +15,15 @@ class RecipeMe.RecipesController
 
   show: (id) ->
     recipe = new RecipeMe.Models.Recipe(id: id)
-
     recipe.fetch
       success: (model)->
         view = new RecipeMe.Views.RecipeShow(model: model)
         $("section#main").html(view.el)
         view.render()
+      error: (response, request) ->
+        errorMessage = new RecipeMe.ErrorHandler(response, request)
+        if errorMessage.status == 404
+          errorMessage.status404()
 
   edit: (id) ->
     recipe = new RecipeMe.Models.Recipe(id: id)

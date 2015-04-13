@@ -64,7 +64,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     ingridients = {ingridients: @current_ingridients, callback: this.createIngridients}
     @model.createFromForm(attributes, step, ingridients,
       success = (response, request) ->
-        RecipeMe.currentUser.fetch()
+#        RecipeMe.currentUser.fetch()
         Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
       error = (response, request) ->
         errorMessage = new RecipeMe.ErrorHandler(response, request)
