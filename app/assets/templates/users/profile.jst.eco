@@ -39,7 +39,10 @@
       </div>
     </div>
     <div class="col-md-3">
-      <img height="200" width="200" src="<%= @user.get('avatar').url if @user.get('avatar') %>" class="recipe-image img-thumbnail"/>
+      <a href="<%= @user.get("avatar").url %>"  data-lightbox="recipe-image" data-title="<%= @user.get("nickname") %>">
+        <img height="200" width="200" src="<%= @user.get('avatar').url if @user.get('avatar') %>" class="recipe-image img-thumbnail"/>
+      </a>
+
       <div class="user-connections-block">
         <div class="followers">
           <a class="followers-list-link" href="/#users/<%= @user.get("id") %>/followers">
@@ -70,9 +73,15 @@
         <a href="#" data-remote="true" class="btn btn-warning glyphicon glyphicon-arrow-down btn-xs toggle-user-recipes"></a>
       </legend>
         <div class="user-recipes-body"></div>
-        <div class="user-recipes-title">
-
-        </div>
+    </fieldset>
+  </div>
+  <div class="row">
+    <fieldset>
+      <legend>
+        <h4>Комментарии пользователя</h4>
+        <a href="#" data-remote="true" class="btn btn-warning glyphicon glyphicon-arrow-down btn-xs toggle-user-comments"></a>
+      </legend>
+      <div class="user-comments-body"></div>
     </fieldset>
   </div>
 </div>

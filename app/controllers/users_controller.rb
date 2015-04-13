@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :load_user, only: [:following, :followers]
+  before_action :load_user, only: [:following, :followers, :comments, :recipes]
 
 
   def show
@@ -18,6 +18,14 @@ class UsersController < ApplicationController
   def feed
     feed = current_user.feed
     render json: feed.as_json, status: :ok
+  end
+
+  def recipes
+    render json :@user.recipes.as_json, status: :ok
+  end
+
+  def comments
+
   end
 
   def locale

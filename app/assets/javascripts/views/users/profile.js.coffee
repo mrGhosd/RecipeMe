@@ -20,14 +20,17 @@ class RecipeMe.Views.UserProfile extends Backbone.View
       $(".user-recipes-body").html("")
       button.removeClass("glyphicon-arrow-up").addClass("glyphicon-arrow-down")
     else
-      @params.recipes.each(@showRecipe)
+      collection = new RecipeMe.Collections.Recipes({url: "api/users/#{@params.user.get("id")}/recipes"})
+      collection.fetch({async: false})
+      recipes = collection.slice(0,20)
+      for recipe in recipes
+        this.showProfileRecipe(recipe)
       button.removeClass("glyphicon-arrow-down").addClass("glyphicon-arrow-up")
 
 
-  showRecipe: (recipe) ->
+  showProfileRecipe: (recipe) ->
     view = new RecipeMe.Views.ProfileRecipe({model: recipe})
-    $(".user-recipes-body").append(view.el)
-    view.render()
+    $(".user-recipes-body").append(view.render().el)
 
   showModalEdit: ->
     modal = new RecipeMe.Views.CommonModal()
