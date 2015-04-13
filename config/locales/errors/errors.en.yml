@@ -1,3 +1,5 @@
 en:
   errors:
     forbidden: "You don't have rights for this operation"
+    pages:
+      forbidden: "You don't have rights for access to this page"

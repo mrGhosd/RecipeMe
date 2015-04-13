@@ -1,0 +1,1 @@
+<%= I18n.t('errors.pages.forbidden') %>

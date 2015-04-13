@@ -32,15 +32,7 @@ class RecipeMe.Views.CallbackForm extends Backbone.View
           $("#callback-form").remove()
       error: (response, request) ->
         error = new RecipeMe.ErrorHandler(response, request)
-        console.log error
-        if error.status == 401
-          error.formMessageForbidden($("#callback-form"))
-        else
-          errors = request.responseJSON
-          $.each(errors, (key, value)->
-            $("#callback-form input[name=\"#{key}\"]").addClass("error")
-            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#callback-form input[name=\"#{key}\"]"))
-          )
+        error.showFormErrorMessage($("#callback-form"))
     )
 
   removeForm: (event) ->

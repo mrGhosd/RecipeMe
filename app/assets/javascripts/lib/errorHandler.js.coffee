@@ -1,7 +1,15 @@
 class RecipeMe.ErrorHandler
   constructor: (response, request) ->
-    @status = request.status
-    @message = request.responseJSON
+    if request
+      @status = request.status
+      @message = request.responseJSON
+
+  showFormErrorMessage: (form) ->
+    if @status == 401 || @status == 403
+      this.formMessageForbidden(form)
+    if @status == 422
+      this.formMessageError(form)
+
 
   formMessageForbidden: (form) ->
     form.after("<div class='error-text'>#{ I18n.t('errors.forbidden')}</div>")
@@ -18,4 +26,8 @@ class RecipeMe.ErrorHandler
 
   status404: ->
     view = new RecipeMe.Views.NotFound()
+    $("section#main").html(view.render().el)
+
+  forbidden: ->
+    view = new RecipeMe.Views.Forbidden()
     $("section#main").html(view.render().el)

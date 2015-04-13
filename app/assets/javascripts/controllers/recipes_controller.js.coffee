@@ -28,7 +28,10 @@ class RecipeMe.RecipesController
   edit: (id) ->
     recipe = new RecipeMe.Models.Recipe(id: id)
     recipe.fetch
-      success: (model)->
-        view = new RecipeMe.Views.RecipesForm({model: model})
-        $("section#main").html(view.el)
-        view.render()
+      success: (model) ->
+        if model.get("user_id") == RecipeMe.currentUser.get("id")
+          view = new RecipeMe.Views.RecipesForm({model: model})
+          $("section#main").html(view.el)
+          view.render()
+        else
+          new RecipeMe.ErrorHandler().forbidden()

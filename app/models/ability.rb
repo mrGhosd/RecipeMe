@@ -14,6 +14,7 @@ class Ability
 
   def guest_abilities
     can :read, :all
+    can :create, Callback
   end
 
   def current_user_abilities
@@ -22,7 +23,11 @@ class Ability
     can [:update, :destroy], Recipe, user_id: @user.id
     can [:read, :create, :destroy, :update, :recipe_ingridients], Ingridient
     can [:read, :create, :update, :destroy], Step
+    can [:create, :destroy, :index], Relationship
     can :create, Image
+    can :read, User
+    can [:following, :followers], User
+    can [:update, :destroy], User, id: user.id
   end
 
   def admin_abilities
