@@ -6,7 +6,6 @@ class RecipeMe.Collections.Recipes extends Backbone.Collection
 
   url: ->
     if @category
-      console.log @category
       "/api/categories/#{@category}/recipes"
     else
       return '/api/recipes'

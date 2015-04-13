@@ -21,11 +21,11 @@ class UsersController < ApplicationController
   end
 
   def recipes
-    render json :@user.recipes.as_json, status: :ok
+    render json: @user.recipes.as_json, status: :ok
   end
 
   def comments
-
+    render json: @user.comments.as_json(methods: :recipe), status: :ok
   end
 
   def locale

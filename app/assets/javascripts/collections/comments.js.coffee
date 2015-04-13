@@ -2,14 +2,12 @@ class RecipeMe.Collections.Comments extends Backbone.Collection
   model: RecipeMe.Models.Comment
 
   initialize: (options)->
-    if options != null
+    if options
       @recipe = options.recipe
-    else
-      @recipe = 0
+      @path = options.url
 
-  url: (option) ->
-    if option != null
+  url: ->
+    if @path
+      return @path
+    if @recipe
       return "api/recipes/#{@recipe}/comments"
-    else
-      return "api/recipes/#{@recipe}/comments/#{option.url}"
-

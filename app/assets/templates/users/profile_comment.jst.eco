@@ -1,0 +1,2 @@
+<a href="/#recipes/<%= @recipe.id %>"> <%= @recipe.title %> </a>
+<div class="comment-text"><%= @comment.get("text") %></div>

@@ -5,6 +5,7 @@ class RecipeMe.Views.UserProfile extends Backbone.View
     'click .toggle-user-recipes': 'toggleUserRecipes'
     'click .add-following': 'createFollowing'
     'click .remove-following': 'deleteFollowing'
+    'click .toggle-user-comments': 'toggleuserComments'
 
   initialize: (params)->
     @params = params
@@ -20,17 +21,26 @@ class RecipeMe.Views.UserProfile extends Backbone.View
       $(".user-recipes-body").html("")
       button.removeClass("glyphicon-arrow-up").addClass("glyphicon-arrow-down")
     else
-      collection = new RecipeMe.Collections.Recipes({url: "api/users/#{@params.user.get("id")}/recipes"})
-      collection.fetch({async: false})
-      recipes = collection.slice(0,20)
-      for recipe in recipes
-        this.showProfileRecipe(recipe)
+      this.recipesCollection()
+      button.removeClass("glyphicon-arrow-down").addClass("glyphicon-arrow-up")
+
+  toggleuserComments: (event) ->
+    button = $(event.target)
+    if button.hasClass("glyphicon-arrow-up")
+      $(".user-comments-body").html("")
+      button.removeClass("glyphicon-arrow-up").addClass("glyphicon-arrow-down")
+    else
+      this.commentsCollection()
       button.removeClass("glyphicon-arrow-down").addClass("glyphicon-arrow-up")
 
 
   showProfileRecipe: (recipe) ->
     view = new RecipeMe.Views.ProfileRecipe({model: recipe})
     $(".user-recipes-body").append(view.render().el)
+
+  showProfileComment: (comment) ->
+    view = new RecipeMe.Views.ProfileComment({model: comment})
+    $(".user-comments-body").append(view.render().el)
 
   showModalEdit: ->
     modal = new RecipeMe.Views.CommonModal()
@@ -40,6 +50,20 @@ class RecipeMe.Views.UserProfile extends Backbone.View
     $("#myModal .modal-title").html("<h3>#{I18n.t('user.edit_profile')}</h3>")
     $("#myModal .modal-body").html(view.el)
     view.render()
+
+  commentsCollection: ->
+    collection = new RecipeMe.Collections.Comments({url: "api/users/#{@params.user.get("id")}/comments"})
+    collection.fetch({async: false})
+    comments = collection.slice(0,10)
+    for comment in comments
+      this.showProfileComment(comment)
+
+  recipesCollection: ->
+    collection = new RecipeMe.Collections.Recipes({url: "api/users/#{@params.user.get("id")}/recipes"})
+    collection.fetch({async: false})
+    recipes = collection.slice(0,20)
+    for recipe in recipes
+      this.showProfileRecipe(recipe)
 
   createFollowing: (event) ->
     $.ajax "/api/relationships",
