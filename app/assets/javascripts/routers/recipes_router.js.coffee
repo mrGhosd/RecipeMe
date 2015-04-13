@@ -103,3 +103,5 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
       $("section#main").slideUp()
       $("section#main").html(view.el).slideDown()
       view.render()
+    else
+      new RecipeMe.ErrorHandler().forbidden()

@@ -9,9 +9,12 @@ class RecipeMe.RecipesController
     view.render()
 
   new: ->
-    view = new RecipeMe.Views.RecipesForm({collection: @collection})
-    $("section#main").html(view.el)
-    view.render()
+    if RecipeMe.currentUser
+      view = new RecipeMe.Views.RecipesForm({collection: @collection})
+      $("section#main").html(view.el)
+      view.render()
+    else
+      new RecipeMe.ErrorHandler().forbidden()
 
   show: (id) ->
     recipe = new RecipeMe.Models.Recipe(id: id)
