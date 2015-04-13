@@ -13,6 +13,7 @@ class Ability
   end
 
   def guest_abilities
+    can :locale, User
     can :read, :all
     can :create, Callback
   end

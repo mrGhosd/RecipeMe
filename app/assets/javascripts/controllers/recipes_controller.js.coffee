@@ -21,17 +21,18 @@ class RecipeMe.RecipesController
         $("section#main").html(view.el)
         view.render()
       error: (response, request) ->
-        errorMessage = new RecipeMe.ErrorHandler(response, request)
-        if errorMessage.status == 404
-          errorMessage.status404()
+        new RecipeMe.ErrorHandler(response, request).showErrorPage()
 
   edit: (id) ->
     recipe = new RecipeMe.Models.Recipe(id: id)
     recipe.fetch
       success: (model) ->
-        if model.get("user_id") == RecipeMe.currentUser.get("id")
+        if RecipeMe.currentUser.isResourceOwner(model)
           view = new RecipeMe.Views.RecipesForm({model: model})
           $("section#main").html(view.el)
           view.render()
         else
           new RecipeMe.ErrorHandler().forbidden()
+      error: (response, request) ->
+        new RecipeMe.ErrorHandler(response, request).showErrorPage()
+

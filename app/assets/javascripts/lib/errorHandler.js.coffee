@@ -10,6 +10,12 @@ class RecipeMe.ErrorHandler
     if @status == 422
       this.formMessageError(form)
 
+  showErrorPage: ->
+    if @status == 404
+      this.status404()
+    if @status == 422
+      this.forbidden()
+
 
   formMessageForbidden: (form) ->
     form.after("<div class='error-text'>#{ I18n.t('errors.forbidden')}</div>")
