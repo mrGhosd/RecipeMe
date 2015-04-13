@@ -67,14 +67,12 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
         RecipeMe.currentUser.fetch()
         Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
       error = (response, request) ->
+        errorMessage = new RecipeMe.ErrorHandler(response, request)
         errors = request.responseJSON
-        $.each(errors, (key, value)->
-          $("#recipe_form input[name=\"#{key}\"], #recipe_form textarea[name=\"#{key}\"]").addClass("error")
-          if key == "description"
-            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form textarea[name=\"#{key}\"]"))
-          else
-            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#recipe_form input[name=\"#{key}\"]"))
-        )
+        if errorMessage.status == 401
+        else
+          errorMessage.formMessageError($("#recipe_form"))
+
       )
 
 

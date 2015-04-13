@@ -18,6 +18,8 @@ class Ability
 
   def current_user_abilities
     guest_abilities
+    can :create, Recipe
+    can [:update, :destroy], Recipe, id: user.id
   end
 
   def admin_abilities
