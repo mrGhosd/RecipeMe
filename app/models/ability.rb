@@ -24,13 +24,15 @@ class Ability
     guest_abilities
     can :create, Recipe
     can [:update, :destroy], Recipe, user_id: @user.id
-    can [:read, :create, :destroy, :update, :recipe_ingridients], Ingridient
-    can [:read, :create, :update, :destroy], Step
+    can [:create, :destroy, :update], Ingridient
+    can [:create, :update, :destroy], Step
     can [:create, :destroy, :index], Relationship
     can :create, Image
+    can :create, Comment
+    can [:update, :destroy], Comment, user_id: @user.id
     can [:read, :following, :followers], User
-    can [:update, :destroy], User, id: user.id
-
+    can [:feeds, :update, :destroy], User, id: @user.id
+    can :read, Feed
   end
 
   def admin_abilities

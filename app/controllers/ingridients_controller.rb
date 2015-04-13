@@ -18,11 +18,12 @@ class IngridientsController < ApplicationController
     if @ingridient.present? && common_ingridient.present?
       render json: @ingridient.as_json, status: :ok
     elsif @ingridient.blank? && common_ingridient.present?
-      add_ingridient_to_recipe
+      add_ingridient_to_recipe(common_ingridient)
+      render json: @ingridient.as_json, status: :ok
     else
       @ingridient = Ingridient.new(ingridient_params)
       if @ingridient.save
-        add_ingridient_to_recipe
+        add_ingridient_to_recipe(@ingridient)
         render json: @ingridient.as_json, status: :ok
       else
         render json: @ingridient.errors.as_json, status: :unprocessible_entity
@@ -51,8 +52,8 @@ class IngridientsController < ApplicationController
 
   private
 
-  def add_ingridient_to_recipe
-    Recipe.find(params[:recipe_id]).ingridients << @ingridient
+  def add_ingridient_to_recipe(ingridient)
+    Recipe.find(params[:recipe_id]).ingridients << ingridient
   end
 
   def load_ingridient
