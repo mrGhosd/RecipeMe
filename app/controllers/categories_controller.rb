@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :load_category, except: [:index, :create]
   after_action :create_image, only: [:create, :update]
+  include Images
 
   def index
     categories = Category.paginate(page: params[:page] || 1, per_page: 10)
@@ -45,12 +46,5 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:title, :description, :image_id)
-  end
-
-  def create_image
-    if params[:image].present? && params[:image][:image_id].present?
-      Image.find(params[:image][:image_id]).update(imageable_id: @category.id)
-      @category.update_image
-    end
   end
 end

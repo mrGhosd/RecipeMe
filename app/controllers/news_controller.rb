@@ -1,10 +1,11 @@
 class NewsController < ApplicationController
   before_filter :load_news, except: [:index, :create]
-  before_action :change_object, only: [:rating, :liked_users]
+  before_action :changed_object, only: [:rating, :liked_users]
   after_action :create_image, only: [:create, :update]
   include ChangeObject
   include Rate
   include UsersLiked
+  include Images
 
   def index
     @news = News.paginate(page: params[:page] || 1, per_page: 5)
@@ -45,12 +46,5 @@ class NewsController < ApplicationController
 
   def news_params
     params.require(:news).permit(:title, :text)
-  end
-
-  def create_image
-    if params[:image].present? && params[:image][:image_id].present?
-      Image.find(params[:image][:image_id]).update(imageable_id: @news.id)
-      @news.update_image
-    end
   end
 end

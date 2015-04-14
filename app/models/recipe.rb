@@ -15,6 +15,7 @@ class Recipe < ActiveRecord::Base
 
   accepts_nested_attributes_for :steps
   include Rate
+  include ImageModel
 
   def images
     {small: self.image.url(:small),
@@ -29,12 +30,6 @@ class Recipe < ActiveRecord::Base
     self.tags = names.split(",").map do |n|
       ActsAsTaggableOn::Tag.where(name: n.strip).first_or_create!
     end
-  end
-
-  def update_image
-    current_image = self.image
-    last_image = Image.where(imageable_id: self.id).last
-    current_image == last_image ? true : self.update(image: last_image)
   end
 
   def ingridients_list
