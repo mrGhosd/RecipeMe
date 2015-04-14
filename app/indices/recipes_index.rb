@@ -3,8 +3,9 @@ ThinkingSphinx::Index.define :recipe, with: :active_record do
   #fields
   indexes title, sortable: true
   indexes description
-  indexes user.email, as: :author
+  indexes user.nickname, as: :author
   indexes tags.name, as: :tag
+  indexes ingridients.name, as: :ingridient
 
   #attributes
   has user_id, created_at, updated_at
