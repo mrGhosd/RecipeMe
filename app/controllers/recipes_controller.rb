@@ -1,8 +1,11 @@
 class RecipesController < ApplicationController
+
   after_action :create_image, only: [:create, :update]
+  before_action :changed_object, only: [:rating, :liked_users, :create_image]
   before_action :load_recipe, only: [:update, :show, :destroy, :rating, :liked_users]
-  before_action :change_object, only: [:rating, :liked_users]
+
   include ChangeObject
+  include Images
   include Rate
   include UsersLiked
 
@@ -52,11 +55,11 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:recipe_id] || params[:id])
   end
 
-  def create_image
-    if params[:image].present? || (params[:image].present? && params[:image][:image_id].present?)
-      Image.find(params[:image][:image_id] || params[:image][:id]).update(imageable_id: @recipe.id)
-    end
-  end
+  # def create_image
+  #   if params[:image].present? || (params[:image].present? && params[:image][:image_id].present?)
+  #     Image.find(params[:image][:image_id] || params[:image][:id]).update(imageable_id: @recipe.id)
+  #   end
+  # end
 
   def create_steps
       params[:steps].each_with_index do |k, v|

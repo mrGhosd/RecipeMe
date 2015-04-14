@@ -2,10 +2,10 @@ module Rate
   include ChangeObject
 
   def rating
-    if @@object.update_rating(current_user)
-      render json: {rate: @@object.rate}, status: :ok
+    if changed_object.update_rating(current_user)
+      render json: {rate: changed_object.rate}, status: :ok
     else
-      render json: @@object.errors.to_json, status: :uprocessible_entity
+      render json: changed_object.errors.to_json, status: :uprocessible_entity
     end
   end
 

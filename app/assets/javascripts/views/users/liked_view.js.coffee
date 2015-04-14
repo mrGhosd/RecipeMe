@@ -4,6 +4,7 @@ class RecipeMe.Views.LikedView extends Backbone.View
   initialize: (params) ->
     if params.user
       @model = params.user
+      console.log @model
 
     this.render()
 

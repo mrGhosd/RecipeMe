@@ -27,6 +27,7 @@ class Ability
     can [:create, :destroy, :update], Ingridient
     can [:create, :update, :destroy], Step
     can [:create, :destroy, :index], Relationship
+    can [:rating, :liked_users], [Recipe, Comment, News]
     can :create, Image
     can :create, Comment
     can [:update, :destroy], Comment, user_id: @user.id
