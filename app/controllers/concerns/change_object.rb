@@ -1,7 +1,7 @@
 module ChangeObject
 
   def changed_object
-    @object ||= @recipe || @comment || @news
+    @step || @recipe || @comment || @news
   end
 
 end

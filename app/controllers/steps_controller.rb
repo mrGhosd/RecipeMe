@@ -1,6 +1,7 @@
 class StepsController < ApplicationController
   before_action :load_recipe
   after_action :create_image, only: [:create, :update]
+  include Images
 
   def index
     render json: @recipe.steps.as_json(methods: :image)
@@ -44,10 +45,10 @@ class StepsController < ApplicationController
     params.permit(:description, :recipe_id)
   end
 
-  def create_image
-    if params[:image].present? && params[:image][:image_id].present?
-      Image.find(params[:image][:image_id]).update(imageable_id: @step.id)
-      @step.update_image
-    end
-  end
+  # def create_image
+  #   if params[:image].present? && params[:image][:image_id].present?
+  #     Image.find(params[:image][:image_id]).update(imageable_id: @step.id)
+  #     @step.update_image
+  #   end
+  # end
 end
