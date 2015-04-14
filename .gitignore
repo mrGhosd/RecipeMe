@@ -18,3 +18,5 @@ public/uploads
 .idea
 public/system/
 dump.rdb
+config/*.sphinx.conf
+db/sphinx
