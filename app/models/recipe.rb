@@ -10,6 +10,7 @@ class Recipe < ActiveRecord::Base
   has_many :ingridients, through: :recipe_ingridients
   acts_as_taggable
   after_create :update_user_recipe
+  after_create :send_message_to_author_followers
 
   validates :title, :description, presence: true
 
@@ -48,5 +49,11 @@ class Recipe < ActiveRecord::Base
   def update_user_recipe
     RecipeUpdate.create(user_id: self.user.id, update_type: 'create',
     update_entity: self.class.to_s, update_entity_for: self.class.to_s, update_id: self.id)
+  end
+
+  def send_message_to_author_followers
+    self.user.followers.each do |follower|
+      RecipesMailer.delay.create_message(follower, self.user, self)
+    end
   end
 end
