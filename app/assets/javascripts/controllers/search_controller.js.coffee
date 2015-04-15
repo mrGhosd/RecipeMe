@@ -20,8 +20,16 @@ class RecipeMe.SearchController
     $("section#main").html(view.el)
     view.render()
 
-
   filterByIngridient: (objects, filterData, type) ->
     view = new RecipeMe.Views.Filter({objects: objects, filterData: filterData})
     $("section#main").html(view.el)
     view.render()
+
+  searchByAllFields: (objects) ->
+    $("section#main").html("<ul class='search-recipes-list'></ul>")
+    for model in objects
+      recipe = new RecipeMe.Models.Recipe(model)
+      view = new RecipeMe.Views.Recipe(model: recipe)
+      $(".search-recipes-list").prepend(view.render().el)
+
+

@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     if params[:filter].present?
       search_params ={ conditions: { params[:filter] => params[:data] } }
     else
-      search_params = params[:data]
+      search_params = "#{params[:data]}*"
     end
     result = Recipe.search(search_params, star: true)
     render json: result.as_json(only: [:title, :id, :user_id, :rate], methods: [:image])

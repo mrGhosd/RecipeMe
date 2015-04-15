@@ -8,6 +8,7 @@ class RecipeMe.Views.HeaderView extends Backbone.View
     "click .sign-out-button": 'signOut'
     "click .menu-item": 'showNavigationMenu'
     "click .locale-switcher": 'toggleCurrentLocale'
+    'click .search-button': 'sendSearchRequest'
 
   initialize: ->
     this.render()
@@ -34,6 +35,11 @@ class RecipeMe.Views.HeaderView extends Backbone.View
 
   showNavigationMenu: ->
     this.toggleLeftMenu()
+
+  sendSearchRequest: (event) ->
+    text = $(".search-field").val()
+    search = new RecipeMe.SearchController(text)
+    search.search(search.searchByAllFields, text)
 
 
   toggleLeftMenu: (handler = true)->
