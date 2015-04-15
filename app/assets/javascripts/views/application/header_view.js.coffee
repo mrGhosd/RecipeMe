@@ -39,8 +39,11 @@ class RecipeMe.Views.HeaderView extends Backbone.View
 
   sendSearchRequest: (event) ->
     text = $(".search-field").val()
-    search = new RecipeMe.SearchController(text)
-    search.search(search.searchByAllFields, text)
+    if(text.length == 0)
+      window.history.back()
+    else
+      search = new RecipeMe.SearchController(text)
+      search.search(search.searchByAllFields, text)
 
 
   toggleLeftMenu: (handler = true)->
