@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def search
     if params[:filter].present?
-      search_params ={ conditions: { tag: params[:data] } }
+      search_params ={ conditions: { params[:filter] => params[:data] } }
     else
       search_params = params[:data]
     end

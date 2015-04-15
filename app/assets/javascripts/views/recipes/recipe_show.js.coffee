@@ -9,6 +9,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     'mouseover .rate-value': 'showVotedUsersPopup'
     'mouseleave .rate-value': 'hideVotedUsersPopup'
     'click .tag-data': 'searchRecipesByTag'
+    'click .ingridient-link': 'searchRecipeByIngridient'
 
   initialize: (params) ->
     @page = 1
@@ -42,17 +43,10 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
   searchRecipesByTag: (event) ->
     text = $(event.target).text()
     Backbone.history.navigate("/search/tag/#{text}", {trigger: true, repalce: true})
-#    $.ajax "/api/search/#{text}",
-#      type: "GET"
-#      data: {filter: "tag"}
-#      success: (response, request) ->
-#        console.log response
-#        console.log request
-#        view = new RecipeMe.Views.Filter({objects: response, filterData: text})
-#        $("section#main").html(view.render().el)
-#      error: (response, request) ->
-#        console.log response
-#        console.log request
+
+  searchRecipeByIngridient: (event) ->
+    text = $(event.target).closest("a.ingridient-link").find("span.name").text()
+    Backbone.history.navigate("/search/ingridient/#{text}", {trigger: true, repalce: true})
 
   render: ->
     $(@el).html(@template(recipe: @model))

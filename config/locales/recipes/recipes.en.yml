@@ -10,3 +10,6 @@ en:
     show:
       ingridients: 'Ingridients'
       in: 'in'
+      filter_page:
+        tag: 'Tag'
+        ingridient: 'Ingridient'

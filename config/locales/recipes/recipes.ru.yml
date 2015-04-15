@@ -10,3 +10,6 @@ ru:
     show:
       ingridients: 'Ингридиенты'
       in: 'в'
+      filter_page:
+        tag: ' Тэг'
+        ingridient: 'Ингридиент'

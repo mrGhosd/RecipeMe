@@ -1,6 +1,8 @@
-<div class="filter-page-title">
-  Тэг: <%= @filter %>
-</div>
-<ul class="filter-list">
+<fieldset>
+  <legend class="filter-page-title">
+    <%= I18n.t("recipes.show.filter_page.#{@viewType}") %>: <%= @filter %>
+  </legend>
+  <ul class="filter-list">
 
-</ul>
+  </ul>
+</fieldset>

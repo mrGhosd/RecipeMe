@@ -6,6 +6,7 @@ class RecipeMe.Views.Filter extends Backbone.View
       console.log params
       @objects = params.objects
       @filterData = params.filterData
+      @view = params.viewType
 
   addObject: (object) ->
     recipe = new RecipeMe.Models.Recipe(object)
@@ -13,6 +14,6 @@ class RecipeMe.Views.Filter extends Backbone.View
     $("ul.filter-list").append(view.render().el)
 
   render: ->
-    $(@el).html(@template(filter: @filterData))
+    $(@el).html(@template(filter: @filterData, viewType: @view))
     this.addObject(obj) for obj in @objects
     this

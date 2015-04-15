@@ -13,6 +13,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     'users/:id/following': 'followingList'
     'users/:id/feed': 'userFeed'
     'search/tag/:param': 'searchByTag'
+    'search/ingridient/:param': 'searchByIngridient'
     'categories': 'categoriesList'
     'categories/new': 'createCategory'
     'categories/:id/edit': 'editCategory'
@@ -79,7 +80,11 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   searchByTag: (param) ->
     search = new RecipeMe.SearchController(param, "tag")
-    search.search(search.filterByTag, param)
+    search.search(search.filterByTagOrIngridient, param, "tag")
+
+  searchByIngridient: (param) ->
+    search = new RecipeMe.SearchController(param, "ingridient")
+    search.search(search.filterByTagOrIngridient, param, "ingridient")
 
   newsList: ->
     new RecipeMe.NewsController().index()
