@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :recipes
   has_many :comments
   has_many :votes
-  has_many :authorizations
+  has_many :authorizations, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id",
            dependent: :destroy
   has_many :following, through: :relationships, source: :followed
@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
+
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
     return authorization.user if authorization
     email = auth.info.email
@@ -64,7 +65,10 @@ class User < ActiveRecord::Base
       user.create_authorization(auth)
     else
       password = Devise.friendly_token[0, 20]
-      user = User.create!(email: email, password: password, password_confirmation: password)
+      user = User.create!(email: email, password: password, password_confirmation: password,
+                          name: auth.info.first_name, surname: auth.info.last_name,
+                          remote_avatar_url: auth.extra.raw_info.photo_200_orig,
+                          city: auth.info.location)
       user.create_authorization(auth)
     end
     user
