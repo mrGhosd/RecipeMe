@@ -15,7 +15,7 @@
       <div class="modal-footer">
         <div class="omniauth-links">
           <a href="/users/auth/facebook" class="facebook"><img src="/images/facebook-icon.png" height="30" width="30"/></a>
-          <a href="/users/auth/vkontakte" class="vkontakte" require-email="true">Vkontakte</a>
+          <a href="/users/auth/vkontakte" class="vkontakte" require-email="true"><img src="/images/Vk-icon.png" height="30" width="30"/></a>
           <a href="/users/auth/twitter" class="twitter" require-email="true"><img src="/images/Web-Twitter-alt-4-Metro-icon.png" height="30" width="30"/></a>
         </div>
         <div class="modal-actions">
