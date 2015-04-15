@@ -9,6 +9,7 @@ class RecipeMe.Views.HeaderView extends Backbone.View
     "click .menu-item": 'showNavigationMenu'
     "click .locale-switcher": 'toggleCurrentLocale'
     'click .search-button': 'sendSearchRequest'
+    'keyup .search-field': 'sendSearchRequest'
 
   initialize: ->
     this.render()
