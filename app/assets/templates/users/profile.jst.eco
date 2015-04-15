@@ -78,7 +78,7 @@
   <div class="row">
     <fieldset>
       <legend>
-        <h4>Комментарии пользователя</h4>
+        <h4><%= I18n.t('user.comments') %></h4>
         <a href="#" data-remote="true" class="btn btn-warning glyphicon glyphicon-arrow-down btn-xs toggle-user-comments"></a>
       </legend>
       <div class="user-comments-body"></div>

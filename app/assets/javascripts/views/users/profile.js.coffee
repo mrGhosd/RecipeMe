@@ -53,6 +53,7 @@ class RecipeMe.Views.UserProfile extends Backbone.View
 
   commentsCollection: ->
     collection = new RecipeMe.Collections.Comments({url: "api/users/#{@params.user.get("id")}/comments"})
+
     collection.fetch({async: false})
     comments = collection.slice(0,10)
     for comment in comments

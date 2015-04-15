@@ -8,6 +8,7 @@ en:
     city: 'City'
     birth: 'Date of birth'
     recipes: 'User recipes'
+    comments: 'User comments'
     followers: 'Followers'
     following: 'Following'
     follow: 'Follow'
