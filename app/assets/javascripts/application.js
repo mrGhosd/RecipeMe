@@ -16,8 +16,6 @@
 //= require underscore
 //= require backbone
 //= require recipe_me
-//= require markitup
-//= require markitup/sets/html/set
 //= require bootstrap-sprockets
 //= require i18n
 //= require i18n/translations

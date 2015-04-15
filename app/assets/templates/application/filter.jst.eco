@@ -1,0 +1,6 @@
+<div class="filter-page-title">
+  Тэг: <%= @filter %>
+</div>
+<ul class="filter-list">
+
+</ul>

@@ -25,6 +25,33 @@
     }
   }
 }
+.filter-list{
+  list-style: none;
+  display: inline-block;
+  li{
+    border: 1px solid #ddd;
+    padding: 17px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    float: left;
+  }
+  .recipe-list-item{
+    position: relative;
+    .title{
+      text-align: center;
+    }
+    &:hover{
+      .recipe-item-actions {
+        top: 0px;
+        margin-top: 10px;
+        margin-left: 15px;
+        position: absolute;
+        display: block !important;
+        visibility: visible !important;
+      }
+    }
+  }
+}
 .description{
   img{
     height: 200px;

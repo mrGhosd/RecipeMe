@@ -12,7 +12,19 @@ class ApplicationController < ActionController::Base
     end
     render nothing: true, status: status
   end
-  authorize_resource
+  authorize_resource if: lambda{ |controller| controller.controller_name != "application" }
+
+  def search
+    if params[:filter].present?
+      search_params ={ conditions: { tag: params[:data] } }
+    else
+      search_params = params[:data]
+    end
+    result = Recipe.search(search_params, star: true)
+    render json: result.as_json(only: [:title, :id, :user_id, :rate], methods: [:image])
+  end
+
+
 
   def set_locale
     I18n.locale = cookies[:locale] || session[:locale] || I18n.default_locale

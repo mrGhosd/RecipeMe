@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   scope :api do
+    get "/search/:data", to: "application#search"
     resources :images, only: :create
     resources :relationships, only: [:create, :destroy]
     resources :users do

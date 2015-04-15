@@ -28,7 +28,6 @@ gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-gem "markitup-rails"
 gem "devise"
 gem 'redis'
 gem 'acts-as-taggable-on'
