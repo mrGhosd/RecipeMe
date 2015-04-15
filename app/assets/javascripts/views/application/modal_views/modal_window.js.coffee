@@ -3,6 +3,8 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
   events:
     "click .modal-body .nav.nav-tabs>li": "changeModalView"
     "click .send-data": "sendFormData"
+    'click a.oauth-link': 'omniauthLogin'
+
 
   initialize: ->
     this.render()
@@ -17,6 +19,20 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
       view = new RecipeMe.Views.RegistrationView({el: ".actions-views"})
     else if chosenView == "recovery"
       view = new RecipeMe.Views.PasswordRecoveryView({el: ".actions-views"})
+
+  omniauthLogin: (event) ->
+    event.preventDefault()
+    event.stopPropagation()
+    link = $(event.target).parent()
+    if link.attr("require-email") != undefined
+      modal = new RecipeMe.Views.CommonModal()
+      emailView = new RecipeMe.Views.AdditionalEmail({url: "#{link.attr('href')}"})
+      $("#myModal").html($(modal.render().el).modal('show'))
+      $("#common-modal").removeClass("modal-lg")
+      $("#common-modal .modal-body").html(emailView.render().el)
+      $("#common-modal").modal('show')
+    else
+      window.location.href = link.attr("href")
 
   sendFormData: ->
     form = $("#authModal .actions-views").find("form")

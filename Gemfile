@@ -49,6 +49,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 gem 'omniauth-instagram'
+gem 'instagram'
 gem 'cancancan'
 
 gem "letter_opener"

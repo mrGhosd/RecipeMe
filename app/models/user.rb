@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter, :vkontakte]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
+         omniauth_providers: [:facebook, :twitter, :vkontakte, :instagram]
   mount_uploader :avatar, AvatarUploader
   has_many :recipes
   has_many :comments
@@ -56,7 +57,7 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-
+    binding.pry
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
     return authorization.user if authorization
     email = auth.info.email
@@ -65,6 +66,10 @@ class User < ActiveRecord::Base
       user.create_authorization(auth)
     else
       password = Devise.friendly_token[0, 20]
+      user_params = {email: email, password: password, password_confirmation: password,
+                     name: auth.info.first_name, surname: auth.info.last_name,
+                     city: auth.info.location}
+      user_params.merge({remote_avatar_url: auth.extra.raw_info.photo_200_orig}) if auth.extra.raw_info.present?
       user = User.create!(email: email, password: password, password_confirmation: password,
                           name: auth.info.first_name, surname: auth.info.last_name,
                           remote_avatar_url: auth.extra.raw_info.photo_200_orig,
