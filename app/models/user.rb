@@ -56,8 +56,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.from_omniauth(auth)
-    binding.pry
+  def self.from_omniauth(auth, instagram: false)
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
     return authorization.user if authorization
     email = auth.info.email
@@ -65,15 +64,17 @@ class User < ActiveRecord::Base
     if user
       user.create_authorization(auth)
     else
+      if instagram
+        auth.extra.raw_info = {photo_200_orig: auth.info.image}
+        nickname = {nickname: auth.info.nickname}
+      end
       password = Devise.friendly_token[0, 20]
       user_params = {email: email, password: password, password_confirmation: password,
                      name: auth.info.first_name, surname: auth.info.last_name,
                      city: auth.info.location}
-      user_params.merge({remote_avatar_url: auth.extra.raw_info.photo_200_orig}) if auth.extra.raw_info.present?
-      user = User.create!(email: email, password: password, password_confirmation: password,
-                          name: auth.info.first_name, surname: auth.info.last_name,
-                          remote_avatar_url: auth.extra.raw_info.photo_200_orig,
-                          city: auth.info.location)
+      user_params = user_params.merge({remote_avatar_url: auth.extra.raw_info.photo_200_orig}) if auth.extra.raw_info.present?
+      user_params = user_params.merge({nickname: nickname}) if instagram
+      user = User.create!(user_params)
       user.create_authorization(auth)
     end
     user

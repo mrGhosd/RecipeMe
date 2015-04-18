@@ -1,5 +1,8 @@
-<h4>Введите, пожалуйста, свой электронный адрес:</h4>
-<form class='additional-emal form-horizaontal'>
-  <input type='text' class='form-control additional-email' placeholder='Emal:' />
-  <input type="submit" class="submit-twitter-email btn btn-success" value="send" />
+<form class='additional-emal form-horizontal'>
+  <div class="form-group">
+    <div class="col-md-12">
+        <input type='text' class='form-control additional-email' placeholder='Emal:' />
+    </div>
+  </div>
+  <input type="submit" class="submit-twitter-email btn btn-success" value="<%= I18n.t('application.additional_email.button') %>" />
 </form>

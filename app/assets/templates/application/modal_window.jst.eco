@@ -14,9 +14,9 @@
       <div class="actions-views"></div>
       <div class="modal-footer">
         <div class="omniauth-links">
-          <a href="/users/auth/facebook" data-remote="true" class="facebook oauth-link"><img src="/images/facebook-icon.png" height="30" width="30"/></a>
-          <a href="/users/auth/vkontakte" data-remote="true" class="vkontakte oauth-link" ><img src="/images/Vk-icon.png" height="30" width="30"/></a>
-          <a href="/users/auth/twitter" data-remote="true" class="twitter oauth-link" require-email="true"><img src="/images/Web-Twitter-alt-4-Metro-icon.png" height="30" width="30"/></a>
+          <a href="/users/auth/facebook" data-remote="true" class="facebook oauth-link"><img src="/images/facebook24.png" height="30" width="30"/></a>
+          <a href="/users/auth/vkontakte" data-remote="true" class="vkontakte oauth-link" ><img src="/images/b.png" height="30" width="30"/></a>
+          <a href="/users/auth/twitter" data-remote="true" class="twitter oauth-link" require-email="true"><img src="/images/twitter2.png" height="30" width="30"/></a>
           <a href="/users/auth/instagram" data-remote="true" class="instagram oauth-link" require-email="true"><img src="/images/instagram12.png" height="30" width="30"/></a>
         </div>
         <div class="modal-actions">

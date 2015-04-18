@@ -29,6 +29,7 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
       emailView = new RecipeMe.Views.AdditionalEmail({url: "#{link.attr('href')}"})
       $("#myModal").html($(modal.render().el).modal('show'))
       $("#common-modal").removeClass("modal-lg")
+      $("#common-modal .modal-title").html("#{I18n.t('application.additional_email.title')}")
       $("#common-modal .modal-body").html(emailView.render().el)
       $("#common-modal").modal('show')
     else

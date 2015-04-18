@@ -11,7 +11,8 @@ class RecipeMe.Views.AdditionalEmail extends Backbone.View
     event.preventDefault()
     event.stopPropagation()
     email = $(".additional-email").val()
-    window.location.href = @url+"?email=#{email}"
+    window.location.assign(@url+"?email=#{email}")
+
 
   render: ->
     $(@el).html(@template())
