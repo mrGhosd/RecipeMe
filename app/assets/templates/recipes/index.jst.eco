@@ -2,6 +2,12 @@
 <div class="recipes_manage">
   <a href="/#recipes/new" class="btn btn-info glyphicon glyphicon-plus add-recipe"></a>
 </div>
+<div class="recipe-filters">
+  <a href="#" data-remote="true" class="recipe-filter" filter="rate" order="desc">Рейтинг</a>
+  <a href="#" data-remote="true" class="recipe-filter" filter="comments" order="desc" count="true">Комментарии</a>
+  <a href="#" data-remote="true" class="recipe-filter" filter="steps" order="desc" count="true">Шаги</a>
+  <a href="#" data-remote="true" class="recipe-filter" filter="ingridients" order="desc" count="true">Ингридиенты</a>
+</div>
 <% end %>
 <ul class="recipes_list">
 </ul>

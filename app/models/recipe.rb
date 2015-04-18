@@ -27,6 +27,28 @@ class Recipe < ActiveRecord::Base
     self.tags.map(&:name).join(", ")
   end
 
+  def self.filter(params)
+    if params[:count].present?
+
+    else
+      attribute = params[:filter_attr] || "rate"
+      order = params[:filter_ord] || "desc"
+      self.order(attribute => order)
+    end
+  end
+
+  def steps_count
+    self.steps.count
+  end
+
+  def ingridients_count
+    self.ingridients.count
+  end
+
+  def comments_count
+    self.comments.count
+  end
+
   def tag_list=(names)
     self.tags = names.split(",").map do |n|
       ActsAsTaggableOn::Tag.where(name: n.strip).first_or_create!

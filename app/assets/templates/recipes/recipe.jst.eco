@@ -14,7 +14,7 @@
       </div>
       <div class="recipe-info">
         <p class="info-item glyphicon glyphicon-heart"><span><%= @recipe.get("rate") %></span></p>
-        <p class="info-item"></p>
+        <p class="info-item glyphicon glyphicon-comment"><span><%= @recipe.get("comments_count") %></span></p>
         <p class="info-item"></p>
       </div>
     </div>
