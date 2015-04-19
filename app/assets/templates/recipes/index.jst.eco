@@ -3,10 +3,10 @@
   <a href="/#recipes/new" class="btn btn-info glyphicon glyphicon-plus add-recipe"></a>
 </div>
 <div class="recipe-filters">
-  <a href="#" data-remote="true" class="recipe-filter" filter="rate" order="desc">Рейтинг</a>
-  <a href="#" data-remote="true" class="recipe-filter" filter="comments_count" order="desc" >Комментарии</a>
-  <a href="#" data-remote="true" class="recipe-filter" filter="steps_count" order="desc" >Шаги</a>
-  <a href="#" data-remote="true" class="recipe-filter" filter="recipe_ingridients_count" order="desc" >Ингридиенты</a>
+  <a href="#" data-remote="true" class="btn btn-default btn-success recipe-filter rate" filter="rate" order="desc" active="true" ></a>
+  <a href="#" data-remote="true" class="btn btn-default recipe-filter comments" filter="comments_count" order="asc" ></a>
+  <a href="#" data-remote="true" class="btn btn-default recipe-filter steps" filter="steps_count" order="asc" ></a>
+  <a href="#" data-remote="true" class="btn btn-default recipe-filter ingridients" filter="recipe_ingridients_count" order="asc" ></a>
 </div>
 <% end %>
 <ul class="recipes_list">

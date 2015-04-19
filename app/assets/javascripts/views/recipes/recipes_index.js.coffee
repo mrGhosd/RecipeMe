@@ -23,16 +23,28 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
       $("ul.recipes_list").append(view.render().el)
 
   filterRecipes: (event) ->
-    @filter_attr = $(event.target).attr("filter")
-    @filter_ord = $(event.target).attr("order")
-    @filter_count = $(event.target).attr("count")
-    if $(event.target).attr("order") == "desc"
-      ord_value = "asc"
+    if($(event.target).attr("active"))
+
     else
-      ord_value = "desc"
-    $(event.target).attr("order", ord_value)
+      $(".recipe-filter").removeClass('btn-success btn-danger')
+      $(".recipe-filter").removeAttr('active')
+      $(event.target).attr("active", true)
+
+    this.setFilterValues(event)
     console.log @filter_attr + " " + @filter_ord + " " + @filter_count
     this.loadRecipesCollection(this.showRecipesCollection)
+
+  setFilterValues: (event) ->
+    @filter_attr = $(event.target).attr("filter")
+    if $(event.target).attr("order") == "desc"
+      ord_value = "asc"
+      $(event.target).removeClass('btn-success').addClass('btn-danger')
+
+    else
+      ord_value = "desc"
+      $(event.target).removeClass('btn-danger').addClass('btn-success')
+    @filter_ord = ord_value
+    $(event.target).attr("order", ord_value)
 
 
   showRecipesCollection: (response, request) ->
@@ -54,8 +66,6 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
       data: {filter_attr: @filter_attr, filter_order: @filter_ord, filter_count: @filter_count}
       success: (response, request) ->
         callback(response, request)
-#        recipes = new RecipeMe.Collections.Recipes(response)
-#        recipes.each(@addRecipe)
 
   destroyRecipe: (event)->
     model = @collection.get(id: $(event.target).data("recipeId"))

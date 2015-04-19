@@ -148,3 +148,32 @@
     }
   }
 }
+.recipe-filters{
+  margin-bottom: 10px;
+  margin-top:15px;
+  margin-right: 10px;
+  .recipe-filter{
+    height: 40px;
+    min-width: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    &.rate{
+      background-image: url("/images/mark1.png");
+    }
+    &[active='true'][order='desc']{
+      background-image: url("/images/arrow-down1.png");
+    }
+    &[active='true'][order='asc']{
+      background-image: url("/images/arrow-up.png");
+    }
+    &.comments{
+      background-image: url("/images/comment43.png");
+    }
+    &.steps{
+      background-image: url("/images/first1.png");
+    }
+    &.ingridients{
+      background-image: url("/images/spa22.png");
+    }
+  }
+}
