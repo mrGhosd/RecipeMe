@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def recipes
-    render json: @user.recipes.as_json, status: :ok
+    render json: @user.recipes.as_json(methods: :image), status: :ok
   end
 
   def comments

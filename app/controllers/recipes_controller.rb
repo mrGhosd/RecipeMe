@@ -11,7 +11,7 @@ class RecipesController < ApplicationController
 
   def index
     recipes = Recipe.filter(params).paginate(page: params[:page] || 1, per_page: 12)
-    json_params = {only: [:title, :id, :user_id, :rate], methods: [:image, :comments_count, :ingridients_count, :steps_count]}
+    json_params = {only: [:title, :id, :user_id, :rate], methods: [:image, :comments_count]}
     render json: recipes.as_json(json_params)
   end
 

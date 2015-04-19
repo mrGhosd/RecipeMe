@@ -172,7 +172,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     @current_ingridients.each(@renderRecipeIngridient)
     this
     $(".recipe-tags").tagsinput()
-    $(".markItUp").markItUp(window.myHtmlSettings)
 
   fileUploadAccept: (event) ->
     $("#recipe_form .recipe-image").val()

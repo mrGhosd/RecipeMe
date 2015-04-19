@@ -31,6 +31,7 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
     else
       ord_value = "desc"
     $(event.target).attr("order", ord_value)
+    this.loadRecipesCollection()
     console.log @filter_attr + " " + @filter_ord + " " + @filter_count
 
   addRecipe: (recipe) ->

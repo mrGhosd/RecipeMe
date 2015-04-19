@@ -40,8 +40,8 @@
           <div class="comment-form"></div>
         </div>
         <div class="col-md-3">
-          <a href="<%= @recipe.get("image").name.url %>"  data-lightbox="recipe-image" data-title="<%= @recipe.get("title") %>">
-            <img src="<%=  @recipe.get("image").name.url %>" class="recipe-image img-thumbnail"/>
+          <a href="<%= @recipe.get("image").name.url if @recipe.get("image") %>"  data-lightbox="recipe-image" data-title="<%= @recipe.get("title") %>">
+            <img src="<%=  @recipe.get("image").name.url if @recipe.get("image") %>" class="recipe-image img-thumbnail"/>
           </a>
         </div>
       </div>

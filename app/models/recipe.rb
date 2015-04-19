@@ -10,13 +10,15 @@ class Recipe < ActiveRecord::Base
   has_many :ingridients, through: :recipe_ingridients
   acts_as_taggable
   after_create :update_user_recipe
-  after_create :send_message_to_author_followers
+  after_create :send_message_to_author_followers unless Rails.env == "development"
 
   validates :title, :description, presence: true
 
   accepts_nested_attributes_for :steps
   include Rate
   include ImageModel
+
+  # attr_accessor :comments_count
 
   def images
     {small: self.image.url(:small),
@@ -28,8 +30,8 @@ class Recipe < ActiveRecord::Base
   end
 
   def self.filter(params)
-    if params[:count].present?
-
+    if params[:filter_count].present?
+      eval("#{params[:filter_attr]}_filter('#{params[:filter_order]}')")
     else
       attribute = params[:filter_attr] || "rate"
       order = params[:filter_ord] || "desc"
@@ -37,17 +39,9 @@ class Recipe < ActiveRecord::Base
     end
   end
 
-  def steps_count
-    self.steps.count
-  end
-
-  def ingridients_count
-    self.ingridients.count
-  end
-
-  def comments_count
-    self.comments.count
-  end
+  # def comments_count
+  #   self.comments.count
+  # end
 
   def tag_list=(names)
     self.tags = names.split(",").map do |n|
@@ -77,5 +71,25 @@ class Recipe < ActiveRecord::Base
     self.user.followers.each do |follower|
       RecipesMailer.delay.create_message(follower, self.user, self)
     end
+  end
+
+  private
+
+  def self.comments_filter(order)
+    self.all.sort! do |a, b|
+      if order.eql?("desc")
+        a.comments.count <=> b.comments.count
+      else
+        b.comments.count <=> a.comments.count
+      end
+    end
+  end
+
+  def self.ingridients_filter(order)
+
+  end
+
+  def self.steps_filter(order)
+
   end
 end
