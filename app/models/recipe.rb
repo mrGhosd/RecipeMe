@@ -28,13 +28,9 @@ class Recipe < ActiveRecord::Base
   end
 
   def self.filter(params)
-    if params[:filter_count].present?
-      eval("#{params[:filter_attr]}_filter('#{params[:filter_order]}')")
-    else
-      attribute = params[:filter_attr] || "rate"
-      order = params[:filter_order] || "desc"
-      self.order(attribute => order)
-    end
+    attribute = params[:filter_attr] || "rate"
+    order = params[:filter_order] || "desc"
+    self.order(attribute => order)
   end
 
   def tag_list=(names)
@@ -65,25 +61,5 @@ class Recipe < ActiveRecord::Base
     self.user.followers.each do |follower|
       RecipesMailer.delay.create_message(follower, self.user, self)
     end
-  end
-
-  private
-
-  def self.comments_filter(order)
-    self.all.sort! do |a, b|
-      if order.eql?("desc")
-        a.comments.count <=> b.comments.count
-      else
-        b.comments.count <=> a.comments.count
-      end
-    end
-  end
-
-  def self.ingridients_filter(order)
-
-  end
-
-  def self.steps_filter(order)
-
   end
 end
