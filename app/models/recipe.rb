@@ -18,8 +18,6 @@ class Recipe < ActiveRecord::Base
   include Rate
   include ImageModel
 
-  # attr_accessor :comments_count
-
   def images
     {small: self.image.url(:small),
     normal: self.image.url(:normal)}
@@ -34,14 +32,10 @@ class Recipe < ActiveRecord::Base
       eval("#{params[:filter_attr]}_filter('#{params[:filter_order]}')")
     else
       attribute = params[:filter_attr] || "rate"
-      order = params[:filter_ord] || "desc"
+      order = params[:filter_order] || "desc"
       self.order(attribute => order)
     end
   end
-
-  # def comments_count
-  #   self.comments.count
-  # end
 
   def tag_list=(names)
     self.tags = names.split(",").map do |n|

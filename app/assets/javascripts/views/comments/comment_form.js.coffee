@@ -6,7 +6,6 @@ class RecipeMe.Views.CommentForm extends Backbone.View
 
   initialize: ->
     this.render()
-    $(".markItUp").markItUp(myHtmlSettings)
 
   commentAction: (event)->
     event.preventDefault()
@@ -49,5 +48,4 @@ class RecipeMe.Views.CommentForm extends Backbone.View
 
   render: ->
     $(@el).html(@template(options: @model))
-    $(".markItUp").markItUp(myHtmlSettings)
     this

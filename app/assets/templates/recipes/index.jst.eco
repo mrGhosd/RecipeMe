@@ -4,9 +4,9 @@
 </div>
 <div class="recipe-filters">
   <a href="#" data-remote="true" class="recipe-filter" filter="rate" order="desc">Рейтинг</a>
-  <a href="#" data-remote="true" class="recipe-filter" filter="comments" order="desc" count="true">Комментарии</a>
-  <a href="#" data-remote="true" class="recipe-filter" filter="steps" order="desc" count="true">Шаги</a>
-  <a href="#" data-remote="true" class="recipe-filter" filter="ingridients" order="desc" count="true">Ингридиенты</a>
+  <a href="#" data-remote="true" class="recipe-filter" filter="comments_count" order="desc" >Комментарии</a>
+  <a href="#" data-remote="true" class="recipe-filter" filter="steps_count" order="desc" >Шаги</a>
+  <a href="#" data-remote="true" class="recipe-filter" filter="recipe_ingridients_count" order="desc" >Ингридиенты</a>
 </div>
 <% end %>
 <ul class="recipes_list">

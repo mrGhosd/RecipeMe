@@ -31,21 +31,31 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
     else
       ord_value = "desc"
     $(event.target).attr("order", ord_value)
-    this.loadRecipesCollection()
     console.log @filter_attr + " " + @filter_ord + " " + @filter_count
+    this.loadRecipesCollection(this.showRecipesCollection)
+
+
+  showRecipesCollection: (response, request) ->
+    for model in response
+      recipe = new RecipeMe.Models.Recipe(model)
+      view = new RecipeMe.Views.Recipe(model: recipe)
+      $("ul.recipes_list").append(view.render().el)
+
 
   addRecipe: (recipe) ->
     view = new RecipeMe.Views.Recipe(model: recipe)
     $("ul.recipes_list").append(view.render().el)
 
-  loadRecipesCollection: ->
+  loadRecipesCollection: (callback) ->
+    $("ul.recipes_list").html("")
     recipes = @collection
     $.ajax "api/recipes",
       type: "GET"
       data: {filter_attr: @filter_attr, filter_order: @filter_ord, filter_count: @filter_count}
       success: (response, request) ->
-        recipes = new RecipeMe.Collections.Recipes(response)
-        recipes.each(@addRecipe)
+        callback(response, request)
+#        recipes = new RecipeMe.Collections.Recipes(response)
+#        recipes.each(@addRecipe)
 
   destroyRecipe: (event)->
     model = @collection.get(id: $(event.target).data("recipeId"))
