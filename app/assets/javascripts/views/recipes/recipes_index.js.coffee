@@ -11,7 +11,7 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
     @filter_attr = "rate"
     @filter_ord = "desc"
     @filter_count = null
-    @listenTo(Backbone, "recipe", @updateRate)
+    @listenTo(Backbone, "Recipe", @updateRate)
     @collection = param.collection
     @collection.on('reset', @render, this)
     @collection.on('change', @render, this)
@@ -29,8 +29,11 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
       model.set({rate: data.obj.rate})
     if data.action == "attributes-change"
       model.set(data.obj)
-      console.log model
-      console.log data
+    if data.action == "image"
+      model.set({image: data.image})
+
+    console.log model
+    console.log data
 
   filterRecipes: (event) ->
     if($(event.target).attr("active"))

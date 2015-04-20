@@ -4,7 +4,8 @@ class RecipesController < ApplicationController
   before_action :changed_object, only: [:rating, :liked_users, :create_image]
   before_action :load_recipe, only: [:update, :show, :destroy, :rating, :liked_users]
   after_action :send_rate_message, only: [:rating]
-  after_action :send_update_recipe_message, only: :update
+  after_action :send_update_recipe_message, only: [:update]
+  after_action :send_image_message, only: :create_image
 
   include ChangeObject
   include Images
@@ -51,7 +52,7 @@ class RecipesController < ApplicationController
   end
 
   def send_rate_message
-    msg = { resource: 'recipe',
+    msg = { resource: 'Recipe',
             action: 'rate',
             id: changed_object.id,
             obj: changed_object }
@@ -60,10 +61,12 @@ class RecipesController < ApplicationController
   end
 
   def send_update_recipe_message
-    msg = { resource: 'recipe',
+    msg = { resource: 'Recipe',
             action: 'attributes-change',
-            id: @recipe.id,
-            obj: @recipe }
+            id: changed_object.id,
+            obj: changed_object,
+            image: changed_object.image
+    }
 
     $redis.publish 'rt-change', msg.to_json
   end
@@ -76,12 +79,6 @@ class RecipesController < ApplicationController
   def load_recipe
     @recipe = Recipe.find(params[:recipe_id] || params[:id])
   end
-
-  # def create_image
-  #   if params[:image].present? || (params[:image].present? && params[:image][:image_id].present?)
-  #     Image.find(params[:image][:image_id] || params[:image][:id]).update(imageable_id: @recipe.id)
-  #   end
-  # end
 
   def create_steps
       params[:steps].each_with_index do |k, v|
