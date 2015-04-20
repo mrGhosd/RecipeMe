@@ -6,6 +6,7 @@ window.RecipeMe =
   initialize: ->
     @recipes = new RecipeMe.Routers.Recipes
     Backbone.history.start()
+    this.realtime.connect()
 
 $(document).ready ->
   RecipeMe.initialize()

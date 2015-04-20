@@ -11,8 +11,10 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
     @filter_attr = "rate"
     @filter_ord = "desc"
     @filter_count = null
+    @listenTo(Backbone, "recipe", @updateRate)
     @collection = param.collection
     @collection.on('reset', @render, this)
+    @collection.on('change', @render, this)
     @collection.on('add', @render, this)
 
   successRecipesUpload: (response, request) ->
@@ -20,6 +22,13 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
       recipe = new RecipeMe.Models.Recipe(model)
       view = new RecipeMe.Views.Recipe(model: recipe)
       $("ul.recipes_list").append(view.render().el)
+
+  updateRate: (data) ->
+    if data.action == "rate"
+      model = @collection.get(data.id)
+      model.set({rate: data.obj.rate})
+      console.log model
+      console.log data
 
   filterRecipes: (event) ->
     if($(event.target).attr("active"))

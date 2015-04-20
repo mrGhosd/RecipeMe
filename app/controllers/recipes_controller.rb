@@ -3,6 +3,7 @@ class RecipesController < ApplicationController
   after_action :create_image, only: [:create, :update]
   before_action :changed_object, only: [:rating, :liked_users, :create_image]
   before_action :load_recipe, only: [:update, :show, :destroy, :rating, :liked_users]
+  after_action :send_rate_message, only: [:rating]
 
   include ChangeObject
   include Images
@@ -46,6 +47,15 @@ class RecipesController < ApplicationController
     else
       render json: { success: false}, status: :forbidden
     end
+  end
+
+  def send_rate_message
+    msg = { resource: 'recipe',
+            action: 'rate',
+            id: changed_object.id,
+            obj: changed_object }
+
+    $redis.publish 'rt-change', msg.to_json
   end
 
   private

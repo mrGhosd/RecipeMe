@@ -1,10 +1,11 @@
-window.app.realtime = {
+window.RecipeMe.realtime = {
     connect : function(){
-        window.app.socket = io.connect("http://0.0.0.0:5001");
+        window.RecipeMe.socket = io.connect("http://0.0.0.0:5001");
 
-        window.app.socket.on("rt-change", function(message){
+        window.RecipeMe.socket.on("rt-change", function(message){
             // publish the change on the client side, the channel == the resource
-            window.app.trigger(message.resource, message);
+            console.log(message.resource, message);
+            Backbone.trigger(message.resource, message);
         });
     }
 }
