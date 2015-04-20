@@ -4,6 +4,8 @@ class RecipeMe.Views.Recipe extends Backbone.View
   tagName: 'li'
   className: 'recipe-field'
   tagClass: 'col-md-4'
+  events:
+    'click .destroy-recipe':'recipeDestroy'
 
   initialize: ->
     this.render()
@@ -11,3 +13,9 @@ class RecipeMe.Views.Recipe extends Backbone.View
   render: ->
     $(@el).html(@template(recipe: @model))
     this
+
+
+  recipeDestroy: (event) ->
+    @model.destroy
+      success: ->
+        $(event.target).closest("li").fadeOut('slow')

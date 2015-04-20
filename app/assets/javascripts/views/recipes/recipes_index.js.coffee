@@ -3,7 +3,6 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
   template: JST['recipes/index']
 
   events:
-    'click .destroy-recipe': 'destroyRecipe'
     'scroll window': 'checkScroll'
     'click .recipe-filter': 'filterRecipes'
 
@@ -66,12 +65,6 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
       data: {filter_attr: @filter_attr, filter_order: @filter_ord, filter_count: @filter_count}
       success: (response, request) ->
         callback(response, request)
-
-  destroyRecipe: (event)->
-    model = @collection.get(id: $(event.target).data("recipeId"))
-    model.destroy
-      success: ->
-        $(event.target).closest("li").fadeOut('slow')
 
 
   render: ->
