@@ -24,9 +24,11 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
       $("ul.recipes_list").append(view.render().el)
 
   updateRate: (data) ->
+    model = @collection.get(data.id)
     if data.action == "rate"
-      model = @collection.get(data.id)
       model.set({rate: data.obj.rate})
+    if data.action == "attributes-change"
+      model.set(data.obj)
       console.log model
       console.log data
 

@@ -4,7 +4,10 @@ window.RecipeMe.realtime = {
 
         window.RecipeMe.socket.on("rt-change", function(message){
             // publish the change on the client side, the channel == the resource
-            console.log(message.resource, message);
+            for(var key in message.obj){
+                message.obj[key] = decodeURIComponent(escape(message.obj[key]));
+            }
+            console.log(message);
             Backbone.trigger(message.resource, message);
         });
     }

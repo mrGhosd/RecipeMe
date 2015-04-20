@@ -6,8 +6,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     'click .back-button': 'returnToList'
     'click .add-comment-button': 'showCommentForm'
     'click .rate-icon': 'changeRate'
-    'mouseover .rate-value': 'showVotedUsersPopup'
-    'mouseleave .rate-value': 'hideVotedUsersPopup'
     'click .tag-data': 'searchRecipesByTag'
     'click .ingridient-link': 'searchRecipeByIngridient'
 
