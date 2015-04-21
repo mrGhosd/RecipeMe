@@ -13,6 +13,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     @page = 1
     @listenTo(Backbone, "Recipe", @updateRecipe)
     @listenTo(Backbone, "Step", @updateStep)
+    @listenTo(Backbone, "Ingridient", @updateIngridient)
     if params
       @model = params.model
       @steps = @model.get("steps")
@@ -33,39 +34,50 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
 
   updateRecipe: (data) ->
-    if data.action == "rate"
-      @model.set({rate: data.obj.rate})
-      this.render()
-    if data.action == "attributes-change"
-      @model.set(data.obj)
-      this.render()
-    if data.action == "image"
-      @model.set({image: data.image})
-      this.render()
-    if data.action == "comment-create"
-      model = new RecipeMe.Models.Comment(data.obj)
-      @comments.add(model)
-    if data.action == "comment-destroy"
-      model = new RecipeMe.Models.Comment(data.obj)
-      @comments.remove(model)
+    if @model.get("id") == data.id
+      if data.action == "rate"
+        @model.set({rate: data.obj.rate})
+        this.render()
+      if data.action == "attributes-change"
+        @model.set(data.obj)
+        this.render()
+      if data.action == "image"
+        @model.set({image: data.image})
+        this.render()
+      if data.action == "comment-create"
+        model = new RecipeMe.Models.Comment(data.obj)
+        @comments.add(model)
+      if data.action == "comment-destroy"
+        model = new RecipeMe.Models.Comment(data.obj)
+        @comments.remove(model)
+
+  updateIngridient: (data) ->
+    if parseInt(@model.get("id"), 10) == parseInt(data.id, 10)
+      @ingridient = @ingridients.get(data.obj.id)
+      if data.action == "create"
+        data.obj["size"] = data.size
+        @ingridient = new RecipeMe.Models.Ingridient(data.obj)
+        @ingridients.add(@ingridient)
+      if data.action == "destroy"
+        @ingridient = @ingridients.get(data.obj.id)
+        @ingridients.remove(@ingridient)
+      if data.action == "update"
+        @ingridient.set(data.obj)
 
   updateStep: (data) ->
-    @step = @steps.get(data.obj.id)
-    if data.action == "create"
-      @step = new RecipeMe.Models.Step(data.obj)
-      @steps.add(@step)
-    if data.action == "destroy"
-      @step = new RecipeMe.Models.Step(data.obj)
-      @steps.remove(@step)
-    if data.action == "update"
-      @step.set(data.obj)
-    if data.action == "image"
-      @step.set({image: data.image})
-      this.render()
-
-
-
-
+    if @model.get("id") == data.id
+      @step = @steps.get(data.obj.id)
+      if data.action == "create"
+        @step = new RecipeMe.Models.Step(data.obj)
+        @steps.add(@step)
+      if data.action == "destroy"
+        @step = new RecipeMe.Models.Step(data.obj)
+        @steps.remove(@step)
+      if data.action == "update"
+        @step.set(data.obj)
+      if data.action == "image"
+        @step.set({image: data.image})
+        this.render()
 
 
   showCommentForm: ->

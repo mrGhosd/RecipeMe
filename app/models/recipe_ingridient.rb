@@ -20,7 +20,7 @@ class RecipeIngridient < ActiveRecord::Base
   end
 
   def decrement_counter
-    Recipe.decrement_counter(:recipe_ingridients_count, recipe.id)
+    Recipe.decrement_counter(:recipe_ingridients_count, self.id)
   end
 
   private
