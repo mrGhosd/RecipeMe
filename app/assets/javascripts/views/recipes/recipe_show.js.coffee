@@ -28,6 +28,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
       @ingridients.on('remove', @render, this)
 
       @comments.on('add', @render, this)
+      @comments.on('change', @render, this)
       @comments.on('remove', @render, this)
       @comments.on('reset', @render, this)
     this.render()
@@ -47,6 +48,9 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
       if data.action == "comment-create"
         model = new RecipeMe.Models.Comment(data.obj)
         @comments.add(model)
+      if data.action == "comment-update"
+        model = @comments.get(data.obj.id)
+        model.set({text: data.obj.text})
       if data.action == "comment-destroy"
         model = new RecipeMe.Models.Comment(data.obj)
         @comments.remove(model)

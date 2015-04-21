@@ -3,6 +3,7 @@ class CommentsController <ApplicationController
   before_action :change_object, only: [:rating, :liked_users]
   after_action :mail_send, only: :create
   after_action :send_create_comment_message, only: :create
+  after_action :send_update_comment_message, only: :update
   after_action :send_destroy_comment_message, only: :destroy
 
   include ChangeObject
@@ -29,7 +30,7 @@ class CommentsController <ApplicationController
   end
 
   def update
-    if comment.update(comments_params)
+    if @comment.update(comments_params)
       render json: @comment.to_json, status: :ok
     else
       render json: @comment.errors.to_json, status: :forbidden
@@ -52,6 +53,16 @@ class CommentsController <ApplicationController
             id: @comment.recipe.id,
             obj: @comment,
             count: @comment.recipe.comments_count - 1
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
+
+  def send_update_comment_message
+    msg = { resource: 'Recipe',
+            action: 'comment-update',
+            id: @comment.recipe.id,
+            obj: @comment
     }
 
     $redis.publish 'rt-change', msg.to_json
