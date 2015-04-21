@@ -1,11 +1,13 @@
 class RecipesController < ApplicationController
 
   after_action :create_image, only: [:create, :update]
+  after_action :send_recipe_create_message, only: :create
   before_action :changed_object, only: [:rating, :liked_users, :create_image]
   before_action :load_recipe, only: [:update, :show, :destroy, :rating, :liked_users]
   after_action :send_rate_message, only: [:rating]
   after_action :send_update_recipe_message, only: [:update]
   after_action :send_image_message, only: :create_image
+
 
   include ChangeObject
   include Images
@@ -72,6 +74,18 @@ class RecipesController < ApplicationController
   end
 
   private
+
+  def send_recipe_create_message
+    msg = { resource: 'Recipe',
+            action: 'create',
+            id: @recipe.id,
+            obj: @recipe,
+            image: @recipe.image
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
+
   def recipes_params
     params.permit(:title, :user_id, :description,  :tag_list, :category_id, :steps => [])
   end

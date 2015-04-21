@@ -24,17 +24,21 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
       $("ul.recipes_list").append(view.render().el)
 
   updateRate: (data) ->
-    model = @collection.get(data.id)
+    @model = @collection.get(data.id)
+    if data.action == "create"
+      @model = new RecipeMe.Models.Recipe(data.obj)
+      @collection.add(@model)
+      console.log view
     if data.action == "rate"
-      model.set({rate: data.obj.rate})
+      @model.set({rate: data.obj.rate})
     if data.action == "attributes-change"
-      model.set(data.obj)
+      @model.set(data.obj)
     if data.action == "image"
-      model.set({image: data.image})
+      @model.set({image: data.image})
     if data.action == "comment-create"
-      model.set({comments_count: data.obj.comments_count})
+      @model.set({comments_count: data.obj.comments_count})
     if data.action == "comment-destroy"
-      model.set({comments_count: data.obj})
+      @model.set({comments_count: data.obj})
 
   filterRecipes: (event) ->
     if($(event.target).attr("active"))
