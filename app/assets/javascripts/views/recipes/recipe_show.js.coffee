@@ -20,6 +20,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
       @ingridients = @model.get('ingridients')
 
       @steps.on('add', @render, this)
+      @steps.on('change', @render, this)
       @steps.on('remove', @render, this)
 
       @ingridients.on('add', @render, this)
@@ -56,6 +57,8 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     if data.action == "destroy"
       @step = new RecipeMe.Models.Step(data.obj)
       @steps.remove(@step)
+    if data.action == "update"
+      @step.set(data.obj)
     if data.action == "image"
       @step.set({image: data.image})
       this.render()
