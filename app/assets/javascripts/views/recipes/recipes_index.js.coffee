@@ -31,9 +31,9 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
       model.set(data.obj)
     if data.action == "image"
       model.set({image: data.image})
-
-    console.log model
-    console.log data
+    if data.action == "comment-create"
+      console.log data.obj.comments_count
+      model.set({comments_count: data.obj.comments_count})
 
   filterRecipes: (event) ->
     if($(event.target).attr("active"))

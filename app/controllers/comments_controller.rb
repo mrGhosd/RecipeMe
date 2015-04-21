@@ -2,6 +2,7 @@ class CommentsController <ApplicationController
   before_action :load_comment, only: [:update, :show, :destroy, :rating, :liked_users]
   before_action :change_object, only: [:rating, :liked_users]
   after_action :mail_send, only: :create
+  after_action :send_create_comment_message, only: :create
 
   include ChangeObject
   include Rate
@@ -43,6 +44,16 @@ class CommentsController <ApplicationController
   end
 
   private
+
+  def send_create_comment_message
+    msg = { resource: 'Recipe',
+            action: 'comment-create',
+            id: @comment.recipe.id,
+            obj: @comment.recipe
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
 
   def load_comment
     @comment = Comment.find(params[:id])
