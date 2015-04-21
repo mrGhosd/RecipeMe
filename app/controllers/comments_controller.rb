@@ -3,6 +3,7 @@ class CommentsController <ApplicationController
   before_action :change_object, only: [:rating, :liked_users]
   after_action :mail_send, only: :create
   after_action :send_create_comment_message, only: :create
+  after_action :send_destroy_comment_message, only: :destroy
 
   include ChangeObject
   include Rate
@@ -44,6 +45,16 @@ class CommentsController <ApplicationController
   end
 
   private
+
+  def send_destroy_comment_message
+    msg = { resource: 'Recipe',
+            action: 'comment-destroy',
+            id: @comment.recipe.id,
+            obj: @comment.recipe.comments_count - 1
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
 
   def send_create_comment_message
     msg = { resource: 'Recipe',
