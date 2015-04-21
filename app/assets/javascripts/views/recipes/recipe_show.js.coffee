@@ -11,19 +11,27 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
   initialize: (params) ->
     @page = 1
-    @listenTo(Backbone, "Recipe", @updateData)
+    @listenTo(Backbone, "Recipe", @updateRecipe)
+    @listenTo(Backbone, "Step", @updateStep)
     if params
       @model = params.model
       @steps = @model.get("steps")
       @comments = @model.get('comments')
       @ingridients = @model.get('ingridients')
+
+      @steps.on('add', @render, this)
+      @steps.on('remove', @render, this)
+
+      @ingridients.on('add', @render, this)
+      @ingridients.on('remove', @render, this)
+
       @comments.on('add', @render, this)
       @comments.on('remove', @render, this)
       @comments.on('reset', @render, this)
     this.render()
 
 
-  updateData: (data) ->
+  updateRecipe: (data) ->
     if data.action == "rate"
       @model.set({rate: data.obj.rate})
       this.render()
@@ -39,6 +47,21 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     if data.action == "comment-destroy"
       model = new RecipeMe.Models.Comment(data.obj)
       @comments.remove(model)
+
+  updateStep: (data) ->
+    @step = @steps.get(data.obj.id)
+    if data.action == "create"
+      @step = new RecipeMe.Models.Step(data.obj)
+      @steps.add(@step)
+    if data.action == "destroy"
+      @step = new RecipeMe.Models.Step(data.obj)
+      @steps.remove(@step)
+    if data.action == "image"
+      @step.set({image: data.image})
+      this.render()
+
+
+
 
 
 

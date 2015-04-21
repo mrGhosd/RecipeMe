@@ -11,7 +11,7 @@ window.RecipeMe.realtime = {
                     message.obj[key] = decodeURIComponent(escape(message.obj[key]));
                 }
             }
-            console.log(message);
+            //console.log(message);
             Backbone.trigger(message.resource, message);
         });
     }
