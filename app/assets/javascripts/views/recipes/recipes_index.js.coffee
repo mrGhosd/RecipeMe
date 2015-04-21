@@ -14,6 +14,7 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
     @listenTo(Backbone, "Recipe", @updateRate)
     @collection = param.collection
     @collection.on('reset', @render, this)
+    @collection.on('remove', @render, this)
     @collection.on('change', @render, this)
     @collection.on('add', @render, this)
 
@@ -28,7 +29,8 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
     if data.action == "create"
       @model = new RecipeMe.Models.Recipe(data.obj)
       @collection.add(@model)
-      console.log view
+    if data.action == "destroy"
+      @collection.remove(@model)
     if data.action == "rate"
       @model.set({rate: data.obj.rate})
     if data.action == "attributes-change"

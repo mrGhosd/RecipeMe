@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
   after_action :send_rate_message, only: [:rating]
   after_action :send_update_recipe_message, only: [:update]
   after_action :send_image_message, only: :create_image
+  after_action :send_destroy_recipe_message, only: :destroy
 
 
   include ChangeObject
@@ -68,6 +69,16 @@ class RecipesController < ApplicationController
             id: changed_object.id,
             obj: changed_object,
             image: changed_object.image
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
+
+  def send_destroy_recipe_message
+    msg = { resource: 'Recipe',
+            action: 'destroy',
+            id: @recipe.id,
+            obj: @recipe
     }
 
     $redis.publish 'rt-change', msg.to_json
