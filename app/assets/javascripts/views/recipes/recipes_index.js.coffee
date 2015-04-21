@@ -11,7 +11,7 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
     @filter_attr = "rate"
     @filter_ord = "desc"
     @filter_count = null
-    @listenTo(Backbone, "Recipe", @updateRate)
+    @listenTo(Backbone, "Recipe", @updateData)
     @collection = param.collection
     @collection.on('reset', @render, this)
     @collection.on('remove', @render, this)
@@ -24,7 +24,7 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
       view = new RecipeMe.Views.Recipe(model: recipe)
       $("ul.recipes_list").append(view.render().el)
 
-  updateRate: (data) ->
+  updateData: (data) ->
     @model = @collection.get(data.id)
     if data.action == "create"
       @model = new RecipeMe.Models.Recipe(data.obj)
@@ -38,9 +38,10 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
     if data.action == "image"
       @model.set({image: data.image})
     if data.action == "comment-create"
-      @model.set({comments_count: data.obj.comments_count})
+      console.log @model
+      @model.set({comments_count: data.count.comments_count})
     if data.action == "comment-destroy"
-      @model.set({comments_count: data.obj})
+      @model.set({comments_count: data.count})
 
   filterRecipes: (event) ->
     if($(event.target).attr("active"))

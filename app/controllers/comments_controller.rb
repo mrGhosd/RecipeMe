@@ -50,7 +50,8 @@ class CommentsController <ApplicationController
     msg = { resource: 'Recipe',
             action: 'comment-destroy',
             id: @comment.recipe.id,
-            obj: @comment.recipe.comments_count - 1
+            obj: @comment,
+            count: @comment.recipe.comments_count - 1
     }
 
     $redis.publish 'rt-change', msg.to_json
@@ -60,7 +61,8 @@ class CommentsController <ApplicationController
     msg = { resource: 'Recipe',
             action: 'comment-create',
             id: @comment.recipe.id,
-            obj: @comment.recipe
+            obj: @comment,
+            count: @comment.recipe
     }
 
     $redis.publish 'rt-change', msg.to_json

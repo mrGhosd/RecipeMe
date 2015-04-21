@@ -11,14 +11,36 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
   initialize: (params) ->
     @page = 1
+    @listenTo(Backbone, "Recipe", @updateData)
     if params
       @model = params.model
       @steps = @model.get("steps")
       @comments = @model.get('comments')
       @ingridients = @model.get('ingridients')
       @comments.on('add', @render, this)
+      @comments.on('remove', @render, this)
       @comments.on('reset', @render, this)
     this.render()
+
+
+  updateData: (data) ->
+    if data.action == "rate"
+      @model.set({rate: data.obj.rate})
+      this.render()
+    if data.action == "attributes-change"
+      @model.set(data.obj)
+      this.render()
+    if data.action == "image"
+      @model.set({image: data.image})
+      this.render()
+    if data.action == "comment-create"
+      model = new RecipeMe.Models.Comment(data.obj)
+      @comments.add(model)
+    if data.action == "comment-destroy"
+      model = new RecipeMe.Models.Comment(data.obj)
+      @comments.remove(model)
+
+
 
   showCommentForm: ->
     options = {recipe: @model}
