@@ -24,8 +24,6 @@ class RecipeMe.Views.CategoryShow extends Backbone.View
       if data.action == "attributes-change"
         @recipe.set(data.obj)
       if data.action == "image"
-        console.log @recipe
-        console.log data
         @recipe.set({image: data.image})
       if data.action == "destroy"
         @recipes.remove(@recipe)

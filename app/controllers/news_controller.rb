@@ -2,6 +2,8 @@ class NewsController < ApplicationController
   before_filter :load_news, except: [:index, :create]
   before_action :changed_object, only: [:rating, :liked_users]
   after_action :create_image, only: [:create, :update]
+  after_action :send_create_news_message, only: :create
+  after_action :send_image_message, only: :create_image
   include ChangeObject
   include Rate
   include UsersLiked
@@ -39,6 +41,16 @@ class NewsController < ApplicationController
   end
 
   private
+
+  def send_create_news_message
+    msg = { resource: 'News',
+            action: 'create',
+            id: @news.id,
+            obj: @news
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
 
   def load_news
     @news = News.find(params[:id] || params[:news_id])

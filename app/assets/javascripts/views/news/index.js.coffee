@@ -5,8 +5,26 @@ class RecipeMe.Views.NewsIndex extends Backbone.View
   initialize: (params) ->
     @page = 1
     @collection = params.collection
-    @collection.on('reset', @render, this)
+    @collection.on('remove', @render, this)
+    @collection.on('change', @render, this)
     @collection.on('add', @render, this)
+    @listenTo(Backbone, "News", @updateNews)
+
+  updateNews: (data) ->
+    @model = @collection.get(data.id)
+    if data.action == "create"
+      @model = new RecipeMe.Models.New(data.obj)
+      @collection.add(@model)
+    if data.action == "destroy"
+      @collection.remove(@model)
+    if data.action == "rate"
+      @model.set({rate: data.obj.rate})
+    if data.action == "update"
+      @model.set(data.obj)
+    if data.action == "image"
+      console.log @model
+      console.log data.image
+      @model.set({image: data.image})
 
   addNews: (model) ->
     view = new RecipeMe.Views.News({model: model})
