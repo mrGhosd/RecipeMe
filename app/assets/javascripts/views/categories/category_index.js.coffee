@@ -6,8 +6,18 @@ class RecipeMe.Views.CategoryIndex extends Backbone.View
     @page = 1
     if params.collection
       @collection = params.collection
-      @collection.on('reset', @render, this)
+      @collection.on('remove', @render, this)
       @collection.on('add', @render, this)
+      @listenTo(Backbone, "Category", @updateCategory)
+
+  updateCategory: (data) ->
+    @model = @collection.get(data.id)
+    if data.action == "create"
+      @model = new RecipeMe.Models.Category(data.obj)
+      @collection.add(@model)
+    if data.action == "destroy"
+      @collection.remove(@model)
+
 
   render: ->
     $(@el).html(@template)

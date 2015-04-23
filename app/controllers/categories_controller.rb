@@ -1,6 +1,8 @@
 class CategoriesController < ApplicationController
   before_action :load_category, except: [:index, :create]
   after_action :create_image, only: [:create, :update]
+  after_action :send_create_category_message, only: :create
+  after_action :send_destroy_category_message, only: :destroy
   include Images
 
   def index
@@ -39,6 +41,27 @@ class CategoriesController < ApplicationController
   end
 
   private
+
+  def send_create_category_message
+    msg = { resource: 'Category',
+            action: 'create',
+            id: @category.id,
+            obj: @category,
+            image: @category.image
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
+
+  def send_destroy_category_message
+    msg = { resource: 'Category',
+            action: 'destroy',
+            id: @category.id,
+            obj: @category
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
 
   def load_category
     @category = Category.find(params[:id])
