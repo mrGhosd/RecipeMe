@@ -5,7 +5,7 @@
       </a>
     </div>
     <div class="new-item-content panel-body">
-      <div class="description"><%= @news.get("title") if @news.get("title") %></div>
+      <div class="description"><%= @news.get("text") if @news.get("text") %></div>
       <div class="image-data">
         <div class="image">
           <% if @news.get("image"): %>

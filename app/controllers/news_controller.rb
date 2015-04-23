@@ -5,6 +5,7 @@ class NewsController < ApplicationController
   after_action :send_create_news_message, only: :create
   after_action :send_image_message, only: :create_image
   after_action :send_destroy_news_message, only: :destroy
+  after_action :send_update_news_message, only: :update
   include ChangeObject
   include Rate
   include UsersLiked
@@ -56,6 +57,16 @@ class NewsController < ApplicationController
   def send_destroy_news_message
     msg = { resource: 'News',
             action: 'destroy',
+            id: @news.id,
+            obj: @news
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
+
+  def send_update_news_message
+    msg = { resource: 'News',
+            action: 'update',
             id: @news.id,
             obj: @news
     }

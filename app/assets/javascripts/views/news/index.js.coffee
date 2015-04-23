@@ -17,6 +17,8 @@ class RecipeMe.Views.NewsIndex extends Backbone.View
       @collection.add(@model)
     if data.action == "destroy"
       @collection.remove(@model)
+    if data.action == "update"
+      @model.set(data.obj)
     if data.action == "rate"
       @model.set({rate: data.obj.rate})
     if data.action == "update"
