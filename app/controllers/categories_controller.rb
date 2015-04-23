@@ -3,6 +3,8 @@ class CategoriesController < ApplicationController
   after_action :create_image, only: [:create, :update]
   after_action :send_create_category_message, only: :create
   after_action :send_destroy_category_message, only: :destroy
+  after_action :send_update_category_message, only: :update
+  after_action :send_image_message, only: :create_image
   include Images
 
   def index
@@ -37,7 +39,7 @@ class CategoriesController < ApplicationController
   end
 
   def recipes
-    render json: @category.recipes.paginate(page: params[:page] || 1, per_page: 8).as_json(only: [:title, :id, :user_id], methods: [:image])
+    render json: @category.recipes.order(created_at: :desc).paginate(page: params[:page] || 1, per_page: 8).as_json(only: [:title, :id, :user_id], methods: [:image])
   end
 
   private
@@ -56,6 +58,16 @@ class CategoriesController < ApplicationController
   def send_destroy_category_message
     msg = { resource: 'Category',
             action: 'destroy',
+            id: @category.id,
+            obj: @category
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
+
+  def send_update_category_message
+    msg = { resource: 'Category',
+            action: 'update',
             id: @category.id,
             obj: @category
     }
