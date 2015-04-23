@@ -1,5 +1,6 @@
 class CallbacksController < ApplicationController
   before_action :load_callback, except: [:index, :create]
+  after_action :send_callback_create_message, only: :create
 
   def index
     @callbacks = ::Callback.all
@@ -32,6 +33,16 @@ class CallbacksController < ApplicationController
   end
 
   private
+
+  def send_callback_create_message
+    msg = { resource: 'Callback',
+            action: 'create',
+            id: @callback.id,
+            obj: @callback
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
 
   def callback_params
     params.require(:callback).permit(:author, :user_id, :text)

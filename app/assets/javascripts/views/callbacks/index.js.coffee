@@ -8,6 +8,17 @@ class RecipeMe.Views.CallbackIndex extends Backbone.View
     @collection.fetch({async: false})
     @collection.on('add', @render, this)
     @collection.on('remove', @render, this)
+    @listenTo(Backbone, "Callback", @updateCallback)
+
+  updateCallback: (data) ->
+    @model = @collection.get(data.id)
+    if data.action == "create"
+      @collection.add(data.obj)
+    if data.action == "destroy"
+      @collection.remove(@model)
+    if data.action == "update"
+      @model.set(data.obj)
+
 
   render: ->
     $(@el).html(@template())
