@@ -21,8 +21,6 @@ class RecipeMe.Views.NewsIndex extends Backbone.View
     if data.action == "update"
       @model.set(data.obj)
     if data.action == "rate"
-      console.log @model
-      console.log data
       @model.set({rate: data.obj.rate})
     if data.action == "update"
       @model.set(data.obj)
@@ -34,12 +32,8 @@ class RecipeMe.Views.NewsIndex extends Backbone.View
     $(".news-list").append(view.render().el)
 
   successNewsUpload: (response, request, collection) ->
-#    console.log collection
     for model in response
       collection.push(model)
-#      view = new RecipeMe.Views.News(model: news)
-#      $(".news-main .news-list").append(view.render().el)
-#      console.log collection
 
   render: ->
     $(@el).html(@template())

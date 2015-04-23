@@ -10,6 +10,19 @@ class RecipeMe.Views.NewsShow extends Backbone.View
   initialize: (params) ->
     if params
       @news = params.model
+      @listenTo(Backbone, "News", @updateNews)
+
+  updateNews: (data) ->
+    if parseInt(data.id, 10) == parseInt(@news.get("id"), 10)
+      @model = @news
+      if data.action == "update"
+        @model.set(data.obj)
+      if data.action == "rate"
+        @model.set({rate: data.obj.rate})
+      if data.action == "image"
+        @model.set({image: data.image})
+      this.render()
+
 
   changeRate: (event) ->
     if RecipeMe.currentUser
