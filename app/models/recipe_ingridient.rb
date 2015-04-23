@@ -1,6 +1,6 @@
 class RecipeIngridient < ActiveRecord::Base
   belongs_to :recipe, counter_cache: true
-  belongs_to :ingridient
+  belongs_to :ingridient, dependent: :destroy
 
   after_create :increment_counter
   after_destroy :decrement_counter

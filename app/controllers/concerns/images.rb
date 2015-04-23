@@ -10,9 +10,10 @@ module Images
   end
 
   def send_image_message
+    parent = changed_object.try(:recipe).present? ? changed_object.recipe : changed_object
     msg = { resource: changed_object.class.to_s,
             action: 'image',
-            id: changed_object.id,
+            id: parent.id,
             obj: changed_object,
             image: changed_object.image
     }

@@ -69,7 +69,9 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
         @ingridient.set(data.obj)
 
   updateStep: (data) ->
-    if @model.get("id") == data.id
+    console.log @model.get("id")
+    console.log data.id
+    if parseInt(@model.get("id"), 10) == parseInt(data.id, 10)
       @step = @steps.get(data.obj.id)
       if data.action == "create"
         @step = new RecipeMe.Models.Step(data.obj)
@@ -80,6 +82,9 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
       if data.action == "update"
         @step.set(data.obj)
       if data.action == "image"
+        @step = @steps.get(data.obj.id)
+        console.log @step
+        console.log data.obj
         @step.set({image: data.image})
         this.render()
 

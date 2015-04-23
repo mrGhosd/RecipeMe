@@ -57,7 +57,6 @@ class StepsController < ApplicationController
             id: @recipe.id,
             obj: @step
     }
-
     $redis.publish 'rt-change', msg.to_json
   end
 
