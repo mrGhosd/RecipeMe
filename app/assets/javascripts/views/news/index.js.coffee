@@ -8,7 +8,6 @@ class RecipeMe.Views.NewsIndex extends Backbone.View
     @collection.on('remove', @render, this)
     @collection.on('change', @render, this)
     @collection.on('add', @render, this)
-    @collection.on('reset', @render, this)
     @listenTo(Backbone, "News", @updateNews)
 
   updateNews: (data) ->
@@ -37,6 +36,7 @@ class RecipeMe.Views.NewsIndex extends Backbone.View
 
   render: ->
     $(@el).html(@template())
+    $(".news-list").html("")
     @collection.each(@addNews)
     window.scrollUpload.init(@page, "api/news", $(".news-main .news-list"), this.successNewsUpload, @collection)
     this
