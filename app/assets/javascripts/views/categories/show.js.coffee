@@ -21,6 +21,8 @@ class RecipeMe.Views.CategoryShow extends Backbone.View
       if data.action == "create"
         @recipe = new RecipeMe.Models.Recipe(data.obj)
         @recipes.add(@recipe)
+      if data.action == "attributes-change"
+        @recipe.set(data.obj)
       if data.action == "image"
         console.log @recipe
         console.log data
