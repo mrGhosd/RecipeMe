@@ -1,6 +1,7 @@
 class CallbacksController < ApplicationController
   before_action :load_callback, except: [:index, :create]
   after_action :send_callback_create_message, only: :create
+  after_action :send_callback_destroy_message, only: :destroy
 
   def index
     @callbacks = ::Callback.all
@@ -37,6 +38,16 @@ class CallbacksController < ApplicationController
   def send_callback_create_message
     msg = { resource: 'Callback',
             action: 'create',
+            id: @callback.id,
+            obj: @callback
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
+
+  def send_callback_destroy_message
+    msg = { resource: 'Callback',
+            action: 'destroy',
             id: @callback.id,
             obj: @callback
     }
