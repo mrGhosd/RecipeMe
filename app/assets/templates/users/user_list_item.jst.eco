@@ -5,5 +5,5 @@
       <% path = "/images/user8.png"  %>
   <% end %>
   <img src="<%= path %>" height="<%= @size if @size %>" width="<%= @size if @size %>" class="img-thumbnail" />
-  <span class="name"><%= @user.get("correct_naming") if @user %></span>
+  <span class="name"><%= @user.get("nickname") if @user %></span>
 </a>

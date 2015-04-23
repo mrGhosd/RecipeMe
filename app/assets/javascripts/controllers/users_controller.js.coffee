@@ -47,13 +47,13 @@ class RecipeMe.UsersController
       success: (user) ->
         feed = new RecipeMe.Collections.Feeds({user: user.id})
         feed.fetch
-          success: (collection) ->
+          success: (collection, request) ->
             if RecipeMe.currentUser && RecipeMe.currentUser.get("id") == user.get("id")
               view = new RecipeMe.Views.FeedList({collection: collection})
               $("section#main").html(view.el)
               view.render()
             else
-              new RecipeMe.ErrorHandler(response, request).showErrorPage()
+              new RecipeMe.ErrorHandler(collection, request).forbidden()
       error: (response, request) ->
         new RecipeMe.ErrorHandler(response, request).showErrorPage()
 
