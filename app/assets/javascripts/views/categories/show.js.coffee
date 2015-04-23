@@ -12,6 +12,7 @@ class RecipeMe.Views.CategoryShow extends Backbone.View
       @recipes.on('add', @render, this)
       @recipes.on('change', @render, this)
       @recipes.on('remove', @render, this)
+      @recipes.on('reset', @render, this)
       @listenTo(Backbone, "Recipe", @updateRecipe)
     this.render()
 

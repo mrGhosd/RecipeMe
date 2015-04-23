@@ -57,9 +57,6 @@ class RecipeMe.Views.CategoryForm extends Backbone.View
     file = this.getFileFromEvent(event)
     formData.append('name', file)
     formData.append('imageable_type', type)
-#    if $(event.target).closest(".step-block").attr("image_id") && $(event.target).closest(".step-block").attr("image_id").length > 0
-#      image_id = $(event.target).closest(".step-block").attr("image_id")
-#      formData.append('imageable_id', image_id)
     if @image == undefined
       @image = new RecipeMe.Models.Image()
     else
@@ -67,14 +64,13 @@ class RecipeMe.Views.CategoryForm extends Backbone.View
 
     @image.uploadImage(formData)
     @model.set("image", @image)
-    console.log @model
 
   submitCategory: (event) ->
     event.preventDefault()
     attributes = window.appHelper.formSerialization($("#category_form"))
     @model.save(attributes,
       success: (response, request) ->
-        Backbone.history.navigate('/categories', {trigger: true, repalce: true})
+        Backbone.history.navigate('/categories', {trigger: true, replace: true})
       error: (response, request) ->
         errors = request.responseJSON
         $.each(errors, (key, value)->

@@ -15,7 +15,7 @@
 
   <div class="form-group">
     <div class="col-md-8">
-      <textarea name="text" placeholder="<%= I18n.t('feedback.text') %>" class="form-control callback-text"></textarea>
+      <textarea name="text" placeholder="<%= I18n.t('feedback.text') %>" class="form-control callback-text"><%= @callback.get("text") if @callback.get("text") %></textarea>
     </div>
   </div>
   <input type="submit" class="btn btn-success submit-callback" value="Save"/>

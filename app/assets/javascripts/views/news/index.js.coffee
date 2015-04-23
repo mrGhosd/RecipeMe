@@ -8,7 +8,7 @@ class RecipeMe.Views.NewsIndex extends Backbone.View
     @collection.on('remove', @render, this)
     @collection.on('change', @render, this)
     @collection.on('add', @render, this)
-    @collection.bind('add', @render, this)
+    @collection.on('reset', @render, this)
     @listenTo(Backbone, "News", @updateNews)
 
   updateNews: (data) ->

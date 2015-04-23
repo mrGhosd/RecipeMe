@@ -22,6 +22,7 @@ class RecipeMe.Views.Callback extends Backbone.View
   updateCallback: (event) ->
     event.preventDefault()
     $("#callback-form").remove()
+    console.log @model
     form = new RecipeMe.Views.CallbackForm({model: @model})
     item = $(event.target).closest(".callback-item")
     $(item).after(form.render().el)

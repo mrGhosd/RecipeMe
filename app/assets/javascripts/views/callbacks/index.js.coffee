@@ -7,7 +7,9 @@ class RecipeMe.Views.CallbackIndex extends Backbone.View
     @collection = new RecipeMe.Collections.Callbacks()
     @collection.fetch({async: false})
     @collection.on('add', @render, this)
+    @collection.on('change', @render, this)
     @collection.on('remove', @render, this)
+    @collection.on('reset', @render, this)
     @listenTo(Backbone, "Callback", @updateCallback)
 
   updateCallback: (data) ->
