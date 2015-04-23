@@ -54,15 +54,6 @@ class RecipesController < ApplicationController
     end
   end
 
-  def send_rate_message
-    msg = { resource: 'Recipe',
-            action: 'rate',
-            id: changed_object.id,
-            obj: changed_object }
-
-    $redis.publish 'rt-change', msg.to_json
-  end
-
   def send_update_recipe_message
     msg = { resource: 'Recipe',
             action: 'attributes-change',

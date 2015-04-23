@@ -26,4 +26,13 @@ module Rate
   def find_vote(object)
     self.votes.find_by(voteable_id: object.id, voteable_type: object.class.to_s)
   end
+
+  def send_rate_message
+    msg = { resource: changed_object.class.to_s,
+            action: 'rate',
+            id: changed_object.id,
+            obj: changed_object }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
 end

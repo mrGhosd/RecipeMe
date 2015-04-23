@@ -6,6 +6,8 @@ class NewsController < ApplicationController
   after_action :send_image_message, only: :create_image
   after_action :send_destroy_news_message, only: :destroy
   after_action :send_update_news_message, only: :update
+  after_action :send_rate_message, only: [:rating]
+
   include ChangeObject
   include Rate
   include UsersLiked

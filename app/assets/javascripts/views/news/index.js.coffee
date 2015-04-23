@@ -8,6 +8,7 @@ class RecipeMe.Views.NewsIndex extends Backbone.View
     @collection.on('remove', @render, this)
     @collection.on('change', @render, this)
     @collection.on('add', @render, this)
+    @collection.bind('add', @render, this)
     @listenTo(Backbone, "News", @updateNews)
 
   updateNews: (data) ->
@@ -20,26 +21,28 @@ class RecipeMe.Views.NewsIndex extends Backbone.View
     if data.action == "update"
       @model.set(data.obj)
     if data.action == "rate"
+      console.log @model
+      console.log data
       @model.set({rate: data.obj.rate})
     if data.action == "update"
       @model.set(data.obj)
     if data.action == "image"
-      console.log @model
-      console.log data.image
       @model.set({image: data.image})
 
   addNews: (model) ->
     view = new RecipeMe.Views.News({model: model})
-    $(".news-list").prepend(view.render().el)
+    $(".news-list").append(view.render().el)
 
-  successNewsUpload: (response, request) ->
+  successNewsUpload: (response, request, collection) ->
+#    console.log collection
     for model in response
-      news = new RecipeMe.Models.New(model)
-      view = new RecipeMe.Views.News(model: news)
-      $(".news-main .news-list").append(view.render().el)
+      collection.push(model)
+#      view = new RecipeMe.Views.News(model: news)
+#      $(".news-main .news-list").append(view.render().el)
+#      console.log collection
 
   render: ->
     $(@el).html(@template())
     @collection.each(@addNews)
-    window.scrollUpload.init(@page, "api/news", $(".news-main .news-list"), this.successNewsUpload)
+    window.scrollUpload.init(@page, "api/news", $(".news-main .news-list"), this.successNewsUpload, @collection)
     this

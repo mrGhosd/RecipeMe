@@ -1,9 +1,10 @@
 window.scrollUpload =
-  init: (page, url, uploadPlaceholder, callback) ->
+  init: (page, url, uploadPlaceholder, callback, collection = []) ->
     window.page = page
     window.url = url
     window.successCallback = callback
     window.placeholder = uploadPlaceholder
+    window.collection = collection if collection.length > 0
     $(window).on('scroll', this.setUploadImage)
 
   setUploadImage: ->
@@ -19,7 +20,7 @@ window.scrollUpload =
       type: "GET"
       data: {page: ++window.page}
       success: (response, request) ->
-        window.successCallback(response, request)
+        window.successCallback(response, request, collection)
     $(".upload-image").remove()
 
 
