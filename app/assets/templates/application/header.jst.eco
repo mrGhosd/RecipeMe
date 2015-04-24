@@ -1,5 +1,5 @@
 <div class="menu-item">
-  <a href="#" data-remote="true">
+  <a href="#" data-remote="true" class="left-menu-opener">
     <img src="/images/menu48.png" height="35" width="35"/>
   </a>
 </div>

@@ -6,6 +6,9 @@
   display:none;
   top: 0px;
   width: 0px;
+  .quick-panel{
+    overflow: hidden;
+  }
   ul{
     list-style-type: none;
     margin: 0px;

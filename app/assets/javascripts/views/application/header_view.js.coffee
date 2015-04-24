@@ -12,6 +12,9 @@ class RecipeMe.Views.HeaderView extends Backbone.View
     'keyup .search-field': 'sendSearchRequest'
 
   initialize: ->
+    @updates_counter = 0
+    @update_element = $("<span class='label label-danger user-notification'></span>")
+    @listenTo(Backbone, "User", @updateUserData)
     this.render()
     @width = window.screen.width
     @navigation_width = 300
@@ -19,6 +22,27 @@ class RecipeMe.Views.HeaderView extends Backbone.View
   loginDialog: ->
     modalView = new RecipeMe.Views.ModalWindow({el: ".modal"})
     login = new RecipeMe.Views.LoginView({el: ".actions-views"})
+
+  updateUserData: (data) ->
+    if parseInt(data.id, 10) == parseInt(RecipeMe.currentUser.get("id"), 10)
+      if data.action == "follow"
+        @updates_counter++
+      if data.action == "unfollow"
+        if @updates_counter > 0
+          @updates_counter--
+        else
+          @updates_counter = 0
+      this.displayNavMenuNotification() if $("#navigationMenu").width() == 0
+
+
+
+  displayNavMenuNotification: ->
+    console.log @updates_counter
+    if @updates_counter <= 0
+      $(".left-menu-opener").find(".label.label-danger.user-notification").remove()
+    else
+      $(".left-menu-opener").append(@update_element)
+      @update_element.text(@updates_counter)
 
   registrationDialog: ->
     modalView = new RecipeMe.Views.ModalWindow({el: ".modal"})
@@ -47,11 +71,14 @@ class RecipeMe.Views.HeaderView extends Backbone.View
 
 
   toggleLeftMenu: (handler = true)->
+    if @updates_counter > 0
+      $(".user-notification").remove()
+
     if $("#navigationMenu").width() == 0 && handler
-      if $("#navigationMenu .quick-panel").length == 0
+      if $("#navigationMenu").width() == 0
         view = new RecipeMe.Views.NavigationView({el: '#navigationMenu', view: this}  )
-      else
-        $("#navigationMenu .quick-panel").show()
+#      else
+#        $("#navigationMenu .quick-panel").show()
 
       $(".app-header").animate({width: "#{@width - @navigation_width}px", left: "#{@navigation_width}px"}, 250)
       $("#navigationMenu").show().animate({width: "#{@navigation_width}" }, 250)
@@ -59,11 +86,14 @@ class RecipeMe.Views.HeaderView extends Backbone.View
     else
       $(".app-header").animate({width: "100%", left: "0px"}, 250)
       $("#navigationMenu").queue(->
-        $(this).animate({width: "0px"}, 250)
-        $(this).find(".quick-panel").hide()
+        $(this).animate({width: "0px", display: "none"}, 250)
         $(this).dequeue()
+#        $(this).find(".quick-panel").hide()
       )
       $(".mask").addClass("hide")
+
+
+
 
   toggleCurrentLocale: (event) ->
     event.preventDefault()
