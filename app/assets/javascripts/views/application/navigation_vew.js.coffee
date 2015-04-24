@@ -66,7 +66,7 @@ class RecipeMe.Views.NavigationView extends Backbone.View
 
   updateFollowingList: (data) ->
     current_count = parseInt($(".following-block").find(".following-count").text(), 10)
-    @following.pop()
+    @following.pop() if @followers.length == 6
     @following.add(data)
     $(".following-block").find(".following-count").text("#{current_count + 1}")
 
@@ -77,7 +77,7 @@ class RecipeMe.Views.NavigationView extends Backbone.View
 
   updateFollowersList: (data)->
     current_count = parseInt($(".followers-block").find(".followers-count").text(), 10)
-    @followers.pop()
+    @followers.pop() if @followers.length == 6
     @followers.add(data)
     $(".followers-block").find(".followers-count").text("#{current_count + 1}")
 

@@ -51,6 +51,4 @@ class RecipeMe.UsersController
           view.render()
         else
           new RecipeMe.ErrorHandler(collection, request).forbidden()
-#      error: (response, request) ->
-#        new RecipeMe.ErrorHandler(response, request).showErrorPage()
 
