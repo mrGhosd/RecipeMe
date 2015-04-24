@@ -15,13 +15,17 @@ class RecipeMe.Views.NavigationView extends Backbone.View
       @followers.on('remove', @render, this)
       @following.on('add', @render, this)
       @listenTo(Backbone, "User", @updateUser)
-    @listenTo(Backbone, "navigationMenu", @removeFollowingMessage)
+#    @listenTo(Backbone, "navigationMenu", @removeFollowingMessage)
     this.render()
 
   updateUser: (data) ->
     if parseInt(@user.get("id"), 10) == parseInt(data.id, 10)
       if data.action == "follow"
         this.updateFollowersList(data.obj)
+      if data.action == "following"
+        this.updateFollowingList(data.obj)
+      if data.action == "unfollowing"
+        this.updateUnfollowingList(data.obj)
       if data.action == "unfollow"
         this.updateUnfollowList(data.obj)
 
@@ -40,6 +44,17 @@ class RecipeMe.Views.NavigationView extends Backbone.View
     $(".following-block .following-list").html("")
     $(".following-block").find(".following-count").text(@following.length)
     @following.each(@addFollowing)
+
+  updateFollowingList: (data) ->
+    current_count = parseInt($(".following-block").find(".following-count").text(), 10)
+    @following.pop()
+    @following.add(data)
+    $(".following-block").find(".following-count").text("#{current_count + 1}")
+
+  updateUnfollowingList: (data) ->
+    current_count = parseInt($(".following-block").find(".following-count").text(), 10)
+    @following.remove(data)
+    $(".following-block").find(".following-count").text("#{current_count - 1}")
 
   updateFollowersList: (data)->
     current_count = parseInt($(".followers-block").find(".followers-count").text(), 10)

@@ -1,7 +1,9 @@
 class RelationshipsController < ApplicationController
   after_action :send_new_follower_mail, only: :create unless Rails.env == "development"
+  after_action :send_follower_user_message, only: :create
   after_action :send_following_user_message, only: :create
   after_action :send_follower_has_been_removed, only: :destroy unless Rails.env == "development"
+  after_action :send_unfollower_user_message, only: :destroy
   after_action :send_unfollowing_user_message, only: :destroy
 
   def create
@@ -26,7 +28,7 @@ class RelationshipsController < ApplicationController
    User.send_follow_message(@user, current_user)
   end
 
-  def send_following_user_message
+  def send_follower_user_message
     msg = { resource: 'User',
             action: 'follow',
             id: @user.id,
@@ -36,7 +38,27 @@ class RelationshipsController < ApplicationController
     $redis.publish 'rt-change', msg.to_json
   end
 
+  def send_following_user_message
+    msg = { resource: 'User',
+            action: 'following',
+            id: current_user.id,
+            obj: current_user
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
+
   def send_unfollowing_user_message
+    msg = { resource: 'User',
+            action: 'unfollowing',
+            id: current_user.id,
+            obj: current_user
+    }
+
+    $redis.publish 'rt-change', msg.to_json
+  end
+
+  def send_unfollower_user_message
     msg = { resource: 'User',
             action: 'unfollow',
             id: @user.id,
