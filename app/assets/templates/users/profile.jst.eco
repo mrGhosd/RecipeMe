@@ -2,7 +2,9 @@
   <fieldset>
     <legend>
       <h4><%= I18n.t('user.profile_header') %></h4>
-      <a href="#" class="btn btn-primary glyphicon glyphicon-edit btn-xs edit-profile" data-remote="true"></a>
+      <% if RecipeMe.currentUser && @user.get("id") == RecipeMe.currentUser.get("id"): %>
+        <a href="#" class="btn btn-primary glyphicon glyphicon-edit btn-xs edit-profile" data-remote="true"></a>
+      <% end %>
     </legend>
   </fieldset>
   <div class="row">
