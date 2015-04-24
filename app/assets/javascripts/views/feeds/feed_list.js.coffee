@@ -18,8 +18,9 @@ class RecipeMe.Views.FeedList extends Backbone.View
       feed = new RecipeMe.Models.Feed({id: model.user_id, feed: model.id})
       feed.fetch
         success: (model) ->
-          view = new RecipeMe.Views.FeedMain({feed: model})
-          $(".feed-list").append(view.render().el)
+          @collection.push(model)
+#          view = new RecipeMe.Views.FeedMain({feed: model})
+#          $(".feed-list").append(view.render().el)
 
   updateFeedData: (data) ->
     followersID = @followers.pluck("id")
@@ -38,8 +39,8 @@ class RecipeMe.Views.FeedList extends Backbone.View
     feed = new RecipeMe.Models.Feed({id: model.id, feed: model.obj.id})
     feed.fetch
       success: (model) ->
-        view = new RecipeMe.Views.FeedMain({feed: model})
-        $(".feed-list").prepend(view.render().el)
+#        view = new RecipeMe.Views.FeedMain({feed: model})
+#        $(".feed-list").prepend(view.render().el)
 
   render: ->
     $(@el).html(@template())
