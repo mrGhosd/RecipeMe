@@ -27,6 +27,9 @@ class RecipeMe.Views.UserProfile extends Backbone.View
       if data.action == "unfollow"
         current_count = parseInt($(".followers-count").text(), 10)
         $(".followers-list-link").find(".followers-count").text("#{current_count - 1}")
+      if data.action == "update"
+        @params.user.set(data.obj)
+        this.render()
 
 
   render: ->

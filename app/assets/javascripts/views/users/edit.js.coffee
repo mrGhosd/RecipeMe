@@ -17,6 +17,8 @@ class RecipeMe.Views.EditProfile extends Backbone.View
   updateUserInfo: (event) ->
     event.preventDefault()
     attributes = window.appHelper.formSerialization($("#user_form"))
+    @params.user.unset("following_list")
+    @params.user.unset("followers_list")
     @params.user.save(attributes,
       success: (response, request)->
         $("#myModal").modal('hide')

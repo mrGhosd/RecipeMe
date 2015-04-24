@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :load_user, only: [:following, :followers, :comments, :recipes]
-
+  after_action :send_update_user_data, only: :update
 
   def show
     user = User.find(params[:id])
@@ -35,17 +35,27 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find(params[:id])
-    if user.update(user_params)
-      render json: user.to_json, status: :ok
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      render json: @user.to_json, status: :ok
     else
-      render json: user.errors.to_json, status: :forbidden
+      render json: @user.errors.to_json, status: :forbidden
     end
   end
 
   private
   def load_user
     @user = User.find(params[:id])
+  end
+
+  def send_update_user_data
+    msg = { resource: 'User',
+            action: 'update',
+            id: @user.id,
+            obj: @user
+    }
+
+    $redis.publish 'rt-change', msg.to_json
   end
 
   def user_params
