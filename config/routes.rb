@@ -1,5 +1,6 @@
 Rails.application.routes.default_url_options[:host] = 'http://localhost:3000'
 Rails.application.routes.draw do
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   devise_for :users, controllers: {sessions: 'sessions', registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks'}
 
   if Rails.env.development?

@@ -52,6 +52,7 @@ gem 'omniauth-instagram'
 gem 'instagram'
 gem 'cancancan'
 
+
 gem "letter_opener"
 gem 'letter_opener_web'
 
@@ -61,6 +62,7 @@ gem 'mysql2'
 gem 'thinking-sphinx'
 
 group :development, :test do
+  gem 'jasmine-rails'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
