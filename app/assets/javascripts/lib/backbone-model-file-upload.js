@@ -21,7 +21,7 @@
   var backboneModelClone = _.clone( Backbone.Model.prototype );
 
   // Extending out
-  _.extend(Backbone.Model.prototype, {  
+  _.extend(Backbone.Model.prototype, {
 
     // ! Default file attribute - can be overwritten
     fileAttribute: 'file',
@@ -32,7 +32,7 @@
       // Variables
       var attrs, attributes = this.attributes;
 
-      // Signature parsing - taken directly from original Backbone.Model.save 
+      // Signature parsing - taken directly from original Backbone.Model.save
       // and it states: 'Handle both "key", value and {key: value} -style arguments.'
       if (key == null || typeof key === 'object') {
         attrs = key;
@@ -57,13 +57,13 @@
       }
 
       // Check for "formData" flag and check for if file exist.
-      if ( options.formData === true 
-           || options.formData !== false 
-              && mergedAttrs[ this.fileAttribute ] 
+      if ( options.formData === true
+           || options.formData !== false
+              && mergedAttrs[ this.fileAttribute ]
               && mergedAttrs[ this.fileAttribute ] instanceof File
               || mergedAttrs[ this.fileAttribute ] instanceof FileList
               || mergedAttrs[ this.fileAttribute ] instanceof Blob ) {
-        
+
         // Flatten Attributes reapplying File Object
         var formAttrs = _.clone( mergedAttrs ),
             fileAttr = mergedAttrs[ this.fileAttribute ];
@@ -93,7 +93,7 @@
           var xhr = $.ajaxSettings.xhr();
           xhr.upload.addEventListener('progress', that._progressHandler.bind(that), false);
           return xhr;
-        }    
+        }
       }
 
       // Resume back to original state
@@ -101,7 +101,7 @@
 
       // Continue to call the existing "save" method
       return backboneModelClone.save.call(this, attrs, options);
-      
+
     },
 
     // _ FlattenObject gist by "penguinboy".  Thank You!
@@ -123,7 +123,7 @@
       return output;
 
     },
-    
+
     // _ Get the Progress of the uploading file
     _progressHandler: function( event ) {
       if (event.lengthComputable) {
