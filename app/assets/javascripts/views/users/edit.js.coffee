@@ -22,8 +22,10 @@ class RecipeMe.Views.EditProfile extends Backbone.View
     @params.user.save(attributes,
       success: (response, request)->
         $("#myModal").modal('hide')
+        RecipeMe.currentUser = response
+        console.log response
         view = new RecipeMe.Views.UserProfile({user: response})
-        new RecipeMe.Views.HeaderView({el: 'header'})
+        new RecipeMe.Views.HeaderView({el: '.app-header'})
         $("section#main").slideUp().html(view.render().el).slideDown()
       {patch: true})
 

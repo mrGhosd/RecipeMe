@@ -46,7 +46,7 @@
       <div class="user-connections-block">
         <div class="followers">
           <a class="followers-list-link" href="/#users/<%= @user.get("id") %>/followers">
-            <%= I18n.t('user.followers') %>: <span class="followers-count"><%= @user.get("followers_list").length %></span>
+            <%= I18n.t('user.followers') %>: <span class="followers-count"><%= @user.get("followers_list").length if @user.get("followers_list") %></span>
           </a>
         </div>
         <div class="following">

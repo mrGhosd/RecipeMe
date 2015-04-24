@@ -32,6 +32,8 @@ class RecipeMe.Views.HeaderView extends Backbone.View
           @updates_counter--
         else
           @updates_counter = 0
+      if data.action == "update"
+        this.render()
       this.displayNavMenuNotification() if $("#navigationMenu").width() == 0
 
 
