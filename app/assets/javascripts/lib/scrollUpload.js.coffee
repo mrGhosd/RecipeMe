@@ -12,7 +12,11 @@ window.scrollUpload =
       if $(".upload-image").length == 0
         gif = $("<img src='/images/ajax-loader.gif' class='upload-image'/>")
         $(window.placeholder).after(gif)
-      setTimeout(window.scrollUpload.upload, 1000)
+        setTimeout(window.scrollUpload.upload, 1000)
+      return false
+    else
+      return
+
 
 
   upload: ->
@@ -21,7 +25,7 @@ window.scrollUpload =
       data: {page: ++window.page}
       success: (response, request) ->
         window.successCallback(response, request, collection)
-    $(".upload-image").remove()
+        $(".upload-image").remove()
 
 
 

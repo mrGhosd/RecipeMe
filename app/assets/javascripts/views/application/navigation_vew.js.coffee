@@ -3,18 +3,21 @@ class RecipeMe.Views.NavigationView extends Backbone.View
   template: JST['application/navigation']
   events:
     'click a': 'hideNavigationMenu'
+    'click .news-feed': 'resetFeedsCounter'
 
   initialize:(options = {}) ->
+    @feed_update = 0
     @view = options.view if options.view
     if RecipeMe.currentUser
       @user = RecipeMe.currentUser
       @user.fetch({async: false})
-      @following = new RecipeMe.Collections.Users(RecipeMe.currentUser.get("following_list").first(6))
-      @followers = new RecipeMe.Collections.Users(RecipeMe.currentUser.get("followers_list").first(6))
+      @following = new RecipeMe.Collections.Users(@user.get("following_list").first(6))
+      @followers = new RecipeMe.Collections.Users(@user.get("followers_list").first(6))
       @followers.on('add', @render, this)
       @followers.on('remove', @render, this)
       @following.on('add', @render, this)
       @listenTo(Backbone, "User", @updateUser)
+      @listenTo(Backbone, "Feed", @updateFeedData)
 #    @listenTo(Backbone, "navigationMenu", @removeFollowingMessage)
     this.render()
 
@@ -29,6 +32,18 @@ class RecipeMe.Views.NavigationView extends Backbone.View
       if data.action == "unfollow"
         this.updateUnfollowList(data.obj)
 
+  updateFeedData: (data) ->
+    followersID = @user.get("followers_list").pluck("id")
+    if parseInt(data.id, 10) in followersID
+      @feed_update++
+      this.addNotificationToUpdate()
+
+
+  addNotificationToUpdate: ->
+    if $(".feed-notification").length == 0
+      feed_item = $("<span class='label label-danger feed-notification'></span>")
+      $(".news-feed").append(feed_item)
+    $(".feed-notification").text(@feed_update)
 
 
   hideNavigationMenu: (e)->
@@ -38,6 +53,10 @@ class RecipeMe.Views.NavigationView extends Backbone.View
     @user.fetch({async: false})
     @following = new RecipeMe.Collections.Users(RecipeMe.currentUser.get("following_list").first(6))
     this.updateFolowersFollowingList()
+
+  resetFeedsCounter: ->
+    @feed_update = 0
+    $(".feed-notification").remove()
 
 
   updateFolowersFollowingList: (object) ->

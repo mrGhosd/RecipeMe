@@ -11,6 +11,7 @@ class Recipe < ActiveRecord::Base
   acts_as_taggable
   after_create :update_user_recipe
   after_create :send_message_to_author_followers unless Rails.env == "development"
+  after_destroy :destroy_recipe
 
   validates :title, :description, presence: true
 
@@ -61,5 +62,10 @@ class Recipe < ActiveRecord::Base
     self.user.followers.each do |follower|
       RecipesMailer.delay.create_message(follower, self.user, self)
     end
+  end
+
+  def destroy_recipe
+    UserUpdate.where(update_entity: self.class.to_s, update_id: self.id).destroy_all
+    Vote.where(voteable_id: self.id, voteable_type: self.class.to_s).destroy_all
   end
 end

@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      render json: @user.as_json(methods: [:followers_list, :following_list, :correct_naming, :last_sign_in_at_h]), status: :ok
+      render json: @user.to_json, status: :ok
     else
       render json: @user.errors.to_json, status: :forbidden
     end
@@ -61,6 +61,6 @@ class UsersController < ApplicationController
   def user_params
     params.permit(:email, :password,
                   :nickname, :surname,
-                  :name, :date_of_birth, :city, :avatar)
+                  :name, :date_of_birth, :city)
   end
 end

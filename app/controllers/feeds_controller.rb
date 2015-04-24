@@ -1,7 +1,7 @@
 class FeedsController < ApplicationController
 
   def index
-    feeds = current_user.feed.paginate(page: params[:page] || 1, per_page: 5).order(created_at: :asc)
+    feeds = current_user.feed.paginate(page: params[:page] || 1, per_page: 10).order(created_at: :asc)
     render json: feeds.as_json, status: :ok
   end
 

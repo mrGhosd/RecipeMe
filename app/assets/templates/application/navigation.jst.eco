@@ -26,7 +26,7 @@
       <li><a href="/#categories"> <img src="/images/category.png" /><%= I18n.t('menu.category') %></a></li>
       <li><a href="/#news"> <img src="/images/news29.png" /> <%= I18n.t('menu.news') %></a></li>
       <% if RecipeMe.currentUser: %>
-          <li><a href="/#users/<%= RecipeMe.currentUser.get("id") %>/feed"> <img src="/images/news29.png" /><%= I18n.t('menu.updates') %></a></li>
+          <li><a href="/#users/<%= RecipeMe.currentUser.get("id") %>/feed" class="news-feed"> <img src="/images/news29.png" /><%= I18n.t('menu.updates') %></a></li>
       <% end %>
       <li><a href="/#callbacks"> <img src="/images/review4.png" /> <%= I18n.t('menu.feedback') %></a></li>
     </ul>

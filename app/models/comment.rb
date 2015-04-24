@@ -4,6 +4,7 @@ class Comment <ActiveRecord::Base
 
   validates :text, presence: true
   after_create :update_comment
+  after_destroy :destroy_comment
 
   include Rate
 
@@ -14,5 +15,10 @@ class Comment <ActiveRecord::Base
   def update_comment
     CommentUpdate.create(user_id: self.user.id, update_type: 'create',
     update_entity: self.class.to_s, update_entity_for: self.class.to_s, update_id: self.id)
+  end
+
+  def destroy_comment
+    UserUpdate.where(update_entity: self.class.to_s, update_id: self.id).destroy_all
+    Vote.where(voteable_id: self.id, voteable_type: self.class.to_s).destroy_all
   end
 end
