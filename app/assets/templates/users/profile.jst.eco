@@ -46,12 +46,12 @@
       <div class="user-connections-block">
         <div class="followers">
           <a class="followers-list-link" href="/#users/<%= @user.get("id") %>/followers">
-            <%= I18n.t('user.followers') %>: <%= @user.get("followers_list").length %>
+            <%= I18n.t('user.followers') %>: <span class="followers-count"><%= @user.get("followers_list").length %></span>
           </a>
         </div>
         <div class="following">
           <a class="followers-list-link" href="/#users/<%= @user.get("id") %>/following">
-            <%= I18n.t('user.following') %> <%= @user.get("following_list").length %>
+            <%= I18n.t('user.following') %> <span class="following-count"><%= @user.get("following_list").length %></span>
           </a>
         </div>
       </div>
