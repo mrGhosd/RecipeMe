@@ -60,12 +60,14 @@ gem 'sidekiq'
 gem 'sidetiq'
 gem 'mysql2'
 gem 'thinking-sphinx'
+gem 'dotenv'
+gem 'dotenv-deployment', require: 'dotenv/deployment'
 
 group :development do
-  gem 'capistran', require: false
+  gem 'capistrano', require: false
   gem 'capistrano-bundler'
   gem 'capistrano-rails', require: false
-  gem 'capistran-rvm', require: false
+  gem 'capistrano-rvm', require: false
 end
 
 

@@ -27,10 +27,12 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
       @ingridients.on('add', @render, this)
       @ingridients.on('remove', @render, this)
 
+      @comments.on('push', @renderCommentList, this)
       @comments.on('add', @render, this)
+
       @comments.on('change', @render, this)
       @comments.on('remove', @render, this)
-      @comments.on('reset', @render, this)
+#      @comments.on('reset', @render, this)
     this.render()
 
 
@@ -120,14 +122,15 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     @steps.each(@addStep)
     @comments.each(@addComment)
     @ingridients.each(@addIngridient)
-    window.scrollUpload.init(@page, "api/recipes/#{@model.get('id')}/comments", $("div.recipe-comments"), this.successCommentsUpload)
+    window.scrollUpload.init(@page, "api/recipes/#{@model.get('id')}/comments", $("div.recipe-comments"), this.successCommentsUpload, @comments)
     this
 
-  successCommentsUpload: (response, request) ->
+  successCommentsUpload: (response, request, collection) ->
     for model in response
-      comment = new RecipeMe.Models.Comment(model)
-      view = new RecipeMe.Views.Comment(model: comment)
-      $("div.recipe-comments").append(view.render().el)
+      collection.push(model)
+#      comment = new RecipeMe.Models.Comment(model)
+#      view = new RecipeMe.Views.Comment(model: comment)
+#      $("div.recipe-comments").append(view.render().el)
 
   showVotedUsersPopup: (event) ->
     if RecipeMe.currentUser || $(".popup-view")
@@ -139,6 +142,8 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     $(".popup-view").remove()
     $(".popup-view").fadeOut()
 
+  renderCommentList: (comment) ->
+    alert "1"
 
   addStep: (step) ->
     view = new RecipeMe.Views.Step({model: step})
@@ -147,7 +152,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
   addComment: (comment)->
     if !_.isEqual(comment.attributes, {recipe: comment.get("recipe")})
       view = new RecipeMe.Views.Comment({model: comment})
-      $(".recipe-comments").prepend view.render().el
+      $(".recipe-comments").append view.render().el
 
   addIngridient: (ingridient) ->
     view = new RecipeMe.Views.Ingridient({model: ingridient})
