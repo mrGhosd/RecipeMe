@@ -8,7 +8,7 @@
       <% end %>
     </div>
     <input type="hidden" class="step_image_id" steps="true" />
-    <input type="file" name="image"  class="step-image hide" />
+    <input type="file" name="image"  class="step-image-uploader hide" />
 </div>
 <div class="step-actions">
   <a href="#" data-remote="true" class="btn btn-danger remove-step">

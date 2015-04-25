@@ -2,7 +2,7 @@ class RecipeMe.Views.StepForm extends Backbone.View
   template: JST['recipes/step_form']
   className: 'step-block'
   events:
-    'change input.step-image': 'uploadRecipeStepImage'
+    'change input.step-image-uploader': 'uploadRecipeStepImage'
     'click  .step-placeholder': 'triggerFileUpload'
     'dragenter .step-placeholder': 'enterDrag'
     'dragleave .step-placeholder': 'leaveDrag'
@@ -21,7 +21,6 @@ class RecipeMe.Views.StepForm extends Backbone.View
       img = new Image(100, 75)
       img.class = "image-view"
       img.src = dataUri
-      console.log image.find("img")
       if image.find("img") == undefined
         image.find(".step-placeholder").html(img)
       else
@@ -34,16 +33,18 @@ class RecipeMe.Views.StepForm extends Backbone.View
     @model.set({description: text})
 
   uploadRecipeStepImage: (event) ->
-    this.initFileReader($(event.target).prev(".step-placeholder"))
-    $(event.target).val()
-    if $(event.target).val() == "" || typeof $(event.target).val() == undefined
-      return false
-    else
-      $(event.target).prev(".step-placeholder img").remove()
-      image = $(event.target)[0].files[0]
-      @reader.readAsDataURL(image)
-      $(event.target).prev(".step-placeholder").removeClass("empty")
-      this.createStepImage(event, "Step")
+    event.preventDefault()
+    event.stopPropagation(event)
+    this.initFileReader($(event.currentTarget).closest('.step-image').find(".step-placeholder"))
+#    $(event.target).val()
+#    if $(event.target).val() == "" || typeof $(event.target).val() == undefined
+#      return false
+#    else
+#      $(event.target).prev(".step-placeholder img").remove()
+    image = $(event.target)[0].files[0]
+    @reader.readAsDataURL(image)
+    $(event.currentTarget).closest('.step-image').find(".step-placeholder").removeClass("empty")
+    this.createStepImage(event, "Step")
 
   enterDrag: (event) ->
     $(event.target).addClass("hover")
@@ -80,28 +81,20 @@ class RecipeMe.Views.StepForm extends Backbone.View
     return uploadedFile
 
   triggerFileUpload: (event) ->
-    if $(event.target).next("input.step-image").length > 0
-      $(event.target).next("input.step-image").click()
-    else
-      $(event.target).parent().next("input.step-image").click()
+    $(event.currentTarget).closest(".step-image").find('.step-image-uploader').click()
 
   createStepImage: (event, type) ->
     formData = new FormData()
     @image = @model.get("image")
-    console.log @model
     file = this.getFileFromEvent(event)
     formData.append('name', file)
     formData.append('imageable_type', type)
-    if $(event.target).closest(".step-block").attr("image_id") && $(event.target).closest(".step-block").attr("image_id").length > 0
-      image_id = $(event.target).closest(".step-block").attr("image_id")
-      formData.append('imageable_id', image_id)
     if @image == undefined
       @image = new RecipeMe.Models.Image()
     else
       @image = new RecipeMe.Models.Image(@image)
     @image.uploadImage(formData)
     @model.set("image", @image)
-    console.log @model
 
 
   render: ->

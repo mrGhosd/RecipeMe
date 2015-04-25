@@ -2,7 +2,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
   template: JST['recipes/form']
 
   events:
-    'click .recipe-image': 'resetFile'
     'change .recipe-image': 'fileUploadAccept'
     'submit #recipe_form': 'createRecipe'
     'click .back-button': 'returnToList'
@@ -84,15 +83,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
         ingridient.url = "api/recipes/#{response.id}/ingridients"
       else
         ingridient.url = "/api/recipes/#{response.id}/ingridients/#{ingridient.get("id")}"
-      console.log ingridient
-      ingridient.save(
-        success: (response, request) ->
-          console.log response
-          console.log request
-        error: (response, request) ->
-          console.log response
-          console.log request
-      )
+      ingridient.save()
 
 
   createSteps: (steps, response, request) ->
@@ -103,14 +94,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
         step.url = "/api/recipes/#{response.id}/steps"
       else
         step.url = "/api/recipes/#{response.id}/steps/#{step.get("id")}"
-      step.save(
-        success: (response, request) ->
-          console.log response
-          console.log request
-        error: (response, request) ->
-          console.log response
-          console.log request
-      )
+      step.save()
 
   returnToList: (event)->
     Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
