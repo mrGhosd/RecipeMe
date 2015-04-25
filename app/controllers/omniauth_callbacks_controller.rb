@@ -53,7 +53,4 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  def connect
-    redirect_to Instagram.authorize_url(:redirect_uri => "http://localhost:3000/users/auth/instagram/callback")
-  end
 end

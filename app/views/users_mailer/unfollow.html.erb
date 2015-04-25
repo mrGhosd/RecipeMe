@@ -1,2 +1,2 @@
 <p>Здравствуйте</p>
-<p>Пользователь <%= raw link_to @follower.correct_naming, "http://localhost:3000/#users/#{@follower.id}", target: '_blank' %> отписался от ваших обновлений</p>
+<p>Пользователь <%= raw link_to @follower.correct_naming, "#{Rails.application.routes.default_url_options[:host]}/#users/#{@follower.id}", target: '_blank' %> отписался от ваших обновлений</p>
