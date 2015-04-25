@@ -21,3 +21,4 @@ dump.rdb
 config/*.sphinx.conf
 db/sphinx
 log/*.sphinx.*
+config/database.yml

@@ -174,15 +174,17 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     $(".recipe-tags").tagsinput()
 
   fileUploadAccept: (event) ->
-    $("#recipe_form .recipe-image").val()
-    if $("#recipe_form .recipe-image").val() == "" || typeof $("#recipe_form .recipe-image").val() == "undefined"
-      return false
-    else
-      $(".image-placeholder .image-view").remove()
-      image = this.getFileFromEvent(event)
-      @reader.readAsDataURL(image)
-      $(".image-placeholder").removeClass("empty")
-      this.createRecipeImage(event, "Recipe")
+    event.preventDefault()
+    event.stopPropagation(event)
+#    $("#recipe_form .recipe-image").val()
+#    if $("#recipe_form .recipe-image").val() == "" || typeof $("#recipe_form .recipe-image").val() == "undefined"
+#      return false
+#    else
+#      $(".image-placeholder .image-view").remove()
+    image = this.getFileFromEvent(event)
+    @reader.readAsDataURL(image)
+    $(".image-placeholder").removeClass("empty")
+    this.createRecipeImage(event, "Recipe")
 
   updateRecipesCollection: ->
     RecipeMe.recipesCollection.fetch()

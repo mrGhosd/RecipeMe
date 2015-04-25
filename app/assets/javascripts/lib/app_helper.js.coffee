@@ -12,7 +12,7 @@ window.appHelper =
         if $(element).attr("type") == "submit" || $(element).attr("steps") || $(element).attr("ingridients")
           continue
         if $(element).attr("type") == "file"
-          attributes["#{$(element).attr('name')}"] =  $(element)[0].files[0] if $(element)[0].files[0]
+          attributes["#{$(element).attr('name')}"] =  $(element)[0].files[0] if $(element)[0].files[0] && form.attr("id") == $("#user_form").attr("id")
           continue
 
         attributes["#{$(element).attr('name')}"] = $(element).val()
