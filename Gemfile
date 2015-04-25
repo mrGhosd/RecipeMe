@@ -61,6 +61,14 @@ gem 'sidetiq'
 gem 'mysql2'
 gem 'thinking-sphinx'
 
+group :development do
+  gem 'capistran', require: false
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails', require: false
+  gem 'capistran-rvm', require: false
+end
+
+
 group :development, :test do
   gem 'jasmine-rails'
   gem 'sinon-rails'
