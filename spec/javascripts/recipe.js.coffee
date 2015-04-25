@@ -38,6 +38,19 @@ describe "Recipe", ->
       it "doesn't save recipe if title field is empty", ->
         expect(JSON.parse(@responses[2]).title[0]).toBe("cant be blank")
 
+    describe "with valid attributes", ->
+      beforeEach ->
+
+        @recipe = new RecipeMe.Models.Recipe({title: "Title", description: "Desc", user_id: 1})
+        @server.respondWith("POST", "/api/recipes",
+          [200, { "Content-Type": "application/json" }, JSON.stringify(@recipe)]);
+        @recipe.save()
+        @server.respond()
+        @responses = @server.responses[0].response
+
+      it "doesn't marke recipe as new", ->
+        console.log @recipe
+        expect(@recipe.isNew()).toBe(false)
 
 
 

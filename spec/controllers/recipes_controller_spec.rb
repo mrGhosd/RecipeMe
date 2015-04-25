@@ -3,18 +3,36 @@ require 'rails_helper'
 describe RecipesController do
   # login_user
   let!(:user) { create :user }
-  let!(:recipe) { create :recipe, user_id: user.id }
+  let!(:recipes_first_page) { create_list :recipe, 12, user_id: user.id }
+  let!(:recipes_second_page) { create_list :recipe, 12, user_id: user.id }
+  let!(:recipe) { recipes_first_page[0] }
   let!(:image) { create :image, imageable_id: recipe.id, imageable_type: "Recipe" }
 
   describe "GET #index" do
-    it "return a list of recipes" do
-      get :index
-      expect(response.body).to eq(Recipe.all.to_json(only: [:title, :id, :user_id], methods: [:image]))
+    before { get :index }
+
+    %w(id title user_id rate comments_count image).each do |attr|
+      it "recipe attributes contain #{attr}" do
+          expect(response.body).to be_json_eql(recipe.send(attr.to_sym).to_json).at_path("0/#{attr}")
+      end
     end
 
     it "render recipes as json" do
-      get :index
       expect(response.status).to eq(200)
+    end
+
+    context "pagination" do
+      let!(:json_params) { {only: [:title, :id, :user_id, :rate, :comments_count], methods: [:image]} }
+
+      it "load first page" do
+        get :index, page: 1
+        expect(response.body).to eq(recipes_first_page.to_json(json_params))
+      end
+
+      it "load second page" do
+        get :index, page: 2
+        expect(response.body).to eq(recipes_second_page.to_json(json_params))
+      end
     end
   end
 
