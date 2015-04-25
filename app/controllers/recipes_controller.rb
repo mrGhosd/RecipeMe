@@ -54,6 +54,10 @@ class RecipesController < ApplicationController
     end
   end
 
+
+
+  private
+
   def send_update_recipe_message
     msg = { resource: 'Recipe',
             action: 'attributes-change',
@@ -74,8 +78,6 @@ class RecipesController < ApplicationController
 
     $redis.publish 'rt-change', msg.to_json
   end
-
-  private
 
   def send_recipe_create_message
     msg = { resource: 'Recipe',

@@ -4,10 +4,12 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rails'
 require 'support/feature_helper'
+require 'support/auth_helper'
 
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.include FactoryGirl::Syntax::Methods
+  config.include UserControllerMacros, :type => :controller
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation

@@ -1,12 +1,15 @@
 require 'rails_helper'
 
 describe RecipesController do
-  # login_user
   let!(:user) { create :user }
   let!(:recipes_first_page) { create_list :recipe, 12, user_id: user.id }
   let!(:recipes_second_page) { create_list :recipe, 12, user_id: user.id }
   let!(:recipe) { recipes_first_page[0] }
+
   let!(:image) { create :image, imageable_id: recipe.id, imageable_type: "Recipe" }
+
+  before { login_as user }
+
 
   describe "GET #index" do
     before { get :index }
@@ -37,13 +40,73 @@ describe RecipesController do
   end
 
   describe "GET #show" do
-    it "return a recipe with id" do
-      get :show, id: recipe.id, format: :json
-      expect(response.body).to eq(recipe.to_json(methods: [:comments, :image, :steps, :tag_list]))
+    let!(:step){ create :step, recipe_id: recipe.id }
+    let!(:comment) { create :comment, recipe_id: recipe.id, user_id: user.id }
+    let!(:ingridient) { create :ingridient }
+    let!(:recipe_ingridient) { create :recipe_ingridient, recipe_id: recipe.id, ingridient_id: ingridient.id }
+    
+    before { get :show, id: recipe.id, format: :json }
+
+    %w(id title description tag_list user_id rate image comments steps ingridients user created_at_h).each do |attr|
+      it "recipe attributes contain #{attr}" do
+        expect(response.body).to be_json_eql(recipe.send(attr.to_sym).to_json).at_path("#{attr}")
+      end
+    end
+
+    context "comments" do
+
+      it "included comments" do
+        expect(response.body).to have_json_size(1).at_path("comments")
+      end
+
+      %w(id user_id recipe_id text created_at updated_at rate).each do |attr|
+        it "recipe comment contain #{attr}" do
+          expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("comments/0/#{attr}")
+        end
+      end
+    end
+
+    context "ingridients" do
+
+      it "included ingridients" do
+        expect(response.body).to have_json_size(1).at_path("ingridients")
+      end
+
+      %w(id name created_at updated_at).each do |attr|
+        it "recipe ingridient contain #{attr}" do
+          expect(response.body).to be_json_eql(ingridient.send(attr.to_sym).to_json).at_path("ingridients/0/#{attr}")
+        end
+      end
+    end
+
+    context "steps" do
+
+
+      it "included steps" do
+        expect(response.body).to have_json_size(1).at_path("steps")
+      end
+
+      %w(id recipe_id description created_at updated_at).each do |attr|
+        it "recipe step contain #{attr}" do
+          expect(response.body).to be_json_eql(step.send(attr.to_sym).to_json).at_path("steps/0/#{attr}")
+        end
+      end
+
+    end
+
+    context "image" do
+      it "included image" do
+        expect(response.body).to have_json_size(6).at_path("image")
+      end
+
+      %w(id imageable_type imageable_id created_at updated_at).each do |attr|
+        it "recipe image contain #{attr}" do
+          expect(response.body).to be_json_eql(image.send(attr.to_sym).to_json).at_path("image/#{attr}")
+        end
+      end
     end
 
     it "return 200 status" do
-      get :show, id: recipe.id, format: :json
       expect(response.status).to eq(200)
     end
   end
@@ -51,7 +114,7 @@ describe RecipesController do
   describe "PUT #update" do
     context "with valid attributes" do
       it "update attributes of recipe" do
-        put :update, id: recipe.id, title: "ololo", description: "awdawdawd"
+        patch :update, id: recipe.id, title: "ololo", description: "awdawdawd", user_id: user.id
         recipe.reload
         expect(recipe.title).to eq("ololo")
       end
@@ -80,22 +143,22 @@ describe RecipesController do
   describe "POST #create" do
     context "with valid attributes" do
       it "create a new recipe" do
-        expect{post :create, {title: "ololo", description: "awdawdawd"}}.to change(Recipe, :count).by(1)
+        expect{post :create, {title: "ololo", description: "awdawdawd", user_id: user.id}}.to change(Recipe, :count).by(1)
       end
 
       it "return status 200" do
-        post :create, {title: "ololo", description: "awdawdawd"}
+        post :create, {title: "ololo", description: "awdawdawd", user_id: user.id}
         expect(response.status).to eq(200)
       end
     end
 
     context "with invalid attributes" do
       it "doesn't create a new recipe" do
-        expect{post :create, {title: "", description: "awdawdawd"}}.to change(Recipe, :count).by(0)
+        expect{post :create, {title: "", description: "awdawdawd", user_id: user.id}}.to change(Recipe, :count).by(0)
       end
 
       it "return new recipe errors" do
-        post :create, title: "", description: "awdawdawd"
+        post :create, title: "", description: "awdawdawd", user_id: user.id
         expect(JSON.parse(response.body)).to have_key("title")
       end
     end

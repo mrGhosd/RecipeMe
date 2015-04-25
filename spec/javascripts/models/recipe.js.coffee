@@ -48,9 +48,11 @@ describe "Recipe", ->
         @server.respond()
         @responses = @server.responses[0].response
 
-      it "doesn't marke recipe as new", ->
-        console.log @recipe
-        expect(@recipe.isNew()).toBe(false)
+      it "has 200 status", ->
+        expect(@responses[0]).toBe(200)
+
+      it "return recipes attributes object", ->
+        expect(JSON.parse(@responses[2])).toEqual(@recipe.attributes)
 
 
 
