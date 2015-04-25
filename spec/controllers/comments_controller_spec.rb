@@ -2,29 +2,35 @@ require 'rails_helper'
 
 describe CommentsController do
   let!(:user) { create :user }
-  let!(:recipe) { create :recipe }
-  let!(:comment) { create :comment, user_id: user.id, recipe_id: recipe.id }
+  let!(:recipe) { create :recipe, user_id: user.id }
+  let!(:comment_first_page) { create_list :comment, 5, user_id: user.id, recipe_id: recipe.id }
+  let!(:comment_second_page) { create_list :comment, 5, user_id: user.id, recipe_id: recipe.id }
+  let!(:comment) { comment_first_page.first }
 
   describe "GET #index" do
-    it "return a collection of comments for recipe" do
-      get :index, recipe_id: recipe.id
-      expect(response.body).to eq(recipe.comments.to_json)
+    before { get :index, recipe_id: recipe.id }
+
+    %w(id user_id recipe_id text rate created_at updated_at).each do |attr|
+      it "comment contain #{attr}" do
+        expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("0/#{attr}")
+      end
     end
 
     it "return 200 status" do
-      get :index, recipe_id: recipe.id
       expect(response.status).to eq(200)
     end
   end
 
   describe "GET #show" do
-    it "return an comment for recipe" do
-      get :show, recipe_id: recipe.id, id: comment.id
-      expect(response.body).to eq(comment.to_json)
+    before { get :show, recipe_id: recipe.id, id: comment.id }
+
+    %w(id user_id recipe_id text rate created_at updated_at).each do |attr|
+      it "comment contain #{attr}" do
+        expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("#{attr}")
+      end
     end
 
     it "return 200 status" do
-      get :show, recipe_id: recipe.id, id: comment.id
       expect(response.status).to eq(200)
     end
   end

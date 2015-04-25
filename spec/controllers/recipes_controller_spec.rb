@@ -44,7 +44,7 @@ describe RecipesController do
     let!(:comment) { create :comment, recipe_id: recipe.id, user_id: user.id }
     let!(:ingridient) { create :ingridient }
     let!(:recipe_ingridient) { create :recipe_ingridient, recipe_id: recipe.id, ingridient_id: ingridient.id }
-    
+
     before { get :show, id: recipe.id, format: :json }
 
     %w(id title description tag_list user_id rate image comments steps ingridients user created_at_h).each do |attr|
