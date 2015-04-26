@@ -34,6 +34,6 @@ module RecipeMe
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.secret_key_base = "382f2d8466117e883fb9fbe455e553d3ab85647555d5dd58514cdaee8e0b7c9608079c40bb22cd02c14437c8f65a5ba89c52730299d7fc05b34971cbe95d00ab"
+    # config.secret_key_base = "382f2d8466117e883fb9fbe455e553d3ab85647555d5dd58514cdaee8e0b7c9608079c40bb22cd02c14437c8f65a5ba89c52730299d7fc05b34971cbe95d00ab"
   end
 end
