@@ -20,7 +20,7 @@
         <% end %>
       </div>
       <input type="hidden" name="image_id" class="hidden-image-value-news" />
-      <input type="file" name="image" id="news_image" class="news-image" />
+      <input type="file" name="image" id="news_image" class="news-image-uploader" />
     </div>
   <input type="submit" class="btn btn-success" value="<%= I18n.t('application.form.save') %>"/>
   <a href="/#news" class="btn btn-default"><%= I18n.t('application.form.back') %></a>

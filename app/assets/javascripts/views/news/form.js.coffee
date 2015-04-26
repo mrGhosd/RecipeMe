@@ -1,7 +1,9 @@
 class RecipeMe.Views.NewsForm extends Backbone.View
   template: JST["news/form"]
   events:
+    'change .news-image-uploader': 'loadNewsImage'
     'submit #news-form': 'saveNews'
+    'click .image-placeholder': 'triggetImageUpload'
     'dragenter .image-placeholder': 'enterDrag'
     'dragleave .image-placeholder': 'leaveDrag'
     'drop .image-placeholder': 'dropImage'
@@ -23,6 +25,17 @@ class RecipeMe.Views.NewsForm extends Backbone.View
       $(".image-placeholder").html(img)
     @reader.onerror = (event) ->
       console.log "ОШИБКА!"
+
+  triggetImageUpload: ->
+    $(".news-image-uploader").click()
+
+  loadNewsImage: (event) ->
+    event.preventDefault()
+    event.stopPropagation()
+    image = $(event.target)[0].files[0]
+    @reader.readAsDataURL(image)
+    $(event.target).closest(".col-md-2").find(".image-placeholder").removeClass("empty")
+    this.createImage(event, "News")
 
   enterDrag: (event) ->
     event.preventDefault()
