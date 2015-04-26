@@ -66,20 +66,15 @@ class RecipeMe.Views.NewsForm extends Backbone.View
   createImage: (event, type) ->
     formData = new FormData()
     @image = @model.get("image")
-    console.log @model
     file = this.getFileFromEvent(event)
     formData.append('name', file)
     formData.append('imageable_type', type)
-    if $(event.target).find("img") && $(event.target).find("img").length > 0
-      image_id = $(event.target).closest(".hidden-image-value-news").attr("image_id")
-      formData.append('imageable_id', image_id)
     if @image == undefined
       @image = new RecipeMe.Models.Image()
     else
       @image = new RecipeMe.Models.Image(@image)
     @image.uploadImage(formData)
     @model.set("image", @image)
-    console.log @model
 
   saveNews: (event) ->
     event.preventDefault()
