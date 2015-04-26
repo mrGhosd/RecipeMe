@@ -102,8 +102,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     dotenv (1.0.2)
-    dotenv-rails (1.0.2)
-      dotenv (= 1.0.2)
+    dotenv-deployment (0.3.0)
+      dotenv (~> 1.0)
     eco (1.0.0)
       coffee-script
       eco-source
@@ -387,7 +387,7 @@ DEPENDENCIES
   database_cleaner (~> 1.0.1)
   devise
   dotenv
-  dotenv-rails
+  dotenv-deployment
   eco
   factory_girl_rails
   faker (~> 1.1.2)
