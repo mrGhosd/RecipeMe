@@ -36,11 +36,6 @@ class RecipeMe.Views.StepForm extends Backbone.View
     event.preventDefault()
     event.stopPropagation(event)
     this.initFileReader($(event.currentTarget).closest('.step-image').find(".step-placeholder"))
-#    $(event.target).val()
-#    if $(event.target).val() == "" || typeof $(event.target).val() == undefined
-#      return false
-#    else
-#      $(event.target).prev(".step-placeholder img").remove()
     image = $(event.target)[0].files[0]
     @reader.readAsDataURL(image)
     $(event.currentTarget).closest('.step-image').find(".step-placeholder").removeClass("empty")

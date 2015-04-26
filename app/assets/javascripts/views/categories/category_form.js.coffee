@@ -2,8 +2,10 @@ class RecipeMe.Views.CategoryForm extends Backbone.View
   template: JST["categories/form"]
 
   events:
+    'change .category_image': 'uploadCategoryImage'
     'submit #category_form': 'submitCategory'
     'click .back-button': 'returnToList'
+    'click .image-placeholder': 'triggerCategoryImageInput'
     'dragenter .image-placeholder': 'enterDrag'
     'dragleave .image-placeholder': 'leaveDrag'
     'drop .image-placeholder': 'dropImage'
@@ -25,6 +27,17 @@ class RecipeMe.Views.CategoryForm extends Backbone.View
       $(".image-placeholder").html(img)
     @reader.onerror = (event) ->
       console.log "ОШИБКА!"
+
+  uploadCategoryImage: (event) ->
+    event.preventDefault()
+    event.stopPropagation()
+    image = $(event.target)[0].files[0]
+    @reader.readAsDataURL(image)
+    $(event.target).closest(".form-group").find(".image-placeholder").removeClass("empty")
+    this.createCategoryImage(event, "Category")
+
+  triggerCategoryImageInput: (event) ->
+    $(".category_image").click()
 
   getFileFromEvent: (event) ->
     original = event.originalEvent
