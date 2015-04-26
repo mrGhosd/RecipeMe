@@ -51,7 +51,7 @@ gem 'omniauth-vkontakte'
 gem 'omniauth-instagram'
 gem 'instagram'
 gem 'cancancan'
-
+gem 'whenever'
 
 gem "letter_opener"
 gem 'letter_opener_web'
@@ -68,6 +68,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
+  gem 'capistrano-sidekiq', require: false
 end
 
 

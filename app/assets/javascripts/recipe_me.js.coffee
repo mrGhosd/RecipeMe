@@ -4,7 +4,7 @@ window.RecipeMe =
   Views: {}
   Routers: {}
   initialize: ->
-    @routes = new RecipeMe.Routers.Recipes()
+    @recipes = new RecipeMe.Routers.Recipes()
     Backbone.history.start()
     this.realtime.connect()
 
