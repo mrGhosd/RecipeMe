@@ -10,6 +10,8 @@
         <div class="image">
           <% if @news.get("image"): %>
             <img src="<%= @news.get("image").name.url if @news.get("image").name.url %>" height="150" width="150" class="img-thumbnail"/>
+          <% else: %>
+            <img src="/images/news-icon.png" height="150" width="150" class="img-thumbnail"/>
           <% end %>
         </div>
         <div class="news-info">

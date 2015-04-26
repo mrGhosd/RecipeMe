@@ -18,10 +18,12 @@
       </div>
     </div>
     <div class="col-md-2">
-      <% if @news.get("image").name: %>
+      <% if @news.get("image"): %>
           <a href="<%= @news.get("image").name.url %>"  data-lightbox="recipe-image" data-title="<%= @news.get("title") %>">
             <img src="<%=  @news.get("image").name.url %>" class="recipe-image img-thumbnail"/>
           </a>
+      <% else: %>
+          <img src="/images/news-icon.png" class="recipe-image img-thumbnail"/>
       <% end %>
     </div>
   </div>
