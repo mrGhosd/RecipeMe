@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv.load(File.expand_path("../../.env.#{Rails.env}", FILE))
+# Dotenv.load(File.expand_path("../../.env.#{Rails.env}", FILE))
 # Dotenv::Railtie.load
 
 SECRET_KEY_BASE = ENV['secret_key_base']

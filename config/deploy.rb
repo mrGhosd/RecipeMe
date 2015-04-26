@@ -11,9 +11,9 @@ set :repo_url, 'git@github.com:mrGhosd/RecipeMe.git'
 set :deploy_to, "/home/deploy/recipeme"
 set :deploy_user, 'deploy'
 
-set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml .env}
 
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system .env realtime}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system realtime}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
