@@ -6,13 +6,19 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Dotenv::Railtie.load
+
+SECRET_KEY_BASE = ENV['secret_key_base']
+
 module RecipeMe
   class Application < Rails::Application
     # Load defaults from config/*.env in config
-    Dotenv.load *Dir.glob(Rails.root.join("config/**/*.env"), File::FNM_DOTMATCH)
+    # Dotenv.load *Dir.glob(Rails.root.join("config/**/*.env"), File::FNM_DOTMATCH)
+    #
+    # # Override any existing variables if an environment-specific file exists
+    # Dotenv.overload *Dir.glob(Rails.root.join("config/**/*.env.#{Rails.env}"), File::FNM_DOTMATCH)
 
-    # Override any existing variables if an environment-specific file exists
-    Dotenv.overload *Dir.glob(Rails.root.join("config/**/*.env.#{Rails.env}"), File::FNM_DOTMATCH)
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
