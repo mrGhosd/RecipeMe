@@ -6,9 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv::Railtie.load
-
-SECRET_KEY_BASE = ENV['secret_key_base']
+# Dotenv::Railtie.load
+#
+# SECRET_KEY_BASE = ENV['secret_key_base']
 
 module RecipeMe
   class Application < Rails::Application
