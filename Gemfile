@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.1'
 # Use sqlite3 as the database for Active Record
@@ -61,7 +62,7 @@ gem 'sidetiq'
 gem 'mysql2'
 gem 'thinking-sphinx'
 gem 'dotenv'
-gem 'dotenv-rails', :require => 'dotenv/rails-now'
+
 
 group :development do
   gem 'capistrano', require: false
