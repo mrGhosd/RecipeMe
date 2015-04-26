@@ -61,7 +61,7 @@ gem 'sidetiq'
 gem 'mysql2'
 gem 'thinking-sphinx'
 gem 'dotenv'
-gem 'dotenv-rails', require: 'dotenv/rails-now'
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
 
 group :development do
   gem 'capistrano', require: false
