@@ -10,6 +10,7 @@ set :repo_url, 'git@github.com:mrGhosd/RecipeMe.git'
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deploy/recipeme"
 set :deploy_user, 'deploy'
+set :applicationdir, "/home/deploy/recipeme/current"
 
 set :linked_files, %w{config/database.yml .env}
 
@@ -25,14 +26,19 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
+      # execute :touch, release_path.join('tmp/restart.txt')
+      invoke 'unicorn:restart'
     end
   end
 
-  after :publishing, :restart do
-
+  task :run_nodejs_server do
+    on roles(:app), in: :sequence, wait: 5 do
+      run "cd #{applicationdir}/realtime && node server.js"
+    end
   end
 
+  after :publishing, :restart
+  after :restart, :run_nodejs_server
 
   # after :restart, :clear_cache do
   #   on roles(:app), in: :groups, limit: 3, wait: 10 do
