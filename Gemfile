@@ -64,6 +64,10 @@ gem 'thinking-sphinx'
 gem 'dotenv'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
 
+group :production do
+  gem 'unicorn'
+end
+
 group :development do
   gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
