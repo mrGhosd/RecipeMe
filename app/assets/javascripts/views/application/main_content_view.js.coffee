@@ -1,13 +1,10 @@
-class RecipeMe.Views.ApplicationView extends Backbone.View
-  template: JST['application/main']
+class RecipeMe.Views.MainContentView extends Backbone.View
 
   events:
     'click a': 'navigate'
 
   initialize: ->
 #    @listenTo(Backbone, "Auth", @updateView)
-    this.render()
-    this.initAppLayout()
 
 
   initAppLayout: ->

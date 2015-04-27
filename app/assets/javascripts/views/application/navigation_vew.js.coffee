@@ -6,19 +6,13 @@ class RecipeMe.Views.NavigationView extends Backbone.View
     'click .news-feed': 'resetFeedsCounter'
 
   initialize:(options = {}) ->
+    @listenTo(Backbone, "Auth", @updateView)
     @feed_update = 0
     @view = options.view if options.view
     if RecipeMe.currentUser
-      @user = RecipeMe.currentUser
-      @user.fetch({async: false})
-      @following = new RecipeMe.Collections.Users(@user.get("following_list").first(6))
-      @followers = new RecipeMe.Collections.Users(@user.get("followers_list").first(6))
-      @followers.on('add', @render, this)
-      @followers.on('remove', @render, this)
-      @following.on('add', @render, this)
+      this.setUserMainData()
       @listenTo(Backbone, "User", @updateUser)
       @listenTo(Backbone, "Feed", @updateFeedData)
-#    @listenTo(Backbone, "navigationMenu", @removeFollowingMessage)
     this.render()
 
   updateUser: (data) ->
@@ -37,6 +31,10 @@ class RecipeMe.Views.NavigationView extends Backbone.View
     if parseInt(data.id, 10) in followersID
       @feed_update++
       this.addNotificationToUpdate()
+
+  updateView: (data) ->
+    this.setUserMainData()
+    this.render()
 
 
   addNotificationToUpdate: ->
@@ -93,7 +91,17 @@ class RecipeMe.Views.NavigationView extends Backbone.View
       @following.each(@addFollowing)
     this
 
-
+  setUserMainData: ->
+    if RecipeMe.currentUser
+      @user = RecipeMe.currentUser
+      @user.url = "api/users/#{@user.get("id")}"
+      @user.fetch({async: false})
+      console.log @user
+      @following = new RecipeMe.Collections.Users(@user.get("following_list").first(6))
+      @followers = new RecipeMe.Collections.Users(@user.get("followers_list").first(6))
+      @followers.on('add', @render, this)
+      @followers.on('remove', @render, this)
+      @following.on('add', @render, this)
 
   addFollower: (user) ->
     view = new RecipeMe.Views.UserListItem({model: user, size: 70})

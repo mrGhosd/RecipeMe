@@ -1,4 +1,5 @@
 <div class="quick-panel">
+
   <% if RecipeMe.currentUser: %>
     <div class="user_block">
       <div class="user-avatar">
