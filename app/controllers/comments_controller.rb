@@ -9,6 +9,7 @@ class CommentsController <ApplicationController
   include ChangeObject
   include Rate
   include UsersLiked
+
   respond_to :json
 
   def index
