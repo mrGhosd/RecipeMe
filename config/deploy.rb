@@ -31,14 +31,14 @@ namespace :deploy do
     end
   end
 
-  task :run_nodejs_server do
-    on roles(:app), in: :sequence, wait: 5 do
-      run "cd #{applicationdir}/realtime && node server.js"
-    end
-  end
+  # task :run_nodejs_server do
+  #   on roles(:app), in: :sequence, wait: 5 do
+  #     run "cd #{applicationdir}/realtime && node server.js"
+  #   end
+  # end
 
   after :publishing, :restart
-  after :restart, :run_nodejs_server
+  # after :restart, :run_nodejs_server
 
   # after :restart, :clear_cache do
   #   on roles(:app), in: :groups, limit: 3, wait: 10 do
