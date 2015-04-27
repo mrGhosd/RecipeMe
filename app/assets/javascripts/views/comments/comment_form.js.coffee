@@ -12,13 +12,10 @@ class RecipeMe.Views.CommentForm extends Backbone.View
     attributes = window.appHelper.formSerialization($("#comment_form"))
     if @model.comment
       comment = new RecipeMe.Models.Comment({recipe: @model.recipe.get("id"), id: @model.comment.get('id')})
+      comment.set({collection: @model.collection})
       comment.save(attributes,
         success: (response, request)->
-          console.log response
-          console.log request
-          view = new RecipeMe.Views.Comment({model: response})
-          $(".row.comment-form").parent().prev("div").html(view.render().el).show()
-          $(".row.comment-form").parent().remove()
+          response.get("collection").push(response)
         error: (response, request)->
           errors = request.responseJSON
           $.each(errors, (key, value)->
@@ -28,12 +25,10 @@ class RecipeMe.Views.CommentForm extends Backbone.View
       ,{patch: true})
     else
       comment = new RecipeMe.Models.Comment({recipe: @model.recipe.get("id")})
+      comment.set({collection: @model.collection})
       comment.save(attributes,
         success: (response, request)->
-          view = new RecipeMe.Views.Comment(model: response)
-          $(".recipe-comments").prepend(view.render().el)
-          $(".row.comment-form").parent().prev("div").show()
-          $(".row.comment-form").parent().remove()
+           response.get("collection").push(response)
         error: (response, request) ->
           errors = request.responseJSON
           $.each(errors, (key, value)->
