@@ -5,7 +5,7 @@ window.RecipeMe =
   Routers: {}
   initialize: ->
     @recipes = new RecipeMe.Routers.Recipes()
-    Backbone.history.start()
+    Backbone.history.start({pushState: true})
     this.realtime.connect()
 
 $(document).ready ->

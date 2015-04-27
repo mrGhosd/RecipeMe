@@ -22,3 +22,13 @@ class RecipeMe.Views.ApplicationView extends Backbone.View
     this.initAppLayout()
     this.render()
 
+  navigate: (event) ->
+    event.preventDefault()
+    event.stopPropagation()
+    if $(event.currentTarget).data("remote") != "true" && $(event.currentTarget).attr("href") != "#"
+      Backbone.history.navigate($(event.currentTarget).attr("href"), {trigger: true})
+#    console.log $(event.currentTarget).attr("href").length
+
+
+
+
