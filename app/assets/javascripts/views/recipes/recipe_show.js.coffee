@@ -32,7 +32,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
       @comments.on('change', @render, this)
       @comments.on('remove', @render, this)
-#      @comments.on('reset', @render, this)
     this.render()
 
 
@@ -128,9 +127,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
   successCommentsUpload: (response, request, collection) ->
     for model in response
       collection.push(model)
-#      comment = new RecipeMe.Models.Comment(model)
-#      view = new RecipeMe.Views.Comment(model: comment)
-#      $("div.recipe-comments").append(view.render().el)
 
   showVotedUsersPopup: (event) ->
     if RecipeMe.currentUser || $(".popup-view")

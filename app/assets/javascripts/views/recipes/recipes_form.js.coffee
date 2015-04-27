@@ -17,9 +17,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     if options.model
       @model = options.model
       @steps = @model.get('steps')
-#      @steps.fetch()
       @current_ingridients = @model.get('ingridients')
-#      @current_ingridients.fetch()
     else
       @model = new RecipeMe.Models.Recipe()
       @steps = new RecipeMe.Collections.Steps()
@@ -163,10 +161,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     @reader.readAsDataURL(image)
     $(".image-placeholder").removeClass("empty")
     this.createRecipeImage(event, "Recipe")
-
-  updateRecipesCollection: ->
-    RecipeMe.recipesCollection.fetch()
-
 
   getFileFromEvent: (event) ->
     original = event.originalEvent
