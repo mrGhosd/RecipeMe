@@ -95,9 +95,6 @@ class RecipeMe.Views.HeaderView extends Backbone.View
       )
       $(".mask").addClass("hide")
 
-
-
-
   toggleCurrentLocale: (event) ->
     event.preventDefault()
     $.ajax "api/users/locale",

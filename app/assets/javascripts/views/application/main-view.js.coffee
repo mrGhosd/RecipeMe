@@ -5,7 +5,6 @@ class RecipeMe.Views.ApplicationView extends Backbone.View
     'click a': 'navigate'
 
   initialize: ->
-#    @listenTo(Backbone, "Auth", @updateView)
     this.render()
     this.initAppLayout()
 
