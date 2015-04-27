@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    true
+    self.role.eql?("admin")
   end
 
 
