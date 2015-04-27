@@ -79,11 +79,6 @@ class RecipeMe.Views.HeaderView extends Backbone.View
 
     @update_counter = 0
     if $("#navigationMenu").width() == 0 && handler
-      if $("#navigationMenu").width() == 0
-        view = new RecipeMe.Views.NavigationView({el: '#navigationMenu', view: this}  )
-#      else
-#        $("#navigationMenu .quick-panel").show()
-
       $(".app-header").animate({width: "#{@width - @navigation_width}px", left: "#{@navigation_width}px"}, 250)
       $("#navigationMenu").show().animate({width: "#{@navigation_width}" }, 250)
       $(".mask").removeClass("hide")
@@ -92,7 +87,6 @@ class RecipeMe.Views.HeaderView extends Backbone.View
       $("#navigationMenu").queue(->
         $(this).animate({width: "0px", display: "none"}, 250)
         $(this).dequeue()
-#        $(this).find(".quick-panel").hide()
       )
       $(".mask").addClass("hide")
 
