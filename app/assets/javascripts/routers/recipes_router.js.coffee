@@ -26,8 +26,6 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   initialize: ->
     this.setup()
-    @collection = new RecipeMe.Collections.Recipes()
-    @collection.fetch()
     RecipeMe.recipesCollection = @collection
 
   application: ->
