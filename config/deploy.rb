@@ -10,7 +10,6 @@ set :repo_url, 'git@github.com:mrGhosd/RecipeMe.git'
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deploy/recipeme"
 set :deploy_user, 'deploy'
-set :applicationdir, "/home/deploy/recipeme/current"
 
 set :linked_files, %w{config/database.yml .env}
 
@@ -33,7 +32,7 @@ namespace :deploy do
   after :publishing, :restart
   task :run_nodejs_server do
     on roles(:app), in: :sequence, wait: 5 do
-      run "cd #{applicationdir}/realtime && node server.js"
+      execute "cd /home/deploy/recipeme/current/realtime && node server.js"
     end
   end
   after :restart, :run_nodejs_server
