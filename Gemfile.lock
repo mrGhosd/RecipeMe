@@ -432,6 +432,7 @@ DEPENDENCIES
   sidetiq
   sinon-rails
   spring
+  sprockets-rails
   therubyracer
   thinking-sphinx
   turbolinks

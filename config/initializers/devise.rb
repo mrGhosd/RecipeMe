@@ -232,10 +232,10 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :facebook, '362944653893618', '99e517e7da0f4d17cb8209e756ee540a', scope: [:email], client_options: {ssl: {verify: false}}
-  config.omniauth :twitter, 'm6bC2VttJHjamxyDSwI5vEvAo', 'Omw6wdqzWQpakmhYcVxUutNsuMfOWm7VaXLjKlNvKImBeOukbY', scope: [:email]
-  config.omniauth :vkontakte, '4838041', 'dshRjco0XaxGOqakYyj8', scope: [:email]
-  config.omniauth :instagram, '6efa955160f84404aa97256b114b9ae5', 'e8ee4d92966a45cca71c1b89b8a76915', authorize_params: {redirect_uri: "#{Rails.application.routes.default_url_options[:host]}/users/auth/instagram/callback"}
+  config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret, scope: [:email], client_options: {ssl: {verify: false}}
+  config.omniauth :twitter, Rails.application.secrets.twitter_app_id, Rails.application.secrets.twitter_app_secret, scope: [:email], client_options: {ssl: {verify: false}}
+  config.omniauth :vkontakte, Rails.application.secrets.vk_app_id, Rails.application.secrets.vk_app_secret, scope: [:email], client_options: {ssl: {verify: false}}
+  config.omniauth :instagram, Rails.application.secrets.instagram_app_id, Rails.application.secrets.instagram_app_secret, authorize_params: {redirect_uri: "http://localhost:3000/users/auth/instagram/callback"}, client_options: {ssl: {verify: false}}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

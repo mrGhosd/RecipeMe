@@ -14,9 +14,11 @@
       </div>
     </div>
     <div class="col-md-2">
-      <div class="image-placeholder <%= "empty" if  @news.get('image').id == undefined || @news.get('image') == null || @news.get('image') == undefined %>" id="newsPlaceholder" draggable="true">
-        <% if @news.get("image") && @news.get("image").id: %>
-            <img src="<%=  @news.get("image").name.url if @news.get("image") %>" height="200" width="200" image_id="<%= @news.get("image").imageable_id if @news.get("image")  %>"/>
+      <div class="image-placeholder <%= "empty" if @news.get('image') == null || @news.get("id") == undefined %>" id="newsPlaceholder" draggable="true">
+        <% if @news.get("image"): %>
+            <% if @news.get("image").id: %>
+                <img src="<%= @news.get("image").name.url if @news.get("image") %>" height="200" width="200" image_id="<%= @news.get("image").imageable_id if @news.get("image")  %>"/>
+            <% end %>
         <% end %>
       </div>
       <input type="hidden" name="image_id" class="hidden-image-value-news" />
