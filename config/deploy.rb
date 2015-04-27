@@ -21,7 +21,7 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 set :default_shell, '/bin/bash -l'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-after :publishing, :restart
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
@@ -30,7 +30,7 @@ namespace :deploy do
       invoke 'unicorn:restart'
     end
   end
-
+  after :publishing, :restart
   # task :run_nodejs_server do
   #   on roles(:app), in: :sequence, wait: 5 do
   #     run "cd #{applicationdir}/realtime && node server.js"
