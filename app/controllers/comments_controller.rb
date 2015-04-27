@@ -9,11 +9,12 @@ class CommentsController <ApplicationController
   include ChangeObject
   include Rate
   include UsersLiked
+
   respond_to :json
 
   def index
     recipe = Recipe.find(params[:recipe_id])
-    render json: recipe.comments.order(created_at: :asc).paginate(page: params[:page] || 1, per_page: 5).as_json
+    render json: recipe.comments.order(created_at: :desc).paginate(page: params[:page] || 1, per_page: 5).as_json
   end
 
   def create

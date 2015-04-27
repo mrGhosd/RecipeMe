@@ -1,14 +1,13 @@
 class RecipeMe.RecipesController
-  constructor: ->
-    @collection = new RecipeMe.Collections.Recipes()
-    @collection.fetch({reset: true})
 
   index: ->
+    this.loadRecipesCollection()
     view = new RecipeMe.Views.RecipesIndex({collection: @collection})
     $("section#main").html(view.el)
     view.render()
 
   new: ->
+    this.loadRecipesCollection()
     if RecipeMe.currentUser
       view = new RecipeMe.Views.RecipesForm({collection: @collection})
       $("section#main").html(view.el)
@@ -39,3 +38,6 @@ class RecipeMe.RecipesController
       error: (response, request) ->
         new RecipeMe.ErrorHandler(response, request).showErrorPage()
 
+  loadRecipesCollection: ->
+    @collection = new RecipeMe.Collections.Recipes()
+    @collection.fetch({reset: true})

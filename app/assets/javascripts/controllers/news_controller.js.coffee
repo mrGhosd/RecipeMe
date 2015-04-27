@@ -1,9 +1,7 @@
 class RecipeMe.NewsController
-  constructor: ->
-    @collection = new RecipeMe.Collections.News()
-    @collection.fetch({async: false})
 
   index: ->
+    this.newsCollectionUpload()
     view = new RecipeMe.Views.NewsIndex({collection: @collection})
     $("section#main").html(view.el)
     view.render()
@@ -34,3 +32,7 @@ class RecipeMe.NewsController
         view = new RecipeMe.Views.NewsShow({model: model})
         $("section#main").html(view.el)
         view.render()
+
+  newsCollectionUpload: ->
+    @collection = new RecipeMe.Collections.News()
+    @collection.fetch({async: false})

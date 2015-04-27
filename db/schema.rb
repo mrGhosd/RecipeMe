@@ -11,24 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419064012) do
+ActiveRecord::Schema.define(version: 20150427084249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "authorizations", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "provider"
-    t.string  "uid"
+    t.string  "provider", limit: 255
+    t.string  "uid",      limit: 255
   end
 
-  add_index "authorizations", ["provider"], name: "index_authorizations_on_provider", using: :btree
-  add_index "authorizations", ["uid"], name: "index_authorizations_on_uid", using: :btree
   add_index "authorizations", ["user_id"], name: "index_authorizations_on_user_id", using: :btree
 
   create_table "callbacks", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "author"
+    t.string   "author",     limit: 255
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -62,28 +60,23 @@ ActiveRecord::Schema.define(version: 20150419064012) do
   end
 
   create_table "ingridients", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "ingridients", ["name"], name: "index_ingridients_on_name", using: :btree
 
   create_table "news", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",      limit: 255
     t.text     "text"
-    t.integer  "rate",       default: 0
+    t.integer  "rate",                   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "news", ["rate"], name: "index_news_on_rate", using: :btree
-  add_index "news", ["title"], name: "index_news_on_title", using: :btree
 
   create_table "recipe_ingridients", force: :cascade do |t|
     t.integer  "recipe_id"
     t.integer  "ingridient_id"
-    t.string   "size"
+    t.string   "size",          limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -144,27 +137,24 @@ ActiveRecord::Schema.define(version: 20150419064012) do
 
   create_table "user_updates", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "update_type"
+    t.string   "update_type",       limit: 255
     t.integer  "update_id"
-    t.string   "update_entity"
-    t.string   "update_entity_for"
-    t.string   "type"
+    t.string   "update_entity",     limit: 255
+    t.string   "update_entity_for", limit: 255
+    t.string   "type",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "user_updates", ["type"], name: "index_user_updates_on_type", using: :btree
-  add_index "user_updates", ["update_entity"], name: "index_user_updates_on_update_entity", using: :btree
-  add_index "user_updates", ["update_entity_for"], name: "index_user_updates_on_update_entity_for", using: :btree
   add_index "user_updates", ["user_id"], name: "index_user_updates_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "email",                  limit: 255, default: "",     null: false
+    t.string   "encrypted_password",     limit: 255, default: "",     null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,      null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -177,20 +167,19 @@ ActiveRecord::Schema.define(version: 20150419064012) do
     t.datetime "date_of_birth"
     t.string   "city",                   limit: 255
     t.string   "avatar",                 limit: 255
+    t.string   "role",                               default: "user"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role"], name: "index_users_on_role", using: :btree
 
   create_table "votes", force: :cascade do |t|
     t.integer  "voteable_id"
-    t.string   "voteable_type"
+    t.string   "voteable_type", limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "votes", ["voteable_id"], name: "index_votes_on_voteable_id", using: :btree
-  add_index "votes", ["voteable_type"], name: "index_votes_on_voteable_type", using: :btree
 
 end

@@ -5,7 +5,7 @@ window.scrollUpload =
     window.successCallback = callback
     window.placeholder = uploadPlaceholder
     window.collection = collection if collection.length > 0
-    $(window).on('scroll', this.setUploadImage)
+    $(document).on('scroll', this.setUploadImage)
 
   setUploadImage: ->
     if $(document).height() <= $(window).scrollTop() + $(window).height()

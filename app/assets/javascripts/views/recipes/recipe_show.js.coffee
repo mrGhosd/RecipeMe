@@ -32,7 +32,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
       @comments.on('change', @render, this)
       @comments.on('remove', @render, this)
-#      @comments.on('reset', @render, this)
     this.render()
 
 
@@ -92,7 +91,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
 
   showCommentForm: ->
-    options = {recipe: @model}
+    options = {recipe: @model, collection: @comments}
     view = new RecipeMe.Views.CommentForm(model: options)
     $(".comment-form").html(view.el)
     view.render()
@@ -127,10 +126,9 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
   successCommentsUpload: (response, request, collection) ->
     for model in response
-      collection.push(model)
-#      comment = new RecipeMe.Models.Comment(model)
-#      view = new RecipeMe.Views.Comment(model: comment)
-#      $("div.recipe-comments").append(view.render().el)
+      collection.add(model)
+#      view = new RecipeMe.Views.Comment({model: model})
+#      $(".recipe-comments").prepend(view.render().el)
 
   showVotedUsersPopup: (event) ->
     if RecipeMe.currentUser || $(".popup-view")
@@ -157,7 +155,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
   addIngridient: (ingridient) ->
     view = new RecipeMe.Views.Ingridient({model: ingridient})
     $(".ingiridents-list").append(view.render().el)
-
 
   showComments: (comment)->
     view = new RecipeMe.Views.Comment({model: comment})

@@ -92,7 +92,7 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
   render: ->
     $(@el).html(@template())
     @collection.each(@addRecipe)
-    window.scrollUpload.init(@page, "api/recipes?filter_attr=#{@filter_attr}&filter_order=#{@filter_ord}", $("ul.recipes_list"), this.successRecipesUpload)
+    window.scrollUpload.init(@page, "api/recipes?filter_attr=#{@filter_attr}&filter_order=#{@filter_ord}", $("ul.recipes_list"), this.successRecipesUpload, @collection)
     this
 
 

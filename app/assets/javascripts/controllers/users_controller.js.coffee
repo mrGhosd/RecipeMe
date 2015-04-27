@@ -1,15 +1,10 @@
 class RecipeMe.UsersController
-  constructor: ->
-    @collection = new RecipeMe.Collections.Recipes()
-    @collection.fetch()
 
   show:(id) ->
     model = new RecipeMe.Models.User({id: id})
     model.fetch
       success: (user) ->
-        user_recipes = new RecipeMe.Collections.Recipes(user.get('recipes'))
-        user_recipes.fetch({reset: true})
-        profile = new RecipeMe.Views.UserProfile({user: user, recipes: user_recipes})
+        profile = new RecipeMe.Views.UserProfile({user: user})
         $("section#main").html(profile.el)
         profile.render()
       error: (response, request) ->
@@ -43,8 +38,9 @@ class RecipeMe.UsersController
 
   userFeed: (id) ->
     feed = new RecipeMe.Collections.Feeds({user: id})
+    console.log id
     feed.fetch
-      success: (collection, request) ->
+      success: (collection) ->
         if RecipeMe.currentUser && RecipeMe.currentUser.get("id") == parseInt(id, 10)
           view = new RecipeMe.Views.FeedList({collection: collection})
           $("section#main").html(view.el)

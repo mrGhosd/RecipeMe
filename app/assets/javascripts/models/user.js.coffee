@@ -22,6 +22,8 @@ class RecipeMe.Models.User extends Backbone.Model
       response.following_list.fetch({async: false})
     return response
 
+  isAdmin: ->
+    return this.get("role") == "admin"
 
   isResourceOwner: (resource) ->
     if resource.get("user_id") == this.get("id")

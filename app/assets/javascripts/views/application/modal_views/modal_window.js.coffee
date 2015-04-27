@@ -50,7 +50,10 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
     user.save(attributes,
       success: ->
         RecipeMe.currentUser = user
-        window.location.reload()
+        Backbone.trigger("Auth", user)
+        Backbone.history.stop()
+        Backbone.history.start()
+        $("#myModal").modal('hide')
       error: (response, request)->
         object = JSON.parse(request.responseText)
         if form.attr("action") == "/users/sign_in"

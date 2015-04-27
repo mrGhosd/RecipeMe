@@ -12,6 +12,7 @@ class RecipeMe.Views.HeaderView extends Backbone.View
     'keyup .search-field': 'sendSearchRequest'
 
   initialize: ->
+    @listenTo(Backbone, "Auth", @updateView)
     @updates_counter = 0
     @update_element = $("<span class='label label-danger user-notification'></span>")
     @listenTo(Backbone, "User", @updateUserData)
@@ -38,9 +39,10 @@ class RecipeMe.Views.HeaderView extends Backbone.View
         @updates_counter++
       this.displayNavMenuNotification() if $("#navigationMenu").width() == 0
 
+  updateView: (data) ->
+    this.render()
 
   displayNavMenuNotification: ->
-    console.log @updates_counter
     if @updates_counter <= 0
       $(".left-menu-opener").find(".label.label-danger.user-notification").remove()
     else
@@ -57,7 +59,10 @@ class RecipeMe.Views.HeaderView extends Backbone.View
     $.ajax "/users/sign_out",
       type: "DELETE"
       success: (data, textStatus, jqXHR) ->
-        window.location.reload()
+        RecipeMe.currentUser = null
+        Backbone.trigger("Auth", null)
+        Backbone.history.stop()
+        Backbone.history.start()
       error: (jqXHR, textStatus, errorThrown) ->
         console.log jqXHR.responseText
 
@@ -89,9 +94,6 @@ class RecipeMe.Views.HeaderView extends Backbone.View
         $(this).dequeue()
       )
       $(".mask").addClass("hide")
-
-
-
 
   toggleCurrentLocale: (event) ->
     event.preventDefault()

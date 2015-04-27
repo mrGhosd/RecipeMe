@@ -1,4 +1,4 @@
-<% if RecipeMe.currentUser: %>
+<% if RecipeMe.currentUser && RecipeMe.currentUser.isAdmin(): %>
     <a href="/#news/new" class="btn btn-primary glyphicon glyphicon-plus"></a>
 <% end %>
 <div class="news-list"></div>

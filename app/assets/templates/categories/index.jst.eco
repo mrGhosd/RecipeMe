@@ -1,2 +1,4 @@
-<a href="/#categories/new" class="btn btn-primary"><%= I18n.t('category.new') %></a>
+<% if RecipeMe.currentUser && RecipeMe.currentUser.isAdmin(): %>
+    <a href="/#categories/new" class="btn btn-primary"><%= I18n.t('category.new') %></a>
+<% end %>
 <div class="categories-list"></div>

@@ -26,9 +26,6 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   initialize: ->
     this.setup()
-    @collection = new RecipeMe.Collections.Recipes()
-    @collection.fetch()
-    RecipeMe.recipesCollection = @collection
 
   application: ->
     this.index()
@@ -97,7 +94,6 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   showNews: (id) ->
     new RecipeMe.NewsController().show(id)
-
 
   userRecipes: (id) ->
     if RecipeMe.currentUser
