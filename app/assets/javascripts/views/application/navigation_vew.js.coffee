@@ -102,6 +102,7 @@ class RecipeMe.Views.NavigationView extends Backbone.View
       @followers.on('add', @render, this)
       @followers.on('remove', @render, this)
       @following.on('add', @render, this)
+      @following.on('remove', @render, this)
 
   addFollower: (user) ->
     view = new RecipeMe.Views.UserListItem({model: user, size: 70})

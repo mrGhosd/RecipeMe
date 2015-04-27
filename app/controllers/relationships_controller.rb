@@ -42,7 +42,7 @@ class RelationshipsController < ApplicationController
     msg = { resource: 'User',
             action: 'following',
             id: current_user.id,
-            obj: current_user
+            obj: @user
     }
 
     $redis.publish 'rt-change', msg.to_json
@@ -52,7 +52,7 @@ class RelationshipsController < ApplicationController
     msg = { resource: 'User',
             action: 'unfollowing',
             id: current_user.id,
-            obj: current_user
+            obj: @user
     }
 
     $redis.publish 'rt-change', msg.to_json
