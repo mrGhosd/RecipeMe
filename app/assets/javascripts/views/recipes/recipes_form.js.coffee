@@ -17,9 +17,9 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     if options.model
       @model = options.model
       @steps = @model.get('steps')
-      @steps.fetch({async: false})
+#      @steps.fetch()
       @current_ingridients = @model.get('ingridients')
-      @current_ingridients.fetch({async: false})
+#      @current_ingridients.fetch()
     else
       @model = new RecipeMe.Models.Recipe()
       @steps = new RecipeMe.Collections.Steps()
@@ -63,7 +63,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     ingridients = {ingridients: @current_ingridients, callback: this.createIngridients}
     @model.createFromForm(attributes, step, ingridients,
       success = (response, request) ->
-#        RecipeMe.currentUser.fetch()
         Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
       error = (response, request) ->
         errorMessage = new RecipeMe.ErrorHandler(response, request)
@@ -160,11 +159,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
   fileUploadAccept: (event) ->
     event.preventDefault()
     event.stopPropagation(event)
-#    $("#recipe_form .recipe-image").val()
-#    if $("#recipe_form .recipe-image").val() == "" || typeof $("#recipe_form .recipe-image").val() == "undefined"
-#      return false
-#    else
-#      $(".image-placeholder .image-view").remove()
     image = this.getFileFromEvent(event)
     @reader.readAsDataURL(image)
     $(".image-placeholder").removeClass("empty")
@@ -188,9 +182,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     file = this.getFileFromEvent(event)
     formData.append('name', file)
     formData.append('imageable_type', type)
-#    if $(".image-placeholder img").attr("image_id") && $(".image-placeholder img").attr("image_id").length > 0
-#      image_id = $(".image-placeholder img").attr("image_id")
-#      formData.append('imageable_id', image_id)
     if @image == undefined
       @image = new RecipeMe.Models.Image()
     else
