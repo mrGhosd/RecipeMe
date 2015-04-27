@@ -18,10 +18,10 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
+set :default_shell, '/bin/bash -l'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-
+after :publishing, :restart
 namespace :deploy do
   desc 'Restart application'
   task :restart do
@@ -37,7 +37,7 @@ namespace :deploy do
   #   end
   # end
 
-  after :publishing, :restart
+
   # after :restart, :run_nodejs_server
 
   # after :restart, :clear_cache do
