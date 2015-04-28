@@ -127,8 +127,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
   successCommentsUpload: (response, request, collection) ->
     for model in response
       collection.add(model)
-#      view = new RecipeMe.Views.Comment({model: model})
-#      $(".recipe-comments").prepend(view.render().el)
 
   showVotedUsersPopup: (event) ->
     if RecipeMe.currentUser || $(".popup-view")

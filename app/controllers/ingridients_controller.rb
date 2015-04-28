@@ -2,8 +2,8 @@ class IngridientsController < ApplicationController
   before_action :load_recipe, only: [:create, :recipe_ingridients, :destroy]
   before_action :load_ingridient, only: [:update, :destroy]
   after_action :update_recipe_connection, only: [:create]
-  after_action :send_create_ingridient_action, only: :create
-  after_action :send_destroy_ingridient_action, only: :destroy
+
+  include IngridientsConcerns
 
   def index
     @ingridients = Ingridient.all
@@ -55,27 +55,6 @@ class IngridientsController < ApplicationController
 
   private
 
-  def send_create_ingridient_action
-    msg = { resource: 'Ingridient',
-            action: 'create',
-            id: @recipe.id,
-            obj: @ingridient,
-            size: params[:in_size]
-    }
-
-    $redis.publish 'rt-change', msg.to_json
-  end
-
-  def send_destroy_ingridient_action
-    msg = { resource: 'Ingridient',
-            action: 'destroy',
-            id: @recipe.id,
-            obj: @ingridient,
-            size: params[:in_size]
-    }
-    $redis.publish 'rt-change', msg.to_json
-  end
-
   def add_ingridient_to_recipe(ingridient)
     Recipe.find(params[:recipe_id]).ingridients << ingridient
   end
@@ -96,8 +75,6 @@ class IngridientsController < ApplicationController
     if @ingridient
       RecipeIngridient.find_by_or_create(recipe_id: params[:recipe_id], ingridient_id: @ingridient.id, size: params[:in_size])
     end
-
-    # @ingridient.recipe_ingridients.find_by_or_create(recipe_id: params[:recipe_id], size: params[:in_size])
   end
 
 end

@@ -1,4 +1,5 @@
 module Images
+  include WebsocketsMessage
   include ChangeObject
 
   def create_image
@@ -11,13 +12,10 @@ module Images
 
   def send_image_message
     parent = changed_object.try(:recipe).present? ? changed_object.recipe : changed_object
-    msg = { resource: changed_object.class.to_s,
-            action: 'image',
-            id: parent.id,
-            obj: changed_object,
-            image: changed_object.image
-    }
-
-    $redis.publish 'rt-change', msg.to_json
+    message({ resource: changed_object.class.to_s,
+              action: 'image',
+              id: parent.id,
+              obj: changed_object,
+              image: changed_object.image })
   end
 end
