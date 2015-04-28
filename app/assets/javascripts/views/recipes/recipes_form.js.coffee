@@ -138,12 +138,10 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     $(".steps-list").append(view.render().el)
 
   renderRecipeIngridient: (ingridient) ->
-    console.log ingridient.url()
     view = new RecipeMe.Views.IngridientForm(model: ingridient)
     $(".ingridients-list").append(view.render().el)
 
   render: ->
-    console.log @current_ingridients
     if @model
       $(@el).html(@template(recipe: @model, categories: @categories))
     else
@@ -183,5 +181,4 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
 
     @image.uploadImage(formData)
     @model.set("image", @image)
-    console.log @model
 

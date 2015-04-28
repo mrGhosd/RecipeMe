@@ -40,6 +40,14 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  def comments_list
+    self.comments.order(created_at: :desc).limit(5)
+  end
+
+  def steps_list
+    self.steps.as_json(methods: :image)
+  end
+
   def ingridients_list
     self.ingridients.uniq.map do |ingridient|
       ingridient.attributes.merge({size: ingridient.recipe_ingridients.find_by(ingridient_id: ingridient.id).size,
