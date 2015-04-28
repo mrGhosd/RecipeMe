@@ -2,13 +2,11 @@ class CommentsController <ApplicationController
   before_action :load_comment, only: [:update, :show, :destroy, :rating, :liked_users]
   before_action :change_object, only: [:rating, :liked_users]
   after_action :mail_send, only: :create
-  after_action :send_create_comment_message, only: :create
-  after_action :send_update_comment_message, only: :update
-  after_action :send_destroy_comment_message, only: :destroy
 
   include ChangeObject
   include Rate
   include UsersLiked
+  include CommentsConcern
 
   respond_to :json
 
@@ -39,6 +37,7 @@ class CommentsController <ApplicationController
   end
 
   def destroy
+    @comment.destroy_comment
     if @comment.destroy
       render json: { success: true}, status: :ok
     else
@@ -47,38 +46,6 @@ class CommentsController <ApplicationController
   end
 
   private
-
-  def send_destroy_comment_message
-    msg = { resource: 'Recipe',
-            action: 'comment-destroy',
-            id: @comment.recipe.id,
-            obj: @comment,
-            count: @comment.recipe.comments_count - 1
-    }
-
-    $redis.publish 'rt-change', msg.to_json
-  end
-
-  def send_update_comment_message
-    msg = { resource: 'Recipe',
-            action: 'comment-update',
-            id: @comment.recipe.id,
-            obj: @comment
-    }
-
-    $redis.publish 'rt-change', msg.to_json
-  end
-
-  def send_create_comment_message
-    msg = { resource: 'Recipe',
-            action: 'comment-create',
-            id: @comment.recipe.id,
-            obj: @comment,
-            count: @comment.recipe
-    }
-
-    $redis.publish 'rt-change', msg.to_json
-  end
 
   def load_comment
     @comment = Comment.find(params[:id])
