@@ -1,12 +1,8 @@
 class StepsController < ApplicationController
   before_action :load_recipe
   after_action :create_image, only: [:create, :update]
-  after_action :send_create_step_message, only: :create
-  after_action :send_destroy_step_message, only: :destroy
-  after_action :send_update_step_message, only: :update
 
-
-
+  include StepsConcerns
   include Images
 
   def index
@@ -51,31 +47,5 @@ class StepsController < ApplicationController
     params.permit(:description, :recipe_id)
   end
 
-  def send_create_step_message
-    msg = { resource: 'Step',
-            action: 'create',
-            id: @recipe.id,
-            obj: @step
-    }
-    $redis.publish 'rt-change', msg.to_json
-  end
 
-  def send_update_step_message
-    msg = { resource: 'Step',
-            action: 'update',
-            id: @recipe.id,
-            obj: @step
-    }
-
-    $redis.publish 'rt-change', msg.to_json
-  end
-
-  def send_destroy_step_message
-    msg = { resource: 'Step',
-            action: 'destroy',
-            id: @recipe.id,
-            obj: @step
-    }
-    $redis.publish 'rt-change', msg.to_json
-    end
 end
