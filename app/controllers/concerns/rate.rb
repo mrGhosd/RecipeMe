@@ -1,4 +1,5 @@
 module Rate
+  include WebsocketsMessage
   include ChangeObject
 
   def rating
@@ -28,11 +29,9 @@ module Rate
   end
 
   def send_rate_message
-    msg = { resource: changed_object.class.to_s,
-            action: 'rate',
-            id: changed_object.id,
-            obj: changed_object }
-
-    $redis.publish 'rt-change', msg.to_json
+    message({ resource: changed_object.class.to_s,
+              action: 'rate',
+              id: changed_object.id,
+              obj: changed_object })
   end
 end

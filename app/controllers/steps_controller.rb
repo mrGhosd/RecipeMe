@@ -78,11 +78,4 @@ class StepsController < ApplicationController
     }
     $redis.publish 'rt-change', msg.to_json
     end
-
-  # def create_image
-  #   if params[:image].present? && params[:image][:image_id].present?
-  #     Image.find(params[:image][:image_id]).update(imageable_id: @step.id)
-  #     @step.update_image
-  #   end
-  # end
 end
