@@ -16,17 +16,18 @@ class RecipeMe.Views.UserProfile extends Backbone.View
   updateUser: (data) ->
     if parseInt(@params.user.get("id"), 10) == parseInt(data.id, 10)
       if data.action == "follow"
-        current_count = parseInt($(".followers-count").text(), 10)
-        $(".followers-list-link").find(".followers-count").text("#{current_count + 1}")
-      if data.action == "following"
-        current_count = parseInt($(".following-count").text(), 10)
-        $(".following-list-link").find(".following-count").text("#{current_count + 1}")
-      if data.action == "unfollowing"
-        current_count = parseInt($(".following-count").text(), 10)
-        $(".following-list-link").find(".following-count").text("#{current_count - 1}")
+        current_count = parseInt($(".user_profile .followers-count").text(), 10)
+        $(".user_profile .followers-list-link").find(".followers-count").html("#{current_count + 1}")
+#      if data.action == "following"
+#        current_count = parseInt($(".following-count").text(), 10)
+#        $(".following-list-link").find(".following-count").html("#{current_count + 1}")
+#      if data.action == "unfollowing"
+#        current_count = parseInt($(".following-count").text(), 10)
+#        $(".following-list-link").find(".following-count").html("#{current_count - 1}")
       if data.action == "unfollow"
-        current_count = parseInt($(".followers-count").text(), 10)
-        $(".followers-list-link").find(".followers-count").text("#{current_count - 1}")
+        current_count = parseInt($(".user_profile .followers-count").text(), 10)
+        console.log current_count
+        $(".user_profile .followers-list-link").find(".followers-count").html("#{current_count - 1}")
       if data.action == "update"
         @params.user.set(data.obj)
         this.render()
