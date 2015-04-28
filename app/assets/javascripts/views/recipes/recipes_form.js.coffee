@@ -26,7 +26,6 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     @common_ingridients = new RecipeMe.Collections.Ingridients()
     @common_ingridients.fetch({async: false})
 
-
     this.loadCategories()
     this.render()
     @reader = new FileReader()

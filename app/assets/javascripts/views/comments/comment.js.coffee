@@ -8,8 +8,6 @@ class RecipeMe.Views.Comment extends Backbone.View
     'click .edit-comment': 'editComment'
     'click .remove-comment': 'deleteComment'
     'click .comment-rate-action': 'changeRate'
-    'mouseover .comment-rate-value': 'showVotedUsersPopup'
-    'mouseleave .comment-rate-value': 'hideVotedUsersPopup'
 
   initialize: (params)->
     if params.model
