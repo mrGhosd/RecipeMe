@@ -16,7 +16,7 @@ describe RecipesController do
 
     %w(id title user_id rate comments_count image).each do |attr|
       it "recipe attributes contain #{attr}" do
-          expect(response.body).to be_json_eql(recipe.send(attr.to_sym).to_json).at_path("0/#{attr}")
+        expect(response.body).to be_json_eql(recipe.send(attr.to_sym).to_json).at_path("0/#{attr}")
       end
     end
 
