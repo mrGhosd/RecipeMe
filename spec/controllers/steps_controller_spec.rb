@@ -5,12 +5,18 @@ describe StepsController do
   let!(:recipe) { create :recipe, user_id: user.id }
   let!(:step) { create :step, recipe_id: recipe.id }
   let!(:image) { create :image, imageable_id: step.id, imageable_type: "Step" }
-  describe "GET #index" do
-    before { get :index, recipe_id: recipe.id, id: step.id }
 
-    it "return an list of steps for recipe" do
-      expect(response.body).to eq(recipe.steps.to_json(methods: :image))
+  before { login_as user }
+
+  describe "GET #index" do
+    before { get :index, recipe_id: recipe.id }
+
+    %w(id recipe_id description image).each do |attr|
+      it "step contain #{attr}" do
+        expect(response.body).to be_json_eql(step.send(attr.to_sym).to_json).at_path("0/#{attr}")
+      end
     end
+
 
     it "return an json with status 200" do
       expect(response.status).to eq(200)
