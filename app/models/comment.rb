@@ -4,7 +4,6 @@ class Comment <ActiveRecord::Base
 
   validates :text, presence: true
   after_create :update_comment
-  # after_destroy :destroy_comment
 
   include Rate
 

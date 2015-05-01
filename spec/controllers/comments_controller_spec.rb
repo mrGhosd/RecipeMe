@@ -5,12 +5,14 @@ describe CommentsController do
   let!(:recipe) { create :recipe, user_id: user.id }
   let!(:comment_first_page) { create_list :comment, 5, user_id: user.id, recipe_id: recipe.id }
   let!(:comment_second_page) { create_list :comment, 5, user_id: user.id, recipe_id: recipe.id }
-  let!(:comment) { comment_first_page.first }
+  let!(:comment) { comment_second_page.last }
+
+  before { login_as user }
 
   describe "GET #index" do
     before { get :index, recipe_id: recipe.id }
 
-    %w(id user_id recipe_id text rate created_at updated_at).each do |attr|
+    %w(id user_id recipe_id text rate).each do |attr|
       it "comment contain #{attr}" do
         expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("0/#{attr}")
       end
@@ -24,7 +26,7 @@ describe CommentsController do
   describe "GET #show" do
     before { get :show, recipe_id: recipe.id, id: comment.id }
 
-    %w(id user_id recipe_id text rate created_at updated_at).each do |attr|
+    %w(id user_id recipe_id text rate ).each do |attr|
       it "comment contain #{attr}" do
         expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("#{attr}")
       end
@@ -40,13 +42,13 @@ describe CommentsController do
       it "create a new comment for recipe" do
         expect{post :create,
         recipe_id: recipe.id,
-        comment: attributes_for(:comment)}.to change(Comment, :count).by(1)
+        comment: attributes_for(:comment, user_id: user.id, recipe_id: recipe.id)}.to change(Comment, :count).by(1)
       end
 
       it "return just created comment" do
         post :create,
         recipe_id: recipe.id,
-        comment: attributes_for(:comment)
+        comment: attributes_for(:comment, user_id: user.id, recipe_id: recipe.id)
         expect(response.body).to eq(Comment.last.to_json)
       end
     end
@@ -55,13 +57,13 @@ describe CommentsController do
       it "create a new comment for recipe" do
         expect{post :create,
         recipe_id: recipe.id,
-        comment: attributes_for(:comment, text: "")}.to change(Comment, :count).by(0)
+        comment: attributes_for(:comment, text: "", user_id: user.id, recipe_id: recipe.id)}.to change(Comment, :count).by(0)
       end
 
       it "return comment errors" do
         post :create,
         recipe_id: recipe.id,
-        comment: attributes_for(:comment, text: "")
+        comment: attributes_for(:comment, text: "", user_id: user.id, recipe_id: recipe.id)
         expect(JSON.parse(response.body)).to have_key("text")
       end
     end
