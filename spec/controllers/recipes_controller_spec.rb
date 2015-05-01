@@ -47,7 +47,7 @@ describe RecipesController do
 
     before { get :show, id: recipe.id, format: :json }
 
-    %w(id title description tag_list user_id rate image comments steps ingridients user created_at_h).each do |attr|
+    %w(id title description tag_list user_id rate image comments_list steps_list ingridients_list user created_at_h).each do |attr|
       it "recipe attributes contain #{attr}" do
         expect(response.body).to be_json_eql(recipe.send(attr.to_sym).to_json).at_path("#{attr}")
       end
@@ -56,12 +56,12 @@ describe RecipesController do
     context "comments" do
 
       it "included comments" do
-        expect(response.body).to have_json_size(1).at_path("comments")
+        expect(response.body).to have_json_size(1).at_path("comments_list")
       end
 
       %w(id user_id recipe_id text created_at updated_at rate).each do |attr|
         it "recipe comment contain #{attr}" do
-          expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("comments/0/#{attr}")
+          expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("comments_list/0/#{attr}")
         end
       end
     end
@@ -69,12 +69,12 @@ describe RecipesController do
     context "ingridients" do
 
       it "included ingridients" do
-        expect(response.body).to have_json_size(1).at_path("ingridients")
+        expect(response.body).to have_json_size(1).at_path("ingridients_list")
       end
 
       %w(id name created_at updated_at).each do |attr|
         it "recipe ingridient contain #{attr}" do
-          expect(response.body).to be_json_eql(ingridient.send(attr.to_sym).to_json).at_path("ingridients/0/#{attr}")
+          expect(response.body).to be_json_eql(ingridient.send(attr.to_sym).to_json).at_path("ingridients_list/0/#{attr}")
         end
       end
     end
@@ -83,12 +83,12 @@ describe RecipesController do
 
 
       it "included steps" do
-        expect(response.body).to have_json_size(1).at_path("steps")
+        expect(response.body).to have_json_size(1).at_path("steps_list")
       end
 
       %w(id recipe_id description created_at updated_at).each do |attr|
         it "recipe step contain #{attr}" do
-          expect(response.body).to be_json_eql(step.send(attr.to_sym).to_json).at_path("steps/0/#{attr}")
+          expect(response.body).to be_json_eql(step.send(attr.to_sym).to_json).at_path("steps_list/0/#{attr}")
         end
       end
 
