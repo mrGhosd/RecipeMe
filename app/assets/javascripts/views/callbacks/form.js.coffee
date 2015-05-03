@@ -6,8 +6,10 @@ class RecipeMe.Views.CallbackForm extends Backbone.View
     'click .remove-form': 'removeForm'
 
   initialize: (params) ->
+    console.log params
     if params.model
       @callback = params.model
+      @collection = params.collection
     else
       @callback = new RecipeMe.Models.Callback()
 
@@ -22,7 +24,8 @@ class RecipeMe.Views.CallbackForm extends Backbone.View
     $(".error-text").remove()
     callbacks = @collection
     attributes = window.appHelper.formSerialization($("#callback-form"))
-    @callback.save(attributes,
+    @callback.set(attributes)
+    @callback.save attributes,
       success: (response, request) ->
         if callbacks
           callbacks.add(response)
@@ -33,7 +36,6 @@ class RecipeMe.Views.CallbackForm extends Backbone.View
       error: (response, request) ->
         error = new RecipeMe.ErrorHandler(response, request)
         error.showFormErrorMessage($("#callback-form"))
-    )
 
   removeForm: (event) ->
     event.preventDefault()

@@ -1,8 +1,7 @@
 class RecipeMe.ErrorHandler
   constructor: (response, request) ->
-    if request
-      @status = request.status
-      @message = request.responseJSON
+    @status = request.status
+    @message = request.responseJSON
 
   showFormErrorMessage: (form) ->
     if @status == 401 || @status == 403
@@ -21,10 +20,11 @@ class RecipeMe.ErrorHandler
     form.after("<div class='error-text'>#{ I18n.t('errors.forbidden')}</div>")
 
   formMessageError: (form) ->
-    $.each(@message, (key, value)->
+    $.each(@message, (key, value) ->
+      console.log @message
       form.find("input[name=\"#{key}\"]").addClass("error")
       form.find("textarea[name=\"#{key}\"]").addClass("error")
-      if key == "description"
+      if key == "description" || key == "text"
         $("<div class='error-text'>#{value[0]}</div>").insertAfter(form.find("textarea[name=\"#{key}\"]"))
       else
         $("<div class='error-text'>#{value[0]}</div>").insertAfter(form.find("input[name=\"#{key}\"]"))

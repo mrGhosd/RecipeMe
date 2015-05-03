@@ -3,7 +3,7 @@ module CallbacksConcerns
   extend ActiveSupport::Concern
 
   included do
-    after_action :send_callback_create_message, only: :create
+    # after_action :send_callback_create_message, only: :create
     after_action :send_callback_destroy_message, only: :destroy
     after_action :send_callback_update_message, only: :update
   end

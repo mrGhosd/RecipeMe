@@ -13,7 +13,7 @@ class CallbacksController < ApplicationController
     if @callback.save
       render json: @callback.as_json, status: :ok
     else
-      render json: @callback.errors.to_json, status: :uprocessible_entity
+      render json: @callback.errors.to_json, status: :unprocessable_entity
     end
   end
 
@@ -24,7 +24,7 @@ class CallbacksController < ApplicationController
     if @callback.update(callback_params)
       render json: @callback.as_json, status: :ok
     else
-      render json: @callback.errors.as_json, status: :unprocessible_entity
+      render json: @callback.errors.as_json, status: :unprocessable_entity
     end
   end
 

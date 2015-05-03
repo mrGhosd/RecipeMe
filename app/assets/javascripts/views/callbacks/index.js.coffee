@@ -36,5 +36,5 @@ class RecipeMe.Views.CallbackIndex extends Backbone.View
     if $(".callback-form").find("form").length
       $(".callback-form").find("form").remove()
     else
-      view = new RecipeMe.Views.CallbackForm(collection: @collection)
+      view = new RecipeMe.Views.CallbackForm({collection: @collection})
       $(".callback-form").append(view.render().el)
