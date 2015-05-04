@@ -1,6 +1,11 @@
 module Images
+  extend ActiveSupport::Concern
   include WebsocketsMessage
   include ChangeObject
+
+  included do
+    after_action :send_image_message, only: :create_image
+  end
 
   def create_image
     if params[:image].present? && (params[:image][:image_id].present? || params[:image][:id].present? )

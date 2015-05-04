@@ -79,16 +79,18 @@ class RecipeMe.Views.NewsForm extends Backbone.View
   saveNews: (event) ->
     event.preventDefault()
     attributes = window.appHelper.formSerialization($("#news-form"))
-    @model.save(attributes,
+    @model.save attributes, {
+      wait: true
       success: (response, request) ->
         Backbone.history.navigate('/news', {trigger: true, repalce: true})
       error: (response, request) ->
         errors = request.responseJSON
-        $.each(errors, (key, value)->
-          $("#news-form input[name=\"#{key}\"]").addClass("error")
-          $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#news-form input[name=\"#{key}\"]"))
-        )
-    )
+        $.each errors, (key, value)->
+          error = new RecipeMe.ErrorHandler(response, request)
+          error.showFormErrorMessage($("#news-form"))
+          }
+
+
 
   render: ->
     $(@el).html(@template(news: @model))

@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
            :dependent => :destroy
   has_many :followers, :through => :reverse_relationships, :source => :follower
 
-  include Rate
+  include RateModel
 
   after_create :set_nickname
 

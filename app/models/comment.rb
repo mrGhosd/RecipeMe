@@ -5,7 +5,7 @@ class Comment <ActiveRecord::Base
   validates :text, presence: true
   after_create :update_comment
 
-  include Rate
+  include RateModel
 
   def self.send_recipe_author_message(comment)
     CommentsMailer.create_message(comment, comment.recipe, comment.recipe.user).deliver

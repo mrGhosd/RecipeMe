@@ -3,7 +3,6 @@ class NewsController < ApplicationController
   before_action :changed_object, only: [:rating, :liked_users]
   after_action :create_image, only: [:create, :update]
 
-  include NewsConcerns
   include ChangeObject
   include Rate
   include UsersLiked
@@ -19,7 +18,7 @@ class NewsController < ApplicationController
     if @news.save
       render json: @news.as_json(methods: :image), status: :ok
     else
-      render json: @news.errors.as_json, status: :unprocessibe_entity
+      render json: @news.errors.as_json, status: :unprocessable_entity
     end
   end
 
@@ -31,7 +30,7 @@ class NewsController < ApplicationController
     if @news.update(news_params)
       render json: @news.as_json(methods: :image), status: :ok
     else
-      render json: @news.errors.as_json, status: :unprocessible_entity
+      render json: @news.errors.as_json, status: :unprocessable_entity
     end
   end
 
