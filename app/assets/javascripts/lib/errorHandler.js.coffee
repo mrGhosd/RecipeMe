@@ -4,6 +4,7 @@ class RecipeMe.ErrorHandler
     @message = request.responseJSON
 
   showFormErrorMessage: (form) ->
+    console.log @status
     if @status == 401 || @status == 403
       this.formMessageForbidden(form)
     if @status == 422
@@ -21,7 +22,6 @@ class RecipeMe.ErrorHandler
 
   formMessageError: (form) ->
     $.each(@message, (key, value) ->
-      console.log @message
       form.find("input[name=\"#{key}\"]").addClass("error")
       form.find("textarea[name=\"#{key}\"]").addClass("error")
       if key == "description" || key == "text"

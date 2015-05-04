@@ -3,30 +3,30 @@ module CallbacksConcerns
   extend ActiveSupport::Concern
 
   included do
-    # after_action :send_callback_create_message, only: :create
-    after_action :send_callback_destroy_message, only: :destroy
-    after_action :send_callback_update_message, only: :update
+    after_create :send_callback_create_message
+    after_destroy :send_callback_destroy_message
+    after_update :send_callback_update_message
   end
 
   def send_callback_create_message
     message({ resource: 'Callback',
               action: 'create',
-              id: @callback.id,
-              obj: @callback
+              id: self.id,
+              obj: self
             })
   end
 
   def send_callback_destroy_message
     message({ resource: 'Callback',
               action: 'destroy',
-              id: @callback.id,
-              obj: @callback })
+              id: self.id,
+              obj: self })
   end
 
   def send_callback_update_message
     message({resource: 'Callback',
              action: 'update',
-             id: @callback.id,
-             obj: @callback })
+             id: self.id,
+             obj: self })
   end
 end
