@@ -30,6 +30,7 @@ class Ability
     can [:rating, :liked_users], [Recipe, Comment, News]
     can :create, Image
     can :create, Comment
+    can [:update, :destroy], Callback, user_id: @user.id
     can [:update, :destroy], Comment, user_id: @user.id
     can [:read, :following, :followers, :comments, :recipes], User
     can [:feeds, :update, :destroy], User, id: @user.id

@@ -15,9 +15,6 @@ class CallbacksController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def update
     if @callback.update(callback_params)
       render json: @callback.as_json, status: :ok
