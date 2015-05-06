@@ -17,8 +17,6 @@ window.scrollUpload =
     else
       return
 
-
-
   upload: ->
     $.ajax window.url,
       type: "GET"
