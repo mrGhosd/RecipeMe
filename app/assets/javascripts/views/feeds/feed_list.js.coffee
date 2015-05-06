@@ -6,7 +6,6 @@ class RecipeMe.Views.FeedList extends Backbone.View
     @followers = new RecipeMe.Collections.Users({usersURL: "api/users/#{RecipeMe.currentUser.get("id")}/followers"})
     @followers.fetch({async: false})
     if params.collection
-
       @collection = params.collection
       @collection.on('add', @render, this)
       @collection.on('remove', @render, this)

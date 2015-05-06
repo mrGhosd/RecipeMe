@@ -5,8 +5,7 @@ class RecipeMe.Views.FeedMain extends Backbone.View
   initialize: (params) ->
     if params.feed
       @feed = params.feed
-      @user = new RecipeMe.Models.User({id: @feed.get("user_id")})
-      @user.fetch({async: false})
+      @user = @feed.get("follower_user")
 
   render: ->
     $(@el).html(@template({feed: @feed, user: @user}))
