@@ -11,6 +11,8 @@ class RecipeMe.Models.Feed extends Backbone.Model
       return "api/users/#{@user}/feeds"
 
   parse: (response) ->
+    if response.follower_user
+      response.follower_user = new RecipeMe.Models.User(response.follower_user)
     if response.update_entity == "Recipe" && response.update_type == "create"
       recipe = new RecipeMe.Models.Recipe({id: response.update_id})
       recipe.fetch({async: false})

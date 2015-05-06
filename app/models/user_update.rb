@@ -12,6 +12,10 @@ class UserUpdate < ActiveRecord::Base
           user_id: user.id)
   end
 
+  def follower_user
+    User.find(self.user_id)
+  end
+
   private
 
   def send_feed_create_message
