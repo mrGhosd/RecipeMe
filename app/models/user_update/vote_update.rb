@@ -8,7 +8,7 @@ class VoteUpdate < UserUpdate
   end
 
   def entity
-    self.update_entity_for.constantize.find(self.update_id).as_json(methods: :image)
+    self.update_entity_for.constantize.find(self.update_id).as_json(methods: [:image, :tag_list])
   end
 
   def as_json(*)
