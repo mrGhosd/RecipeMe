@@ -13,13 +13,9 @@ class RecipeMe.Views.FeedList extends Backbone.View
 
   successFeedUpload: (response, request, collection)->
     for model in response
-#      collection.add(model)
-      feed = new RecipeMe.Models.Feed({id: model.user_id, feed: model.id})
-      feed.fetch
-        success: (model) ->
-          @collection.push(model)
-#          view = new RecipeMe.Views.FeedMain({feed: model})
-#          $(".feed-list").append(view.render().el)
+      feed = new RecipeMe.Models.Feed(model)
+      feed.parse(model)
+      collection.push(model)
 
   updateFeedData: (data) ->
     followersID = @followers.pluck("id")

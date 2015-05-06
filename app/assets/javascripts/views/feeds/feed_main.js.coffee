@@ -6,6 +6,7 @@ class RecipeMe.Views.FeedMain extends Backbone.View
     if params.feed
       @feed = params.feed
       @user = @feed.get("follower_user")
+      @user = new RecipeMe.Models.User(@feed.get("follower_user")) unless @user instanceof RecipeMe.Models.User
 
   render: ->
     $(@el).html(@template({feed: @feed, user: @user}))
