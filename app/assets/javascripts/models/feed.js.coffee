@@ -14,8 +14,8 @@ class RecipeMe.Models.Feed extends Backbone.Model
     if response.follower_user
       response.follower_user = new RecipeMe.Models.User(response.follower_user)
     if response.update_entity == "Recipe" && response.update_type == "create"
-      recipe = new RecipeMe.Models.Recipe({id: response.update_id})
-      recipe.fetch({async: false})
+      recipe = new RecipeMe.Models.Recipe(response.entity)
+      console.log recipe
       view = new RecipeMe.Views.FeedRecipe({model: recipe, icon: "add73.png"})
       response.body = view
     if response.update_entity == "Vote" && response.update_entity_for == "Recipe"
