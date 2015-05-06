@@ -38,7 +38,6 @@ class RecipeMe.UsersController
 
   userFeed: (id) ->
     feed = new RecipeMe.Collections.Feeds({user: id})
-    console.log id
     feed.fetch
       success: (collection) ->
         if RecipeMe.currentUser && RecipeMe.currentUser.get("id") == parseInt(id, 10)

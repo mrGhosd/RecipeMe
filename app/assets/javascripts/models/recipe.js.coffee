@@ -13,15 +13,10 @@ class RecipeMe.Models.Recipe extends Backbone.Model
     if response.steps_list
       response.steps = new RecipeMe.Collections.Steps(response.steps_list)
       response.steps.recipe = response.id
-      console.log response.steps
     if response.ingridients_list
       response.ingridients = new RecipeMe.Collections.Ingridients(response.ingridients_list)
       response.ingridients.recipe = response.id
     return response
-
-
-  checkoutRate: ->
-
 
   createFromForm: (recipe, steps, ingridients, successCallback, errorCallback) ->
     this.save(recipe,

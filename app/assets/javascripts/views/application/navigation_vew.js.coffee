@@ -96,7 +96,6 @@ class RecipeMe.Views.NavigationView extends Backbone.View
       @user = RecipeMe.currentUser
       @user.url = "api/users/#{@user.get("id")}"
       @user.fetch({async: false})
-      console.log @user
       @following = new RecipeMe.Collections.Users(@user.get("following_list").first(6))
       @followers = new RecipeMe.Collections.Users(@user.get("followers_list").first(6))
       @followers.on('add', @render, this)

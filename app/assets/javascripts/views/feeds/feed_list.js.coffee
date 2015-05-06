@@ -35,13 +35,6 @@ class RecipeMe.Views.FeedList extends Backbone.View
         feed = new RecipeMe.Models.Feed({id: data.id, feed: data.obj.id})
         @collection.remove(feed)
 
-  addJustUploadedFeed: (model) ->
-    feed = new RecipeMe.Models.Feed({id: model.id, feed: model.obj.id})
-    feed.fetch
-      success: (model) ->
-#        view = new RecipeMe.Views.FeedMain({feed: model})
-#        $(".feed-list").prepend(view.render().el)
-
   render: ->
     $(@el).html(@template())
     @collection.each(@addFeed)
@@ -50,4 +43,4 @@ class RecipeMe.Views.FeedList extends Backbone.View
 
   addFeed: (feed)->
     view = new RecipeMe.Views.FeedMain({feed: feed})
-    $(".feed-list").prepend(view.render().el)
+    $(".feed-list").append(view.render().el)
