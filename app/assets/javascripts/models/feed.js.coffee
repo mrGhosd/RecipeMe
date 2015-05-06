@@ -22,13 +22,11 @@ class RecipeMe.Models.Feed extends Backbone.Model
       view = new RecipeMe.Views.FeedRecipe({model: recipe, icon: "up_filled-32.png"})
       response.body = view
     if response.update_entity == "Comment" && response.update_type == "create"
-      comment = new RecipeMe.Models.Comment({recipe: response.recipe.id, id: response.update_id})
-      comment.fetch({async: false})
+      comment = new RecipeMe.Models.Comment(response.entity)
       view = new RecipeMe.Views.FeedComment({model: comment, recipe: response.recipe, icon: "add73.png"})
       response.body = view
     if response.update_entity == "Vote" && response.update_entity_for == "Comment"
-      comment = new RecipeMe.Models.Comment({recipe: response.recipe.id, id: response.update_id})
-      comment.fetch({async: false})
+      comment = new RecipeMe.Models.Comment(response.entity)
       view = new RecipeMe.Views.FeedComment({model: comment, recipe: response.recipe, icon: "up_filled-32.png"})
       response.body = view
     return response

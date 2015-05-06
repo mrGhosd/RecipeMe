@@ -1,6 +1,6 @@
 class CommentsController <ApplicationController
   before_action :load_comment, only: [:update, :show, :destroy, :rating, :liked_users]
-  before_action :change_object, only: [:rating, :liked_users]
+  before_action :changed_object, only: [:rating, :liked_users]
   after_action :mail_send, only: :create
 
   include ChangeObject
