@@ -29,8 +29,6 @@ class RecipeMe.Views.CallbackForm extends Backbone.View
         console.log response
         console.log request
       error: (response, request) ->
-        console.log response
-        console.log request
         error = new RecipeMe.ErrorHandler(response, request)
         error.showFormErrorMessage($("#callback-form"))
         }

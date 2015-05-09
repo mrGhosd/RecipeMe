@@ -2,7 +2,6 @@ class CategoriesController < ApplicationController
   before_action :load_category, except: [:index, :create]
   after_action :create_image, only: [:create, :update]
 
-  include CategoriesConcerns
   include Images
 
   def index
@@ -15,7 +14,7 @@ class CategoriesController < ApplicationController
     if @category.save
       render json: @category.as_json, status: :ok
     else
-      render json: @category.errors.as_json, status: :unforbidden_entity
+      render json: @category.errors.as_json, status: :unprocessable_entity
     end
   end
 

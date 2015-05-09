@@ -16,7 +16,7 @@ class RecipeMe.Views.CategoryIndex extends Backbone.View
     if data.action == "create"
       @model = new RecipeMe.Models.Category(data.obj)
       @collection.add(@model)
-    if data.action == "create"
+    if data.action == "update"
       @model.set(data.obj)
     if data.action == "destroy"
       @collection.remove(@model)
