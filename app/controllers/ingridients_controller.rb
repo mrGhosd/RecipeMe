@@ -55,7 +55,6 @@ class IngridientsController < ApplicationController
   def add_ingridient_to_recipe(ingridient)
     recipe = Recipe.find(params[:recipe_id])
     recipe.recipe_ingridients.create(ingridient: ingridient, size: params[:in_size])
-    Recipe.find(params[:recipe_id]).ingridients << ingridient
   end
 
   def load_ingridient
