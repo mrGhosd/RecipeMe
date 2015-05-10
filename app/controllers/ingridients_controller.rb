@@ -26,7 +26,7 @@ class IngridientsController < ApplicationController
         add_ingridient_to_recipe(@ingridient)
         render json: @ingridient.as_json, status: :ok
       else
-        render json: @ingridient.errors.as_json, status: :unprocessible_entity
+        render json: @ingridient.errors.as_json, status: :unprocessable_entity
       end
     end
   end
@@ -37,10 +37,10 @@ class IngridientsController < ApplicationController
   end
 
   def update
-    if @ingridient.save(ingridient_params)
+    if @ingridient.update(ingridient_params)
       render json: @ingridient.as_json, status: :ok
     else
-      render json: @ingridient.errors.as_json, status: :unprocessible_entity
+      render json: @ingridient.errors.as_json, status: :unprocessable_entity
     end
   end
 
