@@ -3,6 +3,5 @@ class Ingridient < ActiveRecord::Base
   has_many :recipes, through: :recipe_ingridients
 
   validates :name, uniqueness: true, presence: true
-  include IngridientsConcerns
-  attr_accessor :size
+  attr_accessor :size, :recipe_params
 end

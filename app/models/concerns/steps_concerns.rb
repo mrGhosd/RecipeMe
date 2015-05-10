@@ -11,21 +11,21 @@ module StepsConcerns
   def send_create_step_message
     message({ resource: 'Step',
               action: 'create',
-              id: self.id,
+              id: self.recipe.id,
               obj: self })
   end
 
   def send_update_step_message
     message({ resource: 'Step',
               action: 'update',
-              id: self.id,
+              id: self.recipe.id,
               obj: self })
   end
 
   def send_destroy_step_message
     message({ resource: 'Step',
               action: 'destroy',
-              id: self.id,
+              id: self.recipe.id,
               obj: self })
   end
 end

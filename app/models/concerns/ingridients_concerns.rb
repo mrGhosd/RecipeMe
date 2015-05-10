@@ -8,19 +8,20 @@ module IngridientsConcerns
   end
 
   def send_create_ingridient_action
-    message({ resource: 'Ingridient',
-              action: 'create',
-              id: self.id,
-              obj: self,
-              size: self.recipe_ingridients.last.size})
+    msg = { resource: 'Ingridient',
+            action: 'create',
+            id: self.recipe.id,
+            obj: self.ingridient,
+            size: self.size}
+    message(msg)
   end
 
   def send_destroy_ingridient_action
-    message({ resource: 'Ingridient',
-              action: 'destroy',
-              id: self.id,
-              obj: self,
-              size: params[:in_size]})
+    msg = { resource: 'Ingridient',
+            action: 'destroy',
+            id: self.recipe.id,
+            obj: self.ingridient}
+    message(msg)
   end
 
 end

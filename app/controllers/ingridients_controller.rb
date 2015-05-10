@@ -1,7 +1,6 @@
 class IngridientsController < ApplicationController
   before_action :load_recipe, only: [:create, :recipe_ingridients, :destroy]
   before_action :load_ingridient, only: [:update, :destroy]
-  after_action :update_recipe_connection, only: [:create]
 
   def index
     @ingridients = Ingridient.all
@@ -54,6 +53,8 @@ class IngridientsController < ApplicationController
   private
 
   def add_ingridient_to_recipe(ingridient)
+    recipe = Recipe.find(params[:recipe_id])
+    recipe.recipe_ingridients.create(ingridient: ingridient, size: params[:in_size])
     Recipe.find(params[:recipe_id]).ingridients << ingridient
   end
 
@@ -67,12 +68,6 @@ class IngridientsController < ApplicationController
 
   def ingridient_params
     params.permit(:name)
-  end
-
-  def update_recipe_connection
-    if @ingridient
-      RecipeIngridient.find_by_or_create(recipe_id: params[:recipe_id], ingridient_id: @ingridient.id, size: params[:in_size])
-    end
   end
 
 end

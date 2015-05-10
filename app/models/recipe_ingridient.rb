@@ -4,11 +4,12 @@ class RecipeIngridient < ActiveRecord::Base
 
   after_create :increment_counter
   after_destroy :decrement_counter
+  include IngridientsConcerns
 
   def self.find_by_or_create(args)
     connection = self.where(recipe_id: args[:recipe_id], ingridient_id: args[:ingridient_id])
     if connection
-      connection = only_on_ingridient_for_recipe(connection) if connection.count > 1
+      connection = self.only_on_ingridient_for_recipe(connection) if connection.count > 1
       connection.last.update(size: args[:size])
     else
       self.create(args)
