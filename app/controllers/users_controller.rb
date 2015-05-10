@@ -16,11 +16,6 @@ class UsersController < ApplicationController
     render json: @user.followers.as_json(methods: [:last_sign_in_at_h, :correct_naming])
   end
 
-  def feed
-    feed = current_user.feed
-    render json: feed.as_json, status: :ok
-  end
-
   def recipes
     render json: @user.recipes.as_json(methods: :image), status: :ok
   end

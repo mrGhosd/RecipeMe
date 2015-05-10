@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
            :class_name => "Relationship",
            :dependent => :destroy
   has_many :followers, :through => :reverse_relationships, :source => :follower
+  validates :nickname, presence: true, if: :should_validate?
 
   include RateModel
 
@@ -98,6 +99,10 @@ class User < ActiveRecord::Base
 
   def last_sign_in_at_h
     self.last_sign_in_at.strftime('%H:%M:%S %d.%m.%Y') if self.last_sign_in_at
+  end
+
+  def should_validate?
+    !new_record?
   end
 
 
