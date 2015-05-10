@@ -19,11 +19,6 @@ class Recipe < ActiveRecord::Base
   include RateModel
   include ImageModel
 
-  def images
-    {small: self.image.url(:small),
-    normal: self.image.url(:normal)}
-  end
-
   def tag_list
     self.tags.map(&:name).join(", ")
   end
