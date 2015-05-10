@@ -5,11 +5,14 @@ require 'rspec/autorun'
 require 'capybara/rails'
 require 'support/feature_helper'
 require 'support/auth_helper'
+require 'thinking_sphinx/test'
+require 'support/sphinx_helper'
 
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.include FactoryGirl::Syntax::Methods
   config.include UserControllerMacros, :type => :controller
+  config.include SphinxHelper, type: :feature
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
