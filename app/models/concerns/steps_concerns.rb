@@ -3,29 +3,29 @@ module StepsConcerns
   extend ActiveSupport::Concern
 
   included do
-    after_action :send_create_step_message, only: :create
-    after_action :send_destroy_step_message, only: :destroy
-    after_action :send_update_step_message, only: :update
+    after_create :send_create_step_message
+    after_destroy :send_destroy_step_message
+    after_update :send_update_step_message
   end
 
   def send_create_step_message
     message({ resource: 'Step',
               action: 'create',
-              id: @recipe.id,
-              obj: @step })
+              id: self.id,
+              obj: self })
   end
 
   def send_update_step_message
     message({ resource: 'Step',
               action: 'update',
-              id: @recipe.id,
-              obj: @step })
+              id: self.id,
+              obj: self })
   end
 
   def send_destroy_step_message
     message({ resource: 'Step',
               action: 'destroy',
-              id: @recipe.id,
-              obj: @step })
+              id: self.id,
+              obj: self })
   end
 end

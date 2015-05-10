@@ -3,8 +3,6 @@ class IngridientsController < ApplicationController
   before_action :load_ingridient, only: [:update, :destroy]
   after_action :update_recipe_connection, only: [:create]
 
-  include IngridientsConcerns
-
   def index
     @ingridients = Ingridient.all
     render json: @ingridients.as_json, status: :ok

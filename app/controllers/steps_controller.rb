@@ -1,8 +1,6 @@
 class StepsController < ApplicationController
   before_action :load_recipe
   after_action :create_image, only: [:create, :update]
-
-  include StepsConcerns
   include Images
 
   def index
