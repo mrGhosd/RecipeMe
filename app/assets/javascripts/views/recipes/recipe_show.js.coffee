@@ -44,7 +44,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
         @model.set(data.obj)
         this.render()
       if data.action == "image"
-        console.log data
         @model.set({image: data.image})
         this.render()
       if data.action == "comment-create"
