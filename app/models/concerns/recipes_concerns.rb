@@ -1,0 +1,24 @@
+module RecipesConcerns
+  include WebsocketsMessage
+  extend ActiveSupport::Concern
+
+  included do
+    after_create :send_recipe_create_message
+    after_destroy :send_destroy_recipe_message
+  end
+
+  def send_destroy_recipe_message
+    message({ resource: 'Recipe',
+              action: 'destroy',
+              id: self.id,
+              obj: self })
+  end
+
+  def send_recipe_create_message
+    message({ resource: 'Recipe',
+              action: 'create',
+              id: self.id,
+              obj: self,
+              image: self.image })
+  end
+end

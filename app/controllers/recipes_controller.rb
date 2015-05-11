@@ -1,15 +1,15 @@
 class RecipesController < ApplicationController
 
   after_action :create_image, only: [:create, :update]
-  after_action :send_recipe_create_message, only: :create
+  # after_action :send_image_message, only: :create_image
   before_action :changed_object, only: [:rating, :liked_users, :create_image]
   before_action :load_recipe, only: [:update, :show, :destroy, :rating, :liked_users]
 
-  include RecipesConcerns
   include ChangeObject
   include Images
   include Rate
   include UsersLiked
+  include RecipesControllerConcern
 
   def index
     recipes = Recipe.filter(params).paginate(page: params[:page] || 1, per_page: 12)

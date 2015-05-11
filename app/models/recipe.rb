@@ -16,6 +16,7 @@ class Recipe < ActiveRecord::Base
   validates :title, :description, presence: true
 
   accepts_nested_attributes_for :steps
+  include RecipesConcerns
   include RateModel
   include ImageModel
 

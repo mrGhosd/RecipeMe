@@ -36,7 +36,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
 
   updateRecipe: (data) ->
-    if @model.get("id") == data.id
+    if parseInt(@model.get("id"), 10) == parseInt(data.id, 10)
       if data.action == "rate"
         @model.set({rate: data.obj.rate})
         this.render()
@@ -44,6 +44,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
         @model.set(data.obj)
         this.render()
       if data.action == "image"
+        console.log data
         @model.set({image: data.image})
         this.render()
       if data.action == "comment-create"
