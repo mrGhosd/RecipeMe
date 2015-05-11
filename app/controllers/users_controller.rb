@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   before_action :load_user, only: [:following, :followers, :comments, :recipes]
-
-  include UsersConcerns
   
   def show
     user = User.find(params[:id])
