@@ -6,7 +6,6 @@ class CommentsController <ApplicationController
   include ChangeObject
   include Rate
   include UsersLiked
-  include CommentsConcern
 
   respond_to :json
 
