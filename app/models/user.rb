@@ -22,10 +22,6 @@ class User < ActiveRecord::Base
 
   after_create :set_nickname
 
-  def following?(followed)
-    relationships.find_by_followed_id(followed)
-  end
-
   def follow!(followed)
     relationships.create!(followed_id: followed.id)
   end
@@ -35,17 +31,16 @@ class User < ActiveRecord::Base
   end
 
   def following_list
-    self.followers.order(name: :asc).limit(6)
+    self.following.order(name: :asc).limit(6)
   end
 
   def followers_list
-    self.following.order(name: :asc).limit(6)
+    self.followers.order(name: :asc).limit(6)
   end
 
   def is_admin?
     self.role.eql?("admin")
   end
-
 
   def correct_naming
     if self.nickname
