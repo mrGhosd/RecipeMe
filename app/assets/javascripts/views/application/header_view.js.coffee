@@ -71,9 +71,7 @@ class RecipeMe.Views.HeaderView extends Backbone.View
 
   sendSearchRequest: (event) ->
     text = $(".search-field").val()
-    if(text.length == 0)
-      window.history.back()
-    else
+    if text.length != 0
       search = new RecipeMe.SearchController(text)
       search.search(search.searchByAllFields, text)
 
