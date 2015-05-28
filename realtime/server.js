@@ -1,4 +1,4 @@
-var io = require('socket.io').listen(5001),
+var io = require('socket.io').listen(443),
     redis = require('redis').createClient();
 
 redis.subscribe('rt-change');
