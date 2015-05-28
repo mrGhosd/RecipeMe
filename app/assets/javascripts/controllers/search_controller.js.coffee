@@ -26,10 +26,10 @@ class RecipeMe.SearchController
     view.render()
 
   searchByAllFields: (objects) ->
-    $("section#main").html("<ul class='search-recipes-list'></ul>")
+    $("section#main").html("<ul class='recipes_list'></ul>")
     for model in objects
       recipe = new RecipeMe.Models.Recipe(model)
       view = new RecipeMe.Views.Recipe(model: recipe)
-      $(".search-recipes-list").prepend(view.render().el)
+      $(".recipes_list").prepend(view.render().el)
 
 
