@@ -33,7 +33,7 @@ namespace :deploy do
 
   task :run_nodejs_server do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd /home/deploy/recipeme/current/realtime && forever server.js start"
+      execute "cd /home/deploy/recipeme/current/realtime && forever start server.js"
     end
   end
 
