@@ -30,12 +30,14 @@ namespace :deploy do
     end
   end
   after :publishing, :restart
-  # task :run_nodejs_server do
-  #   on roles(:app), in: :sequence, wait: 5 do
-  #     execute "cd /home/deploy/recipeme/current/realtime && node server.js"
-  #   end
-  # end
-  # after :restart, :run_nodejs_server
+
+  task :run_nodejs_server do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "cd /home/deploy/recipeme/current/realtime && forever server.js start"
+    end
+  end
+
+  after :restart, :run_nodejs_server
 
   # after :restart, :clear_cache do
   #   on roles(:app), in: :groups, limit: 3, wait: 10 do
