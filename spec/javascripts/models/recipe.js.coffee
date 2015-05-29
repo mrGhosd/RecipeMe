@@ -16,7 +16,6 @@ describe "Recipe", ->
       @server.restore()
 
     describe "with invalid attributes", ->
-
       beforeEach ->
         @recipe = new RecipeMe.Models.Recipe({description: "Desc"})
         @server.respondWith("POST", "/api/recipes",
@@ -40,7 +39,6 @@ describe "Recipe", ->
 
     describe "with valid attributes", ->
       beforeEach ->
-
         @recipe = new RecipeMe.Models.Recipe({title: "Title", description: "Desc", user_id: 1})
         @server.respondWith("POST", "/api/recipes",
           [200, { "Content-Type": "application/json" }, JSON.stringify(@recipe)]);
@@ -54,16 +52,35 @@ describe "Recipe", ->
       it "return recipes attributes object", ->
         expect(JSON.parse(@responses[2])).toEqual(@recipe.attributes)
 
+  describe "#parse", ->
+    beforeEach ->
+      @recipe = new RecipeMe.Models.Recipe({description: "Desc"})
+      @comments = new RecipeMe.Collections.Comments()
+      @steps = new RecipeMe.Collections.Steps()
+      @ingridients = new RecipeMe.Collections.Ingridients()
+
+      @recipe.comments = @comments
+      @recipe.steps = @steps
+      @recipe.ingridients = @ingridients
+      @server = sinon.fakeServer.create()
+      @server.respondWith("POST", "/api/recipes/#{@recipe.id}",
+        [200, { "Content-Type": "application/json" }, JSON.stringify(@recipe)]);
+
+    afterEach ->
+      @server.restore()
+
+    describe "fetch server data", ->
+      beforeEach ->
+        @recipe.fetch({async: false})
+
+      it "has a comments list collection", ->
+        expect(@recipe.comments).toEqual(@comments)
+
+      it "has a steps list collection", ->
+        expect(@recipe.steps).toEqual(@steps)
+
+      it "has a ingridients list collection", ->
+        expect(@recipe.ingridients).toEqual(@ingridients)
 
 
-#      @server.respondWith(recipe.save)
-#      expect(recipe.isNew()).toBe(true)
-#      recipe.save()
-#      expect(recipe.isNew()).toBe(true)
 
-#      request = @server.requests[0]
-#      params = JSON.parse(request.requestBody)
-#      console.log @server
-#      console.log params
-
-#      expect(request.status).toBe(403)
