@@ -69,7 +69,9 @@ class Recipe < ActiveRecord::Base
   end
 
   def destroy_recipe
-    UserUpdate.where(update_entity: self.class.to_s, update_id: self.id).destroy_all
-    Vote.where(voteable_id: self.id, voteable_type: self.class.to_s).destroy_all
+    if self.present?
+      RecipeUpdate.where(update_entity: self.class.to_s, update_id: self.id).delete_all
+      Vote.where(voteable_id: self.id, voteable_type: self.class.to_s).delete_all
+    end
   end
 end

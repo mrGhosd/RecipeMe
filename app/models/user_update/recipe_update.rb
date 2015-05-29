@@ -1,6 +1,7 @@
 class RecipeUpdate < UserUpdate
   def entity
-    Recipe.find(self.update_id).as_json(methods: [:image, :tag_list])
+    recipe = Recipe.find(self.update_id)
+    recipe.as_json(methods: [:image, :tag_list]) if recipe
   end
 
   def follower_user

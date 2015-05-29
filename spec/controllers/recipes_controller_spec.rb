@@ -6,13 +6,15 @@ describe RecipesController do
   let!(:recipes_second_page) { create_list :recipe, 12, user_id: user.id }
   let!(:recipe) { recipes_first_page[0] }
 
-  let!(:image) { create :image, imageable_id: recipe.id, imageable_type: "Recipe" }
+  let!(:image) { create :image, imageable_id: recipe.id, imageable_type: recipe.class.to_s }
 
   before { login_as user }
 
 
   describe "GET #index" do
-    before { get :index }
+    before { get :index
+             recipe.update(image: image)
+           }
 
     %w(id title user_id rate comments_count image).each do |attr|
       it "recipe attributes contain #{attr}" do
@@ -40,12 +42,18 @@ describe RecipesController do
   end
 
   describe "GET #show" do
+    let!(:category) { create :category }
+    let!(:recipe) { create :recipe, user_id: user.id, category_id: category.id }
     let!(:step){ create :step, recipe_id: recipe.id }
     let!(:comment) { create :comment, recipe_id: recipe.id, user_id: user.id }
     let!(:ingridient) { create :ingridient }
     let!(:recipe_ingridient) { create :recipe_ingridient, recipe_id: recipe.id, ingridient_id: ingridient.id }
+    let!(:image) { create :image, imageable_id: recipe.id, imageable_type: recipe.class.to_s }
 
-    before { get :show, id: recipe.id, format: :json }
+    before {
+      get :show, id: recipe.id, format: :json
+      recipe.update(image: image)
+    }
 
     %w(id title description tag_list user_id rate image comments_list steps_list ingridients_list user created_at_h).each do |attr|
       it "recipe attributes contain #{attr}" do
@@ -165,6 +173,9 @@ describe RecipesController do
   end
 
   describe "DELETE #destroy" do
+    let!(:category) { create :category }
+    let!(:user) { create :user }
+    let!(:recipe) { create :recipe, user_id: user.id, category_id: category.id }
     it "delete selected recipe" do
       expect{delete :destroy,
       id: recipe.id}.to change(Recipe, :count).by(-1)
