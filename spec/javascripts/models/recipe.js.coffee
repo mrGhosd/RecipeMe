@@ -54,17 +54,45 @@ describe "Recipe", ->
 
   describe "#parse", ->
     beforeEach ->
-      @recipe = new RecipeMe.Models.Recipe({description: "Desc"})
+      @recipe = new RecipeMe.Models.Recipe({id: 1, description: "Desc"})
       @comments = new RecipeMe.Collections.Comments()
       @steps = new RecipeMe.Collections.Steps()
       @ingridients = new RecipeMe.Collections.Ingridients()
+      
+      @fixture = {
+        id: "1",
+        comments_list: [{
+            id: 1,
+            text: "1"
+          },
+          {
+            id: 2,
+            text: "2"
+          }],
+        steps_list: [{
+          id: 1,
+          text: "Step 1"
+        },
+        {
+          id: 2,
+          text: "Step 2"
+        }],
+        ingridients_list: [{
+          id: 1,
+          name: "Ingridient 1",
+          size: 100
+        },
+        {
+          id: 2,
+          name: "Ingridient 2",
+          size: 200
+        }]
 
-      @recipe.comments = @comments
-      @recipe.steps = @steps
-      @recipe.ingridients = @ingridients
+      }
       @server = sinon.fakeServer.create()
-      @server.respondWith("POST", "/api/recipes/#{@recipe.id}",
-        [200, { "Content-Type": "application/json" }, JSON.stringify(@recipe)]);
+      @server.respondWith("GET", "/api/recipes/#{@recipe.id}",
+        [200, { "Content-Type": "application/json" }, JSON.stringify(@fixture)]);
+      @response = @server.responses[0].response
 
     afterEach ->
       @server.restore()
@@ -73,14 +101,40 @@ describe "Recipe", ->
       beforeEach ->
         @recipe.fetch({async: false})
 
-      it "has a comments list collection", ->
-        expect(@recipe.comments).toEqual(@comments)
+      it "make a correct request", ->
+        expect(@server.requests.length).toEqual(1);
+        expect(@server.requests[0].method).toEqual("GET");
+        expect(@server.requests[0].url).toEqual("/api/recipes/#{@recipe.id}");
 
-      it "has a steps list collection", ->
-        expect(@recipe.steps).toEqual(@steps)
+      describe "comments list", ->
 
-      it "has a ingridients list collection", ->
-        expect(@recipe.ingridients).toEqual(@ingridients)
+        it "return not empty comments list", ->
+          @server.respond()
+          expect(@recipe.get("comments").length).toEqual(@fixture.comments_list.length)
+
+        it "return correct text of first comment", ->
+          @server.respond()
+          expect(@recipe.get("comments").get(1).get("text")).toEqual("1")
+
+      describe "steps list", ->
+
+        it "return not empty steps list", ->
+          @server.respond()
+          expect(@recipe.get("steps").length).toEqual(@fixture.steps_list.length)
+
+        it "return correct text of first step", ->
+          @server.respond()
+          expect(@recipe.get("steps").get(1).get("text")).toEqual("Step 1")
+
+      describe "ingridients list", ->
+        it "return not empty ingridients list", ->
+          @server.respond()
+          expect(@recipe.get("ingridients").length).toEqual(@fixture.ingridients_list.length)
+
+        it "return correct name of first ingridient", ->
+          @server.respond()
+          expect(@recipe.get("ingridients").get(1).get("name")).toEqual("Ingridient 1")
+
 
 
 
