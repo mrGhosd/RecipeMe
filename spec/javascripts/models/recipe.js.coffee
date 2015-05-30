@@ -58,7 +58,7 @@ describe "Recipe", ->
       @comments = new RecipeMe.Collections.Comments()
       @steps = new RecipeMe.Collections.Steps()
       @ingridients = new RecipeMe.Collections.Ingridients()
-      
+
       @fixture = {
         id: "1",
         comments_list: [{
