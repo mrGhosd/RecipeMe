@@ -1,8 +1,10 @@
 class RecipeMe.Models.Ingridient extends Backbone.Model
 
   initialize: (params) ->
-    if params.recipe
+    if params && params.recipe
       @recipe = params.recipe
+    else
+      @recipe = undefined
 
   url: ->
     if @recipe

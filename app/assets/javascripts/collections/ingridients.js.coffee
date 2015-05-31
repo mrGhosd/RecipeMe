@@ -6,8 +6,6 @@ class RecipeMe.Collections.Ingridients extends Backbone.Collection
       @recipe = params.recipe
 
   parse: (response) ->
-#    response.each (model) ->
-#      console.log model
     return response
 
 
