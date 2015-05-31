@@ -11,7 +11,6 @@ class RecipeMe.Models.Image extends Backbone.Model
     json = JSON.parse(response)
     klass.set({image_id: json.id})
 
-
   uploadImage: (data)->
     this.makeRequest(data, this.setImageData, this)
 
