@@ -37,8 +37,6 @@ describe "Callbacks", ->
         expect(@server.requests[0].url).toEqual("api/callbacks/#{@callback.get("id")}");
 
     describe "fetch data", ->
-#      beforeEach: ->
-#        @callback.fetch({async: false})
 
       it "return correct text of callback", ->
         @server.respond()
