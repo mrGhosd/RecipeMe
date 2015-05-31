@@ -5,7 +5,7 @@ class RecipeMe.Models.User extends Backbone.Model
     @params = options
 
   url: ->
-    if @params.id
+    if @params && @params.id
       return "/api/users/#{@params.id}"
     else
       return "/api/users"
