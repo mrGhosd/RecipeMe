@@ -39,3 +39,27 @@
     z-index:100;
   }
 }
+
+@media screen and (max-width: 760px){
+  .auth-buttons > input{
+    height: 35px;
+    width: 35px;
+    text-indent: -9999px;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .login-window{
+    background-image: url("/images/authorization.png") !important;
+  }
+  .registration-window{
+    background-image: url("/images/registration.png") !important;
+  }
+
+  .app-header > div.features-block{
+    display: none;
+  }
+  .app-header div.auth-buttons{
+    right: 10px;
+  }
+
+}
