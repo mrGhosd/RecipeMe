@@ -40,7 +40,7 @@
   }
 }
 
-@media screen and (max-width: 760px){
+@media handheld and (max-width: 760px){
   .auth-buttons > input{
     height: 35px;
     width: 35px;
