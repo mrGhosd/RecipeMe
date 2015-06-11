@@ -28,6 +28,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
       @ingridients.on('remove', @render, this)
 
 #      @comments.on('push', @renderCommentList, this)
+      console.log @comments
       @comments.on('add', @render, this)
 
       @comments.on('change', @render, this)

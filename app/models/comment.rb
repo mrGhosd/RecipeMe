@@ -8,6 +8,10 @@ class Comment <ActiveRecord::Base
   include RateModel
   include CommentsConcern
 
+  def as_json(*)
+    super(methods: :user)
+  end
+
   def self.send_recipe_author_message(comment)
     CommentsMailer.create_message(comment, comment.recipe, comment.recipe.user).deliver
   end

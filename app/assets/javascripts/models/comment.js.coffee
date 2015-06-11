@@ -8,6 +8,8 @@ class RecipeMe.Models.Comment extends Backbone.Model
     else
       @recipe = 0
 
+    console.log @option.user
+
   url: ->
     if @option.id
       return "api/recipes/#{@recipe}/comments/#{@option.id}"
