@@ -1,5 +1,9 @@
 <span class="comment-text"><%- @comment.get('text') if @comment %></span>
-<span class="comment-create-at"><%= window.appHelper.dateFormater(@comment.get('created_at')) if @comment %></span>
+<span class="comment-create-at">
+  <a href="/#users/<%= @comment.get("user").id %>"> <%= @comment.get("user").nickname %></a>
+  <%= I18n.t('recipes.show.in') %>
+  <%= window.appHelper.dateFormater(@comment.get('created_at')) if @comment %>
+</span>
 <div class="comment-info-actions">
   <div class="info-item">
     <a href="#" data-remote="true" class="btn btn-success btn-xs info-label comment-rate-action glyphicon glyphicon-heart"></a>

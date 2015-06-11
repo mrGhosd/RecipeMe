@@ -28,7 +28,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
       @ingridients.on('remove', @render, this)
 
 #      @comments.on('push', @renderCommentList, this)
-      console.log @comments
       @comments.on('add', @render, this)
 
       @comments.on('change', @render, this)
@@ -58,18 +57,14 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
         @comments.remove(model)
 
   updateIngridient: (data) ->
-    console.log data
-    console.log @model.get("id")
     if parseInt(@model.get("id"), 10) == parseInt(data.id, 10)
       @ingridient = @ingridients.get(data.obj.id)
       if data.action == "create"
         data.obj["size"] = data.size
         @ingridient = new RecipeMe.Models.Ingridient(data.obj)
-        console.log @ingridient
         @ingridients.add(@ingridient)
       if data.action == "destroy"
         @ingridient = @ingridients.get(data.obj.id)
-        console.log @ingridient
         @ingridients.remove(@ingridient)
       if data.action == "update"
         @ingridient.set(data.obj)
