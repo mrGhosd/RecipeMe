@@ -7,6 +7,12 @@ ru:
     tags: 'Теги'
     ingridients: 'Ингридиенты'
     steps: 'Шаги'
+    time: '{{timer}} минут'
+    persons: '{{persons}} человек'
+    difficult:
+      easy: "Легко"
+      medium: "Средне"
+      hard: "Сложно"
     show:
       ingridients: 'Ингридиенты'
       in: 'в'

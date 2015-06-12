@@ -14,7 +14,7 @@ class Recipe < ActiveRecord::Base
   after_destroy :destroy_recipe
 
   validates :title, :description, presence: true
-  validates :time, numericality: { only_integer: true }
+  validates :time, numericality: { only_integer: true }, presence: true
   validate :difficult_valid?
   validates :persons, presence: true
 

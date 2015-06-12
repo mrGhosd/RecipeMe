@@ -7,6 +7,9 @@ en:
     tags: 'Tags'
     ingridients: 'Ingridients'
     steps: 'Steps'
+    time_label: "Time"
+    persons_label: "Persons"
+    difficult_label: "Difficult"
     time: '{{timer}} minutes'
     persons: '{{persons}} persons'
     difficult:
