@@ -54,6 +54,7 @@ gem 'instagram'
 gem 'cancancan'
 gem 'whenever'
 gem 'newrelic_rpm'
+gem 'doorkeeper'
 
 gem "letter_opener"
 gem 'letter_opener_web'

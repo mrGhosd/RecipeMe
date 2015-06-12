@@ -11,24 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612040257) do
+ActiveRecord::Schema.define(version: 20150612095156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "authorizations", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "provider"
-    t.string  "uid"
+    t.string  "provider", limit: 255
+    t.string  "uid",      limit: 255
   end
 
-  add_index "authorizations", ["provider"], name: "index_authorizations_on_provider", using: :btree
-  add_index "authorizations", ["uid"], name: "index_authorizations_on_uid", using: :btree
   add_index "authorizations", ["user_id"], name: "index_authorizations_on_user_id", using: :btree
 
   create_table "callbacks", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "author"
+    t.string   "author",     limit: 255
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -62,28 +60,63 @@ ActiveRecord::Schema.define(version: 20150612040257) do
   end
 
   create_table "ingridients", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "ingridients", ["name"], name: "index_ingridients_on_name", using: :btree
 
   create_table "news", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",      limit: 255
     t.text     "text"
-    t.integer  "rate",       default: 0
+    t.integer  "rate",                   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "news", ["rate"], name: "index_news_on_rate", using: :btree
-  add_index "news", ["title"], name: "index_news_on_title", using: :btree
+  create_table "oauth_access_grants", force: :cascade do |t|
+    t.integer  "resource_owner_id", null: false
+    t.integer  "application_id",    null: false
+    t.string   "token",             null: false
+    t.integer  "expires_in",        null: false
+    t.text     "redirect_uri",      null: false
+    t.datetime "created_at",        null: false
+    t.datetime "revoked_at"
+    t.string   "scopes"
+  end
+
+  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
+
+  create_table "oauth_access_tokens", force: :cascade do |t|
+    t.integer  "resource_owner_id"
+    t.integer  "application_id"
+    t.string   "token",             null: false
+    t.string   "refresh_token"
+    t.integer  "expires_in"
+    t.datetime "revoked_at"
+    t.datetime "created_at",        null: false
+    t.string   "scopes"
+  end
+
+  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
+  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
+  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
+
+  create_table "oauth_applications", force: :cascade do |t|
+    t.string   "name",                      null: false
+    t.string   "uid",                       null: false
+    t.string   "secret",                    null: false
+    t.text     "redirect_uri",              null: false
+    t.string   "scopes",       default: "", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "recipe_ingridients", force: :cascade do |t|
     t.integer  "recipe_id"
     t.integer  "ingridient_id"
-    t.string   "size"
+    t.string   "size",          limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -150,18 +183,15 @@ ActiveRecord::Schema.define(version: 20150612040257) do
 
   create_table "user_updates", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "update_type"
+    t.string   "update_type",       limit: 255
     t.integer  "update_id"
-    t.string   "update_entity"
-    t.string   "update_entity_for"
-    t.string   "type"
+    t.string   "update_entity",     limit: 255
+    t.string   "update_entity_for", limit: 255
+    t.string   "type",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "user_updates", ["type"], name: "index_user_updates_on_type", using: :btree
-  add_index "user_updates", ["update_entity"], name: "index_user_updates_on_update_entity", using: :btree
-  add_index "user_updates", ["update_entity_for"], name: "index_user_updates_on_update_entity_for", using: :btree
   add_index "user_updates", ["user_id"], name: "index_user_updates_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -192,13 +222,10 @@ ActiveRecord::Schema.define(version: 20150612040257) do
 
   create_table "votes", force: :cascade do |t|
     t.integer  "voteable_id"
-    t.string   "voteable_type"
+    t.string   "voteable_type", limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "votes", ["voteable_id"], name: "index_votes_on_voteable_id", using: :btree
-  add_index "votes", ["voteable_type"], name: "index_votes_on_voteable_type", using: :btree
 
 end
