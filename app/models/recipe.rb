@@ -14,9 +14,9 @@ class Recipe < ActiveRecord::Base
   after_destroy :destroy_recipe
 
   validates :title, :description, presence: true
-  validates :time, numericality: { only_integer: true }, presence: true
+  validates :time, numericality: { only_integer: true }
   validate :difficult_valid?
-  validates :persons, presence: true
+  validates :persons, numericality: { only_integer: true }
 
 
   accepts_nested_attributes_for :steps
@@ -83,7 +83,7 @@ class Recipe < ActiveRecord::Base
     if difficult.in?(["easy", "medium", "hard"])
       true
     else
-      recipe.errors[:difficult] << t("recipes.errors.difficult")
+      self.errors[:difficult] << I18n.t("recipes.errors.difficult")
       false
     end
   end

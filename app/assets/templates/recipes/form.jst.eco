@@ -10,9 +10,27 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="title" class="control-label col-sm-1"><%= I18n.t('recipes.time_label') %></label>
+        <label for="time" class="control-label col-sm-1"><%= I18n.t('recipes.time_label') %></label>
         <div class="col-md-8">
           <input type="text" name="time" class="form-control recipe-time" value="<%=  @recipe.get('time') if @recipe %>"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="persons" class="control-label col-sm-1"><%= I18n.t('recipes.persons_label') %></label>
+        <div class="col-md-8">
+          <input type="text" name="persons" class="form-control recipe-persons" value="<%=  @recipe.get('persons') if @recipe %>"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="difficult" class="control-label col-sm-1"><%= I18n.t('recipes.difficult_label') %></label>
+        <div class="col-md-8">
+          <select class="form-control" name="difficult">
+            <% for difficult in [{option: "easy", value: "#{I18n.t('recipes.difficult.easy')}"}, {option: "medium", value: "#{I18n.t('recipes.difficult.medium')}"}, {option: "hard", value: "#{I18n.t('recipes.difficult.hard')}"}]: %>
+                <option value="<%= difficult.option %>" <%="selected" if @recipe.get("difficult") == difficult.option %> >
+                  <%= difficult.value %>
+                </option>
+            <% end %>
+          </select>
         </div>
       </div>
       <div class="form-group">
