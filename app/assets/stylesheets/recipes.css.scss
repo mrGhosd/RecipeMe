@@ -97,8 +97,35 @@
   }
 }
 .recipe-data{
-  &>div{
+  &>div {
     margin-top: 10px;
+  }
+  .info-attributes{
+    .recipe-attributes{
+      display: inline-block;
+      margin-right: 15px;
+      i{
+        display: inline-block;
+        background-repeat: no-repeat;
+        height: 16px;
+        width:16px;
+      }
+      &.time{
+        i{
+          background-image: url("/images/time_16.png");
+        }
+      }
+      &.persons{
+        i{
+          background-image: url("/images/persons_16.png");
+        }
+      }
+      &.difficult{
+        i{
+          background-image: url("/images/difficult_16.png");
+        }
+      }
+    }
   }
 }
 .actions-background{

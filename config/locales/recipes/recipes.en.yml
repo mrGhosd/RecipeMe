@@ -7,6 +7,12 @@ en:
     tags: 'Tags'
     ingridients: 'Ingridients'
     steps: 'Steps'
+    time: '{{timer}} minutes'
+    persons: '{{persons}} persons'
+    difficult:
+      easy: "Easy"
+      medium: "Medium"
+      hard: "Hard"
     show:
       ingridients: 'Ingridients'
       in: 'in'
