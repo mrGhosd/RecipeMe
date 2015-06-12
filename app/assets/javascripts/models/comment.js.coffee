@@ -7,8 +7,8 @@ class RecipeMe.Models.Comment extends Backbone.Model
       @recipe = options.recipe
     else
       @recipe = 0
-    if @option && @option.user
-      this.user = new RecipeMe.Models.User(@option.user)
+    if options && options.user
+      this.set({user: new RecipeMe.Models.User(@option.user)})
 
 
   url: ->

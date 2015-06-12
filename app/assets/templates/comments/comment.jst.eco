@@ -1,6 +1,6 @@
 <span class="comment-text"><%- @comment.get('text') if @comment %></span>
 <span class="comment-create-at">
-  <a href="/#users/<%= @comment.get("user").id %>"> <%= @comment.get("user").nickname %></a>
+  <a href="/#users/<%= @comment.get("user").get("id") %>"> <%= @comment.get("user").get("nickname") %></a>
   <%= I18n.t('recipes.show.in') %>
   <%= window.appHelper.dateFormater(@comment.get('created_at')) if @comment %>
 </span>
