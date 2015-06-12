@@ -14,6 +14,10 @@ class Recipe < ActiveRecord::Base
   after_destroy :destroy_recipe
 
   validates :title, :description, presence: true
+  validates :time, numericality: { only_integer: true }
+  validate :difficult_valid?
+  validates :persons, presence: true
+
 
   accepts_nested_attributes_for :steps
   include RecipesConcerns
@@ -74,4 +78,14 @@ class Recipe < ActiveRecord::Base
       Vote.where(voteable_id: self.id, voteable_type: self.class.to_s).delete_all
     end
   end
+
+  def difficult_valid?
+    if difficult.in?(["easy", "medium", "hard"])
+      true
+    else
+      recipe.errors[:difficult] << t("recipes.errors.difficult")
+      false
+    end
+  end
+
 end

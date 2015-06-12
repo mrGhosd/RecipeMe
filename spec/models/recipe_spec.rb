@@ -36,8 +36,10 @@ describe Recipe do
   end
 
   describe "#comments_list" do
+    let!(:diff_user) { create :user }
+    let!(:diff_recipe) { create :recipe, user_id: diff_user.id, category_id: category.id }
     let!(:comment) { create :comment, user_id: user.id, recipe_id: recipe.id }
-    let!(:diff_comment) { create :comment, user_id: user.id }
+    let!(:diff_comment) { create :comment, user_id: diff_user.id, recipe_id: diff_recipe.id }
 
     it "return list of comments for particular recipe" do
       expect(recipe.comments_list).to match_array([comment])

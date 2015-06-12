@@ -13,6 +13,8 @@ en:
       easy: "Easy"
       medium: "Medium"
       hard: "Hard"
+    errors:
+      difficult: "this value can't be assign"
     show:
       ingridients: 'Ingridients'
       in: 'in'
