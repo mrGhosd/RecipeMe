@@ -90,7 +90,6 @@ class RecipeMe.Views.StepForm extends Backbone.View
       @image = new RecipeMe.Models.Image(@image)
     @image.uploadImage(formData)
     @model.set("image", @image)
-    console.log @model
 
 
   render: ->
