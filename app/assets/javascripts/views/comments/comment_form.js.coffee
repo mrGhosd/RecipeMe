@@ -18,7 +18,6 @@ class RecipeMe.Views.CommentForm extends Backbone.View
     @comment.save attributes,
       success: (response, request)->
         console.log request
-#        response.get("collection").push(response)
       error: (response, request)->
         errors = request.responseJSON
         $.each errors, (key, value)->

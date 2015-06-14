@@ -32,7 +32,6 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
       @comments.on('change', @render, this)
       @comments.on('remove', @render, this)
-      console.log @comments.length
     this.render()
 
 
