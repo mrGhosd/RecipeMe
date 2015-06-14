@@ -32,6 +32,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
       @comments.on('change', @render, this)
       @comments.on('remove', @render, this)
+      console.log @comments.length
     this.render()
 
 
@@ -47,6 +48,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
         @model.set({image: data.image})
         this.render()
       if data.action == "comment-create"
+        data.obj.user = data.user
         model = new RecipeMe.Models.Comment(data.obj)
         @comments.add(model)
       if data.action == "comment-update"
@@ -142,9 +144,8 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
     $(".steps-line").append view.render().el
 
   addComment: (comment)->
-    if !_.isEqual(comment.attributes, {recipe: comment.get("recipe")})
-      view = new RecipeMe.Views.Comment({model: comment})
-      $(".recipe-comments").append view.render().el
+    view = new RecipeMe.Views.Comment({model: comment})
+    $(".recipe-comments").append view.render().el
 
   addIngridient: (ingridient) ->
     view = new RecipeMe.Views.Ingridient({model: ingridient})

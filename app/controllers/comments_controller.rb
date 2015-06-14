@@ -17,7 +17,7 @@ class CommentsController <ApplicationController
   def create
     @comment = Comment.new(comments_params)
     if @comment.save
-      render json: @comment.to_json, status: :ok
+      render json: @comment.as_json, status: :ok
     else
       render json: @comment.errors.to_json, status: :forbidden
     end
@@ -29,7 +29,7 @@ class CommentsController <ApplicationController
 
   def update
     if @comment.update(comments_params)
-      render json: @comment.to_json, status: :ok
+      render json: @comment.as_json, status: :ok
     else
       render json: @comment.errors.to_json, status: :forbidden
     end

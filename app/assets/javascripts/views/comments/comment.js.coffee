@@ -55,13 +55,12 @@ class RecipeMe.Views.Comment extends Backbone.View
     commentModel.fetch({async: false})
     commentModel.destroy
       success: (response, request)->
-        console.log response
-        console.log request
+        comment = button.closest(".comment")
+        comment.fadeOut('slow')
       error: (response, request)->
         console.log response
         console.log request
-    comment = button.closest(".comment")
-    comment.fadeOut('slow')
+
 
   showVotedUsersPopup: (event) ->
     if RecipeMe.currentUser || $(".popup-view")

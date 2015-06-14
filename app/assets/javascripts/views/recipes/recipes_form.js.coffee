@@ -13,6 +13,7 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     'click .add-ingridient': 'addIngridient'
 
   initialize: (options = {}) ->
+    window.removeEventListener("scroll")
     @form = this
     if options.model
       @model = options.model

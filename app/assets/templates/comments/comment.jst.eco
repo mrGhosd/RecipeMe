@@ -10,7 +10,7 @@
     <a href="#" data-remote="true" class="info-value comment-rate-value"><%= @comment.get("rate") %></a>
   </div>
 </div>
-<% if RecipeMe.currentUser && RecipeMe.currentUser.get('id') == @comment.get('user_id'): %>
+<% if RecipeMe.currentUser && parseInt(RecipeMe.currentUser.get('id'), 10) == parseInt(@comment.get('user_id'), 10): %>
     <div class="actions-for-comment">
         <a href="#" class="btn btn-primary edit-comment glyphicon glyphicon-pencil"
            data-comment="<%= @comment.get('id') if @comment %>"

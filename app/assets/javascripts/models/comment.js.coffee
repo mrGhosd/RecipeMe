@@ -7,8 +7,9 @@ class RecipeMe.Models.Comment extends Backbone.Model
       @recipe = options.recipe
     else
       @recipe = 0
+
     if options && options.user
-      this.set({user: new RecipeMe.Models.User(@option.user)})
+      this.set({user: new RecipeMe.Models.User(options.user)})
 
 
   url: ->
@@ -18,7 +19,6 @@ class RecipeMe.Models.Comment extends Backbone.Model
       return "api/recipes/#{@recipe}/comments"
 
   parse: (attributes) ->
-    console.log attributes
     if @option && @option.user
       attributes.user = new RecipeMe.Models.User(@option.user)
     return attributes

@@ -4,7 +4,7 @@ window.scrollUpload =
     window.url = url
     window.successCallback = callback
     window.placeholder = uploadPlaceholder
-    window.collection = collection if collection.length > 0
+    window.collection = collection
     $(document).on('scroll', this.setUploadImage)
 
   setUploadImage: ->

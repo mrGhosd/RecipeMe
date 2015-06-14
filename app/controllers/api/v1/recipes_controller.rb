@@ -4,7 +4,7 @@ module Api
       before_action :doorkeeper_authorize!, only: [:create]
 
       def index
-        recipes = Recipe.all.limit(12)
+        recipes = Recipe.filter(params).paginate(page: params[:page] || 1, per_page: 12)
         render json: recipes.as_json(methods: [:user, :image])
       end
 

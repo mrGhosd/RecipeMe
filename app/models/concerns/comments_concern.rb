@@ -12,7 +12,7 @@ module CommentsConcern
     message({ resource: 'Recipe',
               action: 'comment-destroy',
               id: self.recipe.id,
-              obj: self,
+              obj: self.as_json,
               count: self.recipe.comments_count - 1})
   end
 
@@ -20,7 +20,8 @@ module CommentsConcern
     message({ resource: 'Recipe',
               action: 'comment-update',
               id: self.recipe.id,
-              obj: self })
+              obj: self.as_json,
+              user: self.user})
   end
 
   def send_create_comment_message
@@ -28,6 +29,7 @@ module CommentsConcern
               action: 'comment-create',
               id: self.recipe.id,
               obj: self,
-              count: self.recipe})
+              count: self.recipe,
+              user: self.user})
   end
 end

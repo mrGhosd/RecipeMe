@@ -5,37 +5,25 @@ class RecipeMe.Views.CommentForm extends Backbone.View
     'click .cancel-button': 'showComment'
 
   initialize: ->
+    if @model.comment
+      @comment = @model.comment
+    else
+      @comment = new RecipeMe.Models.Comment({recipe: @model.recipe.get("id"), user: RecipeMe.currentUser})
     this.render()
 
   commentAction: (event)->
     event.preventDefault()
     attributes = window.appHelper.formSerialization($("#comment_form"))
-    if @model.comment
-      comment = new RecipeMe.Models.Comment({recipe: @model.recipe.get("id"), id: @model.comment.get('id')})
-      comment.set({collection: @model.collection})
-      comment.save(attributes,
-        success: (response, request)->
-          response.get("collection").push(response)
-        error: (response, request)->
-          errors = request.responseJSON
-          $.each(errors, (key, value)->
-            $("#comment_form textarea[name=\"#{key}\"]").addClass("error")
-            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#comment_form textarea[name=\"#{key}\"]"))
-          )
-      ,{patch: true})
-    else
-      comment = new RecipeMe.Models.Comment({recipe: @model.recipe.get("id")})
-      comment.set({collection: @model.collection})
-      comment.save(attributes,
-        success: (response, request)->
-           response.get("collection").push(response)
-        error: (response, request) ->
-          errors = request.responseJSON
-          $.each(errors, (key, value)->
-            $("#comment_form textarea[name=\"#{key}\"]").addClass("error")
-            $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#comment_form textarea[name=\"#{key}\"]").closest(".html"))
-          )
-      )
+#    @comment.set({collection: @model.collection})
+    @comment.save attributes,
+      success: (response, request)->
+        console.log request
+#        response.get("collection").push(response)
+      error: (response, request)->
+        errors = request.responseJSON
+        $.each errors, (key, value)->
+          $("#comment_form textarea[name=\"#{key}\"]").addClass("error")
+          $("<div class='error-text'>#{value[0]}</div>").insertAfter($("#comment_form textarea[name=\"#{key}\"]"))
 
   showComment: ->
     $(".row.comment-form").parent().prev("div").show()
