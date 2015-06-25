@@ -11,6 +11,11 @@ module Api
       def create
 
       end
+
+      def show
+        recipes = Recipe.find(params[:id])
+        render json: recipes.as_json(methods: [:user, :image, :steps_list, :ingridients_list, :comments_list])
+      end
     end
   end
 end
