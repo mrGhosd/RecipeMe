@@ -10,6 +10,9 @@ describe "API Recipes controller" do
   let!(:step) { create :step, recipe_id: recipe.id }
   let!(:image) { create :image, imageable_id: step.id, imageable_type: "Step"}
 
+  let!(:ingridient) { create :ingridient }
+  let!(:recipe_ingridient) { create :recipe_ingridient, recipe_id: recipe.id, ingridient_id: ingridient.id }
+
   context "unauthorized" do
     let!(:api_path) { "/api/v1/recipes" }
     it_behaves_like "API Authenticable"
@@ -47,6 +50,14 @@ describe "API Recipes controller" do
       %w(id recipe_id description image).each do |attr|
         it "recipe step contains #{attr}" do
           expect(response.body).to be_json_eql(step.send(attr.to_sym).to_json).at_path("steps_list/0/#{attr}")
+        end
+      end
+    end
+
+    context "ingridients" do
+      %w(id name created_at updated_at).each do |attr|
+        it "recipe ingridient contains #{attr}" do
+          expect(response.body).to be_json_eql(ingridient.send(attr.to_sym).to_json).at_path("ingridients_list/0/#{attr}")
         end
       end
     end
