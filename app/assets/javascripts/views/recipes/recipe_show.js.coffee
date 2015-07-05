@@ -36,6 +36,7 @@ class RecipeMe.Views.RecipeShow extends Backbone.View
 
 
   updateRecipe: (data) ->
+    console.log data
     if parseInt(@model.get("id"), 10) == parseInt(data.id, 10)
       if data.action == "rate"
         @model.set({rate: data.obj.rate})

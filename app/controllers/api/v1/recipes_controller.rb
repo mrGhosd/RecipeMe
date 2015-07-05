@@ -1,6 +1,6 @@
 module Api
   module V1
-    class RecipesController < ::ApplicationController
+    class RecipesController < Api::ApiController
       before_action :doorkeeper_authorize!, only: [:create]
 
       def index

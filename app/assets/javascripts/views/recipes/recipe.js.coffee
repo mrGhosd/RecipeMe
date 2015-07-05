@@ -8,15 +8,11 @@ class RecipeMe.Views.Recipe extends Backbone.View
     'click .destroy-recipe':'recipeDestroy'
 
   initialize: ->
-
     this.render()
-
-
 
   render: ->
     $(@el).html(@template(recipe: @model))
     this
-
 
   recipeDestroy: (event) ->
     @model.destroy
