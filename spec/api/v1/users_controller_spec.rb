@@ -9,7 +9,7 @@ describe "API Users controller" do
   let!(:comments) { create_list :comment, 12, user_id: user.id, recipe_id: recipe.id }
 
   context "unauthorized" do
-    let!(:api_path) { "/api/v1/users" }
+    let!(:api_path) { "/api/v1/users/profile" }
     it_behaves_like "API Authenticable"
   end
 
@@ -24,6 +24,30 @@ describe "API Users controller" do
 
     it "return status 200" do
       expect(response.status).to eq(200)
+    end
+  end
+
+  describe "POST #create" do
+    context "with valid attributes" do
+      it "create a new user" do
+        expect{ post "/api/v1/users", user: attributes_for(:user) }.to change(User, :count).by(1)
+      end
+
+      it "return just create user" do
+        post "/api/v1/users", user: attributes_for(:user)
+        expect(response.body).to eq(User.last.to_json)
+      end
+    end
+
+    context "with invalid attributes" do
+      it "doesnt' create an user" do
+        expect{ post "/api/v1/users", user: attributes_for(:user, email: "") }.to change(User, :count).by(0)
+      end
+
+      it "return users errors" do
+        post "/api/v1/users", user: attributes_for(:user, password: "")
+        expect(JSON.parse(response.body)).to have_key("password")
+      end
     end
   end
 
