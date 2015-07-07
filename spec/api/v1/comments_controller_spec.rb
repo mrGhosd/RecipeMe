@@ -17,12 +17,35 @@ describe "API Comments controller" do
     context "with valid attributes" do
       it "creates a new comment" do
         expect{ post "/api/v1/recipes/#{recipe.id}/comments",
-                     comment: attributes_for(:comment) }.to change(Comment, :count).by(1)
+        recipe_id: recipe.id,
+        comment: attributes_for(:comment, user_id: user.id, recipe_id: recipe.id),
+        access_token: access_token.token, format: :json }.to change(Comment, :count).by(1)
+      end
+
+      it "return just created comment" do
+        post "/api/v1/recipes/#{recipe.id}/comments",
+        recipe_id: recipe.id,
+        comment: attributes_for(:comment, user_id: user.id, recipe_id: recipe.id),
+        access_token: access_token.token, format: :json
+        expect(response.body).to eq(Comment.last.to_json)
       end
     end
 
     context "with invalid attributes" do
+      it "creates a new comment" do
+        expect{ post "/api/v1/recipes/#{recipe.id}/comments",
+        recipe_id: recipe.id,
+        comment: attributes_for(:comment, text: "", user_id: user.id, recipe_id: recipe.id),
+        access_token: access_token.token, format: :json }.to change(Comment, :count).by(0)
+      end
 
+      it "return just created comment" do
+        post "/api/v1/recipes/#{recipe.id}/comments",
+             recipe_id: recipe.id,
+             comment: attributes_for(:comment, text: "", user_id: user.id, recipe_id: recipe.id),
+             access_token: access_token.token, format: :json
+        expect(JSON.parse(response.body)).to have_key("text")
+      end
     end
   end
 
