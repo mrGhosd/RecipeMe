@@ -10,7 +10,7 @@ module Api
         if user.save
           render json:user.as_json, status: :ok
         else
-          render json: user.errors.to_json, status: :unprocessible_entity
+          render json: user.errors.to_json, status: :unprocessable_entity
         end
       end
 
