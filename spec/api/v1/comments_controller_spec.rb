@@ -49,4 +49,22 @@ describe "API Comments controller" do
     end
   end
 
+  describe "DELETE #destroy" do
+    let!(:category) { create :category }
+    let!(:user) { create :user }
+    let!(:recipe) { create :recipe, user_id: user.id, category_id: category.id }
+    let!(:comment) { create :comment, recipe_id: recipe.id, user_id: user.id }
+
+    it "delete selected recipe" do
+      expect{delete "/api/v1/recipes/#{recipe.id}/comments/#{comment.id}",
+                    recipe_id: recipe.id, id: comment.id}.to change(Comment, :count).by(-1)
+    end
+
+    it "return 200 status" do
+      delete "/api/v1/recipes/#{recipe.id}/comments/#{comment.id}",
+             recipe_id: recipe.id, id: comment.id
+      expect(response.status).to eq(200)
+    end
+  end
+
 end

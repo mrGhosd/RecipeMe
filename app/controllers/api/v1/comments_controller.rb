@@ -5,8 +5,8 @@ module Api
       after_action :mail_send, only: :create
 
       def index
-        recipe = Recipe.find(params[:id])
-        render json: recipe.comments.as_json(methods: [:user, :image])
+        recipe = Recipe.find(params[:recipe_id])
+        render json: recipe.comments.as_json
       end
 
       def create
@@ -16,6 +16,12 @@ module Api
         else
           render json: @comment.errors.to_json, status: :forbidden
         end
+      end
+
+      def destroy
+        comment = Comment.find(params[:id])
+        comment.destroy
+        render json: {success: true}.to_json
       end
 
       private
