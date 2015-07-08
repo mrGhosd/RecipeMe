@@ -67,4 +67,32 @@ describe "API Comments controller" do
     end
   end
 
+  describe "PUT #update" do
+    let!(:category) { create :category }
+    let!(:user) { create :user }
+    let!(:recipe) { create :recipe, user_id: user.id, category_id: category.id }
+    let!(:comment) { create :comment, recipe_id: recipe.id, user_id: user.id }
+
+    context "with valid attributes" do
+      it "update comment" do
+        put "/api/v1/recipes/#{recipe.id}/comments/#{comment.id}",
+        recipe_id: recipe.id, id: comment.id, comment: attributes_for(:comment, text: "1"), access_token: access_token.token,
+        format: :json
+        comment.reload
+        expect(comment.text).to eq("1")
+      end
+
+      it "return just updated comment" do
+        put "/api/v1/recipes/#{recipe.id}/comments/#{comment.id}",
+        recipe_id: recipe.id, id: comment.id, comment: attributes_for(:comment, text: "1"), access_token: access_token.token,
+        format: :json
+        expect(response.body).to eq(comment.to_json)
+      end
+    end
+
+    context "with invalid attributes" do
+
+    end
+  end
+
 end
