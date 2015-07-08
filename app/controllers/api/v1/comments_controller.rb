@@ -18,6 +18,15 @@ module Api
         end
       end
 
+      def update
+        comment = Comment.find(params[:id])
+        if comment.update(comments_params)
+          render json: comment.as_json, status: :ok
+        else
+          render json: comment.errors.to_json, status: :forbidden
+        end
+      end
+
       def destroy
         comment = Comment.find(params[:id])
         comment.destroy

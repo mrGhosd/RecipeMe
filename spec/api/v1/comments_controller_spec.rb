@@ -84,14 +84,27 @@ describe "API Comments controller" do
 
       it "return just updated comment" do
         put "/api/v1/recipes/#{recipe.id}/comments/#{comment.id}",
-        recipe_id: recipe.id, id: comment.id, comment: attributes_for(:comment, text: "1"), access_token: access_token.token,
+        recipe_id: recipe.id, id: comment.id, comment: attributes_for(:comment), access_token: access_token.token,
         format: :json
         expect(response.body).to eq(comment.to_json)
       end
     end
 
     context "with invalid attributes" do
+      it "doesn't update comment" do
+        put "/api/v1/recipes/#{recipe.id}/comments/#{comment.id}",
+        recipe_id: recipe.id, id: comment.id, comment: attributes_for(:comment, text: ""), access_token: access_token.token,
+        format: :json
+        comment.reload
+        expect(comment.text).to eq(comment.text)
+      end
 
+      it "return array with errors" do
+        put "/api/v1/recipes/#{recipe.id}/comments/#{comment.id}",
+        recipe_id: recipe.id, id: comment.id, comment: attributes_for(:comment, text: ""), access_token: access_token.token,
+        format: :json
+        expect(JSON.parse(response.body)).to have_key("text")
+      end
     end
   end
 
