@@ -21,8 +21,8 @@ class RecipeMe.Views.StepForm extends Backbone.View
       img = new Image(100, 75)
       img.class = "image-view"
       img.src = dataUri
-      if image.find("img") == undefined
-        image.find(".step-placeholder").html(img)
+      if image.hasClass("step-placeholder")
+        image.html(img)
       else
         image.parent().html(img)
     @reader.onerror = (event) ->
