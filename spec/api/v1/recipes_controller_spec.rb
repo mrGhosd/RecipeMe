@@ -70,30 +70,22 @@ describe "API Recipes controller" do
   describe "POST #create" do
     context "with valid attributes" do
       it "creates a new recipe" do
-        expect {
-          post "/api/v1/recipes", access_token: access_token.token,
-               format: :json, recipe: attributes_for(:recipe, category_id: category.id, user_id: user.id)
-        }.to change(Recipe, :count).by(1)
+        expect { post "/api/v1/recipes", access_token: access_token.token, format: :json, recipe: attributes_for(:recipe, category_id: category.id, user_id: user.id) }.to change(Recipe, :count).by(1)
       end
 
       it "return just created recipe" do
-        post "/api/v1/recipes", access_token: access_token.token,
-             format: :json, recipe: attributes_for(:recipe, category_id: category.id, user_id: user.id)
+        post "/api/v1/recipes", access_token: access_token.token, format: :json, recipe: attributes_for(:recipe, category_id: category.id, user_id: user.id)
         expect(response.body).to eq(Recipe.last.to_json)
       end
     end
 
     context "with invalid attributes" do
       it "doesn't create a new recipe" do
-        expect {
-          post "/api/v1/recipes", access_token: access_token.token,
-               format: :json, recipe: attributes_for(:recipe, title: "", category_id: category.id, user_id: user.id)
-        }.to change(Recipe, :count).by(0)
+        expect { post "/api/v1/recipes", access_token: access_token.token, format: :json, recipe: attributes_for(:recipe, title: "", category_id: category.id, user_id: user.id) }.to change(Recipe, :count).by(0)
       end
 
       it "return errors array" do
-        post "/api/v1/recipes", access_token: access_token.token,
-             format: :json, recipe: attributes_for(:recipe, title: "", category_id: category.id, user_id: user.id)
+        post "/api/v1/recipes", access_token: access_token.token, format: :json, recipe: attributes_for(:recipe, title: "", category_id: category.id, user_id: user.id)
         expect(JSON.parse(response.body)).to have_key("title")
       end
     end
