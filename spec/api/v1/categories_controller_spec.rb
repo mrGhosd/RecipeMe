@@ -4,11 +4,6 @@ describe "Categories API controller" do
   let!(:access_token) { create :access_token }
   let!(:category) { create :category }
 
-  context "unauthorized" do
-    let!(:api_path) { "/api/v1/categories" }
-    it_behaves_like "API Authenticable"
-  end
-
   describe "GET #index" do
     before { get "/api/v1/categories", access_token: access_token.token, format: :json }
 
