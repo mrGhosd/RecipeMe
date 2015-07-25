@@ -12,7 +12,7 @@ class StepsController < ApplicationController
     if @step.save
       render json: @step.as_json, status: :ok
     else
-      render json: @step.errors.as_json, status: :unforbidden_entity
+      render json: @step.errors.as_json, status: :unprocessable_entity
     end
   end
 

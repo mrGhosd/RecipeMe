@@ -53,6 +53,8 @@ Rails.application.routes.draw do
       resources :images, only: :create
       resources :recipes, concerns: [:rate] do
         resources :comments, concerns: [:rate]
+        resources :steps
+        resources :ingridients
       end
       resources :users do
         collection do
