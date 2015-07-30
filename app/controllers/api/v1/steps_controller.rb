@@ -14,6 +14,21 @@ module Api
         end
       end
 
+      def update
+        @step = @recipe.steps.find(params[:id])
+        if @step.update(steps_params)
+          render json: @step.as_json
+        else
+          render json: @step.errors.as_json
+        end
+      end
+
+      def destroy
+        @step = @recipe.steps.find(params[:id])
+        @step.destroy
+        head :ok
+      end
+
       private
 
       def load_recipe

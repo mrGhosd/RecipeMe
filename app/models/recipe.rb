@@ -45,7 +45,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def steps_list
-    self.steps.as_json(methods: :image)
+    self.steps.order(created_at: :asc).as_json(methods: :image)
   end
 
   def ingridients_list
@@ -53,6 +53,10 @@ class Recipe < ActiveRecord::Base
       ingridient.attributes.merge({size: ingridient.recipe_ingridients.find_by(ingridient_id: ingridient.id).size,
                                   recipe: self.id})
     end
+  end
+
+  def votes
+    Vote.where(voteable_id: self.id).map(&:user_id)
   end
 
   def created_at_h

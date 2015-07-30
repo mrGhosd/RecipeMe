@@ -1,7 +1,8 @@
 module Api
   module V1
     class IngridientsController < Api::ApiController
-      before_action :load_recipe, only: [:create]
+      before_action :load_recipe, only: [:create, :destroy]
+      before_action :load_ingridient, only: :destroy
 
       def create
         common_ingridient = Ingridient.find_by name: params[:name]
@@ -21,6 +22,12 @@ module Api
             render json: @ingridient.errors.as_json, status: :unprocessable_entity
           end
         end
+      end
+
+      def destroy
+        Recipe.find(params[:recipe_id]).ingridients.find(params[:id]).destroy
+        @ingridient.recipe_ingridients.find_by(recipe_id: params[:recipe_id], ingridient_id: params[:id]).try(:destroy)
+        head :ok
       end
 
       private

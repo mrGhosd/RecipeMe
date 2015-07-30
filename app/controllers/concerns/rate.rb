@@ -8,7 +8,7 @@ module Rate
   end
 
   def rating
-    if changed_object.update_rating(current_user)
+    if changed_object.update_rating(current_user || current_resource_owner)
       render json: {rate: changed_object.rate}, status: :ok
     else
       render json: changed_object.errors.to_json, status: :uprocessible_entity

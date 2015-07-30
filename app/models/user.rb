@@ -101,7 +101,6 @@ class User < ActiveRecord::Base
     !new_record?
   end
 
-
   private
 
   def set_nickname
