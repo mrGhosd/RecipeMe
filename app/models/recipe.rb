@@ -4,6 +4,7 @@ class Recipe < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :steps, dependent: :destroy
   has_one :image, as: :imageable, dependent: :destroy
+  has_one :complaint, as: :complaintable, dependent: :destroy
   has_many :taggings
   has_many :tags, through: :taggings
   has_many :recipe_ingridients
