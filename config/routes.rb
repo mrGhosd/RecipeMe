@@ -56,6 +56,7 @@ Rails.application.routes.draw do
         resources :steps
         resources :ingridients
       end
+      resources :complaints
       resources :users do
         collection do
           get :profile

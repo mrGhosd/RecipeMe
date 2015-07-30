@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ComplainstsController < Api::ApiController
+    class ComplaintsController < Api::ApiController
       before_action :doorkeeper_authorize!
 
       def create
