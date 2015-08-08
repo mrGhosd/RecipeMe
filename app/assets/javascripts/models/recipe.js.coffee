@@ -28,3 +28,8 @@ class RecipeMe.Models.Recipe extends Backbone.Model
         errorCallback(response, request)
     )
 
+  toJSON: (params) ->
+    this.attributes["image"] = this.get("image").toJSON()
+    super
+
+

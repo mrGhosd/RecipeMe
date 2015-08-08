@@ -17,6 +17,7 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :recipe_ingridients
   accepts_nested_attributes_for :ingridients
   accepts_nested_attributes_for :steps
+  accepts_nested_attributes_for :image
   include RecipesConcerns
   include RateModel
   include ImageModel
