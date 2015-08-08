@@ -348,6 +348,8 @@ GEM
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    tainbox (0.1.0)
+      activesupport
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -447,6 +449,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   sprockets-rails
+  tainbox
   therubyracer
   thinking-sphinx
   turbolinks
