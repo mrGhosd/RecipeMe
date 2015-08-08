@@ -15,7 +15,8 @@
     </div>
     <div class="col-md-2">
       <div class="form-group">
-        <div class="image-placeholder <%= "empty" if @category.get("image").id == undefined || @category.get('image') == null || @category.get('image') == undefined %>">
+        <%= console.log @category %>
+        <div class="image-placeholder <%= "empty" if @category.get('image') == null || @category.get("image").id == undefined || @category.get('image') == undefined %>">
           <% if @category.get("image") && @category.get("image").id != undefined: %>
               <img src="<%=  @category.get("image").name.url if @category.get("image").name %>" height="200" width="200" image_id="<%= @category.get("image").imageable_id if @category.get("image")  %>"/>
           <% end %>

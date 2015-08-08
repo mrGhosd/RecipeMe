@@ -49,7 +49,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :categories
+      resources :categories do
+        member { get :recipes }
+      end
       resources :images, only: :create
       resources :recipes, concerns: [:rate] do
         resources :comments, concerns: [:rate]

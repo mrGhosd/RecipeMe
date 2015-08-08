@@ -24,7 +24,7 @@ class UserUpdate < ActiveRecord::Base
             id: self.user.id,
             obj: self
     }
-    $redis.publish 'rt-change', msg.to_json
+    $redis.publish 'rtchange', msg.to_json
   end
 
   def send_feed_destroy_message
@@ -33,6 +33,6 @@ class UserUpdate < ActiveRecord::Base
             id: self.user.id,
             obj: self
     }
-    $redis.publish 'rt-change', msg.to_json
+    $redis.publish 'rtchange', msg.to_json
   end
 end
