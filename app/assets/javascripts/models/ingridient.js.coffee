@@ -11,3 +11,10 @@ class RecipeMe.Models.Ingridient extends Backbone.Model
       return "api/recipes/#{@recipe}/ingridients"
     else
       return "api/ingridients"
+
+  toJSON: (params) ->
+    this.attributes["size"] = this.attributes["in_size"]
+    delete this.attributes["in_size"]
+    this.attributes["ingridient_attributes"] = { name: this.get("name") }
+    super
+

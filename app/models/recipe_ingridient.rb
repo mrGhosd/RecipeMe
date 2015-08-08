@@ -4,6 +4,8 @@ class RecipeIngridient < ActiveRecord::Base
 
   after_create :increment_counter
   after_destroy :decrement_counter
+
+  accepts_nested_attributes_for :ingridient
   include IngridientsConcerns
 
   def increment_counter

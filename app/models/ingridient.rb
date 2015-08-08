@@ -4,4 +4,5 @@ class Ingridient < ActiveRecord::Base
 
   validates :name, uniqueness: true, presence: true
   attr_accessor :size, :recipe_params
+
 end

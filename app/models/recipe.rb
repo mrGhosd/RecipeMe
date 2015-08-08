@@ -14,12 +14,8 @@ class Recipe < ActiveRecord::Base
   after_create :send_message_to_author_followers unless Rails.env == "development"
   after_destroy :destroy_recipe
 
-  validates :title, :description, presence: true
-  validates :time, numericality: { only_integer: true }
-  validate :difficult_valid?
-  validates :persons, numericality: { only_integer: true }
-
-
+  accepts_nested_attributes_for :recipe_ingridients
+  accepts_nested_attributes_for :ingridients
   accepts_nested_attributes_for :steps
   include RecipesConcerns
   include RateModel
@@ -83,14 +79,4 @@ class Recipe < ActiveRecord::Base
       Vote.where(voteable_id: self.id, voteable_type: self.class.to_s).delete_all
     end
   end
-
-  def difficult_valid?
-    if difficult.in?(["easy", "medium", "hard"])
-      true
-    else
-      self.errors[:difficult] << I18n.t("recipes.errors.difficult")
-      false
-    end
-  end
-
 end

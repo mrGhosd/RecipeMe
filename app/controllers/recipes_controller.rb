@@ -19,12 +19,18 @@ class RecipesController < ApplicationController
 
   def create
     binding.pry
-    @recipe = Recipe.new(recipes_params)
-    if @recipe.save
-      render json: @recipe.as_json, status: :ok
+    form = RecipeForm.new
+    if form.submit(params)
+
     else
-      render json: @recipe.errors.to_json, status: :forbidden
+      render json: form.errors.to_json, status: :forbidden
     end
+    # @recipe = Recipe.new(recipes_params)
+    # if @recipe.save
+    #   render json: @recipe.as_json, status: :ok
+    # else
+    #   render json: @recipe.errors.to_json, status: :forbidden
+    # end
   end
 
   def update
@@ -54,7 +60,11 @@ class RecipesController < ApplicationController
   private
 
   def recipes_params
-    params.permit(:title, :user_id, :description,  :tag_list, :category_id, :time, :persons, :difficult, :steps => [])
+    params.permit(:title, :user_id,
+    :description,  :tag_list, :category_id,
+    :time, :persons, :difficult, :steps_attributes => [:id, :description, :image, :created_at, :updated_at],
+    :recipe_ingridients_attributes => [:id, :size, :recipe_id, :ingridient_id, :created_at,
+                                       :updated_at, :ingridient_attributes => [:id, :name, :created_at, :updated_at]])
   end
 
   def load_recipe
