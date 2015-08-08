@@ -55,8 +55,16 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     attributes = window.appHelper.formSerialization($("#recipe_form"))
     attributes["steps_attributes"] = @steps.toJSON()
     attributes["recipe_ingridients_attributes"] = @current_ingridients.toJSON()
-    @model.save(attributes)
-    console.log attributes
+    @model.save attributes, {
+    wait: true
+    success: (response, request) ->
+      Backbone.history.navigate('/recipes', {trigger: true, repalce: true})
+    error: (response, request) ->
+      errorMessage = new RecipeMe.ErrorHandler(response, request)
+      if errorMessage.status == 401
+      else
+        errorMessage.formMessageError($("#recipe_form"))
+    }
 
 
   createMainObject: (attributes, callback) ->

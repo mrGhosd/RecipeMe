@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
 
-  after_action :create_image, only: [:create, :update]
+  # after_action :create_image, only: [:create, :update]
   # after_action :send_image_message, only: :create_image
   before_action :changed_object, only: [:rating, :liked_users, :create_image]
   before_action :load_recipe, only: [:update, :show, :destroy, :rating, :liked_users]
@@ -18,7 +18,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    binding.pry
     form = RecipeForm.new
     if form.submit(params)
 

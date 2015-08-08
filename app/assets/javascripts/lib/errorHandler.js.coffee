@@ -22,12 +22,18 @@ class RecipeMe.ErrorHandler
 
   formMessageError: (form) ->
     $.each(@message, (key, value) ->
-      form.find("input[name=\"#{key}\"]").addClass("error")
+      form.find("input[name=\"#{key}\"]").addClass("error") if key != "image"
       form.find("textarea[name=\"#{key}\"]").addClass("error")
+      if key == "file"
+        return true
       if key == "description" || key == "text"
         $("<div class='error-text'>#{value[0]}</div>").insertAfter(form.find("textarea[name=\"#{key}\"]"))
       else
-        $("<div class='error-text'>#{value[0]}</div>").insertAfter(form.find("input[name=\"#{key}\"]"))
+        $("<div class='error-text'>#{value[0]}</div>").insertAfter(form.find("input[name=\"#{key}\"]")) if key != "image"
+
+      if key == "image"
+        form.find(".image-placeholder.empty").addClass("error")
+        $("<div class='error-text'>#{value[0]}</div>").insertAfter(form.find(".image-placeholder.empty"))
     )
 
   status404: ->
