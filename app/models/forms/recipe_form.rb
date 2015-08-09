@@ -12,16 +12,14 @@ class RecipeForm
   attribute :tag_list, String
   attribute :description, String
 
-  validates :title, :description, presence: true
-  validates :time, numericality: { only_integer: true }
-  validate :difficult_valid?
-  validates :persons, numericality: { only_integer: true }
+
   # validates :image, presence: true
 
   def submit(params)
     @params = params
     self.attributes = @params
-    if valid?
+    binding.pry
+    if valid? && attributes_valid?
       ActiveRecord::Base.transaction do
         @recipe = Recipe.new(attributes)
         @recipe.save
@@ -53,9 +51,8 @@ class RecipeForm
     false if image.blank?
   end
 
-  def valid?
-    binding.pry
-    super && image_valid? && steps_valid?
+  def attributes_valid?
+    image_valid? && steps_valid?
   end
 
   def image_valid?
@@ -63,6 +60,7 @@ class RecipeForm
   end
 
   def steps_valid?
+    @form = self
     @params["steps"].each do |params|
       image = Image.find(params["image"]["id"]) if params["image"].present?
       step = Step.new({description: params["description"], image: image})

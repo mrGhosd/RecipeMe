@@ -10,17 +10,31 @@ class Recipe < ActiveRecord::Base
   has_many :recipe_ingridients
   has_many :ingridients, through: :recipe_ingridients
   acts_as_taggable
-  after_create :update_user_recipe
-  after_create :send_message_to_author_followers unless Rails.env == "development"
-  after_destroy :destroy_recipe
+  # after_create :update_user_recipe
+  # after_create :send_message_to_author_followers unless Rails.env == "development"
+  # after_destroy :destroy_recipe
+
+  # validates :title, :description, presence: true
+  # validates :time, numericality: { only_integer: true }
+  # validate :difficult_valid?
+  # validates :persons, numericality: { only_integer: true }
+  validates :image, presence: true
+  # validates_associated :steps
 
   # accepts_nested_attributes_for :recipe_ingridients
   # accepts_nested_attributes_for :ingridients
-  # accepts_nested_attributes_for :steps
-  # accepts_nested_attributes_for :image
+  # validates_associated :steps
+  accepts_nested_attributes_for :steps
+  accepts_nested_attributes_for :image
   include RecipesConcerns
   include RateModel
   include ImageModel
+
+  validate do |recipe|
+    recipe.steps.each_with_index do |step, index|
+      self.errors.add(:steps, { index => step.errors.messages }) if step.invalid?
+    end
+  end
 
   def tag_list
     self.tags.map(&:name).join(", ")
@@ -62,8 +76,24 @@ class Recipe < ActiveRecord::Base
   end
 
   def image_attributes=(attrs)
-    binding.pry
+    self.image = Image.find(attrs["id"]) if attrs["id"]
   end
+
+  # def steps_attributes=(attrs)
+  #   binding.pry
+  #   attrs.each do |params|
+  #     step = Step.new(params)
+  #     if step.invalid?
+  #       self.errors.add(:steps, step.errors.messages)
+  #     else
+  #       step.save()
+  #       self.steps << step
+  #     end
+  #   end
+  #   if self.errors[:steps].any?
+  #     false
+  #   end
+  # end
 
   private
 
@@ -82,6 +112,15 @@ class Recipe < ActiveRecord::Base
     if self.present?
       RecipeUpdate.where(update_entity: self.class.to_s, update_id: self.id).delete_all
       Vote.where(voteable_id: self.id, voteable_type: self.class.to_s).delete_all
+    end
+  end
+
+  def difficult_valid?
+    if difficult.in?(["easy", "medium", "hard"])
+      true
+    else
+      self.errors[:difficult] << I18n.t("recipes.errors.difficult")
+      false
     end
   end
 end

@@ -18,18 +18,19 @@ class RecipesController < ApplicationController
   end
 
   def create
-    form = RecipeForm.new
-    if form.submit(params)
-
-    else
-      render json: form.errors.to_json, status: :forbidden
-    end
-    # @recipe = Recipe.new(recipes_params)
-    # if @recipe.save
-    #   render json: @recipe.as_json, status: :ok
+    # form = RecipeForm.new
+    # if form.submit(params)
+    #
     # else
-    #   render json: @recipe.errors.to_json, status: :forbidden
+    #   binding.pry
+    #   render json: form.errors.to_json, status: :forbidden
     # end
+    @recipe = Recipe.new(recipes_params)
+    if @recipe.save
+      render json: @recipe.as_json, status: :ok
+    else
+      render json: @recipe.errors.to_json, status: :forbidden
+    end
   end
 
   def update
@@ -61,7 +62,8 @@ class RecipesController < ApplicationController
   def recipes_params
     params.permit(:title, :user_id,
     :description,  :tag_list, :category_id,
-    :time, :persons, :difficult)
+    :time, :persons, :difficult, image_attributes: [:id, :name, :imageable_id, :imageable_type],
+    steps_attributes: [:id, :description, :image])
   end
 
   def load_recipe

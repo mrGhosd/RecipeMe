@@ -53,8 +53,8 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     $("#recipe_form input, #recipe_form textarea").removeClass("error")
     $(".error-text").remove()
     attributes = window.appHelper.formSerialization($("#recipe_form"))
-    attributes["steps"] = @steps.toJSON()
-    attributes["recipe"] = @current_ingridients.toJSON()
+    attributes["steps_attributes"] = @steps.toJSON()
+#    attributes["recipe"] = @current_ingridients.toJSON()
     @model.save attributes, {
     wait: true
     success: (response, request) ->
