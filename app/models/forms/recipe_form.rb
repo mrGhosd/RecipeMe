@@ -47,7 +47,6 @@ class RecipeForm
     @params["steps"].each do |step|
       step_node = Step.new(step)
     end
-    # binding.pry
   end
 
   def check_image
@@ -55,11 +54,23 @@ class RecipeForm
   end
 
   def valid?
-    super && image_valid?
+    binding.pry
+    super && image_valid? && steps_valid?
   end
 
   def image_valid?
     @params["image"].present? ? true : self.errors.add(:image, "can't be blank"); false
+  end
+
+  def steps_valid?
+    @params["steps"].each do |params|
+      image = Image.find(params["image"]["id"]) if params["image"].present?
+      step = Step.new({description: params["description"], image: image})
+      if step.invalid?
+        self.errors.add(:steps, step.errors.messages)
+      end
+    end
+    self.errors[:steps].any? ? false : true
   end
 
   def difficult_valid?

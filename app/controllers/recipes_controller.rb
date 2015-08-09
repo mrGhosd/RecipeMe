@@ -19,7 +19,6 @@ class RecipesController < ApplicationController
 
   def create
     form = RecipeForm.new
-    binding.pry
     if form.submit(params)
 
     else
