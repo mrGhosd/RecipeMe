@@ -53,8 +53,8 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     $("#recipe_form input, #recipe_form textarea").removeClass("error")
     $(".error-text").remove()
     attributes = window.appHelper.formSerialization($("#recipe_form"))
-    attributes["steps_attributes"] = @steps.toJSON()
-    attributes["recipe_ingridients_attributes"] = @current_ingridients.toJSON()
+    attributes["steps"] = @steps.toJSON()
+    attributes["recipe"] = @current_ingridients.toJSON()
     @model.save attributes, {
     wait: true
     success: (response, request) ->
@@ -123,7 +123,8 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     event.stopPropagation()
     file = this.getFileFromEvent(event)
     @reader.readAsDataURL(file)
-    $("#recipePlaceholder").removeClass("empty entered")
+    $("#recipePlaceholder").removeClass("empty entered error")
+    $("#recipePlaceholder").next(".error-text").remove()
     this.createRecipeImage(event, "Recipe")
     return false
 
@@ -168,7 +169,8 @@ class RecipeMe.Views.RecipesForm extends Backbone.View
     event.stopPropagation(event)
     image = this.getFileFromEvent(event)
     @reader.readAsDataURL(image)
-    $(".image-placeholder").removeClass("empty")
+    $(".image-placeholder").removeClass("empty error")
+    $(".image-placeholder").next(".error-text").remove()
     this.createRecipeImage(event, "Recipe")
 
   getFileFromEvent: (event) ->

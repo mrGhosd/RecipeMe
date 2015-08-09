@@ -14,10 +14,10 @@ class Recipe < ActiveRecord::Base
   after_create :send_message_to_author_followers unless Rails.env == "development"
   after_destroy :destroy_recipe
 
-  accepts_nested_attributes_for :recipe_ingridients
-  accepts_nested_attributes_for :ingridients
-  accepts_nested_attributes_for :steps
-  accepts_nested_attributes_for :image
+  # accepts_nested_attributes_for :recipe_ingridients
+  # accepts_nested_attributes_for :ingridients
+  # accepts_nested_attributes_for :steps
+  # accepts_nested_attributes_for :image
   include RecipesConcerns
   include RateModel
   include ImageModel
@@ -59,6 +59,10 @@ class Recipe < ActiveRecord::Base
 
   def created_at_h
     self.created_at.strftime('%H:%M:%S %d.%m.%Y') if self.created_at
+  end
+
+  def image_attributes=(attrs)
+    binding.pry
   end
 
   private
