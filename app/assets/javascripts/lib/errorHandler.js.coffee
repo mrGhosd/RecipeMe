@@ -47,8 +47,12 @@ class RecipeMe.ErrorHandler
               if attr_name == "description"
                 $(steps_form[k]).find("textarea[name=\"#{attr_name}\"]").addClass("error")
                 $("<div class='error-text'>#{attr_error[0]}</div>").insertAfter($(steps_form[k]).find("textarea[name=\"#{attr_name}\"]"))
-              console.log attr_name
-              console.log attr_error
+              if attr_name == "image"
+                $(steps_form[k]).find(".step-placeholder.empty").addClass("error")
+                $("<div class='error-text'>#{attr_error[0]}</div>").insertAfter($(steps_form[k]).find(".step-placeholder.empty"))
+
+      if key == "ingridients"
+
     )
 
   status404: ->

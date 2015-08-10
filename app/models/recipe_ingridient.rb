@@ -5,6 +5,12 @@ class RecipeIngridient < ActiveRecord::Base
   after_create :increment_counter
   after_destroy :decrement_counter
 
+  validates :size, presence: true
+
+  validate do |recipe_ingridient|
+    self.errors.add(:name, recipe_ingridient.ingridient.errors.messages) if recipe_ingridient.ingridient.invalid?
+  end
+
   accepts_nested_attributes_for :ingridient
   include IngridientsConcerns
 

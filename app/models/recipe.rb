@@ -19,11 +19,11 @@ class Recipe < ActiveRecord::Base
   # validate :difficult_valid?
   # validates :persons, numericality: { only_integer: true }
   validates :image, presence: true
-  # validates_associated :steps
+  validates_associated :steps
 
-  # accepts_nested_attributes_for :recipe_ingridients
   # accepts_nested_attributes_for :ingridients
   # validates_associated :steps
+  accepts_nested_attributes_for :recipe_ingridients
   accepts_nested_attributes_for :steps
   accepts_nested_attributes_for :image
   include RecipesConcerns
@@ -33,6 +33,10 @@ class Recipe < ActiveRecord::Base
   validate do |recipe|
     recipe.steps.each_with_index do |step, index|
       self.errors.add(:steps, { index => step.errors.messages }) if step.invalid?
+    end
+
+    recipe.recipe_ingridients.each_with_index do |ingridient, index|
+      self.errors.add(:ingridients, {index => ingridient.errors.messages}) if ingridient.invalid?
     end
   end
 
@@ -79,21 +83,25 @@ class Recipe < ActiveRecord::Base
     self.image = Image.find(attrs["id"]) if attrs["id"]
   end
 
-  # def steps_attributes=(attrs)
-  #   binding.pry
-  #   attrs.each do |params|
-  #     step = Step.new(params)
-  #     if step.invalid?
-  #       self.errors.add(:steps, step.errors.messages)
-  #     else
-  #       step.save()
-  #       self.steps << step
-  #     end
-  #   end
-  #   if self.errors[:steps].any?
-  #     false
-  #   end
-  # end
+  def steps_attributes=(attrs)
+    attrs.each do |attr|
+      step = Step.new
+      step.description = attr["description"]
+      step.image = Image.find(attr["image"]["id"]) if attr["image"]
+      self.steps << step
+    end if attrs.present?
+  end
+
+  def recipe_ingridients_attributes=(attrs)
+    attrs.each do |attr|
+      ingridient = Ingridient.find_by(name: attr[:ingridient_attributes][:name]) ||
+          Ingridient.new(name: attr[:ingridient_attributes][:name])
+      # recipe_ingridients = RecipeIngridient.new(attr)
+      # recipe_ingridients.ingridient = ingridient
+      # self.recipe_ingridients << recipe_ingridients
+      self.ingridients << ingridient
+    end if attrs.present?
+  end
 
   private
 
