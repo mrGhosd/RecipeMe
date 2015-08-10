@@ -35,7 +35,7 @@ class Recipe < ActiveRecord::Base
       self.errors.add(:steps, { index => step.errors.messages }) if step.invalid?
     end
 
-    recipe.ingridients.each_with_index do |ingridient, index|
+    recipe.recipe_ingridients.each_with_index do |ingridient, index|
       self.errors.add(:ingridients, {index => ingridient.errors.messages}) if ingridient.invalid?
     end
   end
@@ -85,22 +85,29 @@ class Recipe < ActiveRecord::Base
 
   def steps_attributes=(attrs)
     attrs.each do |attr|
-      step = Step.new
+      step = if attr[:id]
+               self.steps.find(attr[:id])
+             else
+               Step.new
+             end
       step.description = attr["description"]
       step.image = Image.find(attr["image"]["id"]) if attr["image"]
-      self.steps << step
+      step.in?(self.steps) ? self.steps.find(step).update_attributes(step.attributes) : self.steps << step
     end if attrs.present?
   end
 
   def recipe_ingridients_attributes=(attrs)
     attrs.each do |attr|
-      binding.pry
-      # ingridient = Ingridient.find_by(name: attr[:ingridient_attributes][:name]) ||
-      #     Ingridient.new(name: attr[:ingridient_attributes][:name])
-      recipe_ingridients = RecipeIngridient.new(attr)
-      # recipe_ingridients.ingridient = ingridient
-      # self.recipe_ingridients << recipe_ingridients
-      self.recipe_ingridients << recipe_ingridients
+      recipe_ingridients = if attr[:id]
+                             RecipeIngridient.find_by(ingridient_id: attr[:id])
+                           else
+                             RecipeIngridient.new(attr)
+                           end
+      if recipe_ingridients.in?(self.recipe_ingridients)
+        self.recipe_ingridients.find(recipe_ingridients).update_attributes(recipe_ingridients.attributes)
+      else
+        self.recipe_ingridients << recipe_ingridients
+      end
     end if attrs.present?
   end
 

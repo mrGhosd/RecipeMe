@@ -27,7 +27,6 @@ class RecipesController < ApplicationController
   end
 
   def update
-    binding.pry
     if @recipe.update(recipes_params)
       render json: { success: true}, status: :ok
     else
