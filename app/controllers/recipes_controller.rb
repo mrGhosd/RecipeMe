@@ -18,13 +18,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    # form = RecipeForm.new
-    # if form.submit(params)
-    #
-    # else
-    #   binding.pry
-    #   render json: form.errors.to_json, status: :forbidden
-    # end
     @recipe = Recipe.new(recipes_params)
     if @recipe.save
       render json: @recipe.as_json, status: :ok

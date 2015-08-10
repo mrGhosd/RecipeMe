@@ -11,6 +11,10 @@ class RecipeIngridient < ActiveRecord::Base
     self.errors.add(:name, recipe_ingridient.ingridient.errors.messages) if recipe_ingridient.ingridient.invalid?
   end
 
+  def ingridient_attributes=(attr)
+    self.ingridient = Ingridient.find_by(name: attr[:name]) || Ingridient.new(name: attr[:name])
+  end
+
   accepts_nested_attributes_for :ingridient
   include IngridientsConcerns
 

@@ -94,12 +94,12 @@ class Recipe < ActiveRecord::Base
 
   def recipe_ingridients_attributes=(attrs)
     attrs.each do |attr|
-      ingridient = Ingridient.find_by(name: attr[:ingridient_attributes][:name]) ||
-          Ingridient.new(name: attr[:ingridient_attributes][:name])
-      # recipe_ingridients = RecipeIngridient.new(attr)
+      # ingridient = Ingridient.find_by(name: attr[:ingridient_attributes][:name]) ||
+      #     Ingridient.new(name: attr[:ingridient_attributes][:name])
+      recipe_ingridients = RecipeIngridient.new(attr)
       # recipe_ingridients.ingridient = ingridient
       # self.recipe_ingridients << recipe_ingridients
-      self.ingridients << ingridient
+      self.recipe_ingridients << recipe_ingridients
     end if attrs.present?
   end
 

@@ -62,7 +62,6 @@ class RecipeMe.ErrorHandler
                 $(ingridient_form[k]).find("input[name=\"#{attr_name}\"]").addClass("error")
                 $("<div class='error-text'>#{attr_error[0]}</div>").insertAfter($(ingridient_form[k]).find("input[name=\"#{attr_name}\"]"))
 
-#          console.log ingridient_element
     )
 
   status404: ->
