@@ -14,10 +14,10 @@ class Recipe < ActiveRecord::Base
   # after_create :send_message_to_author_followers unless Rails.env == "development"
   # after_destroy :destroy_recipe
 
-  # validates :title, :description, presence: true
-  # validates :time, numericality: { only_integer: true }
-  # validate :difficult_valid?
-  # validates :persons, numericality: { only_integer: true }
+  validates :title, :description, presence: true
+  validates :time, numericality: { only_integer: true }
+  validate :difficult_valid?
+  validates :persons, numericality: { only_integer: true }
   validates :image, presence: true
   validates_associated :steps
 

@@ -39,10 +39,8 @@ class RecipeMe.ErrorHandler
 
       if key == "steps"
         steps_form = form.find(".steps-list").find(".step-block")
-        console.log steps_form
         for step_element in value
           for k, v of step_element
-            console.log $(steps_form[k])
             for attr_name, attr_error of v
               if attr_name == "description"
                 $(steps_form[k]).find("textarea[name=\"#{attr_name}\"]").addClass("error")
@@ -52,7 +50,19 @@ class RecipeMe.ErrorHandler
                 $("<div class='error-text'>#{attr_error[0]}</div>").insertAfter($(steps_form[k]).find(".step-placeholder.empty"))
 
       if key == "ingridients"
+        ingridient_form = form.find(".ingridients-list").find(".ingridient-item")
+        for ingridient_element in value
+          continue if typeof ingridient_element == "string"
+          for k, v of ingridient_element
+            for attr_name, attr_error of v
+              if attr_name == "name"
+                $(ingridient_form[k]).find("input[name=\"ingridient-#{attr_name}\"]").addClass("error")
+                $("<div class='error-text'>#{attr_error[0][attr_name][0]}</div>").insertAfter($(ingridient_form[k]).find("input[name=\"ingridient-#{attr_name}\"]"))
+              if attr_name == "size"
+                $(ingridient_form[k]).find("input[name=\"#{attr_name}\"]").addClass("error")
+                $("<div class='error-text'>#{attr_error[0]}</div>").insertAfter($(ingridient_form[k]).find("input[name=\"#{attr_name}\"]"))
 
+#          console.log ingridient_element
     )
 
   status404: ->

@@ -4,7 +4,7 @@
   </div>
 </div>
 <div class="ingridient-size">
-    <div class="col-md-1">
+    <div class="col-md-2">
       <input type="text" name="size" placeholder="<%= I18n.t('ingridients.size') %>" class="form-control ingridient-size" ingridients="true" value="<%= @ingridient.get("size") if @ingridient.get("size") %>" <%= disabled="disabled" if @ingridient.get("id") %>/>
     </div>
 </div>
