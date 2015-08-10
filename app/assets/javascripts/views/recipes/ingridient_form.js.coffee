@@ -11,6 +11,7 @@ class RecipeMe.Views.IngridientForm extends Backbone.View
     if params
       @model = params.model
       @collection = params.collection
+      console.log @model
 
   updateName: (event) ->
     text = $(event.currentTarget).val()

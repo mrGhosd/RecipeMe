@@ -29,7 +29,7 @@ class RecipeMe.Models.Recipe extends Backbone.Model
     )
 
   toJSON: (params) ->
-    this.attributes["image_attributes"] = this.get("image").toJSON() if this.get("image")
+    this.attributes["image_attributes"] = this.get("image") if this.get("image")
     super
 
 

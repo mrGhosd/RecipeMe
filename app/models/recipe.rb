@@ -35,7 +35,7 @@ class Recipe < ActiveRecord::Base
       self.errors.add(:steps, { index => step.errors.messages }) if step.invalid?
     end
 
-    recipe.recipe_ingridients.each_with_index do |ingridient, index|
+    recipe.ingridients.each_with_index do |ingridient, index|
       self.errors.add(:ingridients, {index => ingridient.errors.messages}) if ingridient.invalid?
     end
   end
@@ -94,6 +94,7 @@ class Recipe < ActiveRecord::Base
 
   def recipe_ingridients_attributes=(attrs)
     attrs.each do |attr|
+      binding.pry
       # ingridient = Ingridient.find_by(name: attr[:ingridient_attributes][:name]) ||
       #     Ingridient.new(name: attr[:ingridient_attributes][:name])
       recipe_ingridients = RecipeIngridient.new(attr)

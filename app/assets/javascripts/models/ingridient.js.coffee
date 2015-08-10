@@ -13,8 +13,9 @@ class RecipeMe.Models.Ingridient extends Backbone.Model
       return "api/ingridients"
 
   toJSON: (params) ->
-    this.attributes["size"] = this.attributes["in_size"]
-    delete this.attributes["in_size"]
+    if this.attributes["in_size"]
+      this.attributes["size"] = this.attributes["in_size"]
+      delete this.attributes["in_size"]
     this.attributes["ingridient_attributes"] = { name: this.get("name") }
     super
 

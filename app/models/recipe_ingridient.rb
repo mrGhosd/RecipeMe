@@ -8,7 +8,7 @@ class RecipeIngridient < ActiveRecord::Base
   validates :size, presence: true
 
   validate do |recipe_ingridient|
-    self.errors.add(:name, recipe_ingridient.ingridient.errors.messages) if recipe_ingridient.ingridient.invalid?
+    self.errors.add(:name, recipe_ingridient.ingridient.errors.messages) if recipe_ingridient.ingridient.try(:invalid?)
   end
 
   def ingridient_attributes=(attr)
