@@ -10,9 +10,9 @@ class Recipe < ActiveRecord::Base
   has_many :recipe_ingridients
   has_many :ingridients, through: :recipe_ingridients
   acts_as_taggable
-  # after_create :update_user_recipe
-  # after_create :send_message_to_author_followers unless Rails.env == "development"
-  # after_destroy :destroy_recipe
+  after_create :update_user_recipe
+  after_create :send_message_to_author_followers unless Rails.env == "development"
+  after_destroy :destroy_recipe
 
   validates :title, :description, presence: true
   validates :time, numericality: { only_integer: true }
@@ -21,8 +21,6 @@ class Recipe < ActiveRecord::Base
   validates :image, presence: true
   validates_associated :steps
 
-  # accepts_nested_attributes_for :ingridients
-  # validates_associated :steps
   accepts_nested_attributes_for :recipe_ingridients
   accepts_nested_attributes_for :steps
   accepts_nested_attributes_for :image

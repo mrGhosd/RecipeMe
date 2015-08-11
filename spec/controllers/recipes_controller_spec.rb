@@ -2,28 +2,39 @@ require 'rails_helper'
 
 describe RecipesController do
   let!(:user) { create :user }
+  # let!(:image) { create :image, imageable_type: recipe.class.to_s }
   let!(:recipes_first_page) { create_list :recipe, 12, user_id: user.id }
   let!(:recipes_second_page) { create_list :recipe, 12, user_id: user.id }
-  let!(:recipe) { recipes_first_page[0] }
+  let!(:recipe) { recipes_first_page.last }
 
-  let!(:image) { create :image, imageable_id: recipe.id, imageable_type: recipe.class.to_s }
 
-  before { login_as user }
+  before do
+    login_as user
+    # recipes_first_page.each do |recipe|
+    #   image = create(:image)
+    #   recipe.update(image: image)
+    # end
+    #
+    # recipes_second_page.each do |recipe|
+    #   image = create(:image)
+    #   recipe.update(image: image)
+    # end
+  end
 
 
   describe "GET #index" do
-    before { get :index
-             recipe.update(image: image)
-           }
+    before { get :index }
 
-    %w(id title user_id rate comments_count image).each do |attr|
-      it "recipe attributes contain #{attr}" do
-        expect(response.body).to be_json_eql(recipe.send(attr.to_sym).to_json).at_path("0/#{attr}")
+    context "single recipe" do
+      %w(id title user_id rate image comments_count).each do |attr|
+        it "recipe attributes contain #{attr}" do
+          expect(response.body).to be_json_eql(recipe.send(attr.to_sym).to_json).at_path("#{recipes_first_page.index(recipe)}/#{attr}")
+        end
       end
-    end
 
-    it "render recipes as json" do
-      expect(response.status).to eq(200)
+      it "render recipes as json" do
+        expect(response.status).to eq(200)
+      end
     end
 
     context "pagination" do
