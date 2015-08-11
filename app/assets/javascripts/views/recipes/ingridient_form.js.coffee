@@ -11,17 +11,14 @@ class RecipeMe.Views.IngridientForm extends Backbone.View
     if params
       @model = params.model
       @collection = params.collection
-      console.log @model
 
   updateName: (event) ->
     text = $(event.currentTarget).val()
     @model.set({name: text})
-    console.log @model
 
   updateSize: (event) ->
     text = $(event.currentTarget).val()
     @model.set({in_size: text})
-    console.log @model
 
   removeIngridient: (event) ->
     if @model.isNew()
