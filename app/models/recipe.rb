@@ -19,7 +19,6 @@ class Recipe < ActiveRecord::Base
   validate :difficult_valid?
   validates :persons, numericality: { only_integer: true }
   validates :image, presence: true
-  validates_associated :steps
 
   accepts_nested_attributes_for :recipe_ingridients
   accepts_nested_attributes_for :steps
@@ -90,7 +89,12 @@ class Recipe < ActiveRecord::Base
              end
       step.description = attr["description"]
       step.image = Image.find(attr["image"]["id"]) if attr["image"]
-      step.in?(self.steps) ? self.steps.find(step).update_attributes(step.attributes) : self.steps << step
+      if step.in?(self.steps)
+        self.steps[self.steps.index(step)].description = step.description
+        self.steps[self.steps.index(step)].image = step.image
+      else
+        self.steps << step
+      end
     end if attrs.present?
   end
 

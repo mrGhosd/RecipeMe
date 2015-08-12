@@ -2,8 +2,6 @@ require 'rails_helper'
 
 describe RecipesController do
   let!(:user) { create :user }
-  # let!(:image) { create :image, imageable_type: recipe.class.to_s }
-
 
   before do
     login_as user
@@ -121,30 +119,118 @@ describe RecipesController do
   end
 
   describe "PUT #update" do
+    let!(:category) { create :category }
+    let!(:recipe) { create :recipe, user_id: user.id, category_id: category.id }
+    let!(:step){ create :step, recipe_id: recipe.id }
+    let!(:ingridient) { create :ingridient }
+    let!(:recipe_ingridient) { create :recipe_ingridient, recipe_id: recipe.id, ingridient_id: ingridient.id }
     context "with valid attributes" do
-      it "update attributes of recipe" do
-        patch :update, id: recipe.id, title: "ololo", description: "awdawdawd", user_id: user.id
-        recipe.reload
-        expect(recipe.title).to eq("ololo")
+      before do
+        @attrs_hash = recipe.attributes.merge({image_attributes: recipe.image.attributes})
       end
 
-      it "return 200 status" do
-        put :update, id: recipe.id, title: "ololo", description: "awdawdawd"
+      context "only recipe" do
+        before { @attrs_hash[:title] = "NewTitle" }
+
+        it "update single recipe" do
+          put :update, @attrs_hash
+          recipe.reload
+          expect(recipe.title).to eq("NewTitle")
+        end
+      end
+
+      context "recipe and step" do
+        before do
+          @attrs_hash = recipe.attributes.merge({image_attributes: recipe.image.attributes, steps_attributes: [step.attributes]})
+          @attrs_hash[:steps_attributes].first['description'] = "NewDesc"
+        end
+
+        it "update recipe step" do
+          put :update, @attrs_hash
+          recipe.reload
+          expect(recipe.steps.first.description).to eq("NewDesc")
+        end
+      end
+
+      context "recipe and ingridient" do
+        let!(:new_ingridient) { create :ingridient, name: "www" }
+        before do
+          @attrs_hash = recipe.attributes.merge({image_attributes: recipe.image.attributes, recipe_ingridients_attributes: [{size: recipe_ingridient.size, ingiridient_attributes: new_ingridient.attributes}]})
+        end
+
+        it "create new ingridient for recipe" do
+          put :update, @attrs_hash
+          recipe.reload
+          expect(recipe.recipe_ingridients.count).to eq(2)
+        end
+      end
+
+      it "return just updated recipe" do
+        post :create, @attrs_hash
         expect(response.status).to eq(200)
       end
     end
 
+
     context "with invalid attributes" do
-      it "doesn't update attributes of recipe" do
-        put :update, id: recipe.id, title: "", description: "awdawdawd"
-        recipe.reload
-        expect(recipe.title).to eq(recipe.title)
+      before do
+        @attrs_hash = recipe.attributes.merge({image_attributes: recipe.image.attributes})
       end
 
-      it "return 200 status" do
-        put :update, id: recipe.id, title: "", description: "awdawdawd"
-        recipe.reload
-        expect(JSON.parse(response.body)).to have_key("title")
+      context "single recipe" do
+        before { @attrs_hash[:title] = "" }
+
+        it "doesn't update attributes of recipe" do
+          put :update, @attrs_hash
+          recipe.reload
+          expect(recipe.title).to eq(recipe.title)
+        end
+
+        it "return recipe error" do
+          put :update, @attrs_hash
+          recipe.reload
+          expect(JSON.parse(response.body)).to have_key("title")
+        end
+      end
+
+      context "recipes step" do
+        before do
+          # recipe.steps << new_step
+          @attrs_hash = recipe.attributes.merge({image_attributes: recipe.image.attributes, steps_attributes: [step.attributes]})
+          @attrs_hash[:steps_attributes].first['description'] = ""
+        end
+
+        it "doesn't update step attributes of recipe" do
+          put :update, @attrs_hash
+          recipe.reload
+          expect(recipe.steps.first.description).to eq(recipe.steps.first.description)
+        end
+
+        it "return step error" do
+          put :update, @attrs_hash
+          recipe.reload
+          expect(JSON.parse(response.body)).to have_key("steps")
+        end
+      end
+
+      context "recipes ingridients" do
+        before do
+          @attrs_hash = recipe.attributes.merge({image_attributes: recipe.image.attributes, recipe_ingridients_attributes: [{size: recipe_ingridient.size, ingiridient_attributes: ingridient.attributes}]})
+          @attrs_hash[:recipe_ingridients_attributes].first['size'] = ''
+        end
+
+        it "doesn't update ingridient attributes of recipe" do
+          put :update, @attrs_hash
+          recipe.reload
+          expect(recipe.recipe_ingridients.first.size).to eq(recipe.recipe_ingridients.first.size)
+          expect(recipe.recipe_ingridients.count).to eq(1)
+        end
+
+        it "return ingridient error" do
+          put :update, @attrs_hash
+          recipe.reload
+          expect(JSON.parse(response.body)).to have_key("ingridients")
+        end
       end
     end
   end
