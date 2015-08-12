@@ -151,13 +151,66 @@ describe RecipesController do
 
   describe "POST #create" do
     context "with valid attributes" do
-      it "create a new recipe" do
-        expect{post :create, {title: "ololo", description: "awdawdawd", user_id: user.id}}.to change(Recipe, :count).by(1)
+      let!(:image) { create :image }
+      before do
+        @attrs_hash = {title: "ololo", description: "awdawdawd", persons: 1,
+                       time: 1, difficult: "easy",
+                       user_id: user.id, image_attributes: {id: image.id, imageable_type: "Recipe", name: image.name}}
+      end
+      context "only recipe" do
+
+        it "create a new recipe" do
+          expect {post :create, @attrs_hash }.to change(Recipe, :count).by(1)
+        end
+
+        it "return status 200" do
+          post :create, @attrs_hash
+          expect(response.status).to eq(200)
+        end
       end
 
-      it "return status 200" do
-        post :create, {title: "ololo", description: "awdawdawd", user_id: user.id}
-        expect(response.status).to eq(200)
+      context "recipe with steps" do
+        let!(:step_image) { create :image }
+
+        before do
+          @attrs_hash = @attrs_hash.merge({steps_attributes: [{description: "Desc", image: {id: step_image.id, name: step_image.name}}]})
+        end
+
+        it "create a new recipe with steps" do
+          expect {post :create, @attrs_hash }.to change(Step, :count).by(1)
+        end
+
+        it "return status 200" do
+          post :create, @attrs_hash
+          expect(response.status).to eq(200)
+        end
+      end
+
+      context "recipe with ingridients" do
+        before do
+          @attrs_hash = @attrs_hash.merge({recipe_ingridients_attributes: [{size: 1, ingridient_attributes: {name: "Avokado"}}]})
+        end
+
+        context "ingridient already exists" do
+          let!(:ingridient) { create :ingridient }
+
+          before do
+            @attrs_hash[:recipe_ingridients_attributes].first[:ingridient_attributes][:name] = ingridient.name
+          end
+
+          subject { lambda { post :create, @attrs_hash } }
+
+          it { should change {RecipeIngridient.count}.by 1 }
+          it { should change {Ingridient.count}.by 0 }
+
+        end
+
+        context "new ingridient" do
+          subject { lambda { post :create, @attrs_hash } }
+
+          it { should change {RecipeIngridient.count}.by 1 }
+          it { should change {Ingridient.count}.by 1 }
+        end
       end
     end
 
