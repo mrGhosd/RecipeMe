@@ -339,7 +339,7 @@ describe RecipesController do
 
       context "recipe with ingridients" do
         before do
-          @attrs_hash = @attrs_hash.merge({recipe_ingridients_attributes: [{size: 0, ingridient_attributes: {name: "a"}}]})
+          @attrs_hash = @attrs_hash.merge({recipe_ingridients_attributes: [{size: "", ingridient_attributes: {name: "a"}}]})
         end
 
         context "doesn't create recipe and ingridient" do
