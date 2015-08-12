@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :recipe do
     before(:create)do |recipe|
-      recipe.image =  Image.new
+      recipe.image =  create(:image)
     end
 
     title 'Title'

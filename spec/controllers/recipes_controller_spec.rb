@@ -3,26 +3,17 @@ require 'rails_helper'
 describe RecipesController do
   let!(:user) { create :user }
   # let!(:image) { create :image, imageable_type: recipe.class.to_s }
-  let!(:recipes_first_page) { create_list :recipe, 12, user_id: user.id }
-  let!(:recipes_second_page) { create_list :recipe, 12, user_id: user.id }
-  let!(:recipe) { recipes_first_page.last }
 
 
   before do
     login_as user
-    # recipes_first_page.each do |recipe|
-    #   image = create(:image)
-    #   recipe.update(image: image)
-    # end
-    #
-    # recipes_second_page.each do |recipe|
-    #   image = create(:image)
-    #   recipe.update(image: image)
-    # end
   end
 
 
   describe "GET #index" do
+    let!(:recipes_first_page) { create_list :recipe, 12, user_id: user.id }
+    let!(:recipes_second_page) { create_list :recipe, 12, user_id: user.id }
+    let!(:recipe) { recipes_first_page.last }
     before { get :index }
 
     context "single recipe" do
@@ -63,7 +54,6 @@ describe RecipesController do
 
     before {
       get :show, id: recipe.id, format: :json
-      recipe.update(image: image)
     }
 
     %w(id title description tag_list user_id rate image comments_list steps_list ingridients_list user created_at_h).each do |attr|
@@ -118,9 +108,9 @@ describe RecipesController do
         expect(response.body).to have_json_size(6).at_path("image")
       end
 
-      %w(id imageable_type imageable_id created_at updated_at).each do |attr|
+      %w(id imageable_type imageable_id).each do |attr|
         it "recipe image contain #{attr}" do
-          expect(response.body).to be_json_eql(image.send(attr.to_sym).to_json).at_path("image/#{attr}")
+          expect(response.body).to be_json_eql(recipe.image.send(attr.to_sym).to_json).at_path("image/#{attr}")
         end
       end
     end
