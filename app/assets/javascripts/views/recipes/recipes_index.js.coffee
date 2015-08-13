@@ -35,8 +35,6 @@ class RecipeMe.Views.RecipesIndex extends Backbone.View
       @model.set({rate: data.obj.rate})
     if data.action == "attributes-change"
       @model.set(data.obj)
-    if data.action == "image"
-      @model.set({image: data.image})
     if data.action == "comment-create"
       console.log @model
       @model.set({comments_count: data.count.comments_count})
