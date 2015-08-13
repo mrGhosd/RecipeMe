@@ -18,6 +18,6 @@ module RecipesConcerns
     message({ resource: 'Recipe',
               action: 'create',
               id: self.id,
-              obj: self.as_json(methods: [:image]) })
+              obj: self.as_json(methods: [:image, :user]) })
   end
 end
