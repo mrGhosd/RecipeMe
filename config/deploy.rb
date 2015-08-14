@@ -31,6 +31,13 @@ namespace :deploy do
   end
   after :publishing, :restart
 
+  desc "Run thinking sphinx"
+  task :run_thinking_sphinx do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute 'sidekiq -q ts_delta'
+    end
+  end
+
   task :run_nodejs_server do
     on roles(:app), in: :sequence, wait: 5 do
       execute "cd /home/deploy/recipeme/current/realtime && forever start server.js"
@@ -38,14 +45,4 @@ namespace :deploy do
   end
 
   after :restart, :run_nodejs_server
-
-  # after :restart, :clear_cache do
-  #   on roles(:app), in: :groups, limit: 3, wait: 10 do
-  #     # Here we can do anything such as:
-  #     # within release_path do
-  #     #   execute :rake, 'cache:clear'
-  #     # end
-  #   end
-  # end
-
 end
