@@ -3,7 +3,6 @@ module Api
     class RecipesController < Api::ApiController
       before_action :load_recipe, only: [:update, :show, :destroy, :rating]
       before_action :doorkeeper_authorize!, only: [:create, :update, :destroy]
-      after_action :create_image, only: [:create, :update]
 
       include ChangeObject
       include Rate
@@ -52,7 +51,11 @@ module Api
       end
 
       def recipes_params
-        params.require(:recipe).permit(:title, :user_id, :description,  :tag_list, :category_id, :time, :persons, :difficult, :steps => [])
+        params.permit(:title, :user_id,
+                      :description,  :tag_list, :category_id,
+                      :time, :persons, :difficult, image_attributes: [:id, :name, :imageable_id, :imageable_type],
+                      :steps_attributes => [:id, :description, :recipe_id, image: [:id, :name]],
+                      :recipe_ingridients_attributes => [:id, :size, ingridient_attributes: [:id, :name]])
       end
     end
 
