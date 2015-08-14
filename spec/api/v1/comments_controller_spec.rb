@@ -13,6 +13,12 @@ describe "API Comments controller" do
     it_behaves_like "API Authenticable"
   end
 
+  describe "POST #rating" do
+    let!(:object) { comment }
+    let!(:request) { post "/api/v1/recipes/#{recipe.id}/comments/#{object.id}/rating", recipe_id: recipe.id, comment_id: object.id, access_token: access_token.token }
+    it_behaves_like "Rating"
+  end
+
   describe "POST #create" do
     context "with valid attributes" do
       it "creates a new comment" do

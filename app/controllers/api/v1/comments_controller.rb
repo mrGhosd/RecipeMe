@@ -2,7 +2,11 @@ module Api
   module V1
     class CommentsController < Api::ApiController
       before_action :doorkeeper_authorize!, only: [:create]
+      before_action :load_comment, only: :rating
       after_action :mail_send, only: :create
+
+      include ChangeObject
+      include Rate
 
       def index
         recipe = Recipe.find(params[:recipe_id])
@@ -34,6 +38,10 @@ module Api
       end
 
       private
+
+      def load_comment
+        @comment = Comment.find(params[:comment_id])
+      end
 
       def comments_params
         params.require(:comment).permit(:recipe_id, :user_id, :text)
