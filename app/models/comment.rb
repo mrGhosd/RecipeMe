@@ -21,8 +21,8 @@ class Comment <ActiveRecord::Base
     update_entity: self.class.to_s, update_entity_for: self.class.to_s, update_id: self.id)
   end
 
-  def destroy_comment
-    UserUpdate.where(update_entity: self.class.to_s, update_id: self.id).destroy_all
-    Vote.where(voteable_id: self.id, voteable_type: self.class.to_s).destroy_all
-  end
+  # def destroy_comment
+  #   UserUpdate.where(update_entity: self.class.to_s, update_id: self.id).delete_all
+  #   Vote.where(voteable_id: self.id, voteable_type: self.class.to_s).delete_all
+  # end
 end

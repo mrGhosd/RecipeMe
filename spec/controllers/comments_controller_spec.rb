@@ -111,7 +111,7 @@ describe CommentsController do
 
   describe "DELETE #destroy" do
     it "delete expected comment" do
-      expect{delete :destroy,
+      expect { delete :destroy,
       recipe_id: recipe.id,
       id: comment.id}.to change(Comment, :count).by(-1)
     end

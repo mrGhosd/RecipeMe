@@ -36,7 +36,6 @@ class CommentsController <ApplicationController
   end
 
   def destroy
-    @comment.destroy_comment
     if @comment.destroy
       render json: { success: true}, status: :ok
     else
