@@ -63,6 +63,7 @@ describe Recipe do
     let!(:diff_ingridient) { create :ingridient, name: "lool" }
 
     it "return ingridient attributes with size" do
+      recipe.reload
       expect(recipe.ingridients_list).to match_array([recipe.ingridients.first.attributes.merge(size: recipe.recipe_ingridients.last.size,
                                                       recipe: recipe.id)])
     end
