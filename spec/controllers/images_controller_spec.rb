@@ -18,20 +18,5 @@ describe ImagesController do
         expect(response.status).to eq(200)
       end
     end
-
-    context "imageable_id doesn't blank" do
-      let!(:image) { create :image, imageable_id: recipe.id, imageable_type: recipe.class.to_s }
-      it "update existing image" do
-        post :create, imageable_id: recipe.id, imageable_type: recipe.class.to_s, name: fixture_file_upload("/images/b.png", 'image/png')
-        image.reload
-        expect(image.name.url).to eq("/uploads/image/#{image.id}/b.png")
-      end
-
-      it "return w00 status" do
-        post :create, imageable_id: recipe.id, imageable_type: recipe.class.to_s, name: fixture_file_upload("/images/b.png", 'image/png')
-        expect(response.status).to eq(200)
-      end
-
-    end
   end
 end

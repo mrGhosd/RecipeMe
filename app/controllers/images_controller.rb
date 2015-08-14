@@ -7,6 +7,7 @@ class ImagesController < ApplicationController
       image = Image.find_by(imageable_type: params[:imageable_type], imageable_id: params[:imageable_id] )
       if image
         image.update(name: params[:name])
+        image.reload
         render json: image.as_json, status: :ok
       end
     end
