@@ -332,4 +332,20 @@ describe "API Recipes controller" do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    let!(:category) { create :category }
+    let!(:user) { create :user }
+    let!(:recipe) { create :recipe, user_id: user.id, category_id: category.id }
+    it "delete selected recipe" do
+      expect{delete "/api/v1/recipes/#{recipe.id}",
+                    id: recipe.id, access_token: access_token.token}.to change(Recipe, :count).by(-1)
+    end
+
+    it "return 200 status" do
+      delete "/api/v1/recipes/#{recipe.id}",
+             id: recipe.id, access_token: access_token.token
+      expect(response.status).to eq(200)
+    end
+  end
 end
