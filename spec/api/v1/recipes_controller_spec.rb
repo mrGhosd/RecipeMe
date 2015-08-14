@@ -137,5 +137,69 @@ describe "API Recipes controller" do
         end
       end
     end
+
+    context "with invalid attributes" do
+      let!(:image) { create :image }
+      before do
+        @attrs_hash = {title: "", description: "awdawdawd", persons: 1,
+                       time: 1, difficult: "easy",
+                       user_id: user.id,
+                       image_attributes: {id: image.id, imageable_type: "Recipe", name: image.name}, access_token: access_token.token}
+      end
+
+      context "single recipe" do
+        it "doesn't create a new recipe" do
+          expect{post "/api/v1/recipes", @attrs_hash}.to change(Recipe, :count).by(0)
+        end
+
+        it "return new recipe errors" do
+          post "/api/v1/recipes", @attrs_hash
+          expect(JSON.parse(response.body)).to have_key("title")
+        end
+      end
+
+      context "recipe with steps" do
+        let!(:step_image) { create :image }
+
+        before do
+          @attrs_hash[:title] = "Title"
+          @attrs_hash = @attrs_hash.merge({steps_attributes: [{description: "", image: {id: step_image.id, name: step_image.name}}]})
+        end
+
+        it "doesn't a new recipe and steps" do
+          expect {post "/api/v1/recipes", @attrs_hash }.to change(Step, :count).by(0)
+        end
+
+        it "return error's hash" do
+          post "/api/v1/recipes", @attrs_hash
+          expect(JSON.parse(response.body)).to have_key("steps")
+        end
+      end
+
+      context "recipe with ingridients" do
+        before do
+          @attrs_hash = @attrs_hash.merge({recipe_ingridients_attributes: [{size: "", ingridient_attributes: {name: "a"}}]})
+        end
+
+        context "doesn't create recipe and ingridient" do
+          let!(:ingridient) { create :ingridient }
+
+          before do
+            @attrs_hash[:title] = "Title"
+            @attrs_hash[:recipe_ingridients_attributes].first[:ingridient_attributes][:name] = ingridient.name
+          end
+
+          subject { lambda { post "/api/v1/recipes", @attrs_hash } }
+
+          it { should change {RecipeIngridient.count}.by 0 }
+          it { should change {Ingridient.count}.by 0 }
+
+          it "return error's hash" do
+            post "/api/v1/recipes", @attrs_hash
+            expect(JSON.parse(response.body)).to have_key("ingridients")
+          end
+        end
+      end
+    end
   end
 end
