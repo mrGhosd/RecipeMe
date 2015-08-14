@@ -1,5 +1,4 @@
-ThinkingSphinx::Index.define :recipe, with: :active_record do
-
+ThinkingSphinx::Index.define :recipe, with: :active_record, delta: ThinkingSphinx::Deltas::SidekiqDelta do
   #fields
   indexes title, sortable: true
   indexes description
@@ -12,4 +11,6 @@ ThinkingSphinx::Index.define :recipe, with: :active_record do
 
   set_property enable_star: 1
   set_property min_infix_len: 1
+
+  set_property delta: ThinkingSphinx::Deltas::SidekiqDelta
 end

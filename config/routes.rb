@@ -2,6 +2,7 @@ Rails.application.routes.default_url_options[:host] = 'http://localhost:3000' if
 Rails.application.routes.draw do
   use_doorkeeper
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
+  mount Sidekiq::Monitor::Engine => '/sidekiq'
   devise_for :users, controllers: {sessions: 'sessions', registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks'}
 
   if Rails.env.development?

@@ -11,24 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730080817) do
+ActiveRecord::Schema.define(version: 20150814192555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "authorizations", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "provider"
-    t.string  "uid"
+    t.string  "provider", limit: 255
+    t.string  "uid",      limit: 255
   end
 
-  add_index "authorizations", ["provider"], name: "index_authorizations_on_provider", using: :btree
-  add_index "authorizations", ["uid"], name: "index_authorizations_on_uid", using: :btree
   add_index "authorizations", ["user_id"], name: "index_authorizations_on_user_id", using: :btree
 
   create_table "callbacks", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "author"
+    t.string   "author",     limit: 255
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -73,23 +71,18 @@ ActiveRecord::Schema.define(version: 20150730080817) do
   end
 
   create_table "ingridients", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "ingridients", ["name"], name: "index_ingridients_on_name", using: :btree
 
   create_table "news", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",      limit: 255
     t.text     "text"
-    t.integer  "rate",       default: 0
+    t.integer  "rate",                   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "news", ["rate"], name: "index_news_on_rate", using: :btree
-  add_index "news", ["title"], name: "index_news_on_title", using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -134,7 +127,7 @@ ActiveRecord::Schema.define(version: 20150730080817) do
   create_table "recipe_ingridients", force: :cascade do |t|
     t.integer  "recipe_id"
     t.integer  "ingridient_id"
-    t.string   "size"
+    t.string   "size",          limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -153,9 +146,11 @@ ActiveRecord::Schema.define(version: 20150730080817) do
     t.integer  "time",                                 default: 0
     t.integer  "persons",                              default: 1
     t.string   "difficult"
+    t.boolean  "delta",                                default: true, null: false
   end
 
   add_index "recipes", ["category_id"], name: "index_recipes_on_category_id", using: :btree
+  add_index "recipes", ["delta"], name: "index_recipes_on_delta", using: :btree
   add_index "recipes", ["difficult"], name: "index_recipes_on_difficult", using: :btree
   add_index "recipes", ["persons"], name: "index_recipes_on_persons", using: :btree
   add_index "recipes", ["time"], name: "index_recipes_on_time", using: :btree
@@ -171,6 +166,29 @@ ActiveRecord::Schema.define(version: 20150730080817) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
+
+  create_table "sidekiq_jobs", force: :cascade do |t|
+    t.string   "jid"
+    t.string   "queue"
+    t.string   "class_name"
+    t.text     "args"
+    t.boolean  "retry"
+    t.datetime "enqueued_at"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.string   "status"
+    t.string   "name"
+    t.text     "result"
+  end
+
+  add_index "sidekiq_jobs", ["class_name"], name: "index_sidekiq_jobs_on_class_name", using: :btree
+  add_index "sidekiq_jobs", ["enqueued_at"], name: "index_sidekiq_jobs_on_enqueued_at", using: :btree
+  add_index "sidekiq_jobs", ["finished_at"], name: "index_sidekiq_jobs_on_finished_at", using: :btree
+  add_index "sidekiq_jobs", ["jid"], name: "index_sidekiq_jobs_on_jid", using: :btree
+  add_index "sidekiq_jobs", ["queue"], name: "index_sidekiq_jobs_on_queue", using: :btree
+  add_index "sidekiq_jobs", ["retry"], name: "index_sidekiq_jobs_on_retry", using: :btree
+  add_index "sidekiq_jobs", ["started_at"], name: "index_sidekiq_jobs_on_started_at", using: :btree
+  add_index "sidekiq_jobs", ["status"], name: "index_sidekiq_jobs_on_status", using: :btree
 
   create_table "steps", force: :cascade do |t|
     t.integer  "recipe_id"
@@ -201,18 +219,15 @@ ActiveRecord::Schema.define(version: 20150730080817) do
 
   create_table "user_updates", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "update_type"
+    t.string   "update_type",       limit: 255
     t.integer  "update_id"
-    t.string   "update_entity"
-    t.string   "update_entity_for"
-    t.string   "type"
+    t.string   "update_entity",     limit: 255
+    t.string   "update_entity_for", limit: 255
+    t.string   "type",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "user_updates", ["type"], name: "index_user_updates_on_type", using: :btree
-  add_index "user_updates", ["update_entity"], name: "index_user_updates_on_update_entity", using: :btree
-  add_index "user_updates", ["update_entity_for"], name: "index_user_updates_on_update_entity_for", using: :btree
   add_index "user_updates", ["user_id"], name: "index_user_updates_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -243,13 +258,10 @@ ActiveRecord::Schema.define(version: 20150730080817) do
 
   create_table "votes", force: :cascade do |t|
     t.integer  "voteable_id"
-    t.string   "voteable_type"
+    t.string   "voteable_type", limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "votes", ["voteable_id"], name: "index_votes_on_voteable_id", using: :btree
-  add_index "votes", ["voteable_type"], name: "index_votes_on_voteable_type", using: :btree
 
 end

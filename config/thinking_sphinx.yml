@@ -1,4 +1,5 @@
 development:
+  quiet_deltas: true
   mysql41: 9312
 test:
   mysql41: 9313

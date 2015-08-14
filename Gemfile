@@ -64,6 +64,8 @@ gem 'sidekiq'
 gem 'sidetiq'
 gem 'mysql2'
 gem 'thinking-sphinx'
+gem 'ts-sidekiq-delta'
+gem 'sidekiq_monitor'
 gem 'dotenv'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
 
