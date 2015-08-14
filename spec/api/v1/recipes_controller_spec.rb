@@ -3,15 +3,7 @@ require 'rails_helper'
 describe "API Recipes controller" do
   let!(:access_token) { create :access_token }
   let!(:user) { create :user }
-  let!(:category) { create :category }
-  let!(:recipes) { create_list :recipe, 12, user_id: user.id, category_id: category.id }
-  let!(:recipe) { recipes.first }
 
-  let!(:step) { create :step, recipe_id: recipe.id }
-  let!(:image) { create :image, imageable_id: step.id, imageable_type: "Step"}
-
-  let!(:ingridient) { create :ingridient }
-  let!(:recipe_ingridient) { create :recipe_ingridient, recipe_id: recipe.id, ingridient_id: ingridient.id }
 
   context "unauthorized" do
     let!(:api_path) { "/api/v1/recipes" }
@@ -20,11 +12,21 @@ describe "API Recipes controller" do
 
 
   describe "GET #index" do
+    let!(:category) { create :category }
+    let!(:recipes) { create_list :recipe, 12, user_id: user.id, category_id: category.id }
+    let!(:recipe) { recipes.last }
+
+    let!(:step) { create :step, recipe_id: recipe.id }
+    # let!(:image) { create :image, imageable_id: step.id, imageable_type: "Step"}
+
+    let!(:ingridient) { create :ingridient }
+    let!(:recipe_ingridient) { create :recipe_ingridient, recipe_id: recipe.id, ingridient_id: ingridient.id }
+
     before { get "/api/v1/recipes", access_token: access_token.token, format: :json }
 
     %w(id title description rate user image persons difficult time).each do |attr|
       it "recipe in recipes list contains #{attr}" do
-        expect(response.body).to be_json_eql(recipe.send(attr.to_sym).to_json).at_path("0/#{attr}")
+        expect(response.body).to be_json_eql(recipe.send(attr.to_sym).to_json).at_path("#{recipes.index(recipe)}/#{attr}")
       end
     end
 
@@ -34,6 +36,14 @@ describe "API Recipes controller" do
   end
 
   describe "GET #show" do
+    let!(:category) { create :category }
+    let!(:recipe) { create :recipe, user_id: user.id, category_id: category.id }
+    let!(:step){ create :step, recipe_id: recipe.id }
+    let!(:comment) { create :comment, recipe_id: recipe.id, user_id: user.id }
+    let!(:ingridient) { create :ingridient }
+    let!(:recipe_ingridient) { create :recipe_ingridient, recipe_id: recipe.id, ingridient_id: ingridient.id }
+    let!(:image) { create :image, imageable_id: recipe.id, imageable_type: recipe.class.to_s }
+
     before { get "/api/v1/recipes/#{recipe.id}", access_token: access_token.token, format: :json }
 
     %w(id title description rate user image persons difficult time steps_list ingridients_list comments_list).each do |attr|
@@ -43,10 +53,6 @@ describe "API Recipes controller" do
     end
 
     context "steps" do
-      before do
-        step.update(image: image)
-      end
-
       %w(id recipe_id description image).each do |attr|
         it "recipe step contains #{attr}" do
           expect(response.body).to be_json_eql(step.send(attr.to_sym).to_json).at_path("steps_list/0/#{attr}")

@@ -6,7 +6,6 @@ module Api
       after_action :create_image, only: [:create, :update]
 
       include ChangeObject
-      include Images
       include Rate
       include UsersLiked
       include RecipesControllerConcern

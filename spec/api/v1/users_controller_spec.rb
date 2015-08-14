@@ -8,11 +8,6 @@ describe "API Users controller" do
   let!(:recipe) { recipes.first }
   let!(:comments) { create_list :comment, 12, user_id: user.id, recipe_id: recipe.id }
 
-  context "unauthorized" do
-    let!(:api_path) { "/api/v1/users/profile" }
-    it_behaves_like "API Authenticable"
-  end
-
   describe "GET #profile" do
     before {get "/api/v1/users/profile", access_token: access_token.token, format: :json}
 

@@ -32,6 +32,7 @@ module RecipeMe
     config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.{rb,yml}"]
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
     config.autoload_paths << Rails.root.join('concerns')
+    config.active_record.raise_in_transactional_callbacks = true
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
