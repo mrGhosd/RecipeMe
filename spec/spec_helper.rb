@@ -7,6 +7,7 @@ require 'support/feature_helper'
 require 'cancan/matchers'
 require 'support/auth_helper'
 require 'support/shared/api_authorization'
+require 'support/shared/rating'
 require 'thinking_sphinx/test'
 require 'support/sphinx_helper'
 

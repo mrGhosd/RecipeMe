@@ -2,22 +2,26 @@ require 'rails_helper'
 
 describe RecipesController do
   let!(:user) { create :user }
-
   before do
     login_as user
   end
 
+  describe "POST #rating" do
+    let!(:object) { create :recipe, user_id: user.id }
+    let!(:request) { post :rating, recipe_id: object.id }
+    it_behaves_like "Rating"
+  end
 
   describe "GET #index" do
     let!(:recipes_first_page) { create_list :recipe, 12, user_id: user.id }
     let!(:recipes_second_page) { create_list :recipe, 12, user_id: user.id }
-    let!(:recipe) { recipes_first_page.last }
+    let!(:recipe) { recipes_first_page.first }
     before { get :index }
 
     context "single recipe" do
       %w(id title user_id rate image comments_count).each do |attr|
         it "recipe attributes contain #{attr}" do
-          expect(response.body).to be_json_eql(recipe.send(attr.to_sym).to_json).at_path("#{recipes_first_page.index(recipe)}/#{attr}")
+          expect(response.body).to be_json_eql(recipe.send(attr.to_sym).to_json).at_path("0/#{attr}")
         end
       end
 
