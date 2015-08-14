@@ -4,10 +4,16 @@ describe "API Recipes controller" do
   let!(:access_token) { create :access_token }
   let!(:user) { create :user }
 
-
   context "unauthorized" do
     let!(:api_path) { "/api/v1/recipes" }
     it_behaves_like "API Authenticable"
+  end
+
+
+  describe "POST #rating" do
+    let!(:object) { create :recipe, user_id: user.id }
+    let!(:request) { post "/api/v1/recipes/#{object.id}/rating", recipe_id: object.id, access_token: access_token.token }
+    it_behaves_like "Rating"
   end
 
 
