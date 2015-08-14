@@ -6,6 +6,19 @@ describe IngridientsController do
   let!(:ingridient) { create :ingridient }
   let!(:ingridient) { create :ingridient }
 
+  describe "GET #index" do
+    before { get :index }
+    %w(id name).each do |attr|
+      it "ingridient contain #{attr}" do
+        expect(response.body).to be_json_eql(ingridient.send(attr.to_sym).to_json).at_path("0/#{attr}")
+      end
+    end
+
+    it "return 200 status" do
+      expect(response.status).to eq(200)
+    end
+  end
+
   describe "DELETE #destroy" do
     before do
       recipe.recipe_ingridients.create ingridient: ingridient, size: 20

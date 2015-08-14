@@ -1,7 +1,15 @@
 class IngridientsController < ApplicationController
-  before_action :load_recipe, only: [:destroy]
-  before_action :load_ingridient, only: [:destroy]
+  before_action :load_recipe, only: [:create, :recipe_ingridients, :destroy]
+  before_action :load_ingridient, only: [:update, :destroy]
 
+  def index
+    @ingridients = Ingridient.all
+    render json: @ingridients.as_json, status: :ok
+  end
+
+  def recipe_ingridients
+    render json: @recipe.ingridients_list.as_json, status: :ok
+  end
 
   def destroy
     Recipe.find(params[:recipe_id]).ingridients.find(params[:id]).destroy
@@ -18,4 +26,9 @@ class IngridientsController < ApplicationController
   def load_recipe
     @recipe = Recipe.find(params[:recipe_id])
   end
+
+  def ingridient_params
+    params.permit(:name)
+  end
+
 end
