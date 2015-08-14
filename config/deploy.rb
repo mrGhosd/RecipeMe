@@ -34,7 +34,7 @@ namespace :deploy do
   desc "Run thinking sphinx"
   task :run_thinking_sphinx do
     on roles(:app), in: :sequence, wait: 5 do
-      execute 'sidekiq -q ts_delta'
+      execute 'rake ts:rebuild && sidekiq -q ts_delta'
     end
   end
 
