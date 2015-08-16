@@ -55,6 +55,7 @@ describe RecipesController do
     let!(:image) { create :image, imageable_id: recipe.id, imageable_type: recipe.class.to_s }
 
     before {
+      recipe.reload
       get :show, id: recipe.id, format: :json
     }
 

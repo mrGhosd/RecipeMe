@@ -39,6 +39,22 @@ class User < ActiveRecord::Base
     self.followers.order(name: :asc).limit(6)
   end
 
+  def following_ids
+    self.following.map(&:id)
+  end
+
+  def followers_ids
+    self.followers.map(&:id)
+  end
+
+  def recipes_count
+    self.recipes.count
+  end
+
+  def comments_count
+    self.comments.count
+  end
+
   def is_admin?
     self.role.eql?("admin")
   end

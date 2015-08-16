@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       resources :categories do
         member { get :recipes }
       end
+      resources :relationships, only: [:create, :destroy]
       resources :images, only: :create
       resources :recipes, concerns: [:rate] do
         resources :comments, concerns: [:rate]
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
       end
       resources :complaints
       resources :users do
+        get '/:entity', to: "users#info"
         collection do
           get :profile
         end

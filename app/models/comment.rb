@@ -8,8 +8,8 @@ class Comment <ActiveRecord::Base
   include RateModel
   include CommentsConcern
 
-  def as_json(*)
-    super(methods: :user)
+  def as_json(params = {})
+    super({methods: [:user, :recipe]}.merge(params))
   end
 
   def self.send_recipe_author_message(comment)

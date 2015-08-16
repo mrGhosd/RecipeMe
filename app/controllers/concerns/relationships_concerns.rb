@@ -13,21 +13,21 @@ module RelationshipsConcerns
     message({ resource: 'User',
               action: 'follow',
               id: @user.id,
-              obj: current_user
+              obj: current_user || current_resource_owner
             })
   end
 
   def send_following_user_message
     message({ resource: 'User',
               action: 'following',
-              id: current_user.id,
+              id: current_user.try(:id) || current_resource_owner.try(:id),
               obj: @user })
   end
 
   def send_unfollowing_user_message
     message({ resource: 'User',
               action: 'unfollowing',
-              id: current_user.id,
+              id: current_user.try(:id) || current_resource_owner.try(:id),
               obj: @user })
   end
 
@@ -35,6 +35,6 @@ module RelationshipsConcerns
     message({ resource: 'User',
               action: 'unfollow',
               id: @user.id,
-              obj: current_user })
+              obj: current_user || current_resource_owner})
   end
 end

@@ -113,6 +113,10 @@ class Recipe < ActiveRecord::Base
     end if attrs.present?
   end
 
+  def as_json(params = {})
+    super({methods: [:image, :user]}.merge(params))
+  end
+
   private
 
   def update_user_recipe
