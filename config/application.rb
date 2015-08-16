@@ -4,7 +4,7 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(*Rails.groups)
+Bundler.require(*Rails.groups(assets: %w(development test)))
 
 # Dotenv.load(File.expand_path("../../.env.#{Rails.env}", FILE))
 # Dotenv::Railtie.load
