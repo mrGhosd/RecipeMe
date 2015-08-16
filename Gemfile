@@ -70,6 +70,7 @@ gem 'ts-sidekiq-delta'
 gem 'sidekiq_monitor'
 gem 'dotenv'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
+gem 'kaminari'
 
 group :production do
   gem 'unicorn'

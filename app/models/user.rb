@@ -93,6 +93,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def own_feed
+    Journal.where("user.id" => self.id)
+  end
+
   def feed
     UserUpdate.from_users_followed_by(self)
   end

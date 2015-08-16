@@ -14,6 +14,10 @@ module Api
         end
       end
 
+      def own_feed
+        render json: current_resource_owner.own_feed.page(params[:page] || 1).per_page(10)
+      end
+
       def show
         user = User.find(params[:id])
         render json: user.as_json(methods: [:followers_ids, :following_ids, :recipes_count, :comments_count])
