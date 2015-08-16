@@ -120,8 +120,9 @@ class Recipe < ActiveRecord::Base
   private
 
   def update_user_recipe
-    RecipeUpdate.create(user_id: self.user.id, update_type: 'create',
-    update_entity: self.class.to_s, update_entity_for: self.class.to_s, update_id: self.id)
+    Journal.create(user: {id: self.user.id, name: self.user.correct_naming, avatar_url: self.user.avatar.url},
+    event_type: "create", entity: self.class.to_s, object: self.attributes.merge({image: self.image.attributes}),
+    created_at: self.created_at)
   end
 
   def send_message_to_author_followers

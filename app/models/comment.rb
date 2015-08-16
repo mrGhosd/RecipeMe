@@ -17,8 +17,10 @@ class Comment <ActiveRecord::Base
   end
 
   def update_comment
-    CommentUpdate.create(user_id: self.user.id, update_type: 'create',
-    update_entity: self.class.to_s, update_entity_for: self.class.to_s, update_id: self.id)
+    Journal.create(user: {id: self.user.id, name: self.user.correct_naming,
+    avatar_url: self.user.avatar.url}, event_type: "create", entity: self.class.to_s,
+    object: self.attributes, parent_object: self.recipe.attributes.merge({image: self.recipe.image.attributes}),
+    created_at: self.created_at)
   end
 
   # def destroy_comment

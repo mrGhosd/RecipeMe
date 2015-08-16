@@ -6,7 +6,10 @@ class Vote < ActiveRecord::Base
   after_destroy :destroy_vote
 
   def update_vote
-    VoteUpdate.create(user_id: self.user.id, update_type: 'create', update_entity: self.class.to_s, update_entity_for: self.voteable_type, update_id: self.voteable_id)
+    object = self.voteable_type.constantize.find(self.voteable_id)
+    Journal.create(user:  {id: self.user.id, name: self.user.correct_naming,
+                         avatar_url: self.user.avatar.url}, event_type: "create",
+                   object: object.attributes.merge({image: object.image.attributes}))
   end
 
   def destroy_vote
