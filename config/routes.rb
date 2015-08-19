@@ -1,7 +1,7 @@
 Rails.application.routes.default_url_options[:host] = 'http://localhost:3000' if Rails.env == "development"
 Rails.application.routes.draw do
-  use_doorkeeper
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
+  use_doorkeeper
   mount Sidekiq::Monitor::Engine => '/sidekiq'
   devise_for :users, controllers: {sessions: 'sessions', registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks'}
 
@@ -65,7 +65,10 @@ Rails.application.routes.draw do
         get '/:entity', to: "users#info"
         collection do
           get :profile
+          get :own_feed
+          get :feed
         end
+
       end
     end
   end

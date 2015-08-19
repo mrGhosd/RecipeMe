@@ -9,8 +9,7 @@
 # so.
 #
 # For more informations about the export options with this file, please
-# refer to the `Export Configuration` section in the README at :
-# https://github.com/fnando/i18n-js#export-configuration
+# refer to the README
 #
 #
 # If you're going to use the Rails 3.1 asset pipeline, change
@@ -22,9 +21,9 @@
 # If you're running an old version, you can use something
 # like this:
 #
-# translations:
-#   - file: "app/assets/javascripts/i18n/translations.js"
-#     only: "*"
-#
+fallbacks: :default_locale
+
 translations:
-  - file: 'public/javascripts/i18n/application.js'
+ - file: "app/assets/javascripts/i18n/translations.js"
+   only: "*"
+#

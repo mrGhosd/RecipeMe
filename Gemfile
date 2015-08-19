@@ -45,7 +45,7 @@ gem 'eco'
 gem 'backbone-rails'
 gem 'jquery-fileupload-rails'
 gem 'pry-rails'
-gem "i18n-js", ">= 3.0.0.rc8"
+gem "i18n-js", ">= 3.0.0.rc11"
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'

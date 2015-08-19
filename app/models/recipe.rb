@@ -121,7 +121,7 @@ class Recipe < ActiveRecord::Base
 
   def update_user_recipe
     Journal.create(user: {id: self.user.id, name: self.user.correct_naming, avatar_url: self.user.avatar.url},
-    event_type: "create", entity: self.class.to_s, object: self.attributes.merge({image: self.image.attributes}),
+    event_type: "create", entity: self.class.to_s, object: self.attributes.merge({image: self.image.attributes.merge({url: self.image.name.url})}),
     created_at: self.created_at)
   end
 

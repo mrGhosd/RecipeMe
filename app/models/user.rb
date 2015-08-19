@@ -94,11 +94,11 @@ class User < ActiveRecord::Base
   end
 
   def own_feed
-    Journal.where("user.id" => self.id)
+    Journal.where("user.id" => self.id).order(created_at: :desc)
   end
 
   def feed
-    UserUpdate.from_users_followed_by(self)
+    Journal.where("user.id" => {'$in' => self.following.map(&:id).push(self.id)})
   end
 
   def self.send_follow_message(user, follower)

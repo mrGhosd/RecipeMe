@@ -3,7 +3,7 @@ module Api
     class UsersController < Api::ApiController
       prepend_before_filter :allow_params_authentication!, :only => :create
       skip_before_filter :restrict_access_by_token, :only => :create
-      before_action :doorkeeper_authorize!, only: [:profile, :info]
+      before_action :doorkeeper_authorize!, only: [:profile, :info, :feed]
 
       def create
         user = User.new(user_params)
@@ -14,8 +14,13 @@ module Api
         end
       end
 
+      def feed
+        render json: current_resource_owner.feed.page(params[:page] || 1).per(10).to_a
+      end
+
       def own_feed
-        render json: current_resource_owner.own_feed.page(params[:page] || 1).per_page(10)
+        user = User.find(params[:id])
+        render json: user.own_feed.page(params[:page] || 1).per(10).to_a
       end
 
       def show

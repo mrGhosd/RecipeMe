@@ -18,7 +18,7 @@ describe "Comment", ->
     describe "user is set", ->
       it "create User model instance", ->
         @comment = new RecipeMe.Models.Comment({id: 2, user: {id: 1}})
-        expect(@comment.user instanceof RecipeMe.Models.User).toBe(true)
+        expect(@comment.get('user') instanceof RecipeMe.Models.User).toBe(true)
 
     describe "user isn't set", ->
       it "doesn't create User model instance", ->

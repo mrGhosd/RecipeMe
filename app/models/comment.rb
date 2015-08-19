@@ -19,12 +19,8 @@ class Comment <ActiveRecord::Base
   def update_comment
     Journal.create(user: {id: self.user.id, name: self.user.correct_naming,
     avatar_url: self.user.avatar.url}, event_type: "create", entity: self.class.to_s,
-    object: self.attributes, parent_object: self.recipe.attributes.merge({image: self.recipe.image.attributes}),
+    object: self.attributes, parent_object: self.recipe.attributes.merge({image: self.recipe.image.attributes.merge({url: self.recipe.image.name.url})}),
     created_at: self.created_at)
   end
 
-  # def destroy_comment
-  #   UserUpdate.where(update_entity: self.class.to_s, update_id: self.id).delete_all
-  #   Vote.where(voteable_id: self.id, voteable_type: self.class.to_s).delete_all
-  # end
 end
