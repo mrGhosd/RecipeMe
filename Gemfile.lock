@@ -129,6 +129,7 @@ GEM
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
+    cliver (0.3.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -296,6 +297,11 @@ GEM
     orm_adapter (0.5.0)
     pg (0.18.2)
     phantomjs (1.9.8.0)
+    poltergeist (1.6.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -419,6 +425,10 @@ GEM
       net-ssh (>= 2.8.0)
     tainbox (0.2.3)
       activesupport
+    teaspoon (1.0.2)
+      railties (>= 3.2.5, < 5)
+    teaspoon-jasmine (2.2.0)
+      teaspoon (>= 1.0.0)
     temple (0.7.6)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
@@ -452,6 +462,9 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     websocket (1.2.2)
+    websocket-driver (0.5.4)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
     whenever (0.9.4)
       chronic (>= 0.6.3)
     will_paginate (3.0.7)
@@ -509,6 +522,8 @@ DEPENDENCIES
   omniauth-twitter
   omniauth-vkontakte
   pg
+  phantomjs
+  poltergeist
   pry-rails
   rails (~> 4.1)
   redis
@@ -527,6 +542,7 @@ DEPENDENCIES
   spring-commands-rspec
   sprockets-rails
   tainbox
+  teaspoon-jasmine
   therubyracer
   thinking-sphinx
   ts-sidekiq-delta

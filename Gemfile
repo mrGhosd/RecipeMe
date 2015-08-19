@@ -92,6 +92,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
+  gem "teaspoon-jasmine"
 end
 
 group :test do
@@ -102,6 +103,8 @@ group :test do
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
   gem 'json_spec'
+  gem 'poltergeist'
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
 
 # Use ActiveModel has_secure_password

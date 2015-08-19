@@ -1,9 +1,6 @@
 class RecipeMe.Views.ApplicationView extends Backbone.View
   template: JST['application/main']
 
-  events:
-    'click a': 'navigate'
-
   initialize: ->
     this.render()
     this.initAppLayout()
@@ -22,12 +19,9 @@ class RecipeMe.Views.ApplicationView extends Backbone.View
     this.initAppLayout()
     this.render()
 
-#  navigate: (event) ->
-#    event.preventDefault()
-#    event.stopPropagation()
-#    if $(event.currentTarget).data("remote") != "true" && $(event.currentTarget).attr("href") != "#"
-#      Backbone.history.navigate($(event.currentTarget).attr("href"), {trigger: true})
-#    console.log $(event.currentTarget).attr("href").length
+  navigate: (event)->
+    event.preventDefault();
+    Backbone.history.navigate(event.target.pathname, {trigger: true})
 
 
 
