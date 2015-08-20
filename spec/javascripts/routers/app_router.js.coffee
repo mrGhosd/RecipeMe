@@ -3,8 +3,9 @@ describe "Application router", ->
     beforeEach ->
       @test = null
       @router = new RecipeMe.Routers.Recipes()
-      spyOn(@router, 'application')
+      @spy = jasmine.createSpy('application')
+      @router.application = @spy.and.callThrough()
 
     it "fires the index route with a blank hash", ->
       @router.application()
-      expect(@router.application).toHaveBeenCalled()
+      expect(@spy).toHaveBeenCalled()
