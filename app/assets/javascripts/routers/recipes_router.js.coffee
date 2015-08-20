@@ -5,10 +5,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     'recipes/page/:page': 'index'
     'recipes/new': 'newRecipe'
     'recipes/:id': 'showRecipe'
-    'recipes/:id/edit': 'editRecipe'
     'users/:id': 'userProfile'
-    'users/:id/recipes': 'userRecipes'
-    'users/:id/edit': 'editProfile'
     'users/:id/followers': 'followersList'
     'users/:id/following': 'followingList'
     'users/:id/feed': 'userFeed'
@@ -94,20 +91,3 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
 
   showNews: (id) ->
     new RecipeMe.NewsController().show(id)
-
-  userRecipes: (id) ->
-    if RecipeMe.currentUser
-      user_recipes = new RecipeMe.Collections.Recipes(@collection.currentUserRecipes())
-      view = new RecipeMe.Views.RecipesIndex({collection: user_recipes})
-      $("section#main").html(view.el)
-      view.render()
-    else
-
-  editProfile: (id) ->
-    if RecipeMe.currentUser
-      view = new RecipeMe.Views.EditProfile
-      $("section#main").slideUp()
-      $("section#main").html(view.el).slideDown()
-      view.render()
-    else
-      new RecipeMe.ErrorHandler().forbidden()
