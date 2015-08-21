@@ -1,6 +1,5 @@
 class Journal
   include Mongoid::Document
-  Mongoid.raise_not_found_error = false
   store_in collection: "feeds", database: "recipe_me_development", session: "default"
   field :user, type: Hash
   field :event_type, type: String
