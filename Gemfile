@@ -88,6 +88,7 @@ end
 
 group :development, :test do
   gem 'jasmine-rails'
+  gem 'jasmine-jquery-rails'
   gem 'sinon-rails'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
