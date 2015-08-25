@@ -5,6 +5,7 @@ development:
       database: recipe_me_development
       hosts:
         - localhost:27017
+
 test:
   sessions:
     default:
@@ -15,3 +16,10 @@ test:
         read: primary
         max_retries: 1
         retry_interval: 0
+
+production:
+  sessions:
+    default:
+      database: recipe_me_production
+      hosts:
+        - localhost:27017
