@@ -19,7 +19,6 @@ class RecipeMe.Views.FeedList extends Backbone.View
 
   updateFeedData: (data) ->
     followersID = @followers.pluck("id")
-    console.log data
     if parseInt(data.id, 10) in followersID
       if data.action == "create"
         feed = new RecipeMe.Models.Feed({id: data.id, feed: data.obj.id})

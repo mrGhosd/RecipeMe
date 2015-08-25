@@ -2,8 +2,8 @@
     <img src="/images/<%= @icon %>" class="feed-action" />
 </div>
 <div class="feed-recipe-image">
-  <a href="<%= @recipe.get("image").name.url if @recipe.get("image") %>"  data-lightbox="recipe-image" data-title="<%= @recipe.get("title") %>">
-    <img src="<%= @recipe.get("image").name.url if @recipe.get("image")%>" height="100" width="100" class="img-thumbnail"/>
+  <a href="<%= @recipe.get("image").url if @recipe.get("image") %>"  data-lightbox="recipe-image" data-title="<%= @recipe.get("title") %>">
+    <img src="<%= @recipe.get("image").url if @recipe.get("image")%>" height="100" width="100" class="img-thumbnail"/>
   </a>
 </div>
 <div class="feed-recipe-info">
@@ -14,5 +14,8 @@
     <% if @recipe.get("tag_list"): %>
         <%- @recipe.get("tag_list").split(",").map (value) -> "<a href='#' data-remote='true' class='tag-data'>#{value}</a>" %>
     <% end %>
+  </div>
+  <div class="description">
+    <%= @recipe.get("description") if @recipe.get("description") %>
   </div>
 </div>

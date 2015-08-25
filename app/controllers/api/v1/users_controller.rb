@@ -19,6 +19,7 @@ module Api
       end
 
       def own_feed
+
         user = User.find(params[:id])
         render json: user.own_feed.page(params[:page] || 1).per(10).to_a
       end

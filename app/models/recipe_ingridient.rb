@@ -6,17 +6,19 @@ class RecipeIngridient < ActiveRecord::Base
   after_destroy :decrement_counter
 
   validates :size, presence: true
+  accepts_nested_attributes_for :ingridient
+  include IngridientsConcerns
 
   validate do |recipe_ingridient|
-    self.errors.add(:name, recipe_ingridient.ingridient.errors.messages) if recipe_ingridient.ingridient.try(:invalid?)
+    if recipe_ingridient.ingridient && recipe_ingridient.ingridient.try(:invalid?)
+      self.errors.add(:name, recipe_ingridient.ingridient.errors.messages)
+    end
+
   end
 
   def ingridient_attributes=(attr)
     self.ingridient = Ingridient.find_by(name: attr[:name]) || Ingridient.new(name: attr[:name])
   end
-
-  accepts_nested_attributes_for :ingridient
-  include IngridientsConcerns
 
   def increment_counter
     Recipe.increment_counter(:recipe_ingridients_count, recipe.id)

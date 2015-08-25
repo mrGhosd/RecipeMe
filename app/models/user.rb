@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   include UsersConcerns
 
   after_create :set_nickname
+  after_update :update_journal_info
+  after_destroy :destroy_journal_info
 
   def follow!(followed)
     relationships.create!(followed_id: followed.id)
@@ -98,7 +100,7 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    Journal.where("user.id" => {'$in' => self.following.map(&:id).push(self.id)})
+    Journal.where("user.id" => {'$in' => self.following.map(&:id).push(self.id)}).order(created_at: :desc)
   end
 
   def self.send_follow_message(user, follower)
@@ -126,5 +128,16 @@ class User < ActiveRecord::Base
   def set_nickname
     nick_arr = self.email.partition("@")
     self.update(nickname: nick_arr[0])
+  end
+
+  def update_journal_info
+    if self.changed?
+      Journal.where("user.id" => self.id).update_all({"user.name" => self.correct_naming,
+                                                      "user.avatar_url" => self.avatar.url})
+    end
+  end
+
+  def destroy_journal_info
+
   end
 end

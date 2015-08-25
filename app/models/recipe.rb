@@ -114,7 +114,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def as_json(params = {})
-    super({methods: [:image, :user]}.merge(params))
+    super({methods: [:image, :user, :tag_list]}.merge(params))
   end
 
   private

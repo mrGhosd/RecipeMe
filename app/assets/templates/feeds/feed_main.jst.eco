@@ -1,10 +1,10 @@
 <div class="user-block">
   <div class="user-image">
-    <img src="<%= @user.get("avatar").url if @user.get("avatar").url %>" height="80" width="80" class="img-circle " />
+    <img src="<%= @user.get("avatar_url") if @user.get("avatar_url")%>" height="80" width="80" class="img-circle " />
   </div>
   <div class="user-feed-info">
     <p class="title-date">
-      <a href="/#users/<%= @user.get("id") if @user.get("id") %>"><%= @user.get("nickname") %></a>
+      <a href="/#users/<%= @user.get("id") if @user.get("id") %>"><%= @user.get("nickname") || @user.get("name") %></a>
       <span> <%= window.appHelper.dateFormater(@feed.get("created_at")) %></span>
     </p>
   </div>
