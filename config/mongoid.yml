@@ -52,10 +52,6 @@ production:
         # referenced above.
         timeout: 15
 
-        # Set this to ensure that your writes are a round-trip operation
-        # and are confirmed by the system. Default (false).
-        safe: true
-
         # refresh_interval specifies the number of seconds to cache information
         # about a node. Default is 300 seconds (5 minutes).
         refresh_interval: 10
