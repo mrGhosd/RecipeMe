@@ -25,19 +25,20 @@ class RecipeMe.Views.HeaderView extends Backbone.View
     login = new RecipeMe.Views.LoginView({el: ".actions-views"})
 
   updateUserData: (data) ->
-    if parseInt(data.id, 10) == parseInt(RecipeMe.currentUser.get("id"), 10)
-      if data.action == "follow"
-        @updates_counter++
-      if data.action == "unfollow"
-        if @updates_counter > 0
-          @updates_counter--
-        else
-          @updates_counter = 0
-      if data.action == "update"
-        this.render()
-      if data.action == "feed"
-        @updates_counter++
-      this.displayNavMenuNotification() if $("#navigationMenu").width() == 0
+    if RecipeMe.currentUser
+      if parseInt(data.id, 10) == parseInt(RecipeMe.currentUser.get("id"), 10)
+        if data.action == "follow"
+          @updates_counter++
+        if data.action == "unfollow"
+          if @updates_counter > 0
+            @updates_counter--
+          else
+            @updates_counter = 0
+        if data.action == "update"
+          this.render()
+        if data.action == "feed"
+          @updates_counter++
+        this.displayNavMenuNotification() if $("#navigationMenu").width() == 0
 
   updateView: (data) ->
     this.render()
