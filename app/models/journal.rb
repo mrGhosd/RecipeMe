@@ -1,6 +1,6 @@
 class Journal
   include Mongoid::Document
-  store_in collection: "feeds", database: "recipe_me_development", session: "default"
+  store_in collection: "feeds", database: Rails.application.secrets.mongoid_db, session: "default"
   field :user, type: Hash
   field :event_type, type: String
   field :entity, type: String
