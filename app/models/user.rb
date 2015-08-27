@@ -131,10 +131,10 @@ class User < ActiveRecord::Base
   end
 
   def update_journal_info
-    # if self.changed?
-    #   Journal.where("user.id" => self.id).update_all({"user.name" => self.correct_naming,
-    #                                                   "user.avatar_url" => self.avatar.url})
-    # end
+    if self.changed?
+      Journal.where("user.id" => self.id).update_all({"user.name" => self.correct_naming,
+                                                      "user.avatar_url" => self.avatar.url})
+    end
   end
 
   def destroy_journal_info
