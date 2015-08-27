@@ -20,11 +20,14 @@ test:
 production:
   sessions:
     default:
+      database: recipe_me_production
+      hosts:
+        - localhost:27017
       # The standard MongoDB connection URI allows for easy replica set
       # connection setup.
       # Use environment variables or a config file to keep your
       # credentials safe.
-      uri: 'mongodb://deploy:deploy@188.166.99.8:4321/database'
+      # uri: 'mongodb://deploy:deploy@188.166.99.8:4321/database'
 
       options:
         # The default consistency is :eventual, which reads from
