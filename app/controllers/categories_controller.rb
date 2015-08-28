@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
 
   def index
     categories = Category.paginate(page: params[:page] || 1, per_page: 10)
-    render json: categories.as_json(only: [:id, :title, :created_at])
+    render json: categories.as_json(only: [:id, :title, :created_at, :slug])
   end
 
   def create
@@ -36,7 +36,7 @@ class CategoriesController < ApplicationController
   end
 
   def recipes
-    render json: @category.recipes.order(created_at: :desc).paginate(page: params[:page] || 1, per_page: 8).as_json(only: [:title, :id, :user_id], methods: [:image])
+    render json: @category.recipes.order(created_at: :desc).paginate(page: params[:page] || 1, per_page: 8).as_json(only: [:title, :id, :user_id, :slug], methods: [:image])
   end
 
   private

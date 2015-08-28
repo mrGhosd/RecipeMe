@@ -3,7 +3,7 @@
     <legend>
       <%= @recipe.get("title") %>
       <div class="info-block">
-        <a href="/#users/<%= @recipe.get("user").id %>"><%= @recipe.get("user").nickname %></a>
+        <a href="/#users/<%= @recipe.get("user").slug %>"><%= @recipe.get("user").nickname %></a>
         <%= I18n.t('recipes.show.in') %>
         <span class="date"><%= @recipe.get("created_at_h") %></span>
       </div>

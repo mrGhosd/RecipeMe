@@ -1,2 +1,2 @@
-<a href="/#users/<%= @user.get("id") if @user %>" class="btn btn-default">На профиль</a>
+<a href="/#users/<%= @user.get("slug") if @user %>" class="btn btn-default">На профиль</a>
 <div class="main-users-list"></div>

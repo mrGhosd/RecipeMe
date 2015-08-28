@@ -27,9 +27,9 @@
         </div>
         <div class="nickname">
             <% if RecipeMe.currentUser.get('nickname'): %>
-                <a href="/#users/<%= RecipeMe.currentUser.get('id') %>"><%= RecipeMe.currentUser.get('nickname') %></a>
+                <a href="/#users/<%= RecipeMe.currentUser.get('slug') %>"><%= RecipeMe.currentUser.get('nickname') %></a>
             <% else: %>
-                <a href="/#users/<%= RecipeMe.currentUser.get('id') %>"><%= RecipeMe.currentUser.get('email') %></a>
+                <a href="/#users/<%= RecipeMe.currentUser.get('slug') %>"><%= RecipeMe.currentUser.get('email') %></a>
             <% end %>
         </div>
         <a class="btn btn-danger glyphicon glyphicon-off sign-out-button"></a>

@@ -9,7 +9,7 @@
       </div>
       <div class="user-short-info">
           <div class="user-name">
-            <a href="/#users/<%= @user.get("id") %>"><span class="user-correct-naming"><%= @user.get("correct_naming") %></span></a>
+            <a href="/#users/<%= @user.get("slug") %>"><span class="user-correct-naming"><%= @user.get("correct_naming") %></span></a>
             <% if @user.get("email") != @user.get("correct_naming"): %>
                 <span class="user-email"><%= @user.get("email") %></span>
             <% end %>
@@ -27,17 +27,17 @@
       <li><a href="/#categories"> <img src="/images/category.png" /><%= I18n.t('menu.category') %></a></li>
       <li><a href="/#news"> <img src="/images/news29.png" /> <%= I18n.t('menu.news') %></a></li>
       <% if RecipeMe.currentUser: %>
-          <li><a href="/#users/<%= RecipeMe.currentUser.get("id") %>/feed" class="news-feed"> <img src="/images/profile19.png" /><%= I18n.t('menu.updates') %></a></li>
+          <li><a href="/#users/<%= RecipeMe.currentUser.get("slug") %>/feed" class="news-feed"> <img src="/images/profile19.png" /><%= I18n.t('menu.updates') %></a></li>
       <% end %>
       <li><a href="/#callbacks"> <img src="/images/review4.png" /> <%= I18n.t('menu.feedback') %></a></li>
     </ul>
   <% if RecipeMe.currentUser: %>
     <div class="followers-block">
-      <a href="/#users/<%= @user.get("id") if @user %>/followers" class="title"><%= I18n.t('menu.followers') %> <span class="followers-count"><%= @user.get("followers_list").models.length %></span></a>
+      <a href="/#users/<%= @user.get("slug") if @user %>/followers" class="title"><%= I18n.t('menu.followers') %> <span class="followers-count"><%= @user.get("followers_list").models.length %></span></a>
       <div class="followers-list"></div>
     </div>
     <div class="following-block">
-      <a href="/#users/<%= @user.get("id") if @user %>/following" class="title"><%= I18n.t('menu.following') %> <span class="following-count"><%= @user.get("following_list").models.length %></span></a>
+      <a href="/#users/<%= @user.get("slug") if @user %>/following" class="title"><%= I18n.t('menu.following') %> <span class="following-count"><%= @user.get("following_list").models.length %></span></a>
       <div class="following-list"></div>
     </div>
   <% end %>

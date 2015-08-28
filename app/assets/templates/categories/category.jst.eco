@@ -1,9 +1,9 @@
 <div class="title">
-  <a href="/#categories/<%= @category.get("id") if @category.get("id")%>" ><%= @category.get("title") %></a>
+  <a href="/#categories/<%= @category.get("slug") if @category.get("slug")%>" ><%= @category.get("title") %></a>
 </div>
 <% if RecipeMe.currentUser && RecipeMe.currentUser.isAdmin(): %>
     <div class="actions">
-      <a href="/#categories/<%= @category.get("id") %>/edit" class="btn btn-success btn-xs glyphicon glyphicon-edit edit-category"></a>
+      <a href="/#categories/<%= @category.get("slug") %>/edit" class="btn btn-success btn-xs glyphicon glyphicon-edit edit-category"></a>
       <a href="#" class="btn btn-danger btn-xs glyphicon glyphicon-remove destroy-category"></a>
     </div>
 <% end %>

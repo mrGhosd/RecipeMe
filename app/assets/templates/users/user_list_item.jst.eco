@@ -1,4 +1,4 @@
-<a href="/#users/<%= @user.get("id") if @user %>" class="user-image">
+<a href="/#users/<%= @user.get("slug") if @user %>" class="user-image">
   <% if @user && @user.get("avatar").url: %>
       <% path = @user.get("avatar").url %>
       <% else: %>
