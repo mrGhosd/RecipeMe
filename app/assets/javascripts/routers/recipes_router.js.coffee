@@ -5,6 +5,7 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
     'recipes/page/:page': 'index'
     'recipes/new': 'newRecipe'
     'recipes/:id': 'showRecipe'
+    'recipes/:id/edit': 'editRecipe'
     'users/:id': 'userProfile'
     'users/:id/followers': 'followersList'
     'users/:id/following': 'followingList'
