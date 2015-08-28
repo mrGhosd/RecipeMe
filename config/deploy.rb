@@ -44,6 +44,7 @@ namespace :deploy do
     end
   end
   # after :restart, :run_thinking_sphinx
+  #after :deploy, :compile_gulp
   after :restart, :run_nodejs_server
 
 end

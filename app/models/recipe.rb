@@ -1,4 +1,6 @@
 class Recipe < ActiveRecord::Base
+  extend FriendlyId
+
   belongs_to :user
   belongs_to :category
   has_many :comments, dependent: :destroy
@@ -10,6 +12,7 @@ class Recipe < ActiveRecord::Base
   has_many :recipe_ingridients
   has_many :ingridients, through: :recipe_ingridients
   acts_as_taggable
+  friendly_id :title, use: [:slugged, :finders]
   after_create :update_user_recipe
   after_create :send_message_to_author_followers unless Rails.env == "development"
   after_destroy :destroy_recipe

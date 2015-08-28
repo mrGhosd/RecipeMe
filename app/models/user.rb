@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  extend FriendlyId
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          omniauth_providers: [:facebook, :twitter, :vkontakte, :instagram]
   mount_uploader :avatar, AvatarUploader
+  friendly_id :nickname, use: [:slugged, :finders]
   has_many :recipes
   has_many :comments
   has_many :votes
@@ -21,7 +22,7 @@ class User < ActiveRecord::Base
   include RateModel
   include UsersConcerns
 
-  after_create :set_nickname
+  after_create :set_nickname_and_slug
   after_update :update_journal_info
   after_destroy :destroy_journal_info
 
@@ -125,7 +126,7 @@ class User < ActiveRecord::Base
 
   private
 
-  def set_nickname
+  def set_nickname_and_slug
     nick_arr = email.partition("@")
     self.nickname = nick_arr[0]
   end
