@@ -545,7 +545,6 @@ DEPENDENCIES
   sinon-rails
   spring
   spring-commands-rspec
-  sprockets-rails
   tainbox
   teaspoon-jasmine
   therubyracer

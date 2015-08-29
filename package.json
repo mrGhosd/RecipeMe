@@ -1,0 +1,36 @@
+{
+  "name": "RecipeMe",
+  "version": "1.0.0",
+  "description": "Simple recipe service",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrGhosd/RecipeMe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrGhosd/RecipeMe/issues"
+  },
+  "homepage": "https://github.com/mrGhosd/RecipeMe",
+  "devDependencies": {
+    "browserify": "^11.0.1",
+    "coffeeify": "^1.1.0",
+    "gulp": "^3.9.0",
+    "gulp-bower": "0.0.10",
+    "gulp-ruby-sass": "^1.4.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-util": "^3.0.6",
+    "jquery": "^2.1.4",
+    "lodash": "^3.10.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.3.1"
+  }
+}
