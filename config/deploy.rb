@@ -43,8 +43,7 @@ namespace :deploy do
       execute "cd /home/deploy/recipeme/current/realtime && forever start server.js"
     end
   end
-  after :restart, :run_thinking_sphinx
-  after :deploy, :compile_gulp
+  # after :restart, :run_thinking_sphinx
   after :restart, :run_nodejs_server
 
 end
