@@ -50,6 +50,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      post "/users/update_profile", to: "users#update_profile"
       resources :categories do
         member { get :recipes }
       end
@@ -64,6 +65,7 @@ Rails.application.routes.draw do
       resources :users do
         get '/:entity', to: "users#info"
         collection do
+          # match :update, via: [:post, :put]
           get :profile
           get :own_feed
           get :feed

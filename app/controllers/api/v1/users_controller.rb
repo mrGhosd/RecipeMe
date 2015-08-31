@@ -33,6 +33,15 @@ module Api
         render json: current_resource_owner.as_json(except: [:password, :password_encrypted], methods: [:followers_ids, :following_ids, :recipes_count, :comments_count])
       end
 
+      def update_profile
+        @user = User.find(params[:id])
+        if @user.update(user_params)
+          render json: @user.as_json(methods: [:followers_list, :following_list, :correct_naming, :last_sign_in_at_h]), status: :ok
+        else
+          render json: @user.errors.to_json, status: :forbidden
+        end
+      end
+
       def info
         user = User.find(params[:user_id])
         objects = user.send(params[:entity]).paginate(page: params[:page] || 1, per_page: 12)
@@ -40,7 +49,7 @@ module Api
       end
 
       def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation)
+        params.permit(:surname, :name, :nickname, :avatar, :email, :password, :password_confirmation)
       end
     end
   end

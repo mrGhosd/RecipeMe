@@ -3,7 +3,7 @@ module UsersConcerns
   extend ActiveSupport::Concern
 
   included do
-    after_update :send_update_user_data
+    after_save :send_update_user_data
   end
 
 
