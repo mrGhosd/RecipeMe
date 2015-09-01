@@ -13,9 +13,9 @@ class RecipeMe.Views.HeaderView extends Backbone.View
 
   initialize: ->
     @listenTo(Backbone, "Auth", @updateView)
+    @listenTo(Backbone, "User", @updateUserData)
     @updates_counter = 0
     @update_element = $("<span class='label label-danger user-notification'></span>")
-    @listenTo(Backbone, "User", @updateUserData)
     this.render()
     @width = window.screen.width
     @navigation_width = 300
@@ -35,7 +35,9 @@ class RecipeMe.Views.HeaderView extends Backbone.View
           else
             @updates_counter = 0
         if data.action == "update"
-          this.render()
+          form = $(".current-user-info")
+          form.find("img.img-circle").attr("src", data.obj["avatar"]["url"])
+          form.find(".nickname > a").text(data.obj.nickname)
         if data.action == "feed"
           @updates_counter++
         this.displayNavMenuNotification() if $("#navigationMenu").width() == 0

@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
 
   def set_nickname_and_slug
     nick_arr = email.partition("@")
-    self.nickname = nick_arr[0]
+    self.update(nickname: nick_arr[0])
   end
 
   def update_journal_info
