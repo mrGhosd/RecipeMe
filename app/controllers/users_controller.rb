@@ -28,6 +28,12 @@ class UsersController < ApplicationController
     head :ok
   end
 
+  def generate_new_password_email
+    user = User.find_by(email: params[:user][:email])
+    user.send_reset_password_instructions
+    head :ok
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)

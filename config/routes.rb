@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   use_doorkeeper
   mount Sidekiq::Monitor::Engine => '/sidekiq'
-  devise_for :users, controllers: {sessions: 'sessions', registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks'}
+  devise_for :users, controllers: {sessions: 'sessions', registrations: 'registrations', passwords: 'passwords', omniauth_callbacks: 'omniauth_callbacks'}
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :images, only: :create
     resources :relationships, only: [:create, :destroy]
     resources :users do
+      post :generate_new_password_email, on: :collection
       resources :feeds, only: [:index, :show]
       get :following, on: :member
       get :recipes, on: :member

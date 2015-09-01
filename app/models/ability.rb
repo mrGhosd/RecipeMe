@@ -14,6 +14,7 @@ class Ability
 
   def guest_abilities
     can :locale, User
+    can :generate_new_password_email, User
     can [:read, :recipe_ingridients], [Recipe, Category, Ingridient, Step, Callback, News, Comment]
     can [:read, :create], Callback
     can [:read, :recipes], Category

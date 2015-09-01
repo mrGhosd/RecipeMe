@@ -42,30 +42,33 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
     user = new RecipeMe.Models.User()
     if form.attr("action") == "/users/sign_in"
       url = "/users/sign_in"
-    else
+    else if form.attr("action") == "/users"
       url = "/users"
+    else
+      url = "/api/users/generate_new_password_email"
     user.url = url
     attributes = {"user": window.appHelper.formSerialization(form)}
-    console.log attributes
     user.save(attributes,
       success: ->
-        RecipeMe.currentUser = user
-        Backbone.trigger("Auth", user)
-        Backbone.history.stop()
-        Backbone.history.start()
-        $("#myModal").modal('hide')
-      error: (response, request)->
-        object = JSON.parse(request.responseText)
-        if form.attr("action") == "/users/sign_in"
-          $("#authModal form input").addClass("error")
-          $("#authModal form #user_password").parent().append("<div class='error-text'>#{object.error}</div>")
+        if url != "/api/users/generate_new_password_email"
+          RecipeMe.currentUser = user
+          Backbone.trigger("Auth", user)
+          Backbone.history.stop()
+          Backbone.history.start()
+          $("#myModal").modal('hide')
+      error: (response, request) ->
+        if request.responseText != ""
+          object = JSON.parse(request.responseText)
+          if form.attr("action") == "/users/sign_in"
+            $("#authModal form input").addClass("error")
+            $("#authModal form #user_password").parent().append("<div class='error-text'>#{object.error}</div>")
 
-        $.each(object.errors, (key, value)->
-          $("#authModal #user_"+key).addClass("error")
-          $.each(value, (element) ->
-            $("#authModal #user_"+key).parent().append("<div class='error-text'>#{value[element]}</div>")
+          $.each(object.errors, (key, value)->
+            $("#authModal #user_"+key).addClass("error")
+            $.each(value, (element) ->
+              $("#authModal #user_"+key).parent().append("<div class='error-text'>#{value[element]}</div>")
+            )
           )
-        )
     )
 
 

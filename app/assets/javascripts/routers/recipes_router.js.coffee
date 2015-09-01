@@ -28,6 +28,9 @@ class RecipeMe.Routers.Recipes extends Backbone.Router
   application: ->
     this.index()
 
+  password_reset: ->
+    alert "1"
+
   setup: ->
     if(!this.ApplicationView)
       new RecipeMe.Views.ApplicationView({el: 'body'})

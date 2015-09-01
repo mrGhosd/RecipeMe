@@ -5,6 +5,14 @@ class RecipeMe.RecipesController
     view = new RecipeMe.Views.RecipesIndex({collection: @collection})
     $("section#main").html(view.el)
     view.render()
+    showDialog = ->
+      modal = new RecipeMe.Views.CommonModal(el: ".modal")
+#      $("#myModal").html($(modal.render().el).modal('show'))
+      $("#common-modal").removeClass("modal-lg")
+      $("#common-modal .modal-title").html("#{I18n.t('application.additional_email.title')}")
+      $("#common-modal .modal-body").html("<h1>Some Text</h1>")
+      $("#myModal").modal('show')
+    setTimeout showDialog, 100 if Backbone.history.location.pathname == "/users/password/edit"
 
   new: ->
     this.loadRecipesCollection()
