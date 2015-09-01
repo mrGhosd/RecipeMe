@@ -21,8 +21,15 @@ class RecipeMe.Views.RecoveryPasswordModal extends Backbone.View
         $("#myModal").modal('hide')
         window.location.href = "/"
       error: (response, request) ->
-        console.log response
-        console.log request
+        if response.responseText != ""
+          object = JSON.parse(response.responseText)
+          console.log object
+          $.each(object, (key, value)->
+            $("#myModal #user_"+key).addClass("error")
+            $.each(value, (element) ->
+              $("#myModal #user_"+key).parent().append("<div class='error-text'>#{value[element]}</div>")
+            )
+          )
 
   render: ->
     $(@el).html(@template())
