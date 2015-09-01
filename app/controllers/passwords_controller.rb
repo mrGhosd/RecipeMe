@@ -1,4 +1,4 @@
 class PasswordsController < Devise::PasswordsController
-  respond_to :html, :json
+  respond_to :json
   skip_authorize_resource
 end

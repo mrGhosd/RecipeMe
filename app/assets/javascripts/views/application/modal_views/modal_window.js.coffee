@@ -47,6 +47,7 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
     else
       url = "/api/users/generate_new_password_email"
     user.url = url
+    console.log url
     attributes = {"user": window.appHelper.formSerialization(form)}
     user.save(attributes,
       success: ->

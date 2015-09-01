@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :images, only: :create
     resources :relationships, only: [:create, :destroy]
     resources :users do
+      post :reset_password, on: :collection
       post :generate_new_password_email, on: :collection
       resources :feeds, only: [:index, :show]
       get :following, on: :member

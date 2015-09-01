@@ -34,6 +34,15 @@ class UsersController < ApplicationController
     head :ok
   end
 
+  def reset_password
+    user = User.reset_password_by_token(params[:user])
+    if user
+      render json: user.as_json, status: :ok
+    else
+      render json: user.errors.as_json, status: :unprocessable_entity
+    end
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
