@@ -57,8 +57,15 @@ class RecipeMe.Views.ModalWindow extends Backbone.View
           Backbone.history.stop()
           Backbone.history.start()
           $("#myModal").modal('hide')
+        else
+          modal = new RecipeMe.Views.CommonModal()
+          $("#myModal").html($(modal.render().el).modal('show'))
+          $("#common-modal").removeClass("modal-lg")
+          $("#common-modal .modal-title").html("#{I18n.t('application.recovery.title')}")
+          $("#common-modal .modal-body").html("<p>#{I18n.t('application.recovery.text')}</p>")
+          $("#common-modal").modal('show')
       error: (response, request) ->
-        if request.responseText != ""
+        if request.responseText != "" && url != "/api/users/generate_new_password_email"
           object = JSON.parse(request.responseText)
           if form.attr("action") == "/users/sign_in"
             $("#authModal form input").addClass("error")

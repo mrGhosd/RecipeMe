@@ -30,8 +30,13 @@ class UsersController < ApplicationController
 
   def generate_new_password_email
     user = User.find_by(email: params[:user][:email])
-    user.send_reset_password_instructions
-    head :ok
+    if user
+      user.send_reset_password_instructions
+      render json: {success: true}.as_json, status: :ok
+    else
+      render json: {success: false}.as_json, status: :unprocessable_entity
+    end
+
   end
 
   def reset_password

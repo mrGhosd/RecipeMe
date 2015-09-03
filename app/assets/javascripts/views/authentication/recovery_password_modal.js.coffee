@@ -23,7 +23,6 @@ class RecipeMe.Views.RecoveryPasswordModal extends Backbone.View
       error: (response, request) ->
         if response.responseText != ""
           object = JSON.parse(response.responseText)
-          console.log object
           $.each(object, (key, value)->
             $("#myModal #user_"+key).addClass("error")
             $.each(value, (element) ->

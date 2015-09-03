@@ -12,3 +12,6 @@ en:
     additional_email:
       title: 'Please, write your email'
       button: 'Send'
+    recovery:
+      title: 'Success'
+      text: 'On your email was sended an instruction for password reset'
