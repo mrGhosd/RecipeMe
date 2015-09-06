@@ -4,7 +4,7 @@ var express = require("express"),
     io = require("socket.io").listen(http),
     redis = require('redis').createClient();
 
-app.set("ipaddr", "127.0.0.1");
+app.set("ipaddr", "188.166.99.8");
 app.set("port", 5001);
 
 redis.subscribe('rtchange');
