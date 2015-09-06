@@ -62,7 +62,7 @@ gem 'letter_opener_web'
 gem 'mongoid'
 gem 'bson_ext'
 
-gem 'sidekiq'
+gem 'sidekiq', '3.4.2'
 gem 'sidetiq'
 gem 'mysql2'
 gem 'thinking-sphinx'
