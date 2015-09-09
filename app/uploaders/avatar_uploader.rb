@@ -4,6 +4,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   storage :file
+  after :store, :update_image
 
   def default_url(*args)
     "/images/user8_256.png"
@@ -20,4 +21,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
     process :resize_to_fit => [350,350]
   end
 
+  def update_image(file)
+    if self.model.changed?
+      Journal.where("user.id" => self.model.id).update_all({"user.name" => self.model.correct_naming,
+                                                      "user.avatar_url" => self.model.avatar.url})
+    end
+  end
 end

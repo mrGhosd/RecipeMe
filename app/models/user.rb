@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   include UsersConcerns
 
   after_create :set_nickname_and_slug
-  after_update :update_journal_info
+  # after_update :update_journal_info
   after_destroy :destroy_journal_info
 
   def follow!(followed)
