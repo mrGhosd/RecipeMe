@@ -34,7 +34,7 @@ namespace :deploy do
   desc "Rebuild thinking sphinx index"
   task :run_thinking_sphinx do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd /home/deploy/recipeme/current && bundle exec rake ts:index RAILS_ENV=production"
+      execute 'cd /home/deploy/recipeme/current && RAILS_ENV=production rake ts:index'
     end
   end
 
