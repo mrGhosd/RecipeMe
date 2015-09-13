@@ -29,6 +29,9 @@ namespace :deploy do
       invoke 'unicorn:restart'
     end
   end
+  before 'deploy', 'rvm1:install:rvm'  # install/update RVM
+  before 'deploy', 'rvm1:install:ruby'  # install/update Ruby
+  before 'deploy', 'rvm1:install:gems'  # install/update gems from Gemfile into gemset
   after :publishing, :restart
 
   desc "Rebuild thinking sphinx index"
