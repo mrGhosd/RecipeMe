@@ -15,7 +15,7 @@ set :npm_target_path, -> { release_path.join('realtime') } # default not set
 set :linked_files, %w{config/database.yml .env}
 
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
-
+set :node_server_path, 'realtime/server.js'
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :default_shell, '/bin/bash -l'
@@ -62,7 +62,7 @@ namespace :pm2 do
 
   def app_status
     within current_path do
-      ps = JSON.parse(capture :pm2, :jlist, fetch(:app_command))
+      ps = JSON.parse(capture :pm2, :jlist, :node_server_path)
       if ps.empty?
         return nil
       else
@@ -74,13 +74,13 @@ namespace :pm2 do
 
   def restart_app
     within current_path do
-      execute :pm2, :restart, 'server.js'
+      execute :pm2, :restart, :node_server_path
     end
   end
 
   def start_app
     within current_path do
-      execute :pm2, :start, 'server.js'
+      execute :pm2, :start, :node_server_path
     end
   end
 
