@@ -41,17 +41,17 @@ namespace :deploy do
   desc "Run sidekiq ts delta workers"
   task :run_ts_deltas do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd /home/deploy/recipeme/current && bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production -q ts_delta"
+      execute 'cd /home/deploy/recipeme/current && bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production -q ts_delta'
     end
   end
 
   task :run_nodejs_server do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd /home/deploy/recipeme/current/realtime && forever start server.js"
+      execute 'cd /home/deploy/recipeme/current/realtime && forever start server.js'
     end
   end
-  after :restart, :run_thinking_sphinx
-  after :run_thinking_sphinx, :run_ts_deltas
+  # after :restart, :run_thinking_sphinx
+  after :restart, :run_ts_deltas
   after :run_ts_deltas, :run_nodejs_server
 
 end
