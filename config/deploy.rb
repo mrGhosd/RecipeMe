@@ -29,9 +29,6 @@ namespace :deploy do
       invoke 'unicorn:restart'
     end
   end
-  before 'deploy', 'rvm1:install:rvm'  # install/update RVM
-  before 'deploy', 'rvm1:install:ruby'  # install/update Ruby
-  before 'deploy', 'rvm1:install:gems'  # install/update gems from Gemfile into gemset
   after :publishing, :restart
 
   desc "Rebuild thinking sphinx index"
@@ -44,13 +41,13 @@ namespace :deploy do
   desc "Run sidekiq ts delta workers"
   task :run_ts_deltas do
     on roles(:app), in: :sequence, wait: 5 do
-      execute 'cd /home/deploy/recipeme/current && bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production -q ts_delta'
+      execute "cd /home/deploy/recipeme/current && bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production -q ts_delta"
     end
   end
 
   task :run_nodejs_server do
     on roles(:app), in: :sequence, wait: 5 do
-      execute 'cd /home/deploy/recipeme/current/realtime && forever start server.js'
+      execute "cd /home/deploy/recipeme/current/realtime && forever start server.js"
     end
   end
   after :restart, :run_thinking_sphinx
