@@ -10,7 +10,7 @@ set :repo_url, 'git@github.com:mrGhosd/RecipeMe.git'
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deploy/recipeme"
 set :deploy_user, 'deploy'
-
+set :npm_target_path, -> { release_path.join('realtime') } # default not set
 set :linked_files, %w{config/database.yml .env}
 
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
