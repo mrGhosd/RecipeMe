@@ -74,7 +74,7 @@ namespace :pm2 do
 
   def restart_app
     within current_path do
-      execute :pm2, :restart, fetch(:node_server_path)
+      execute :pm2, :restart, 'all'
     end
   end
 
