@@ -235,7 +235,7 @@ Devise.setup do |config|
   config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret, scope: [:email], client_options: {ssl: {verify: false}}
   config.omniauth :twitter, Rails.application.secrets.twitter_app_id, Rails.application.secrets.twitter_app_secret, scope: [:email], client_options: {ssl: {verify: false}}
   config.omniauth :vkontakte, Rails.application.secrets.vk_app_id, Rails.application.secrets.vk_app_secret, scope: [:email], client_options: {ssl: {verify: false}}
-  config.omniauth :instagram, Rails.application.secrets.instagram_app_id, Rails.application.secrets.instagram_app_secret, authorize_params: {redirect_uri: "http://localhost:3000/users/auth/instagram/callback"}, client_options: {ssl: {verify: false}}
+  config.omniauth :instagram, Rails.application.secrets.instagram_app_id, Rails.application.secrets.instagram_app_secret, client_options: {ssl: {verify: false}}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
