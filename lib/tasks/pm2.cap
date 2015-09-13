@@ -1,4 +1,4 @@
-equire 'json'
+require 'json'
 
 namespace :pm2 do
 
