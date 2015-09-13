@@ -34,7 +34,7 @@ namespace :deploy do
   desc "Rebuild thinking sphinx index"
   task :run_thinking_sphinx do
     on roles(:app), in: :sequence, wait: 5 do
-      execute 'cd /home/deploy/recipeme/current && RAILS_ENV=production rake ts:index'
+      invoke 'ts:index'
     end
   end
 
@@ -50,8 +50,8 @@ namespace :deploy do
       execute 'cd /home/deploy/recipeme/current/realtime && forever start server.js'
     end
   end
-  # after :restart, :run_thinking_sphinx
-  after :restart, :run_ts_deltas
+  after :restart, :run_thinking_sphinx
+  after :run_thinking_sphinx, :run_ts_deltas
   after :run_ts_deltas, :run_nodejs_server
 
 end
