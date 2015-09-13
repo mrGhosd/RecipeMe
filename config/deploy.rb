@@ -74,13 +74,13 @@ namespace :pm2 do
 
   def restart_app
     within current_path do
-      execute :pm2, :restart, fetch(:app_command)
+      execute :pm2, :restart, 'server.js'
     end
   end
 
   def start_app
     within current_path do
-      execute :pm2, :start, fetch(:app_command)
+      execute :pm2, :start, 'server.js'
     end
   end
 
