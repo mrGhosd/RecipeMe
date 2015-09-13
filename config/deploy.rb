@@ -53,6 +53,6 @@ namespace :deploy do
   end
   # after :restart, :run_thinking_sphinx
   # after :run_thinking_sphinx, :run_ts_deltas
-  after :restart, :run_nodejs_server
+  after :publishing, :run_nodejs_server
 
 end
