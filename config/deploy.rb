@@ -31,10 +31,17 @@ namespace :deploy do
   end
   after :publishing, :restart
 
-  desc "Run thinking sphinx"
+  desc "Rebuild thinking sphinx index"
   task :run_thinking_sphinx do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd /home/deploy/recipeme/current && rake ts:index RAILS_ENV=production && bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production -q ts_delta"
+      execute "cd /home/deploy/recipeme/current && rake ts:index RAILS_ENV=production"
+    end
+  end
+
+  desc "Run sidekiq ts delta workers"
+  task :run_ts_deltas do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "cd /home/deploy/recipeme/current && bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production -q ts_delta"
     end
   end
 
@@ -44,6 +51,7 @@ namespace :deploy do
     end
   end
   after :restart, :run_thinking_sphinx
-  after :run_thinking_sphinx, :run_nodejs_server
+  after :run_thinking_sphinx, :run_ts_deltas
+  after :run_ts_deltas, :run_nodejs_server
 
 end
