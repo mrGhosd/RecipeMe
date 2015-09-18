@@ -87,7 +87,7 @@ namespace :pm2 do
   desc 'Restart app gracefully'
   task :restart do
     on roles(:app) do
-      if app_status.blank?
+      if app_status.nil?
         info 'App is not registerd'
         start_app
       else
