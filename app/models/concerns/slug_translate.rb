@@ -1,7 +1,9 @@
 module SlugTranslate
   extend ActiveSupport::Concern
-
-  before_save :change_slug
+  
+  included do
+    before_save :change_slug
+  end
 
   def change_slug
     self.slug = normalize_friendly_id(self.title)
