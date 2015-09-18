@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 
   include RateModel
   include UsersConcerns
+  include SlugTranslate
 
   after_create :set_nickname_and_slug
   # after_update :update_journal_info

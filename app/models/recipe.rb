@@ -29,6 +29,7 @@ class Recipe < ActiveRecord::Base
   include RecipesConcerns
   include RateModel
   include ImageModel
+  include SlugTranslate
 
   validate do |recipe|
     recipe.steps.each_with_index do |step, index|

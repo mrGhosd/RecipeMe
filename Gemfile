@@ -72,6 +72,7 @@ gem 'dotenv'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'kaminari'
 gem 'friendly_id'
+gem 'babosa'
 
 group :production do
   gem 'unicorn'

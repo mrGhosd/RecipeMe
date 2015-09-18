@@ -8,5 +8,5 @@ class Category < ActiveRecord::Base
 
   include CategoriesConcerns
   include ImageModel
-
+  include SlugTranslate
 end
