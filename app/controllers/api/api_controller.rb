@@ -6,7 +6,7 @@ class Api::ApiController < ActionController::Base
   protected
 
   def set_locale
-    I18n.locale = params[:device_locale] || I18n.default_locale
+    I18n.locale = params[:device_locale][0..1] || I18n.default_locale
   end
 
   def current_resource_owner
