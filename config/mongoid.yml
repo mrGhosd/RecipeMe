@@ -4,14 +4,14 @@ development:
     default:
       database: recipe_me_development
       hosts:
-        - localhost:27017
+        - 0.0.0.0:27017
 
 test:
   sessions:
     default:
       database: recipe_me_test
       hosts:
-        - localhost:27017
+        - 0.0.0.0:27017
       options:
         read: primary
         max_retries: 1
@@ -22,7 +22,7 @@ production:
     default:
       database: recipe_me_production
       hosts:
-        - localhost:27017
+        - 0.0.0.0:27017
       # The standard MongoDB connection URI allows for easy replica set
       # connection setup.
       # Use environment variables or a config file to keep your

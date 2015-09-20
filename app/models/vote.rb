@@ -10,8 +10,7 @@ class Vote < ActiveRecord::Base
     parent_object = self.voteable_type.eql?("Comment") ? object.recipe.attributes.merge({image: object.recipe.image.attributes.merge({url: object.recipe.image.name.url})}) : object.attributes.merge({image: object.image.attributes.merge({url: object.image.name.url})})
     Journal.create(user:  {id: self.user.id, name: self.user.correct_naming,
                          avatar_url: self.user.avatar.url}, event_type: "create",
-                   object: self.attributes, entity: self.class.to_s, user: {id: self.user.id, name: self.user.correct_naming,
-                  avatar_url: object.user.avatar.url}, parent_object: parent_object,
+                   object: self.attributes, entity: self.class.to_s, parent_object: parent_object,
                    created_at: self.created_at)
   end
 

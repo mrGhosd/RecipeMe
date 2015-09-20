@@ -4,6 +4,7 @@ class Comment <ActiveRecord::Base
 
   validates :text, presence: true
   after_create :update_comment
+  after_destroy :destroy_comment_mentions
 
   include RateModel
   include CommentsConcern
@@ -21,6 +22,15 @@ class Comment <ActiveRecord::Base
     avatar_url: self.user.avatar.url}, event_type: "create", entity: self.class.to_s,
     object: self.attributes, parent_object: self.recipe.attributes.merge({image: self.recipe.image.attributes.merge({url: self.recipe.image.name.url})}),
     created_at: self.created_at)
+  end
+
+  private
+
+  def destroy_comment_mentions
+    if self.present?
+      Journal.any_of( {"parent_object.id" => self.id},
+      {"object.id" => self.id, entity: "Comment"}).destroy_all
+    end
   end
 
 end

@@ -31,6 +31,8 @@ class Recipe < ActiveRecord::Base
   include ImageModel
   include SlugTranslate
 
+  default_scope { includes(:image, :steps, :recipe_ingridients, :comments) }
+
   validate do |recipe|
     recipe.steps.each_with_index do |step, index|
       self.errors.add(:steps, { index => step.errors.messages }) if step.invalid?
@@ -137,8 +139,7 @@ class Recipe < ActiveRecord::Base
 
   def destroy_recipe
     if self.present?
-      RecipeUpdate.where(update_entity: self.class.to_s, update_id: self.id).delete_all
-      Vote.where(voteable_id: self.id, voteable_type: self.class.to_s).delete_all
+      Journal.any_of({"parent_object.id" => self.id}, {"object.id" => self.id, entity: "Recipe"}).destroy_all
     end
   end
 

@@ -39,8 +39,8 @@ class RecipeMe.UsersController
   userFeed: (id) ->
     feed = new RecipeMe.Collections.Feeds({user: id})
     feed.fetch
-      success: (collection) ->
-        if RecipeMe.currentUser && RecipeMe.currentUser.get("id") == parseInt(id, 10)
+      success: (collection, request) ->
+        if RecipeMe.currentUser && RecipeMe.currentUser.get("slug") == id
           view = new RecipeMe.Views.FeedList({collection: collection})
           $("section#main").html(view.el)
           view.render()
